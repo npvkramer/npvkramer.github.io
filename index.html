@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coming Soon - npvkramer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+        position: relative;
+        overflow: hidden;
+        font-family: "Old Standard TT", Georgia, serif;
+      }
+
+      /* Wood texture overlay */
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 1px,
+            rgba(139, 89, 42, 0.1) 2px,
+            rgba(139, 89, 42, 0.1) 3px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 20px,
+            rgba(101, 67, 33, 0.05) 21px,
+            rgba(101, 67, 33, 0.05) 22px
+          );
+        pointer-events: none;
+      }
+
+      /* Steel beam structure */
+      .beam-horizontal {
+        position: absolute;
+        height: 20px;
+        width: 100%;
+        background: linear-gradient(
+          180deg,
+          #4a4a4a 0%,
+          #2d2d2d 50%,
+          #1a1a1a 100%
+        );
+        border-top: 2px solid #666;
+        border-bottom: 2px solid #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .beam-top {
+        top: 0;
+      }
+
+      .beam-vertical {
+        position: absolute;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          #4a4a4a 0%,
+          #2d2d2d 50%,
+          #1a1a1a 100%
+        );
+        border-left: 2px solid #666;
+        border-right: 2px solid #333;
+        box-shadow: 4px 0 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .beam-left {
+        left: 0;
+      }
+
+      .beam-right {
+        right: 0;
+      }
+
+      /* Hanging light bulb */
+      .light-fixture {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+
+      .chain {
+        width: 3px;
+        height: 150px;
+        background: linear-gradient(90deg, #666 0%, #999 50%, #666 100%);
+        margin: 0 auto;
+        position: relative;
+        box-shadow: 2px 0 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .chain::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: #333;
+        border-radius: 50%;
+      }
+
+      .bulb-container {
+        position: relative;
+        margin-top: -5px;
+      }
+
+      .bulb {
+        width: 60px;
+        height: 80px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          #fff8e1 0%,
+          #ffeb3b 40%,
+          #ff6f00 100%
+        );
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        position: relative;
+        margin: 0 auto;
+        box-shadow: 0 0 30px rgba(255, 235, 59, 0.8),
+          0 0 60px rgba(255, 235, 59, 0.4);
+        animation: flicker 4s infinite alternate;
+      }
+
+      .bulb-base {
+        width: 30px;
+        height: 15px;
+        background: linear-gradient(180deg, #333 0%, #666 100%);
+        margin: -5px auto 0;
+        border-radius: 0 0 5px 5px;
+      }
+
+      .light-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 235, 59, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: pulse 3s infinite ease-in-out;
+      }
+
+      @keyframes flicker {
+        0%,
+        100% {
+          box-shadow: 0 0 30px rgba(255, 235, 59, 0.8),
+            0 0 60px rgba(255, 235, 59, 0.4);
+          filter: brightness(1);
+        }
+        25% {
+          box-shadow: 0 0 25px rgba(255, 235, 59, 0.6),
+            0 0 50px rgba(255, 235, 59, 0.3);
+          filter: brightness(0.9);
+        }
+        50% {
+          box-shadow: 0 0 35px rgba(255, 235, 59, 0.9),
+            0 0 70px rgba(255, 235, 59, 0.5);
+          filter: brightness(1.1);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.1;
+        }
+      }
+
+      /* Main content */
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 5;
+        padding: 40px;
+        background: rgba(139, 89, 42, 0.1);
+        border: 3px solid #8b592a;
+        border-radius: 10px;
+        backdrop-filter: blur(2px);
+        box-shadow: 0 0 20px rgba(139, 89, 42, 0.3),
+          inset 0 0 20px rgba(0, 0, 0, 0.2);
+        max-width: 90vw;
+      }
+
+      .main-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+        color: #d4af37;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8),
+          0 0 10px rgba(212, 175, 55, 0.5);
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        color: #cd853f;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        margin-bottom: 30px;
+        font-style: italic;
+      }
+
+      .message {
+        font-size: clamp(0.9rem, 3vw, 1.2rem);
+        color: #deb887;
+        line-height: 1.6;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Rivets for industrial look */
+      .rivet {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: radial-gradient(circle, #666 30%, #333 100%);
+        border-radius: 50%;
+        border: 1px solid #444;
+      }
+
+      .rivet-1 {
+        top: 10px;
+        left: 10px;
+      }
+      .rivet-2 {
+        top: 10px;
+        right: 10px;
+      }
+      .rivet-3 {
+        bottom: 10px;
+        left: 10px;
+      }
+      .rivet-4 {
+        bottom: 10px;
+        right: 10px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .light-fixture {
+          top: 20px;
+        }
+
+        .chain {
+          height: 100px;
+        }
+
+        .bulb {
+          width: 40px;
+          height: 60px;
+        }
+
+        .container {
+          padding: 20px;
+          margin: 20px;
+        }
+      }
+
+      @media (max-height: 600px) {
+        .light-fixture {
+          top: 10px;
+        }
+
+        .chain {
+          height: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Steel beam structure -->
+    <div class="beam-horizontal beam-top"></div>
+    <div class="beam-vertical beam-left"></div>
+    <div class="beam-vertical beam-right"></div>
+
+    <!-- Hanging light fixture -->
+    <div class="light-fixture">
+      <div class="chain"></div>
+      <div class="bulb-container">
+        <div class="bulb"></div>
+        <div class="bulb-base"></div>
+      </div>
+    </div>
+
+    <!-- Light glow effect -->
+    <div class="light-glow"></div>
+
+    <!-- Main content -->
+    <div class="container">
+      <div class="rivet rivet-1"></div>
+      <div class="rivet rivet-2"></div>
+      <div class="rivet rivet-3"></div>
+      <div class="rivet rivet-4"></div>
+
+      <h1 class="main-title">Coming Soon</h1>
+      <h2 class="subtitle">GitHub Page Under Construction</h2>
+      <p class="message">
+        My GitHub page will be released very soon.<br />
+        Stay tuned for something amazing!
+      </p>
+    </div>
+  </body>
+</html>
