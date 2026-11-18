@@ -153,16 +153,24 @@
 }
 
 /* Zitate */
+/* Karten einer Reihe sind gleich hoch; Zitat vertikal zentriert, Verfasser immer unten */
 .quote-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--quote-column-min)), 1fr));
+  grid-template-columns: 1fr;
   gap: var(--quote-gap);
-  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .quote-grid {
+    grid-template-columns: repeat(var(--quote-columns), minmax(0, 1fr));
+  }
 }
 
 .quote-card {
   display: grid;
+  grid-template-rows: 1fr auto;
   gap: var(--space-4);
+  min-height: var(--quote-min-height);
   margin: 0;
   padding: var(--quote-padding);
   border: 1px solid var(--color-border);
@@ -170,6 +178,7 @@
 }
 
 .quote-text {
+  align-self: center;
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--quote-size);

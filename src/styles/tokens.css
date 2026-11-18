@@ -50,7 +50,8 @@
 
   /* Zitate */
   --quote-size: 1.5rem;
-  --quote-column-min: 22rem;
+  --quote-columns: 2; /* ab 768px, darunter 1 */
+  --quote-min-height: 14rem;
   --quote-gap: var(--space-5);
   --quote-padding: var(--space-5);
 
