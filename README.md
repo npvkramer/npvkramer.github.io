@@ -47,6 +47,6 @@ public/              Dateien, die 1:1 ausgeliefert werden (Favicon, Bilder)
 
 ## Deployment
 
-**GitHub Pages:** Jeder Push auf `main` baut und veröffentlicht die Seite per GitHub Action ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Einmalig in den Repo-Einstellungen unter *Settings → Pages → Source* „GitHub Actions“ wählen.
+**GitHub Pages:** Jeder Push auf `live` baut und veröffentlicht die Seite per GitHub Action ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Einmalig in den Repo-Einstellungen unter *Settings → Pages → Source* „GitHub Actions“ wählen.
 
 **Eigene Domain / anderer Server:** `npm run build` ausführen und den Inhalt von `dist/` hochladen. Vorher `site` in [astro.config.mjs](astro.config.mjs) auf die neue URL setzen.
