@@ -57,7 +57,7 @@ Note: if one of your quotes references an example word, move that word first. Ot
 
 ## Styling
 
-The look comes from themes. `SITE.theme` in [src/data/site.ts](src/data/site.ts) sets `data-theme` on `<html>`; the appearance setting in the site menu sets `data-scheme` (light/dark; auto follows the OS). Fonts, colors and shapes live in [src/styles/themes/](src/styles/themes/), shared sizes and spacing in [src/styles/tokens.css](src/styles/tokens.css). All other CSS files only use these variables.
+The look comes from themes. `SITE.theme` in [src/data/site.ts](src/data/site.ts) sets `data-theme` on `<html>`; the appearance setting in the site menu sets `data-scheme` (light by default, dark, or auto to follow the OS). Fonts, colors and shapes live in [src/styles/themes/](src/styles/themes/), shared sizes and spacing in [src/styles/tokens.css](src/styles/tokens.css). All other CSS files only use these variables.
 
 Token reference, Index values, font licenses and how to add a theme: [src/styles/themes/README.md](src/styles/themes/README.md).
 

@@ -1,4 +1,4 @@
-// Appearance setting in the site menu: light, dark or auto (follows the OS setting).
+// Appearance setting in the site menu: light (default), dark or auto (follows the OS setting).
 // The choice is stored in the browser and applied before the first paint by public/scripts/theme-init.js.
 
 type Choice = 'light' | 'dark' | 'auto';
@@ -22,8 +22,7 @@ function choose(choice: Choice): void {
   if (choice === 'auto') delete root.dataset.scheme;
   else root.dataset.scheme = choice;
   try {
-    if (choice === 'auto') localStorage.removeItem(STORAGE_KEY);
-    else localStorage.setItem(STORAGE_KEY, choice);
+    localStorage.setItem(STORAGE_KEY, choice);
   } catch {
     /* Cannot persist: the choice only lasts for this page */
   }

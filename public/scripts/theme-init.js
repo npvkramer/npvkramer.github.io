@@ -1,13 +1,15 @@
-// Loaded render-blocking in <head>: applies a saved light/dark choice before the
-// first paint to avoid a flash. Without a saved choice the OS setting applies.
+// Loaded render-blocking in <head>: applies the saved appearance before the first paint to avoid a flash.
+// Default is light. Only an explicit 'auto' choice follows the OS setting (no data-scheme attribute).
 // Only the color scheme is stored here; the theme itself comes from SITE.theme.
 (function () {
+  var root = document.documentElement;
+  var choice = null;
   try {
-    var scheme = localStorage.getItem('color-scheme');
-    if (scheme === 'light' || scheme === 'dark') {
-      document.documentElement.dataset.scheme = scheme;
-    }
+    choice = localStorage.getItem('color-scheme');
   } catch (e) {
-    /* localStorage unavailable: the OS setting applies */
+    /* localStorage unavailable: the default applies */
+  }
+  if (choice !== 'auto') {
+    root.dataset.scheme = choice === 'dark' ? 'dark' : 'light';
   }
 })();

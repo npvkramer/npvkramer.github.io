@@ -5,7 +5,7 @@ The site's look is controlled by two attributes on `<html>`. Components and page
 | Attribute | Values | Set by | Controls |
 | --- | --- | --- | --- |
 | `data-theme` | `index`, … | `SITE.theme` in [src/data/site.ts](../../data/site.ts) | Fonts, colors, shapes, UI text style |
-| `data-scheme` | `light`, `dark` (absent = OS setting) | Appearance setting in the site menu, stored in `localStorage` (`color-scheme`) | Which side of `light-dark()` applies |
+| `data-scheme` | `light` (default), `dark`; absent when "auto" follows the OS setting | Appearance setting in the site menu, stored in `localStorage` (`color-scheme`) | Which side of `light-dark()` applies |
 
 To switch the theme, change one line in `site.ts`:
 
