@@ -77,16 +77,29 @@ main.container {
   padding: 0;
   border: 0;
   overflow-y: auto;
+  flex-direction: column;
   background: var(--color-menu-bg);
   color: var(--color-menu-text);
   -webkit-backdrop-filter: blur(var(--menu-blur));
   backdrop-filter: blur(var(--menu-blur));
+  /* Fades in from transparent and back out; display and overlay switch at the end of the fade */
+  opacity: 0;
+  transition:
+    opacity var(--menu-duration) var(--menu-ease),
+    overlay var(--menu-duration) allow-discrete,
+    display var(--menu-duration) allow-discrete;
 }
 
 /* Set display only while open: the browser hides a closed popover with display: none */
 .site-menu:popover-open {
   display: flex;
-  flex-direction: column;
+  opacity: 1;
+}
+
+@starting-style {
+  .site-menu:popover-open {
+    opacity: 0;
+  }
 }
 
 /* The page behind does not scroll while the menu is open */
@@ -117,6 +130,35 @@ main.container {
   display: grid;
   justify-items: center;
   gap: var(--space-2);
+}
+
+/* Items rise into place one after another (--i is the item index, set in SiteMenu.astro) */
+.menu-nav li {
+  opacity: 0;
+  translate: 0 var(--menu-rise);
+  transition:
+    opacity var(--menu-duration) var(--menu-ease),
+    translate var(--menu-duration) var(--menu-ease);
+}
+
+.site-menu:popover-open .menu-nav li {
+  opacity: 1;
+  translate: 0 0;
+  transition-delay: calc(var(--menu-stagger) * (var(--i, 0) + 1));
+}
+
+@starting-style {
+  .site-menu:popover-open .menu-nav li {
+    opacity: 0;
+    translate: 0 var(--menu-rise);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-nav li,
+  .site-menu:popover-open .menu-nav li {
+    translate: none;
+  }
 }
 
 .menu-nav a {

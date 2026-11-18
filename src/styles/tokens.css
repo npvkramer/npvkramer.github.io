@@ -52,6 +52,10 @@
 
   /* Site menu */
   --menu-item-size: clamp(3rem, 1.5rem + 6vw, 7.5rem);
+  --menu-duration: 320ms; /* fade of the overlay and of each item */
+  --menu-stagger: 60ms; /* delay between items rising into place */
+  --menu-rise: var(--space-4); /* how far items rise */
+  --menu-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
   /* Admin (dev only) */
   --doc-frame-height: 80vh;

@@ -39,7 +39,7 @@ const schemes = [
   <nav class="menu-nav" aria-label={text.navLabel}>
     <ul>
       {navItems(locale).map((item, index) => (
-        <li>
+        <li style={`--i: ${index}`}>
           <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
             <span class="menu-num">{number(index)}</span>
             {item.label}
