@@ -39,13 +39,15 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Default page language:** English, no URL prefix. German lives under `/de/`.
 - **Paths:** translated per language, e.g. `/words/` and `/de/woerter/`.
 - **Hangul:** Noto Serif KR is the fallback font for Korean.
+- **Dictionary:** each page language lists only words with a definition in that language.
+- **Language label:** shown only when a word's language differs from the page language.
+- **Translations:** in the same file, one value per language per field. Plain text counts as German.
+- **Defaults:** light color scheme and English. No automatic redirect.
 - **Still open:**
-  - English dictionary: strict or with fallback?
-  - Language label: only when different, or always?
-  - Visitor language detection?
-  - Word language filter?
-  - Translation file layout?
-  - `lang` for Sonder?
+  - How to offer the visitor's browser language (and scheme), see the options in the chat.
+  - Word language filter: later.
+  - `lang: en` for Sonder: proposed, not decided yet.
+  - Content guidelines: drafted in `docs/content-guidelines.md`, not decided yet.
 
 **2026-11-18: Docs location**
 

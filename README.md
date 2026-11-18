@@ -13,24 +13,34 @@ Personal website built with [Astro](https://astro.build): a collection of words,
 
 ## Content
 
-All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL. Content itself is written in German.
+All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL in every language.
+
+The site is in English (default, `/words/…`) and German (`/de/woerter/…`). Words can come from any language. Interface text and paths live in [src/i18n/](src/i18n/).
+
+**Translatable fields** (`partOfSpeech`, `definition`, `origin`, quote `source`) take plain text or one value per page language. Plain text counts as German. A missing language falls back to German (or the other language) with an "Only available in …" note.
 
 ### Add a word
 
-Create a file in `src/content/words/`, e.g. `sonder.md` → `/woerter/sonder/`.
+Create a file in `src/content/words/`, e.g. `inyeon.md` → `/words/inyeon/` and `/de/woerter/inyeon/`.
 
 ```markdown
 ---
-word: Sonder
-pronunciation: /zɔndɐ/        # optional, IPA
-partOfSpeech: Substantiv      # optional
-definition: Die plötzliche …  # optional – with a definition the word also appears in the dictionary
-origin: …                     # optional
+word: 인연
+lang: ko                      # language of the word, ISO 639 code; default de
+romanization: Inyeon          # required if the word is not in Latin script
+pronunciation: /in.jʌn/       # optional, IPA
+partOfSpeech:                 # optional, translatable
+  de: Substantiv
+  en: noun
+definition:                   # optional, translatable – with a definition in a page language
+  de: Die schicksalhafte …    #   the word also appears in that language's dictionary
+  en: A fated connection …
+origin: …                     # optional, translatable
 weight: 4                     # optional, 1–5: size in the word cloud
 ---
 ```
 
-Without `weight`, a size is derived from the word, which keeps the cloud mixed.
+Without `weight`, a size is derived from the word, which keeps the cloud mixed. Words are sorted by `romanization` if present (인연 under I).
 
 ### Add a quote
 
@@ -39,8 +49,12 @@ Create a file in `src/content/quotes/`, e.g. `hesse-stufen.md`. The quote text g
 ```markdown
 ---
 author: Hermann Hesse
-source: Stufen (1941)   # optional
+source: Stufen (1941)   # optional, translatable
+lang: de                # language of the original; default de
 words: [zauber]         # optional: file names from src/content/words
+translation:            # optional: shown below the original on pages in that language
+  en: |
+    And in every beginning dwells a magic …
 ---
 
 Und jedem Anfang wohnt ein Zauber inne,
