@@ -66,11 +66,11 @@
   --color-accent-soft: light-dark(#e6ecfb, #1f2840);
 }
 
-/* Umschalter im Header überschreibt die Systemeinstellung */
-:root[data-theme='light'] {
+/* The header toggle overrides the OS setting */
+:root[data-scheme='light'] {
   color-scheme: light;
 }
 
-:root[data-theme='dark'] {
+:root[data-scheme='dark'] {
   color-scheme: dark;
 }

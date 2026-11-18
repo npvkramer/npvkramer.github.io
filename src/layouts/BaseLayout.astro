@@ -28,7 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="generator" content={Astro.generator} />
-    <!-- Setzt das gespeicherte Farbschema vor dem ersten Rendern (verhindert Flackern). -->
+    <!-- Applies the saved light/dark choice before the first paint (prevents flashing). -->
     <script is:inline src="/scripts/theme-init.js"></script>
   </head>
   <body>

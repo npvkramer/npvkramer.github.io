@@ -1,12 +1,13 @@
-// Wird blockierend im <head> geladen: setzt ein gespeichertes Farbschema,
-// bevor die Seite gezeichnet wird. Ohne gespeicherte Wahl gilt die Systemeinstellung.
+// Loaded render-blocking in <head>: applies a saved light/dark choice before the
+// first paint to avoid a flash. Without a saved choice the OS setting applies.
+// Only the color scheme is stored here; the theme itself comes from SITE.theme.
 (function () {
   try {
-    var theme = localStorage.getItem('theme');
-    if (theme === 'light' || theme === 'dark') {
-      document.documentElement.dataset.theme = theme;
+    var scheme = localStorage.getItem('color-scheme');
+    if (scheme === 'light' || scheme === 'dark') {
+      document.documentElement.dataset.scheme = scheme;
     }
   } catch (e) {
-    /* localStorage nicht verfügbar – Systemeinstellung gilt */
+    /* localStorage unavailable: the OS setting applies */
   }
 })();
