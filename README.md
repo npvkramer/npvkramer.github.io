@@ -1,59 +1,59 @@
 # npvkramer.github.io
 
-Persönliche Website, gebaut mit [Astro](https://astro.build). Das Ergebnis ist reines statisches HTML, CSS und JS und läuft auf jedem Webserver.
+Personal website built with [Astro](https://astro.build): a collection of words, quotes and a small dictionary. The output is plain static HTML, CSS and JS and runs on any web server.
 
-## Befehle
+## Commands
 
-| Befehl            | Wirkung                                           |
-| ----------------- | ------------------------------------------------- |
-| `npm install`     | Abhängigkeiten installieren (einmalig)            |
-| `npm run dev`     | Lokaler Server auf `http://localhost:4321`        |
-| `npm run build`   | Fertige Seite nach `dist/` bauen                  |
-| `npm run preview` | Gebaute Seite aus `dist/` lokal ansehen           |
+| Command           | Effect                                        |
+| ----------------- | --------------------------------------------- |
+| `npm install`     | Install dependencies (once)                   |
+| `npm run dev`     | Local dev server at `http://localhost:4321`   |
+| `npm run build`   | Build the site into `dist/`                   |
+| `npm run preview` | Serve the built site from `dist/` locally     |
 
-## Inhalte
+## Content
 
-Alle Inhalte sind Markdown-Dateien in `src/content/`. Welche Felder erlaubt sind, steht in [src/content.config.ts](src/content.config.ts). Der Dateiname wird zur URL.
+All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL. Content itself is written in German.
 
-### Wort hinzufügen
+### Add a word
 
-Datei in `src/content/woerter/` anlegen, z. B. `sonder.md` → `/woerter/sonder/`.
+Create a file in `src/content/words/`, e.g. `sonder.md` → `/woerter/sonder/`.
 
 ```markdown
 ---
-wort: Sonder
-lautschrift: /zɔndɐ/          # optional
-wortart: Substantiv           # optional
-definition: Die plötzliche …  # optional – mit Definition erscheint das Wort im Wörterbuch
-herkunft: …                   # optional
-gewicht: 4                    # optional, 1–5: Grösse in der Wortwolke
+word: Sonder
+pronunciation: /zɔndɐ/        # optional, IPA
+partOfSpeech: Substantiv      # optional
+definition: Die plötzliche …  # optional – with a definition the word also appears in the dictionary
+origin: …                     # optional
+weight: 4                     # optional, 1–5: size in the word cloud
 ---
 ```
 
-Ohne `gewicht` wird eine Grösse aus dem Wort abgeleitet. So entsteht eine gemischte Wolke.
+Without `weight`, a size is derived from the word, which keeps the cloud mixed.
 
-### Zitat hinzufügen
+### Add a quote
 
-Datei in `src/content/zitate/` anlegen, z. B. `hesse-stufen.md`. Der Text des Zitats steht unter dem Front Matter.
+Create a file in `src/content/quotes/`, e.g. `hesse-stufen.md`. The quote text goes below the front matter.
 
 ```markdown
 ---
-autor: Hermann Hesse
-quelle: Stufen (1941)   # optional
-woerter: [zauber]       # optional: Dateinamen aus src/content/woerter
+author: Hermann Hesse
+source: Stufen (1941)   # optional
+words: [zauber]         # optional: file names from src/content/words
 ---
 
 Und jedem Anfang wohnt ein Zauber inne,
 Der uns beschützt und der uns hilft, zu leben.
 ```
 
-Wörter aus `woerter` werden im Zitat verlinkt, auch in gebeugter Form (Augenblick → Augenblicke). Auf der Seite des Worts erscheint das Zitat ebenfalls.
+Words listed in `words` are linked in the quote, inflected forms included (Augenblick → Augenblicke). The quote also appears on the word's page.
 
-### Beispielinhalte
+### Example content
 
-Alle Beispiele liegen in `src/content/woerter/beispiele/` und `src/content/zitate/beispiele/`. Auf der Seite sind sie mit „Beispiel“ markiert. Zum Entfernen beide Ordner löschen. Willst du ein Beispiel behalten, verschiebe die Datei eine Ebene nach oben. Die URL bleibt dabei gleich.
+All examples live in `src/content/words/examples/` and `src/content/quotes/examples/` and are marked "Beispiel" on the site. Delete both folders to remove them. To keep an example, move the file one level up; its URL stays the same.
 
-Achtung: Verweist eines deiner Zitate auf ein Beispielwort, verschiebe das Wort vorher. Sonst meldet der Build „Invalid content reference“ und der Link im Zitat fehlt.
+Note: if one of your quotes references an example word, move that word first. Otherwise the build logs "Invalid content reference" and the link in the quote is missing.
 
 ## Styling
 
@@ -61,26 +61,26 @@ The look comes from themes. `SITE.theme` in [src/data/site.ts](src/data/site.ts)
 
 Token reference, Index values, font licenses and how to add a theme: [src/styles/themes/README.md](src/styles/themes/README.md).
 
-## Struktur
+## Structure
 
 ```
 src/
   content/
-    woerter/         Wörter (beispiele/ = Beispielinhalte)
-    zitate/          Zitate (beispiele/ = Beispielinhalte)
-  content.config.ts  Erlaubte Front-Matter-Felder
-  data/site.ts       Seitentitel, Beschreibung, Navigation, Links
-  layouts/           HTML-Gerüst (BaseLayout)
-  components/        Wiederverwendbare Teile (WordEntry, QuoteCard, …)
-  pages/             Routen: jede Datei = eine URL
-  lib/               Datenzugriff und Hilfsfunktionen (content.ts, format.ts)
-  styles/            CSS: tokens (Variablen), base, layout, components
-  scripts/           Client-JS: Wortwolke, Wörterbuch-Suche, Zufallswort, Farbschema
-public/              Dateien, die 1:1 ausgeliefert werden (Favicon, Bilder)
+    words/           Words (examples/ = example content)
+    quotes/          Quotes (examples/ = example content)
+  content.config.ts  Allowed front matter fields
+  data/site.ts       Site title, description, theme, navigation, links
+  layouts/           HTML frame (BaseLayout)
+  components/        Reusable parts (WordEntry, QuoteCard, …)
+  pages/             Routes: each file is a URL (folder names stay German)
+  lib/               Data access and helpers (content.ts, format.ts)
+  styles/            CSS: tokens, themes, base, layout, components
+  scripts/           Client JS: word cloud, dictionary search, random word, color scheme
+public/              Files served as-is (favicon, early scripts)
 ```
 
 ## Deployment
 
-**GitHub Pages:** Jeder Push auf `live` baut und veröffentlicht die Seite per GitHub Action ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Einmalig in den Repo-Einstellungen unter *Settings → Pages → Source* „GitHub Actions“ wählen.
+**GitHub Pages:** every push to `live` builds and publishes the site via GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)). Once, in the repo settings under *Settings → Pages → Source*, choose "GitHub Actions".
 
-**Eigene Domain / anderer Server:** `npm run build` ausführen und den Inhalt von `dist/` hochladen. Vorher `site` in [astro.config.mjs](astro.config.mjs) auf die neue URL setzen.
+**Own domain / other server:** run `npm run build` and upload the contents of `dist/`. Set `site` in [astro.config.mjs](astro.config.mjs) to the new URL first.
