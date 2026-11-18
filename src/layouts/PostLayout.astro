@@ -1,0 +1,35 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+import { formatDate } from '../lib/format';
+import type { Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, date, updated, tags, draft } = post.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="post">
+    <header class="post-header">
+      {draft && <p class="badge">Entwurf</p>}
+      <h1>{title}</h1>
+      <p class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {updated && (
+          <span>
+            · aktualisiert <time datetime={updated.toISOString()}>{formatDate(updated)}</time>
+          </span>
+        )}
+      </p>
+      <TagList tags={tags} />
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+  <p class="back"><a href="/posts/">← Alle Beiträge</a></p>
+</BaseLayout>

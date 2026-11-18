@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/posts';
+import { SITE } from '../data/site';
+
+const latest = (await getPosts()).slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <h1>{SITE.title}</h1>
+    <p class="lead">{SITE.description}</p>
+  </section>
+
+  <section>
+    <h2>Neueste Beiträge</h2>
+    <PostList posts={latest} />
+    <p><a href="/posts/">Alle Beiträge →</a></p>
+  </section>
+</BaseLayout>

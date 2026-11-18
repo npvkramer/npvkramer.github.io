@@ -1,0 +1,20 @@
+// Definiert die Content-Collections und welche Felder im Front Matter erlaubt sind.
+// Fehlt ein Pflichtfeld oder hat es den falschen Typ, bricht der Build mit einer klaren Meldung ab.
+
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const posts = defineCollection({
+  loader: glob({ base: './src/content/posts', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { posts };

@@ -1,0 +1,28 @@
+---
+import { SITE } from '../data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<header class="site-header">
+  <div class="container site-header-inner">
+    <a class="site-title" href="/">{SITE.title}</a>
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav-list">
+        {SITE.nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Farbschema wechseln">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </div>
+</header>
+
+<script src="../scripts/theme-toggle.ts"></script>

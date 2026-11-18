@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts } from '../../lib/posts';
+
+const posts = await getPosts();
+---
+
+<BaseLayout title="Beiträge" description="Alle Beiträge, neueste zuerst.">
+  <h1>Beiträge</h1>
+  <PostList posts={posts} />
+</BaseLayout>

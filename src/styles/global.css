@@ -1,0 +1,6 @@
+/* Einstiegspunkt für alle Styles. Wird einmal im BaseLayout importiert. */
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';
+@import './components.css';
+@import './prose.css';
