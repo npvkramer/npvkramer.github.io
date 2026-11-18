@@ -1,8 +1,8 @@
 ---
-// Markiert Beispielinhalte (Dateien im Ordner `beispiele/`). Verschwindet mit den Beispielen.
+// Marks example content (files in an `examples/` folder). Disappears together with the examples.
 interface Props {
   show: boolean;
 }
 ---
 
-{Astro.props.show && <span class="badge" title="Beispielinhalt aus dem Ordner beispiele/">Beispiel</span>}
+{Astro.props.show && <span class="badge" title="Beispielinhalt">Beispiel</span>}

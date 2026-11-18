@@ -1,5 +1,5 @@
 ---
-// Ein Zitat als Karte. Wörter aus `woerter` im Front Matter werden im Text verlinkt.
+// A quote as a card. Words listed in `words` in the front matter are linked in the text.
 import { getEntries } from 'astro:content';
 import ExampleBadge from './ExampleBadge.astro';
 import { isExample, linkWords, type Quote } from '../lib/content';
@@ -9,15 +9,15 @@ interface Props {
 }
 
 const { quote } = Astro.props;
-const { autor, quelle, woerter } = quote.data;
-const words = (await getEntries(woerter)).filter(Boolean);
+const { author, source, words: wordRefs } = quote.data;
+const words = (await getEntries(wordRefs)).filter(Boolean);
 const segments = linkWords((quote.body ?? '').trim(), words);
 ---
 
 <figure class="quote-card">
   <blockquote class="quote-text">{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
   <figcaption class="quote-source">
-    <span class="quote-author">{autor}</span>{quelle && `, ${quelle}`}
+    <span class="quote-author">{author}</span>{source && `, ${source}`}
     <ExampleBadge show={isExample(quote)} />
   </figcaption>
 </figure>

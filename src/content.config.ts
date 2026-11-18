@@ -1,37 +1,37 @@
-// Definiert die Content-Collections und welche Felder im Front Matter erlaubt sind.
-// Fehlt ein Pflichtfeld oder hat es den falschen Typ, bricht der Build mit einer klaren Meldung ab.
+// Content collections and the front matter fields they allow.
+// A missing required field or a wrong type fails the build with a clear message.
 
 import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// Die ID ist der Dateiname ohne Ordner. Ein Eintrag kann so zwischen
-// `beispiele/` und dem Hauptordner verschoben werden, ohne dass sich seine URL ändert.
+// The ID is the file name without folders, so an entry can move between
+// `examples/` and the main folder without changing its URL.
 const idFromFileName = ({ entry }: { entry: string }) =>
   entry.replace(/\.md$/, '').split('/').pop()!;
 
-const woerter = defineCollection({
-  loader: glob({ base: './src/content/woerter', pattern: '**/*.md', generateId: idFromFileName }),
+const words = defineCollection({
+  loader: glob({ base: './src/content/words', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
-    wort: z.string(),
-    lautschrift: z.string().optional(),
-    wortart: z.string().optional(),
-    // Mit Definition erscheint das Wort zusätzlich im Wörterbuch.
+    word: z.string(),
+    pronunciation: z.string().optional(), // IPA, e.g. /zɔndɐ/
+    partOfSpeech: z.string().optional(),
+    // With a definition the word also appears in the dictionary.
     definition: z.string().optional(),
-    herkunft: z.string().optional(),
-    // Grösse in der Wortwolke (1–5). Ohne Angabe wird eine Grösse aus dem Wort abgeleitet.
-    gewicht: z.number().int().min(1).max(5).optional(),
+    origin: z.string().optional(),
+    // Size in the word cloud (1–5). Without it, a size is derived from the word.
+    weight: z.number().int().min(1).max(5).optional(),
   }),
 });
 
-const zitate = defineCollection({
-  loader: glob({ base: './src/content/zitate', pattern: '**/*.md', generateId: idFromFileName }),
+const quotes = defineCollection({
+  loader: glob({ base: './src/content/quotes', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
-    autor: z.string(),
-    quelle: z.string().optional(),
-    // Verweise auf Wörter (Dateinamen aus src/content/woerter). Sie werden im Zitat verlinkt.
-    woerter: z.array(reference('woerter')).default([]),
+    author: z.string(),
+    source: z.string().optional(),
+    // References to words (file names in src/content/words). They are linked in the quote text.
+    words: z.array(reference('words')).default([]),
   }),
 });
 
-export const collections = { woerter, zitate };
+export const collections = { words, quotes };

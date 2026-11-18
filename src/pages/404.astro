@@ -1,11 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
 ---
 
 <BaseLayout title="Seite nicht gefunden">
-  <section class="intro">
-    <h1>404</h1>
-    <p class="lead">Diese Seite gibt es nicht (mehr).</p>
-    <p><a href="/">Zur Startseite →</a></p>
-  </section>
+  <PageHeader title="404" lead="Diese Seite gibt es nicht (mehr)." />
+  <p><a href="/">Zur Startseite →</a></p>
 </BaseLayout>

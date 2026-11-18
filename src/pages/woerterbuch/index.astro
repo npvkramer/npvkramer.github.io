@@ -6,6 +6,7 @@ import { getDictionary, getQuotes, groupByLetter, quotesForWord, wordUrl } from 
 
 const [words, quotes] = await Promise.all([getDictionary(), getQuotes()]);
 const groups = groupByLetter(words);
+// Anchor ids appear in the URL, so they stay German.
 const letterId = (letter: string) => `buchstabe-${letter.toLowerCase()}`;
 ---
 
@@ -38,7 +39,7 @@ const letterId = (letter: string) => `buchstabe-${letter.toLowerCase()}`;
             link
             id={word.id}
             data-dictionary-entry
-            data-search={`${word.data.wort} ${word.data.definition}`.toLowerCase()}
+            data-search={`${word.data.word} ${word.data.definition}`.toLowerCase()}
           >
             {count > 0 && (
               <p class="entry-refs">

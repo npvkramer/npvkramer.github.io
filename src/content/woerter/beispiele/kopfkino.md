@@ -1,3 +1,0 @@
----
-wort: "Kopfkino"
----

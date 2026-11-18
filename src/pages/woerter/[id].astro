@@ -17,12 +17,12 @@ interface Props {
   quotes: Quote[];
 }
 
-const { word, quotes } = Astro.props;
-const { wort, definition } = word.data;
+const { word: entry, quotes } = Astro.props;
+const { word, definition } = entry.data;
 ---
 
-<BaseLayout title={wort} description={definition ?? `${wort} – aus meiner Wortsammlung.`}>
-  <WordEntry word={word} size="lg" heading="h1" />
+<BaseLayout title={word} description={definition ?? `${word} – aus meiner Wortsammlung.`}>
+  <WordEntry word={entry} size="lg" heading="h1" />
 
   {quotes.length > 0 && (
     <section class="word-quotes">

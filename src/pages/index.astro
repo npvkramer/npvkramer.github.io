@@ -16,7 +16,7 @@ const areas = SITE.nav.filter((item) => 'description' in item);
 ---
 
 <BaseLayout>
-  <!-- Wort des Moments: ohne JavaScript der erste Eintrag, sonst ein zufälliger -->
+  <!-- Featured word: the first entry without JavaScript, otherwise a random one -->
   <section class="featured" data-random-pick>
     <p class="eyebrow">Wort des Moments</p>
     {dictionary.map((word, i) => (
