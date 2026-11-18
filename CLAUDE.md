@@ -20,6 +20,7 @@ This file improves itself, but only with approval.
   commit messages, README and this file.
   - **Stays German:** everything visitors see (UI text, content in `src/content/`), URLs.
     That means route folders in `src/pages/` (`woerter/`, `zitate/`, `woerterbuch/`) and URL anchors.
+  - **Docs snapshots:** files in `docs/concepts/` keep the language they were written in.
 - **Commits:** small, focused commits. **Never push** unless the owner explicitly asks.
 - **Unclear?** Ask instead of guessing.
 - **Verify:** run `npm run build` before committing and check its output for errors.
@@ -65,6 +66,12 @@ Schema: [src/content.config.ts](src/content.config.ts).
 - **Client JS:** only in `src/scripts/`, loaded with `<script src>`.
   - Scripts hook into `data-*` attributes.
   - Every page must still work without JavaScript (progressive enhancement).
+
+## Docs
+
+- Concepts, mocks and decisions live in `docs/` (not published). Browse them in dev at `/admin/`.
+- Concepts are dated snapshots (`YYYY-MM-DD-topic.html`): don't edit old ones, add a new file.
+- Record every product decision in the decision log in [docs/README.md](docs/README.md).
 
 ## Styling
 
