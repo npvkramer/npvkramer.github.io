@@ -50,6 +50,9 @@
   --quote-gap: var(--space-5);
   --quote-padding: var(--space-5);
 
+  /* Site menu */
+  --menu-item-size: clamp(3rem, 1.5rem + 6vw, 7.5rem);
+
   /* Admin (dev only) */
   --doc-frame-height: 80vh;
 

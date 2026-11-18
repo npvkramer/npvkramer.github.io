@@ -50,6 +50,14 @@
   --color-accent-soft: light-dark(#e1e4f7, #23264a); /* tag background */
   --color-on-accent: light-dark(#ffffff, #161513); /* text on accent */
 
+  /* Site menu: inverted, translucent overlay over the page */
+  --color-menu-bg: light-dark(rgb(26 26 26 / 0.92), rgb(237 234 227 / 0.94));
+  --color-menu-solid: light-dark(#1a1a1a, #edeae3); /* opaque menu color, text on pressed buttons */
+  --color-menu-text: light-dark(#f5f4f0, #161513);
+  --color-menu-muted: light-dark(#a8a49b, #5e5c57); /* labels, at least 4.5:1 on the menu */
+  --color-menu-accent: light-dark(#8f9bff, #2840e0); /* hover and current page */
+  --menu-blur: 10px;
+
   /* Shape */
   --radius: 2px;
   --radius-tag: 2px;

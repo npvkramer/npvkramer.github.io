@@ -40,6 +40,14 @@
   --color-accent-soft: light-dark(#e5eefa, #1a2840);
   --color-on-accent: light-dark(#ffffff, #111111);
 
+  /* Site menu: overlay over the page (translucent background, opaque twin for pressed buttons) */
+  --color-menu-bg: light-dark(rgb(17 17 17 / 0.92), rgb(238 238 238 / 0.94));
+  --color-menu-solid: light-dark(#111111, #eeeeee);
+  --color-menu-text: light-dark(#ffffff, #111111);
+  --color-menu-muted: light-dark(#aaaaaa, #555555);
+  --color-menu-accent: light-dark(#77aaff, #0055cc);
+  --menu-blur: 10px;
+
   /* Shape */
   --radius: 4px;
   --radius-tag: 999px;
