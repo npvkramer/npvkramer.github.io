@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theme Index: Hell und Dunkel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap">
+<style>
+/* Snapshot of the design canvas boards "2 · Index" and "2b · Index Dunkel" (fixed 1200px artboards). */
+body { margin: 0; padding: 32px 16px 64px; background: #d9d6ce; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+.boards { display: flex; flex-wrap: wrap; gap: 48px; justify-content: center; }
+.board { display: grid; gap: 12px; max-width: 100%; }
+.board-label { margin: 0; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #1a1a1a; }
+.board-frame { overflow-x: auto; max-width: 100%; box-shadow: 0 1px 0 #0002; }
+.board-light a { color: #1A1A1A; text-decoration: none; }
+.board-light a:hover { color: #2840E0; }
+.board-dark a { color: #EDEAE3; text-decoration: none; }
+.board-dark a:hover { color: #8F9BFF; }
+</style>
+</head>
+<body>
+<div class="boards">
+<section class="board board-light" aria-label="2 · Index hell">
+<p class="board-label">2 · Index — hell</p>
+<div class="board-frame">
+<div style="width: 1200px; height: 1840px; box-sizing: border-box; padding: 0 48px; background: #F5F4F0; color: #1A1A1A; font-family: Newsreader, 'Times New Roman', Times, serif; display: flex; flex-direction: column;">
+
+  <header style="height: 72px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; align-items: center; border-bottom: 1px solid #1A1A1A; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;">
+    <a href="#" style="grid-column: span 4; font-weight: 500;">npvkramer — Sammlung</a>
+    <nav aria-label="Hauptnavigation" style="grid-column: span 6; display: flex; gap: 28px;">
+      <a href="#" style="color: #2840E0;">[Wörter]</a>
+      <a href="#">Zitate</a>
+      <a href="#">Lexikon</a>
+      <a href="#">Über</a>
+    </nav>
+    <span style="grid-column: span 2; text-align: right; color: #5E5C57;">DE / 2026</span>
+  </header>
+
+  <section style="padding: 72px 0 64px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; border-bottom: 1px solid #1A1A1A;">
+    <div style="grid-column: span 8; display: flex; flex-direction: column; gap: 20px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.04em; color: #2840E0;">→ 014 / LEXIKON</span>
+      <h1 style="margin: 0; font-weight: 400; font-size: 136px; line-height: 0.95; letter-spacing: -0.025em;">Sonder</h1>
+      <span style="font-style: italic; font-size: 26px; color: #5E5C57;">/zɔndɐ/</span>
+      <p style="margin: 8px 0 0; font-size: 24px; line-height: 1.5; max-width: 660px;">Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst – mit eigenen Sorgen, Träumen und Beziehungen, in denen man selbst höchstens eine unbedeutende Nebenrolle spielt.</p>
+    </div>
+    <aside style="grid-column: span 4; align-self: end; display: flex; flex-direction: column; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #1A1A1A;"><span style="color: #5E5C57;">WORTART</span><span>Substantiv</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #C9C6BE;"><span style="color: #5E5C57;">KATEGORIE</span><span>Gefühl</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #C9C6BE;"><span style="color: #5E5C57;">QUELLE</span><span>Dict. of Obscure Sorrows</span></div>
+      <div style="display: flex; gap: 8px; padding-top: 24px;">
+        <button type="button" style="flex: 1; height: 48px; border: 1px solid #1A1A1A; border-radius: 2px; background: #1A1A1A; color: #F5F4F0; font: 500 13px 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer;">Zufallswort ↻</button>
+        <button type="button" aria-label="Vorheriges Wort" style="width: 48px; height: 48px; border: 1px solid #1A1A1A; border-radius: 2px; background: transparent; color: #1A1A1A; font: 500 16px 'IBM Plex Mono', monospace; cursor: pointer;">←</button>
+        <button type="button" aria-label="Nächstes Wort" style="width: 48px; height: 48px; border: 1px solid #1A1A1A; border-radius: 2px; background: transparent; color: #1A1A1A; font: 500 16px 'IBM Plex Mono', monospace; cursor: pointer;">→</button>
+      </div>
+    </aside>
+  </section>
+
+  <section aria-label="Wortindex" style="padding: 40px 0 48px; display: flex; flex-direction: column;">
+    <div style="display: grid; grid-template-columns: 80px 280px 1fr 40px; padding-bottom: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5E5C57;">
+      <span>NR.</span><span>WORT</span><span>BEDEUTUNG</span><span></span>
+    </div>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #1A1A1A;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5C57;">011</span>
+      <span style="font-size: 28px;">Fernweh</span>
+      <span style="font-size: 18px; color: #5E5C57;">Sehnsucht nach der Ferne, nach Orten, an denen man nie war.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #C9C6BE;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5C57;">012</span>
+      <span style="font-size: 28px;">Waldeinsamkeit</span>
+      <span style="font-size: 18px; color: #5E5C57;">Das Gefühl, allein und geborgen im Wald zu sein.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #C9C6BE; color: #2840E0;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">013</span>
+      <span style="font-size: 28px; font-style: italic;">Komorebi</span>
+      <span style="font-size: 18px;">Sonnenlicht, das durch das Laub der Bäume fällt. (Hover)</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #C9C6BE; border-bottom: 1px solid #1A1A1A;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #5E5C57;">014</span>
+      <span style="font-size: 28px;">Sonder</span>
+      <span style="font-size: 18px; color: #5E5C57;">Jeder Passant führt ein ebenso reiches Leben wie man selbst.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; padding: 0 0 48px;">
+    <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 16px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5E5C57;">TYPOGRAFIE</span>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 44px; line-height: 1.1;">Newsreader Display</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5C57;">H1–H2 · 136 / 44 · Regular</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 20px; line-height: 1.5;">Fliesstext für Zitate und Definitionen, ruhig und gut lesbar auf warmem Grund.</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5C57;">Body · Newsreader 20/1.5</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.04em;">LABEL · NUMMER · META</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5C57;">UI · IBM Plex Mono 13 caps</span></div>
+    </div>
+    <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5E5C57;">FARBEN</span>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid #1A1A1A;">
+        <div style="height: 120px; background: #F5F4F0; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #1A1A1A;">Papier<br>#F5F4F0</div>
+        <div style="height: 120px; background: #E8E5DD; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #1A1A1A;">Fläche<br>#E8E5DD</div>
+        <div style="height: 120px; background: #C9C6BE; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #1A1A1A;">Linie<br>#C9C6BE</div>
+        <div style="height: 120px; background: #1A1A1A; color: #F5F4F0; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #1A1A1A;">Tinte<br>#1A1A1A</div>
+        <div style="height: 120px; background: #2840E0; color: #FFFFFF; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">Akzent<br>#2840E0</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px;">
+        <label for="i-search" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5E5C57;">SUCHE IM INDEX</label>
+        <input id="i-search" type="text" placeholder="Wort oder Nummer …" style="height: 48px; border: 1px solid #1A1A1A; border-radius: 2px; padding: 0 14px; font: 400 18px Newsreader, serif; color: #1A1A1A; background: #FFFFFF; outline: none;">
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Zitate" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-bottom: 56px;">
+    <figure style="margin: 0; padding: 32px; border: 1px solid #1A1A1A; background: #FFFFFF; display: flex; flex-direction: column; gap: 24px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5C57;">Z—07</span>
+      <blockquote style="margin: 0; font-size: 30px; line-height: 1.25;">„Und jedem Anfang wohnt ein Zauber inne, der uns beschützt und der uns hilft, zu leben.“</blockquote>
+      <figcaption style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em;">HERMANN HESSE · STUFEN</figcaption>
+    </figure>
+    <figure style="margin: 0; padding: 32px; border: 1px solid #1A1A1A; background: #E8E5DD; display: flex; flex-direction: column; gap: 24px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5E5C57;">Z—08</span>
+      <blockquote style="margin: 0; font-size: 30px; line-height: 1.25; font-style: italic;">„Habe Geduld gegen alles Ungelöste in deinem Herzen und versuche, die Fragen selbst liebzuhaben.“</blockquote>
+      <figcaption style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em;">R. M. RILKE · BRIEFE AN EINEN JUNGEN DICHTER</figcaption>
+    </figure>
+  </section>
+
+  <footer style="margin-top: auto; height: 64px; border-top: 1px solid #1A1A1A; display: flex; align-items: center; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #5E5C57;">
+    <span>© 2026 NPVKRAMER</span>
+    <span>WÖRTER · ZITATE · LEXIKON</span>
+  </footer>
+</div>
+</div>
+</section>
+<section class="board board-dark" aria-label="2b · Index dunkel">
+<p class="board-label">2b · Index — dunkel</p>
+<div class="board-frame">
+<div style="width: 1200px; height: 1840px; box-sizing: border-box; padding: 0 48px; background: #161513; color: #EDEAE3; font-family: Newsreader, 'Times New Roman', Times, serif; display: flex; flex-direction: column;">
+
+  <header style="height: 72px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; align-items: center; border-bottom: 1px solid #CFCBC2; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em;">
+    <a href="#" style="grid-column: span 4; font-weight: 500;">npvkramer — Sammlung</a>
+    <nav aria-label="Hauptnavigation" style="grid-column: span 6; display: flex; gap: 28px;">
+      <a href="#" style="color: #8F9BFF;">[Wörter]</a>
+      <a href="#">Zitate</a>
+      <a href="#">Lexikon</a>
+      <a href="#">Über</a>
+    </nav>
+    <span style="grid-column: span 2; text-align: right; color: #9C988F;">DE / 2026</span>
+  </header>
+
+  <section style="padding: 72px 0 64px; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; border-bottom: 1px solid #CFCBC2;">
+    <div style="grid-column: span 8; display: flex; flex-direction: column; gap: 20px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.04em; color: #8F9BFF;">→ 014 / LEXIKON</span>
+      <h1 style="margin: 0; font-weight: 400; font-size: 136px; line-height: 0.95; letter-spacing: -0.025em;">Sonder</h1>
+      <span style="font-style: italic; font-size: 26px; color: #9C988F;">/zɔndɐ/</span>
+      <p style="margin: 8px 0 0; font-size: 24px; line-height: 1.5; max-width: 660px; color: #E2DED6;">Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst – mit eigenen Sorgen, Träumen und Beziehungen, in denen man selbst höchstens eine unbedeutende Nebenrolle spielt.</p>
+    </div>
+    <aside style="grid-column: span 4; align-self: end; display: flex; flex-direction: column; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #CFCBC2;"><span style="color: #9C988F;">WORTART</span><span>Substantiv</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #34322E;"><span style="color: #9C988F;">KATEGORIE</span><span>Gefühl</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid #34322E;"><span style="color: #9C988F;">QUELLE</span><span>Dict. of Obscure Sorrows</span></div>
+      <div style="display: flex; gap: 8px; padding-top: 24px;">
+        <button type="button" style="flex: 1; height: 48px; border: 1px solid #EDEAE3; border-radius: 2px; background: #EDEAE3; color: #161513; font: 500 13px 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer;">Zufallswort ↻</button>
+        <button type="button" aria-label="Vorheriges Wort" style="width: 48px; height: 48px; border: 1px solid #CFCBC2; border-radius: 2px; background: transparent; color: #EDEAE3; font: 500 16px 'IBM Plex Mono', monospace; cursor: pointer;">←</button>
+        <button type="button" aria-label="Nächstes Wort" style="width: 48px; height: 48px; border: 1px solid #CFCBC2; border-radius: 2px; background: transparent; color: #EDEAE3; font: 500 16px 'IBM Plex Mono', monospace; cursor: pointer;">→</button>
+      </div>
+    </aside>
+  </section>
+
+  <section aria-label="Wortindex" style="padding: 40px 0 48px; display: flex; flex-direction: column;">
+    <div style="display: grid; grid-template-columns: 80px 280px 1fr 40px; padding-bottom: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9C988F;">
+      <span>NR.</span><span>WORT</span><span>BEDEUTUNG</span><span></span>
+    </div>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #CFCBC2;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9C988F;">011</span>
+      <span style="font-size: 28px;">Fernweh</span>
+      <span style="font-size: 18px; color: #9C988F;">Sehnsucht nach der Ferne, nach Orten, an denen man nie war.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #34322E;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9C988F;">012</span>
+      <span style="font-size: 28px;">Waldeinsamkeit</span>
+      <span style="font-size: 18px; color: #9C988F;">Das Gefühl, allein und geborgen im Wald zu sein.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #34322E; color: #8F9BFF;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">013</span>
+      <span style="font-size: 28px; font-style: italic;">Komorebi</span>
+      <span style="font-size: 18px;">Sonnenlicht, das durch das Laub der Bäume fällt. (Hover)</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+    <a href="#" style="display: grid; grid-template-columns: 80px 280px 1fr 40px; align-items: baseline; padding: 16px 0; border-top: 1px solid #34322E; border-bottom: 1px solid #CFCBC2;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9C988F;">014</span>
+      <span style="font-size: 28px;">Sonder</span>
+      <span style="font-size: 18px; color: #9C988F;">Jeder Passant führt ein ebenso reiches Leben wie man selbst.</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; text-align: right;">→</span>
+    </a>
+  </section>
+
+  <section style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 20px; padding: 0 0 48px;">
+    <div style="grid-column: span 5; display: flex; flex-direction: column; gap: 16px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9C988F;">TYPOGRAFIE</span>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 44px; line-height: 1.1;">Newsreader Display</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C988F;">H1–H2 · 136 / 44 · Regular</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 20px; line-height: 1.5; color: #E2DED6;">Auf dunklem Grund etwas weniger Kontrast im Fliesstext – angenehmer für lange Abende.</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C988F;">Body · Newsreader 20/1.5 · #E2DED6</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px;"><span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.04em;">LABEL · NUMMER · META</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C988F;">UI · IBM Plex Mono 13 caps</span></div>
+    </div>
+    <div style="grid-column: span 7; display: flex; flex-direction: column; gap: 16px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9C988F;">FARBEN</span>
+      <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid #CFCBC2;">
+        <div style="height: 120px; background: #161513; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #CFCBC2;">Nacht<br>#161513</div>
+        <div style="height: 120px; background: #1F1E1B; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #CFCBC2;">Fläche<br>#1F1E1B</div>
+        <div style="height: 120px; background: #34322E; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #CFCBC2;">Linie<br>#34322E</div>
+        <div style="height: 120px; background: #EDEAE3; color: #161513; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; border-right: 1px solid #CFCBC2;">Kreide<br>#EDEAE3</div>
+        <div style="height: 120px; background: #8F9BFF; color: #161513; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px;">Akzent<br>#8F9BFF</div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 8px;">
+        <label for="id-search" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9C988F;">SUCHE IM INDEX</label>
+        <input id="id-search" type="text" placeholder="Wort oder Nummer …" style="height: 48px; border: 1px solid #CFCBC2; border-radius: 2px; padding: 0 14px; font: 400 18px Newsreader, serif; color: #EDEAE3; background: #1F1E1B; outline: none;">
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Zitate" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-bottom: 56px;">
+    <figure style="margin: 0; padding: 32px; border: 1px solid #CFCBC2; background: #1F1E1B; display: flex; flex-direction: column; gap: 24px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C988F;">Z—07</span>
+      <blockquote style="margin: 0; font-size: 30px; line-height: 1.25;">„Und jedem Anfang wohnt ein Zauber inne, der uns beschützt und der uns hilft, zu leben.“</blockquote>
+      <figcaption style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em;">HERMANN HESSE · STUFEN</figcaption>
+    </figure>
+    <figure style="margin: 0; padding: 32px; border: 1px solid #34322E; background: #26241F; display: flex; flex-direction: column; gap: 24px;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9C988F;">Z—08</span>
+      <blockquote style="margin: 0; font-size: 30px; line-height: 1.25; font-style: italic;">„Habe Geduld gegen alles Ungelöste in deinem Herzen und versuche, die Fragen selbst liebzuhaben.“</blockquote>
+      <figcaption style="margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em;">R. M. RILKE · BRIEFE AN EINEN JUNGEN DICHTER</figcaption>
+    </figure>
+  </section>
+
+  <footer style="margin-top: auto; height: 64px; border-top: 1px solid #CFCBC2; display: flex; align-items: center; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #9C988F;">
+    <span>© 2026 NPVKRAMER</span>
+    <span>WÖRTER · ZITATE · LEXIKON</span>
+  </footer>
+</div>
+</div>
+</section>
+</div>
+</body>
+</html>
