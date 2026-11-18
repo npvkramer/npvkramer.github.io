@@ -44,49 +44,219 @@ main.container {
   margin-right: auto;
 }
 
-.nav-list {
-  display: flex;
-  gap: var(--space-4);
-}
-
-.nav-list a {
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.nav-list a:hover {
-  color: var(--color-accent);
-}
-
-/* Current page: accent color, wrapped in the theme's markers (e.g. square brackets) */
-.nav-list a[aria-current='page'] {
-  color: var(--color-accent);
-}
-
-.nav-list a[aria-current='page']::before {
-  content: var(--nav-marker-start, none);
-}
-
-.nav-list a[aria-current='page']::after {
-  content: var(--nav-marker-end, none);
-}
-
-.theme-toggle {
+/* Menu button: opens the site menu in the header, closes it inside the menu */
+.menu-button {
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
+  margin-right: calc(var(--space-2) * -1);
   padding: 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 0;
   background: transparent;
-  color: var(--color-text);
-  font-size: 1.1rem;
+  color: inherit;
   cursor: pointer;
 }
 
-.theme-toggle:hover {
-  background: var(--color-subtle);
+.menu-button:hover {
+  color: var(--color-accent);
+}
+
+/*
+  Site menu: full-screen, inverted, translucent overlay.
+  A native popover: the browser opens, closes and dismisses it (Escape) without JavaScript.
+*/
+.site-menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow-y: auto;
+  background: var(--color-menu-bg);
+  color: var(--color-menu-text);
+  -webkit-backdrop-filter: blur(var(--menu-blur));
+  backdrop-filter: blur(var(--menu-blur));
+}
+
+/* Set display only while open: the browser hides a closed popover with display: none */
+.site-menu:popover-open {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The page behind does not scroll while the menu is open */
+:root:has(.site-menu:popover-open) {
+  overflow: hidden;
+}
+
+.site-menu :focus-visible {
+  outline-color: var(--color-menu-accent);
+}
+
+.site-menu .site-title {
+  color: inherit;
+}
+
+.site-menu .menu-button:hover {
+  color: var(--color-menu-accent);
+}
+
+.menu-nav {
+  flex: 1;
+  display: grid;
+  place-content: center;
+  padding-block: var(--space-5);
+}
+
+.menu-nav ul {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+}
+
+.menu-nav a {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.12em;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--menu-item-size);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu-nav a:hover,
+.menu-nav a:focus-visible,
+.menu-nav a[aria-current='page'] {
+  color: var(--color-menu-accent);
+}
+
+.menu-nav a:hover,
+.menu-nav a:focus-visible {
+  font-style: italic;
+}
+
+/* Small number next to each item, aligned with the cap height */
+.menu-num {
+  margin-top: calc(var(--menu-item-size) * 0.18);
+  font-style: normal;
+  color: var(--color-menu-muted);
+}
+
+/* Menu footer: appearance, language, social links, copyright */
+.menu-foot {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-3);
+  padding-block: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--color-menu-text);
+}
+
+.menu-group {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+
+.menu-appearance,
+.menu-meta {
+  grid-column: 1 / -1;
+}
+
+.menu-label,
+.menu-meta {
+  color: var(--color-menu-muted);
+}
+
+/* Segmented choice: equal-width buttons or links, the active one filled */
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--space-1);
+}
+
+.segmented > * {
+  display: grid;
+  place-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-menu-text);
+  border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.segmented > :hover {
+  border-color: var(--color-menu-accent);
+  color: var(--color-menu-accent);
+}
+
+.segmented > [aria-pressed='true'],
+.segmented > [aria-current] {
+  border-color: var(--color-menu-text);
+  background: var(--color-menu-text);
+  color: var(--color-menu-solid);
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.menu-links a:hover {
+  color: var(--color-menu-accent);
+}
+
+/* Keyboard hint: only where a hardware keyboard is likely */
+.menu-esc {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .menu-foot {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .menu-appearance,
+  .menu-meta {
+    grid-column: auto;
+  }
+
+  .segmented {
+    display: flex;
+  }
+
+  .menu-meta {
+    justify-items: end;
+    text-align: right;
+  }
+}
+
+@media (min-width: 992px) and (hover: hover) {
+  .menu-esc {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
 }
 
 /* Footer */
@@ -115,17 +285,4 @@ main.container {
 
 .footer-links a {
   color: inherit;
-}
-
-/* Narrow screens: navigation gets its own row below title and toggle */
-@media (max-width: 36rem) {
-  .site-header nav {
-    order: 1;
-    width: 100%;
-  }
-
-  .nav-list {
-    flex-wrap: wrap;
-    gap: var(--space-1) var(--space-3);
-  }
 }

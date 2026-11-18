@@ -95,7 +95,8 @@ ol[class] {
   Each theme shapes it through the --ui-* tokens. Add a class here to opt in.
 */
 .site-title,
-.nav-list,
+.menu-num,
+.menu-foot,
 .site-footer,
 .eyebrow,
 .badge,

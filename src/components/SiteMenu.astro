@@ -1,0 +1,102 @@
+---
+// Full-screen site menu: navigation, appearance, language and social links.
+// A native popover, so opening, closing and Escape work without JavaScript.
+// Only the appearance group needs JavaScript; it stays hidden until the script runs.
+import { SITE } from '../data/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path.startsWith(href);
+const number = (index: number) => String(index + 1).padStart(2, '0');
+const year = new Date().getFullYear();
+const schemes = [
+  { value: 'light', label: 'Hell' },
+  { value: 'dark', label: 'Dunkel' },
+  { value: 'auto', label: 'Auto' },
+];
+---
+
+<div id="site-menu" class="site-menu" popover role="dialog" aria-label="Menü">
+  <div class="container site-header-inner">
+    <a class="site-title" href="/">{SITE.title}</a>
+    <button
+      class="menu-button"
+      type="button"
+      popovertarget="site-menu"
+      popovertargetaction="hide"
+      aria-label="Menü schliessen"
+      autofocus
+    >
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <path d="M6 6l16 16M22 6L6 22" stroke="currentColor" stroke-width="1.5" fill="none"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="menu-nav" aria-label="Hauptnavigation">
+    <ul>
+      {SITE.nav.map((item, index) => (
+        <li>
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <span class="menu-num">{number(index)}</span>
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="menu-foot">
+      <div class="menu-group menu-appearance" role="group" aria-labelledby="menu-appearance" data-scheme-select hidden>
+        <span class="menu-label" id="menu-appearance">Darstellung</span>
+        <div class="segmented">
+          {schemes.map((scheme) => (
+            <button type="button" data-scheme-option={scheme.value} aria-pressed="false">
+              {scheme.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {SITE.languages.length > 1 && (
+        <div class="menu-group" role="group" aria-labelledby="menu-language">
+          <span class="menu-label" id="menu-language">Sprache</span>
+          <div class="segmented">
+            {SITE.languages.map((language) => (
+              <a
+                href={language.href}
+                hreflang={language.code}
+                lang={language.code}
+                aria-current={language.code === SITE.lang ? 'true' : undefined}
+              >
+                {language.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {SITE.social.length > 0 && (
+        <div class="menu-group">
+          <span class="menu-label">Folgen</span>
+          <ul class="menu-links">
+            {SITE.social.map((link) => (
+              <li>
+                <a href={link.href} rel="me noopener">
+                  {link.label} <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div class="menu-group menu-meta">
+        <span>© {year} {SITE.title}</span>
+        <span class="menu-esc" aria-hidden="true">[ESC] = Menü schliessen</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../scripts/color-scheme.ts"></script>
