@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WordEntry from '../../components/WordEntry.astro';
+import QuoteGrid from '../../components/QuoteGrid.astro';
+import { getQuotes, getWords, quotesForWord, type Quote, type Word } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const [words, quotes] = await Promise.all([getWords(), getQuotes()]);
+  return words.map((word) => ({
+    params: { id: word.id },
+    props: { word, quotes: quotesForWord(quotes, word) },
+  }));
+}
+
+interface Props {
+  word: Word;
+  quotes: Quote[];
+}
+
+const { word, quotes } = Astro.props;
+const { wort, definition } = word.data;
+---
+
+<BaseLayout title={wort} description={definition ?? `${wort} – aus meiner Wortsammlung.`}>
+  <WordEntry word={word} size="lg" heading="h1" />
+
+  {quotes.length > 0 && (
+    <section class="word-quotes">
+      <h2>In Zitaten</h2>
+      <QuoteGrid quotes={quotes} />
+    </section>
+  )}
+
+  <p class="back">
+    <a href="/woerter/">← Alle Wörter</a>
+    {definition && <a href="/woerterbuch/">Wörterbuch</a>}
+  </p>
+</BaseLayout>

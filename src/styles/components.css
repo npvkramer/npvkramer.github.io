@@ -291,3 +291,61 @@
 .word-link:hover {
   color: var(--color-accent);
 }
+
+/* Wortwolke: ohne JavaScript eine umbrechende Liste, mit JavaScript frei verteilt */
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--cloud-gap);
+}
+
+.cloud.is-scattered {
+  display: block;
+  position: relative;
+  min-height: var(--cloud-min-height);
+  overflow: hidden;
+}
+
+.cloud.is-scattered > li {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cloud-word {
+  /* --weight (1–5) kommt pro Wort aus dem Front Matter */
+  font-family: var(--font-display);
+  font-size: calc(var(--cloud-size-min) + (var(--cloud-size-max) - var(--cloud-size-min)) * (var(--weight, 1) - 1) / 4);
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.cloud-word:hover {
+  color: var(--color-accent);
+}
+
+/* Punkt: Wort steht auch im Wörterbuch */
+.cloud-word[data-has-definition]::after {
+  content: '';
+  display: inline-block;
+  width: 0.18em;
+  height: 0.18em;
+  margin-left: 0.12em;
+  border-radius: 50%;
+  background: var(--color-accent);
+  vertical-align: super;
+}
+
+/* Wortseite */
+.word-quotes {
+  margin-top: var(--space-6);
+}
+
+.back {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
