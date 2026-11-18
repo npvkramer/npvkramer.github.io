@@ -18,10 +18,21 @@ Concepts, mocks and decisions for this site, kept as history.
 
 | Date | File | Topic |
 | --- | --- | --- |
+| 2026-11-18 | [concepts/2026-11-18-navigation-mock.html](concepts/2026-11-18-navigation-mock.html) | Navigation C': full-screen menu overlay, desktop and mobile, clickable (German) |
+| 2026-11-18 | [concepts/2026-11-18-index-theme-mock.html](concepts/2026-11-18-index-theme-mock.html) | Index theme style tiles, light (2) and dark (2b) (German) |
 | 2026-11-18 | [concepts/2026-11-18-i18n-concept.html](concepts/2026-11-18-i18n-concept.html) | Multilingual site: page language vs. word language, rules R1–R11 (German) |
 | 2026-11-18 | [concepts/2026-11-18-word-collection-mock.html](concepts/2026-11-18-word-collection-mock.html) | First clickable mock: words, quotes, dictionary (German) |
 
 ## Decision log
+
+**2026-11-18: Theme and navigation** (see index theme and navigation mocks)
+
+- **Theme:** Index, warm-minimal archive look in light and dark. Newsreader for text, IBM Plex Mono for UI.
+  Values and token reference in `src/styles/themes/`.
+- **Navigation (C'):** "npvk" on the left, a single menu button on the right.
+  The menu is a full-screen, inverted, translucent overlay with large centered nav items.
+- **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
+- **Language group:** only shown once the site has more than one language.
 
 **2026-11-18: Multilingual site** (see i18n concept)
 
