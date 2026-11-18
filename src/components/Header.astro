@@ -1,13 +1,16 @@
 ---
 // Site header: title on the left, a single menu button on the right that opens the site menu.
 import { SITE } from '../data/site';
+import { getLocale, pathTo, t } from '../i18n';
 import SiteMenu from './SiteMenu.astro';
+
+const locale = getLocale(Astro.url);
 ---
 
 <header class="site-header">
   <div class="container site-header-inner">
-    <a class="site-title" href="/">{SITE.title}</a>
-    <button class="menu-button" type="button" popovertarget="site-menu" aria-label="Menü öffnen">
+    <a class="site-title" href={pathTo('home', locale)}>{SITE.title}</a>
+    <button class="menu-button" type="button" popovertarget="site-menu" aria-label={t(locale).menu.open}>
       <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
         <path d="M3 9h22M9 19h16" stroke="currentColor" stroke-width="1.5" fill="none"></path>
       </svg>

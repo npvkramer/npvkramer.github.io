@@ -3,27 +3,31 @@
 // A native popover, so opening, closing and Escape work without JavaScript.
 // Only the appearance group needs JavaScript; it stays hidden until the script runs.
 import { SITE } from '../data/site';
+import { getLocale, languageLinks, navItems, pathTo, t } from '../i18n';
 
+const locale = getLocale(Astro.url);
+const text = t(locale).menu;
 const path = Astro.url.pathname;
 const isActive = (href: string) => path.startsWith(href);
 const number = (index: number) => String(index + 1).padStart(2, '0');
+const languages = languageLinks(Astro.url);
 const year = new Date().getFullYear();
 const schemes = [
-  { value: 'light', label: 'Hell' },
-  { value: 'dark', label: 'Dunkel' },
-  { value: 'auto', label: 'Auto' },
+  { value: 'light', label: text.light },
+  { value: 'dark', label: text.dark },
+  { value: 'auto', label: text.auto },
 ];
 ---
 
-<div id="site-menu" class="site-menu" popover role="dialog" aria-label="Menü">
+<div id="site-menu" class="site-menu" popover role="dialog" aria-label={text.label}>
   <div class="container site-header-inner">
-    <a class="site-title" href="/">{SITE.title}</a>
+    <a class="site-title" href={pathTo('home', locale)}>{SITE.title}</a>
     <button
       class="menu-button"
       type="button"
       popovertarget="site-menu"
       popovertargetaction="hide"
-      aria-label="Menü schliessen"
+      aria-label={text.close}
       autofocus
     >
       <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
@@ -32,9 +36,9 @@ const schemes = [
     </button>
   </div>
 
-  <nav class="menu-nav" aria-label="Hauptnavigation">
+  <nav class="menu-nav" aria-label={text.navLabel}>
     <ul>
-      {SITE.nav.map((item, index) => (
+      {navItems(locale).map((item, index) => (
         <li>
           <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
             <span class="menu-num">{number(index)}</span>
@@ -48,7 +52,7 @@ const schemes = [
   <div class="container">
     <div class="menu-foot">
       <div class="menu-group menu-appearance" role="group" aria-labelledby="menu-appearance" data-scheme-select hidden>
-        <span class="menu-label" id="menu-appearance">Darstellung</span>
+        <span class="menu-label" id="menu-appearance">{text.appearance}</span>
         <div class="segmented">
           {schemes.map((scheme) => (
             <button type="button" data-scheme-option={scheme.value} aria-pressed="false">
@@ -58,16 +62,16 @@ const schemes = [
         </div>
       </div>
 
-      {SITE.languages.length > 1 && (
+      {languages.length > 1 && (
         <div class="menu-group" role="group" aria-labelledby="menu-language">
-          <span class="menu-label" id="menu-language">Sprache</span>
+          <span class="menu-label" id="menu-language">{text.language}</span>
           <div class="segmented">
-            {SITE.languages.map((language) => (
+            {languages.map((language) => (
               <a
                 href={language.href}
-                hreflang={language.code}
-                lang={language.code}
-                aria-current={language.code === SITE.lang ? 'true' : undefined}
+                hreflang={language.locale}
+                lang={language.locale}
+                aria-current={language.current ? 'true' : undefined}
               >
                 {language.label}
               </a>
@@ -78,7 +82,7 @@ const schemes = [
 
       {SITE.social.length > 0 && (
         <div class="menu-group">
-          <span class="menu-label">Folgen</span>
+          <span class="menu-label">{text.follow}</span>
           <ul class="menu-links">
             {SITE.social.map((link) => (
               <li>
@@ -93,7 +97,7 @@ const schemes = [
 
       <div class="menu-group menu-meta">
         <span>© {year} {SITE.title}</span>
-        <span class="menu-esc" aria-hidden="true">[ESC] = Menü schliessen</span>
+        <span class="menu-esc" aria-hidden="true">{text.escHint}</span>
       </div>
     </div>
   </div>
