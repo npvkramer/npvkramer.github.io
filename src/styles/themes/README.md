@@ -5,7 +5,7 @@ The site's look is controlled by two attributes on `<html>`. Components and page
 | Attribute | Values | Set by | Controls |
 | --- | --- | --- | --- |
 | `data-theme` | `index`, … | `SITE.theme` in [src/data/site.ts](../../data/site.ts) | Fonts, colors, shapes, UI text style |
-| `data-scheme` | `light`, `dark` (absent = OS setting) | Header toggle, stored in `localStorage` (`color-scheme`) | Which side of `light-dark()` applies |
+| `data-scheme` | `light`, `dark` (absent = OS setting) | Appearance setting in the site menu, stored in `localStorage` (`color-scheme`) | Which side of `light-dark()` applies |
 
 To switch the theme, change one line in `site.ts`:
 
@@ -76,13 +76,27 @@ All colors are `light-dark(light, dark)`.
 
 Contrast: `--color-text` and `--color-muted` reach at least 4.5:1 on `--color-bg` and `--color-surface` in both schemes, as does `--color-accent` on `--color-bg`. Keep that when changing values.
 
-### Shape and decoration
+### Site menu
+
+The menu is a full-screen overlay over the page, inverted against the current scheme ([SiteMenu.astro](../../components/SiteMenu.astro), styles in [layout.css](../layout.css)).
+
+| Token | Purpose | Index light | Index dark |
+| --- | --- | --- | --- |
+| `--color-menu-bg` | Translucent overlay background | `rgb(26 26 26 / 0.92)` | `rgb(237 234 227 / 0.94)` |
+| `--color-menu-solid` | Opaque twin of the background, text on pressed buttons | `#1a1a1a` | `#edeae3` |
+| `--color-menu-text` | Text, lines, button borders | `#f5f4f0` | `#161513` |
+| `--color-menu-muted` | Labels, numbers, copyright | `#a8a49b` | `#5e5c57` |
+| `--color-menu-accent` | Hover and current page | `#8f9bff` | `#2840e0` |
+| `--menu-blur` | Blur of the page behind the overlay | 10px | 10px |
+
+`--menu-item-size` (size of the large nav items) is a layout token in `tokens.css`.
+
+### Shape
 
 | Token | Purpose | Index |
 | --- | --- | --- |
 | `--radius` | Corners of cards, inputs, buttons, focus ring | 2px |
 | `--radius-tag` | Corners of small pills and tags | 2px |
-| `--nav-marker-start` / `--nav-marker-end` | Characters around the current nav item; `none` for no marker | `'['` / `']'` |
 
 ## Fonts and licenses
 
@@ -103,7 +117,7 @@ Times New Roman stays in the fallback stack only: it is a Monotype font and may 
 4. Import the file in [global.css](../global.css) after `index.css`.
 5. Set `theme: '<name>'` in `site.ts`.
 
-A theme with only one scheme (e.g. dark only) uses plain color values instead of `light-dark()`, sets `color-scheme: dark;` in its block and should hide the toggle.
+A theme with only one scheme (e.g. dark only) uses plain color values instead of `light-dark()`, sets `color-scheme: dark;` in its block and should hide the appearance group in the site menu.
 
 ## Design reference
 

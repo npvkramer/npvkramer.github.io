@@ -5,7 +5,7 @@
 
   This theme is also the base layer: it applies to :root, so every other theme
   inherits all tokens it does not override. Token reference: ./README.md
-  Colors are light-dark(light, dark); the header toggle switches between them.
+  Colors are light-dark(light, dark); the appearance setting in the site menu switches between them.
 */
 
 /* Self-hosted fonts (SIL Open Font License). Browsers only download a face that is actually used. */
@@ -61,8 +61,4 @@
   /* Shape */
   --radius: 2px;
   --radius-tag: 2px;
-
-  /* Decoration: characters around the current navigation item */
-  --nav-marker-start: '[';
-  --nav-marker-end: ']';
 }

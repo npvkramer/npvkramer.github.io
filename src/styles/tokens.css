@@ -60,7 +60,7 @@
   color-scheme: light dark;
 }
 
-/* The header toggle overrides the OS setting */
+/* The appearance setting in the site menu overrides the OS setting */
 :root[data-scheme='light'] {
   color-scheme: light;
 }

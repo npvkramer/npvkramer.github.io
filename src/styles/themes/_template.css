@@ -51,8 +51,4 @@
   /* Shape */
   --radius: 4px;
   --radius-tag: 999px;
-
-  /* Decoration: characters around the current navigation item, or none */
-  --nav-marker-start: none;
-  --nav-marker-end: none;
 }
