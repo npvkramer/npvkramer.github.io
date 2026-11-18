@@ -78,15 +78,15 @@ Contrast: `--color-text` and `--color-muted` reach at least 4.5:1 on `--color-bg
 
 ### Site menu
 
-The menu is a full-screen overlay over the page, inverted against the current scheme ([SiteMenu.astro](../../components/SiteMenu.astro), styles in [layout.css](../layout.css)).
+The menu is a full-screen, dark, translucent overlay over the page ([SiteMenu.astro](../../components/SiteMenu.astro), styles in [layout.css](../layout.css)). In light mode it inverts the page; in dark mode it is one step darker than the page, so it never turns light.
 
 | Token | Purpose | Index light | Index dark |
 | --- | --- | --- | --- |
-| `--color-menu-bg` | Translucent overlay background | `rgb(26 26 26 / 0.92)` | `rgb(237 234 227 / 0.94)` |
-| `--color-menu-solid` | Opaque twin of the background, text on pressed buttons | `#1a1a1a` | `#edeae3` |
-| `--color-menu-text` | Text, lines, button borders | `#f5f4f0` | `#161513` |
-| `--color-menu-muted` | Labels, numbers, copyright | `#a8a49b` | `#5e5c57` |
-| `--color-menu-accent` | Hover and current page | `#8f9bff` | `#2840e0` |
+| `--color-menu-bg` | Translucent overlay background | `rgb(26 26 26 / 0.92)` | `rgb(8 8 7 / 0.9)` |
+| `--color-menu-solid` | Opaque twin of the background, text on pressed buttons | `#1a1a1a` | `#080807` |
+| `--color-menu-text` | Text, lines, button borders | `#f5f4f0` | `#edeae3` |
+| `--color-menu-muted` | Labels, numbers, copyright | `#a8a49b` | `#9c988f` |
+| `--color-menu-accent` | Hover and current page | `#8f9bff` | `#8f9bff` |
 | `--menu-blur` | Blur of the page behind the overlay | 10px | 10px |
 
 `--menu-item-size` (size of the large nav items) is a layout token in `tokens.css`.
