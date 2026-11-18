@@ -1,21 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PostList from '../components/PostList.astro';
+import WordEntry from '../components/WordEntry.astro';
+import { getDictionary, getQuotes, getWords } from '../lib/content';
 import { getPosts } from '../lib/posts';
+import { countLabel } from '../lib/format';
 import { SITE } from '../data/site';
 
-const latest = (await getPosts()).slice(0, 5);
+const [words, dictionary, quotes, posts] = await Promise.all([getWords(), getDictionary(), getQuotes(), getPosts()]);
+
+const counts: Record<string, string> = {
+  '/woerter/': countLabel(words.length, 'Wort', 'Wörter'),
+  '/zitate/': countLabel(quotes.length, 'Zitat', 'Zitate'),
+  '/woerterbuch/': countLabel(dictionary.length, 'Eintrag', 'Einträge'),
+  '/posts/': countLabel(posts.length, 'Beitrag', 'Beiträge'),
+};
+const areas = SITE.nav.filter((item) => 'description' in item);
 ---
 
 <BaseLayout>
-  <section class="intro">
-    <h1>{SITE.title}</h1>
-    <p class="lead">{SITE.description}</p>
+  <!-- Wort des Moments: ohne JavaScript der erste Eintrag, sonst ein zufälliger -->
+  <section class="featured" data-random-pick>
+    <p class="eyebrow">Wort des Moments</p>
+    {dictionary.map((word, i) => (
+      <WordEntry word={word} size="lg" heading="h2" link hidden={i > 0} data-random-item />
+    ))}
+    <button class="button" type="button" data-random-next hidden>Anderes Wort</button>
   </section>
 
-  <section>
-    <h2>Neueste Beiträge</h2>
-    <PostList posts={latest} />
-    <p><a href="/posts/">Alle Beiträge →</a></p>
-  </section>
+  <ul class="area-list">
+    {areas.map((area) => (
+      <li>
+        <a href={area.href}>
+          <span class="area-title">{area.label}</span>
+          <span class="area-description">{area.description}</span>
+          <span class="area-count">{counts[area.href]}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
 </BaseLayout>
+
+<script src="../scripts/random-pick.ts"></script>

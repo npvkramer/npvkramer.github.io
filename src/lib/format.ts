@@ -9,3 +9,8 @@ const dateFormatter = new Intl.DateTimeFormat(SITE.locale, {
 export function formatDate(date: Date): string {
   return dateFormatter.format(date);
 }
+
+/** „1 Zitat“, „3 Zitate“ */
+export function countLabel(count: number, singular: string, plural: string): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
