@@ -1,8 +1,10 @@
 ---
 // A word styled as a dictionary entry. Used in the dictionary, on the word page and on the home page.
+// The word keeps its own language; definition and labels follow the page language.
 import type { HTMLAttributes } from 'astro/types';
 import ExampleBadge from './ExampleBadge.astro';
 import { isExample, wordUrl, type Word } from '../lib/content';
+import { getLocale, languageName, resolve, t } from '../i18n';
 
 interface Props extends HTMLAttributes<'article'> {
   word: Word;
@@ -13,17 +15,24 @@ interface Props extends HTMLAttributes<'article'> {
 }
 
 const { word: entry, size = 'md', heading: Heading = 'h3', link = false, class: className, ...attrs } = Astro.props;
-const { word, pronunciation, partOfSpeech, definition, origin } = entry.data;
+const locale = getLocale(Astro.url);
+const { word, lang, romanization, pronunciation } = entry.data;
+const partOfSpeech = resolve(entry.data.partOfSpeech, locale);
+const definition = resolve(entry.data.definition, locale);
+const origin = resolve(entry.data.origin, locale);
 ---
 
 <article class:list={['entry', `entry-${size}`, className]} {...attrs}>
   <div class="entry-head">
-    <Heading class="headword">{link ? <a href={wordUrl(entry)}>{word}</a> : word}</Heading>
+    <Heading class="headword" lang={lang}>{link ? <a href={wordUrl(entry, locale)}>{word}</a> : word}</Heading>
+    {romanization && <span class="romanization">{romanization}</span>}
     {pronunciation && <span class="ipa">{pronunciation}</span>}
-    {partOfSpeech && <span class="pos">{partOfSpeech}</span>}
+    {lang !== locale && <span class="word-language">{languageName(lang, locale)}</span>}
+    {partOfSpeech && <span class="pos" lang={partOfSpeech.lang}>{partOfSpeech.text}</span>}
     <ExampleBadge show={isExample(entry)} />
   </div>
-  {definition && <p class="definition">{definition}</p>}
-  {origin && <p class="origin">{origin}</p>}
+  {definition?.fallback && <p class="fallback-note">{t(locale).entry.onlyIn(languageName(definition.lang, locale))}</p>}
+  {definition && <p class="definition" lang={definition.lang}>{definition.text}</p>}
+  {origin && <p class="origin" lang={origin.lang}>{origin.text}</p>}
   <slot />
 </article>

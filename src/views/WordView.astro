@@ -1,0 +1,34 @@
+---
+// Page of a single word: the entry and the quotes that reference it.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WordEntry from '../components/WordEntry.astro';
+import QuoteGrid from '../components/QuoteGrid.astro';
+import { getQuotes, quotesForWord, type Word } from '../lib/content';
+import { hasLocale, pathTo, resolve, t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  word: Word;
+}
+
+const { locale, word } = Astro.props;
+const strings = t(locale);
+const quotes = quotesForWord(await getQuotes(), word);
+const definition = resolve(word.data.definition, locale);
+---
+
+<BaseLayout title={word.data.word} description={definition?.text ?? strings.words.description(word.data.word)}>
+  <WordEntry word={word} size="lg" heading="h1" />
+
+  {quotes.length > 0 && (
+    <section class="word-quotes">
+      <h2>{strings.words.inQuotes}</h2>
+      <QuoteGrid quotes={quotes} />
+    </section>
+  )}
+
+  <p class="back">
+    <a href={pathTo('words', locale)}>{strings.words.allWords}</a>
+    {hasLocale(word.data.definition, locale) && <a href={pathTo('dictionary', locale)}>{strings.dictionary.title}</a>}
+  </p>
+</BaseLayout>

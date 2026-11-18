@@ -1,0 +1,20 @@
+---
+// All quotes as cards.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import QuoteGrid from '../components/QuoteGrid.astro';
+import { getQuotes } from '../lib/content';
+import { t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const strings = t(Astro.props.locale).quotes;
+const quotes = await getQuotes();
+---
+
+<BaseLayout title={strings.title} description={strings.lead}>
+  <PageHeader title={strings.title} lead={strings.lead} />
+  <QuoteGrid quotes={quotes} />
+</BaseLayout>

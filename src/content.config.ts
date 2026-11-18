@@ -4,31 +4,45 @@
 import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { isLatinScript, languageCode } from './i18n/languages';
+import { localizedText } from './i18n/localized';
+import { LOCALES } from './i18n/config';
 
 // The ID is the file name without folders, so an entry can move between
 // `examples/` and the main folder without changing its URL.
 const idFromFileName = ({ entry }: { entry: string }) =>
   entry.replace(/\.md$/, '').split('/').pop()!;
 
+// Translatable fields (localizedText) take plain text (German) or one value per page language.
 const words = defineCollection({
   loader: glob({ base: './src/content/words', pattern: '**/*.md', generateId: idFromFileName }),
-  schema: z.object({
-    word: z.string(),
-    pronunciation: z.string().optional(), // IPA, e.g. /zɔndɐ/
-    partOfSpeech: z.string().optional(),
-    // With a definition the word also appears in the dictionary.
-    definition: z.string().optional(),
-    origin: z.string().optional(),
-    // Size in the word cloud (1–5). Without it, a size is derived from the word.
-    weight: z.number().int().min(1).max(5).optional(),
-  }),
+  schema: z
+    .object({
+      word: z.string(),
+      lang: languageCode(), // language of the word itself, e.g. ko; default de
+      romanization: z.string().optional(), // Latin spelling, required for other scripts
+      pronunciation: z.string().optional(), // IPA, e.g. /zɔndɐ/
+      partOfSpeech: localizedText().optional(),
+      // With a definition in the page language the word also appears in that dictionary.
+      definition: localizedText().optional(),
+      origin: localizedText().optional(),
+      // Size in the word cloud (1–5). Without it, a size is derived from the word.
+      weight: z.number().int().min(1).max(5).optional(),
+    })
+    .refine((data) => data.romanization || isLatinScript(data.word), {
+      message: 'Add `romanization` for words that are not written in Latin script',
+      path: ['romanization'],
+    }),
 });
 
 const quotes = defineCollection({
   loader: glob({ base: './src/content/quotes', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
     author: z.string(),
-    source: z.string().optional(),
+    source: localizedText().optional(),
+    lang: languageCode(), // language of the original text; default de
+    // Translations of the quote text per page language. Shown below the original.
+    translation: z.partialRecord(z.enum(LOCALES), z.string()).optional(),
     // References to words (file names in src/content/words). They are linked in the quote text.
     words: z.array(reference('words')).default([]),
   }),

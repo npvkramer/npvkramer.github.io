@@ -1,9 +1,13 @@
 ---
+// One 404 page for the whole site (GitHub Pages serves it for every unknown URL), in the default language.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { DEFAULT_LOCALE, pathTo, t } from '../i18n';
+
+const strings = t(DEFAULT_LOCALE).notFound;
 ---
 
-<BaseLayout title="Seite nicht gefunden">
-  <PageHeader title="404" lead="Diese Seite gibt es nicht (mehr)." />
-  <p><a href="/">Zur Startseite →</a></p>
+<BaseLayout title={strings.title}>
+  <PageHeader title="404" lead={strings.lead} />
+  <p><a href={pathTo('home', DEFAULT_LOCALE)}>{strings.home}</a></p>
 </BaseLayout>

@@ -1,0 +1,52 @@
+---
+// Home page: a random featured word and the list of areas.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WordEntry from '../components/WordEntry.astro';
+import { getDefinedWords, getDictionary, getQuotes, getWords } from '../lib/content';
+import { countLabel, navItems, t, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+const [words, featured, dictionary, quotes] = await Promise.all([
+  getWords(locale),
+  getDefinedWords(locale),
+  getDictionary(locale),
+  getQuotes(),
+]);
+const counts = {
+  words: countLabel(words.length, strings.count.words),
+  quotes: countLabel(quotes.length, strings.count.quotes),
+  dictionary: countLabel(dictionary.length, strings.count.entries),
+};
+---
+
+<BaseLayout>
+  <!-- Featured word: the first entry without JavaScript, otherwise a random one -->
+  {featured.length > 0 && (
+    <section class="featured" data-random-pick>
+      <p class="eyebrow">{strings.home.featured}</p>
+      {featured.map((word, i) => (
+        <WordEntry word={word} size="lg" heading="h2" link hidden={i > 0} data-random-item />
+      ))}
+      <button class="button" type="button" data-random-next hidden>{strings.home.another}</button>
+    </section>
+  )}
+
+  <ul class="area-list">
+    {navItems(locale).map((area) => (
+      <li>
+        <a href={area.href}>
+          <span class="area-title">{area.label}</span>
+          <span class="area-description">{area.description}</span>
+          <span class="area-count">{counts[area.route]}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<script src="../scripts/random-pick.ts"></script>

@@ -1,0 +1,41 @@
+---
+// Every public page in every language. Paths come from the route table in src/i18n/routes.ts,
+// so /words/inyeon/ (en) and /de/woerter/inyeon/ (de) render the same view.
+import HomeView from '../views/HomeView.astro';
+import WordsView from '../views/WordsView.astro';
+import WordView from '../views/WordView.astro';
+import QuotesView from '../views/QuotesView.astro';
+import DictionaryView from '../views/DictionaryView.astro';
+import { getWords, type Word } from '../lib/content';
+import { LOCALES, pathTo, type Locale, type RouteKey } from '../i18n';
+
+export async function getStaticPaths() {
+  const words = await getWords('en');
+  return LOCALES.flatMap((locale) => {
+    const page = (route: RouteKey, word?: Word) => ({
+      params: { route: pathTo(route, locale, word?.id).slice(1, -1) || undefined },
+      props: { locale, route, word },
+    });
+    return [
+      page('home'),
+      page('words'),
+      page('quotes'),
+      page('dictionary'),
+      ...words.map((word) => page('words', word)),
+    ];
+  });
+}
+
+interface Props {
+  locale: Locale;
+  route: RouteKey;
+  word?: Word;
+}
+
+const { locale, route, word } = Astro.props;
+---
+
+{route === 'home' && <HomeView locale={locale} />}
+{route === 'words' && (word ? <WordView locale={locale} word={word} /> : <WordsView locale={locale} />)}
+{route === 'quotes' && <QuotesView locale={locale} />}
+{route === 'dictionary' && <DictionaryView locale={locale} />}

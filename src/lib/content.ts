@@ -1,30 +1,37 @@
 // Data access for words and quotes. Pages and components get their data only through these functions.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { hasLocale, pathTo, type Locale } from '../i18n';
 
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
-export type DictionaryWord = Word & { data: { definition: string } };
 
 const EXAMPLE_FOLDER = '/examples/';
 const MAX_WEIGHT = 5;
 
-// URLs stay German because visitors see them.
-export const wordUrl = (word: Word) => `/woerter/${word.id}/`;
+export const wordUrl = (word: Word, locale: Locale) => pathTo('words', locale, word.id);
 
 /** Is the entry in an `examples/` folder? */
 export const isExample = (entry: Word | Quote) =>
   (entry.filePath ?? '').replace(/\\/g, '/').includes(EXAMPLE_FOLDER);
 
-/** All words, sorted alphabetically. */
-export async function getWords(): Promise<Word[]> {
+/** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
+export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;
+
+/** All words, sorted alphabetically for the page language. */
+export async function getWords(locale: Locale): Promise<Word[]> {
   const words = await getCollection('words');
-  return words.sort((a, b) => a.data.word.localeCompare(b.data.word, 'de'));
+  return words.sort((a, b) => sortKey(a).localeCompare(sortKey(b), locale));
 }
 
-/** Words with a definition, sorted alphabetically. */
-export async function getDictionary(): Promise<DictionaryWord[]> {
-  return (await getWords()).filter((w): w is DictionaryWord => Boolean(w.data.definition));
+/** Words with a definition at all; they can be featured, with a fallback language if needed. */
+export async function getDefinedWords(locale: Locale): Promise<Word[]> {
+  return (await getWords(locale)).filter((word) => word.data.definition);
+}
+
+/** Dictionary of a page language: only words with a definition in exactly that language. */
+export async function getDictionary(locale: Locale): Promise<Word[]> {
+  return (await getWords(locale)).filter((word) => hasLocale(word.data.definition, locale));
 }
 
 /** All quotes in a stable order (by file name). */
@@ -50,11 +57,11 @@ export function wordWeight(word: Word): number {
 export const initialLetter = (text: string) =>
   text.charAt(0).toUpperCase().normalize('NFD').charAt(0);
 
-/** Groups words by first letter, keeping the input order. */
-export function groupByLetter<T extends Word>(words: T[]): { letter: string; words: T[] }[] {
-  const groups = new Map<string, T[]>();
+/** Groups words by the first letter of their sort key, keeping the input order. */
+export function groupByLetter(words: Word[]): { letter: string; words: Word[] }[] {
+  const groups = new Map<string, Word[]>();
   for (const word of words) {
-    const letter = initialLetter(word.data.word);
+    const letter = initialLetter(sortKey(word));
     groups.set(letter, [...(groups.get(letter) ?? []), word]);
   }
   return [...groups].map(([letter, words]) => ({ letter, words }));
@@ -66,7 +73,7 @@ export type TextSegment = { text: string; href?: string };
  * Splits a quote into segments and links the referenced words.
  * Inflected forms that start with the word are found too (Augenblick → Augenblicke).
  */
-export function linkWords(text: string, words: Word[]): TextSegment[] {
+export function linkWords(text: string, words: Word[], locale: Locale): TextSegment[] {
   if (words.length === 0) return [{ text }];
   const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const pattern = new RegExp(
@@ -79,7 +86,7 @@ export function linkWords(text: string, words: Word[]): TextSegment[] {
   for (const match of text.matchAll(pattern)) {
     const word = words.find((w) => w.data.word.toLowerCase() === match[1].toLowerCase());
     segments.push({ text: text.slice(last, match.index) });
-    segments.push({ text: match[0], href: word && wordUrl(word) });
+    segments.push({ text: match[0], href: word && wordUrl(word, locale) });
     last = match.index + match[0].length;
   }
   segments.push({ text: text.slice(last) });

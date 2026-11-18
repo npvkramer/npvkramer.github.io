@@ -1,23 +1,37 @@
 ---
-// A quote as a card. Words listed in `words` in the front matter are linked in the text.
+// A quote as a card. The original is always shown; a translation into the page language follows
+// when there is one. Words listed in `words` in the front matter are linked in the original.
 import { getEntries } from 'astro:content';
 import ExampleBadge from './ExampleBadge.astro';
 import { isExample, linkWords, type Quote } from '../lib/content';
+import { getLocale, languageName, resolve, t } from '../i18n';
 
 interface Props {
   quote: Quote;
 }
 
 const { quote } = Astro.props;
-const { author, source, words: wordRefs } = quote.data;
+const locale = getLocale(Astro.url);
+const { author, lang, words: wordRefs } = quote.data;
+const source = resolve(quote.data.source, locale);
+const translation = lang !== locale ? quote.data.translation?.[locale] : undefined;
 const words = (await getEntries(wordRefs)).filter(Boolean);
-const segments = linkWords((quote.body ?? '').trim(), words);
+const segments = linkWords((quote.body ?? '').trim(), words, locale);
 ---
 
 <figure class="quote-card">
-  <blockquote class="quote-text">{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
+  <div class="quote-body">
+    <blockquote class="quote-text" lang={lang}>{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
+    {translation && (
+      <p class="quote-translation" lang={locale}>
+        <span class="word-language">{t(locale).quotes.translation}</span>
+        {translation.trim()}
+      </p>
+    )}
+  </div>
   <figcaption class="quote-source">
-    <span class="quote-author">{author}</span>{source && `, ${source}`}
+    <span class="quote-author">{author}</span>{source && <span lang={source.lang}>, {source.text}</span>}
+    {lang !== locale && <span class="word-language">· {languageName(lang, locale)}</span>}
     <ExampleBadge show={isExample(quote)} />
   </figcaption>
 </figure>
