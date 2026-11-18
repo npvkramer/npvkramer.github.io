@@ -1,4 +1,4 @@
-// Filtert das Wörterbuch während der Eingabe. Ohne JavaScript bleibt das Suchfeld ausgeblendet.
+// Filters the dictionary while typing. Without JavaScript the search field stays hidden.
 
 const input = document.querySelector<HTMLInputElement>('[data-dictionary-search]');
 

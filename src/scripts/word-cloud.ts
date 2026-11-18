@@ -1,6 +1,6 @@
-// Verteilt die Wörter zufällig und ohne Überlappung über die ganze Fläche.
-// Ohne JavaScript bleibt die Wolke eine umbrechende Liste.
-// Abstand, Mindesthöhe und Dichte kommen aus den CSS-Variablen --cloud-*.
+// Scatters the words randomly over the whole area without overlap.
+// Without JavaScript the cloud stays a wrapping list.
+// Gap, minimum height and density come from the --cloud-* CSS variables.
 
 type Box = { x: number; y: number; w: number; h: number };
 
@@ -12,7 +12,7 @@ function overlap(a: Box, b: Box, gap: number): number {
   return w > 0 && h > 0 ? w * h : 0;
 }
 
-/** Sucht eine freie Stelle; findet sich keine, die mit der kleinsten Überlappung. */
+/** Finds a free spot; if there is none, the one with the least overlap. */
 function findSpot(w: number, h: number, width: number, height: number, gap: number, placed: Box[]): Box {
   let best: Box = { x: 0, y: 0, w, h };
   let bestOverlap = Infinity;
@@ -39,12 +39,12 @@ function layout(cloud: HTMLElement): void {
     return { li, w: li.offsetWidth, h: li.offsetHeight };
   });
 
-  // Fläche wächst mit der Anzahl Wörter, nie kleiner als --cloud-min-height
+  // The area grows with the number of words, never below --cloud-min-height
   const area = items.reduce((sum, { w, h }) => sum + (w + gap) * (h + gap), 0);
   const height = Math.max(cloud.clientHeight, Math.ceil((area * density) / width));
   cloud.style.height = `${height}px`;
 
-  // Grosse Wörter zuerst platzieren, damit sie sicher Platz finden
+  // Place large words first so they are sure to find room
   const placed: Box[] = [];
   for (const { li, w, h } of items.sort((a, b) => b.w * b.h - a.w * a.h)) {
     const box = findSpot(w, h, width, height, gap, placed);

@@ -1,5 +1,5 @@
-// Zeigt aus einer Gruppe [data-random-pick] ein zufälliges [data-random-item].
-// Der Button [data-random-next] wählt ein anderes, ohne das aktuelle zu wiederholen.
+// Shows one random [data-random-item] from each [data-random-pick] group.
+// The [data-random-next] button picks another one, never repeating the current item.
 
 for (const group of document.querySelectorAll<HTMLElement>('[data-random-pick]')) {
   const items = [...group.querySelectorAll<HTMLElement>('[data-random-item]')];
