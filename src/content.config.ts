@@ -10,18 +10,6 @@ import { z } from 'astro/zod';
 const idFromFileName = ({ entry }: { entry: string }) =>
   entry.replace(/\.md$/, '').split('/').pop()!;
 
-const posts = defineCollection({
-  loader: glob({ base: './src/content/posts', pattern: '**/*.md' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date(),
-    updated: z.coerce.date().optional(),
-    tags: z.array(z.string()).default([]),
-    draft: z.boolean().default(false),
-  }),
-});
-
 const woerter = defineCollection({
   loader: glob({ base: './src/content/woerter', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
@@ -46,4 +34,4 @@ const zitate = defineCollection({
   }),
 });
 
-export const collections = { posts, woerter, zitate };
+export const collections = { woerter, zitate };

@@ -59,24 +59,6 @@ Achtung: Verweist eines deiner Zitate auf ein Beispielwort, verschiebe das Wort 
 
 Alle Farben, Schriften, Grössen und Abstände stehen als Variablen in [src/styles/tokens.css](src/styles/tokens.css). Die übrigen CSS-Dateien verwenden nur diese Variablen. Farben sind als `light-dark(hell, dunkel)` definiert.
 
-## Neuen Beitrag anlegen
-
-Datei in `src/content/posts/` erstellen, z. B. `mein-projekt.md`. Sie ist dann unter `/posts/mein-projekt/` erreichbar.
-
-```markdown
----
-title: Mein Projekt
-description: Kurzbeschreibung für die Übersicht
-date: 2026-11-18
-tags: [projekte]
-draft: false
----
-
-Inhalt in Markdown …
-```
-
-Welche Felder erlaubt sind, steht in [src/content.config.ts](src/content.config.ts). Ein Beitrag mit `draft: true` ist nur lokal sichtbar.
-
 ## Struktur
 
 ```
@@ -84,14 +66,13 @@ src/
   content/
     woerter/         Wörter (beispiele/ = Beispielinhalte)
     zitate/          Zitate (beispiele/ = Beispielinhalte)
-    posts/           Beiträge
   content.config.ts  Erlaubte Front-Matter-Felder
   data/site.ts       Seitentitel, Beschreibung, Navigation, Links
-  layouts/           HTML-Gerüst (BaseLayout, PostLayout)
+  layouts/           HTML-Gerüst (BaseLayout)
   components/        Wiederverwendbare Teile (WordEntry, QuoteCard, …)
   pages/             Routen: jede Datei = eine URL
-  lib/               Datenzugriff und Hilfsfunktionen (content.ts, posts.ts)
-  styles/            CSS: tokens (Variablen), base, layout, components, prose
+  lib/               Datenzugriff und Hilfsfunktionen (content.ts, format.ts)
+  styles/            CSS: tokens (Variablen), base, layout, components
   scripts/           Client-JS: Wortwolke, Wörterbuch-Suche, Zufallswort, Farbschema
 public/              Dateien, die 1:1 ausgeliefert werden (Favicon, Bilder)
 ```

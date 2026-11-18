@@ -2,17 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WordEntry from '../components/WordEntry.astro';
 import { getDictionary, getQuotes, getWords } from '../lib/content';
-import { getPosts } from '../lib/posts';
 import { countLabel } from '../lib/format';
 import { SITE } from '../data/site';
 
-const [words, dictionary, quotes, posts] = await Promise.all([getWords(), getDictionary(), getQuotes(), getPosts()]);
+const [words, dictionary, quotes] = await Promise.all([getWords(), getDictionary(), getQuotes()]);
 
 const counts: Record<string, string> = {
   '/woerter/': countLabel(words.length, 'Wort', 'Wörter'),
   '/zitate/': countLabel(quotes.length, 'Zitat', 'Zitate'),
   '/woerterbuch/': countLabel(dictionary.length, 'Eintrag', 'Einträge'),
-  '/posts/': countLabel(posts.length, 'Beitrag', 'Beiträge'),
 };
 const areas = SITE.nav.filter((item) => 'description' in item);
 ---
