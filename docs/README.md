@@ -18,12 +18,20 @@ Concepts, mocks and decisions for this site, kept as history.
 
 | Date | File | Topic |
 | --- | --- | --- |
-| 2026-11-18 | [concepts/2026-11-18-navigation-mock.html](concepts/2026-11-18-navigation-mock.html) | Navigation C': full-screen menu overlay, desktop and mobile, clickable (German) |
+| 2026-11-18 | [concepts/2026-11-18-navigation-mock-v2.html](concepts/2026-11-18-navigation-mock-v2.html) | Navigation C' v2, as implemented: dark menu in dark mode, no italics, fade-in with rising items (German) |
+| 2026-11-18 | [concepts/2026-11-18-navigation-mock.html](concepts/2026-11-18-navigation-mock.html) | Navigation C': full-screen menu overlay, desktop and mobile, clickable (German). Superseded by v2 |
 | 2026-11-18 | [concepts/2026-11-18-index-theme-mock.html](concepts/2026-11-18-index-theme-mock.html) | Index theme style tiles, light (2) and dark (2b) (German) |
 | 2026-11-18 | [concepts/2026-11-18-i18n-concept.html](concepts/2026-11-18-i18n-concept.html) | Multilingual site: page language vs. word language, rules R1–R11 (German) |
 | 2026-11-18 | [concepts/2026-11-18-word-collection-mock.html](concepts/2026-11-18-word-collection-mock.html) | First clickable mock: words, quotes, dictionary (German) |
 
 ## Decision log
+
+**2026-11-18: Navigation refinements** (see navigation mock v2)
+
+- **Dark mode:** the menu stays dark, one step darker than the page, instead of inverting to light.
+- **Hover and current page:** accent color only, no italics.
+- **Motion:** the overlay fades in from transparent and nav items rise into place one after another;
+  closing fades out. Reduced motion keeps only the fade.
 
 **2026-11-18: Theme and navigation** (see index theme and navigation mocks)
 

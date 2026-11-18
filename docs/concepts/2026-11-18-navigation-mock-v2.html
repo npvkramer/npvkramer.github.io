@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navigation C' v2: Menü-Overlay mit Animation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+<style>
+/*
+  Navigation C' v2, the state as implemented. Changes against 2026-11-18-navigation-mock.html:
+  - Dark mode: the menu stays dark (one step darker than the page) instead of turning light.
+  - Hover and current page: accent color only, no italics.
+  - Motion: the overlay fades in from transparent, nav items rise into place one after another;
+    closing fades out. Reduced motion keeps only the fade.
+  Each stage is a fixed-size frame; the site itself uses a native popover over the whole window.
+*/
+body { margin: 0; padding: 32px 16px 64px; background: #d9d6ce; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+.stages { display: flex; flex-wrap: wrap; gap: 48px; justify-content: center; align-items: flex-start; }
+.stage-wrap { display: grid; gap: 12px; max-width: 100%; }
+.stage-label { margin: 0; font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: #1a1a1a; }
+.stage-frame { overflow-x: auto; max-width: 100%; }
+
+.stage {
+  --bg: #f5f4f0; --text: #1a1a1a; --muted: #5e5c57; --rule: #1a1a1a; --accent: #2840e0;
+  --menu-bg: rgb(26 26 26 / 0.92); --menu-solid: #1a1a1a; --menu-text: #f5f4f0; --menu-muted: #a8a49b; --menu-accent: #8f9bff;
+  --duration: 320ms; --stagger: 60ms; --rise: 24px; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  position: relative; overflow: hidden; flex-shrink: 0;
+  background: var(--bg); color: var(--text);
+  font-family: 'Newsreader', 'Times New Roman', serif;
+}
+.stage[data-scheme='dark'] {
+  --bg: #161513; --text: #edeae3; --muted: #9c988f; --rule: #cfcbc2; --accent: #8f9bff;
+  --menu-bg: rgb(8 8 7 / 0.9); --menu-solid: #080807; --menu-text: #edeae3; --menu-muted: #9c988f; --menu-accent: #8f9bff;
+}
+.stage-desktop { width: 1440px; height: 900px; --pad: 64px; --bar: 72px; --item: 120px; }
+.stage-mobile { width: 390px; height: 844px; --pad: 20px; --bar: 64px; --item: 54px; }
+
+.ui { font-family: 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
+a { text-decoration: none; color: inherit; }
+button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.bar { height: var(--bar); padding: 0 var(--pad); display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+.page .bar { border-bottom: 1px solid var(--rule); }
+.logo { font-size: 15px; font-weight: 500; }
+.icon-btn { width: 48px; height: 48px; margin-right: -10px; display: grid; place-items: center; border: 0; background: transparent; color: currentColor; }
+.icon-btn:hover { color: var(--accent); }
+
+.page main { padding: 72px var(--pad) 0; display: grid; gap: 20px; }
+.stage-mobile .page main { padding-top: 40px; gap: 14px; }
+.eyebrow { font-size: 13px; color: var(--accent); }
+.headword { margin: 0; font-weight: 400; font-size: 168px; line-height: 0.95; letter-spacing: -0.02em; }
+.stage-mobile .headword { font-size: 72px; }
+.ipa { font-style: italic; font-size: 26px; color: var(--muted); }
+.definition { margin: 0; max-width: 720px; font-size: 24px; line-height: 1.5; }
+.stage-mobile .ipa { font-size: 20px; }
+.stage-mobile .definition { font-size: 18px; line-height: 1.55; }
+
+/* Overlay: fades in from transparent, fades out on close */
+.menu {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  background: var(--menu-bg); color: var(--menu-text);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--duration) var(--ease), visibility 0s linear var(--duration);
+}
+.stage[data-open='true'] .menu { opacity: 1; visibility: visible; transition: opacity var(--duration) var(--ease), visibility 0s; }
+.menu :focus-visible { outline-color: var(--menu-accent); }
+.menu .icon-btn:hover { color: var(--menu-accent); }
+
+.menu-nav { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.menu-nav a { display: flex; align-items: flex-start; gap: 0.12em; font-size: var(--item); line-height: 1.05; letter-spacing: -0.02em; }
+.menu-nav a:hover, .menu-nav a:focus-visible, .menu-nav a[aria-current='page'] { color: var(--menu-accent); }
+.menu-nav .num { margin-top: calc(var(--item) * 0.18); font-size: 14px; color: var(--menu-muted); }
+.stage-mobile .menu-nav { gap: 4px; }
+.stage-mobile .menu-nav .num { font-size: 11px; }
+
+/* Items rise into place one after another while the menu opens */
+.menu-nav a {
+  opacity: 0; translate: 0 var(--rise);
+  transition: opacity var(--duration) var(--ease), translate var(--duration) var(--ease), color 120ms;
+}
+.stage[data-open='true'] .menu-nav a {
+  opacity: 1; translate: 0 0;
+  transition-delay: calc(var(--stagger) * (var(--i) + 1)), calc(var(--stagger) * (var(--i) + 1)), 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-nav a, .stage[data-open='true'] .menu-nav a { translate: none; }
+}
+
+.menu-foot {
+  flex-shrink: 0; margin: 0 var(--pad); padding: 24px 0 32px;
+  border-top: 1px solid var(--menu-text);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; align-items: start;
+  font-size: 13px;
+}
+.group { display: flex; flex-direction: column; gap: 10px; }
+.label { color: var(--menu-muted); }
+.segments { display: flex; gap: 6px; }
+.segments button { height: 44px; padding: 0 14px; border: 1px solid var(--menu-text); border-radius: 2px; background: transparent; color: var(--menu-text); }
+.segments button:hover { border-color: var(--menu-accent); color: var(--menu-accent); }
+.segments button[aria-pressed='true'] { border-color: var(--menu-text); background: var(--menu-text); color: var(--menu-solid); }
+.link-row { height: 44px; display: flex; align-items: center; }
+.link-row:hover { color: var(--menu-accent); }
+.meta { text-align: right; color: var(--menu-muted); }
+.meta .link-row { justify-content: flex-end; }
+.meta .link-row:hover { color: inherit; }
+
+.stage-mobile .menu-foot { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; padding: 20px 0 28px; font-size: 12px; }
+.stage-mobile .group { gap: 8px; }
+.stage-mobile .group-appearance { grid-column: 1 / -1; }
+.stage-mobile .segments { display: grid; grid-template-columns: repeat(var(--count), minmax(0, 1fr)); }
+.stage-mobile .segments button { padding: 0 8px; }
+.stage-mobile .meta { grid-column: 1 / -1; text-align: left; }
+.stage-mobile .esc-hint { display: none; }
+</style>
+</head>
+<body>
+<div class="stages">
+  <template id="stage-template">
+    <div class="page">
+      <header class="bar">
+        <a class="logo ui" href="#">npvk</a>
+        <button class="icon-btn" type="button" data-open-menu aria-expanded="true" data-aria-de="Menü öffnen" data-aria-en="Open menu">
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M3 9h22M9 19h16" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+      </header>
+      <main>
+        <span class="eyebrow ui">Wort des Moments</span>
+        <h1 class="headword">Sonder</h1>
+        <span class="ipa">/zɔndɐ/</span>
+        <p class="definition">Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst.</p>
+      </main>
+    </div>
+    <div class="menu" role="dialog" data-menu data-aria-de="Menü" data-aria-en="Menu">
+      <div class="bar">
+        <a class="logo ui" href="#">npvk</a>
+        <button class="icon-btn" type="button" data-close-menu data-aria-de="Menü schliessen" data-aria-en="Close menu">
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M6 6l16 16M22 6L6 22" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+      </div>
+      <nav class="menu-nav" data-aria-de="Hauptnavigation" data-aria-en="Main navigation">
+        <a href="#" style="--i: 0"><span class="num ui">01</span><span data-de="Wörter" data-en="Words"></span></a>
+        <a href="#" style="--i: 1" aria-current="page"><span class="num ui">02</span><span data-de="Zitate" data-en="Quotes"></span></a>
+        <a href="#" style="--i: 2"><span class="num ui">03</span><span data-de="Wörterbuch" data-en="Dictionary"></span></a>
+      </nav>
+      <div class="menu-foot ui">
+        <div class="group group-appearance" role="group" data-aria-de="Darstellung" data-aria-en="Appearance">
+          <span class="label" data-de="Darstellung" data-en="Appearance"></span>
+          <div class="segments" style="--count: 3">
+            <button type="button" data-set-scheme="light" data-de="Hell" data-en="Light"></button>
+            <button type="button" data-set-scheme="dark" data-de="Dunkel" data-en="Dark"></button>
+            <button type="button" data-set-scheme="auto" data-de="Auto" data-en="Auto"></button>
+          </div>
+        </div>
+        <div class="group" role="group" data-aria-de="Sprache" data-aria-en="Language">
+          <span class="label" data-de="Sprache" data-en="Language"></span>
+          <div class="segments" style="--count: 2">
+            <button type="button" data-set-lang="en">EN</button>
+            <button type="button" data-set-lang="de">DE</button>
+          </div>
+        </div>
+        <div class="group">
+          <span class="label" data-de="Folgen" data-en="Follow"></span>
+          <a class="link-row" href="#">GitHub ↗</a>
+        </div>
+        <div class="group meta">
+          <span>© 2026 npvk</span>
+          <span class="link-row esc-hint">[ESC] =&nbsp;<span data-de="Menü schliessen" data-en="Close menu"></span></span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <section class="stage-wrap" aria-label="Desktop">
+    <p class="stage-label">Nav C' v2 · Desktop 1440 × 900</p>
+    <div class="stage-frame"><div class="stage stage-desktop" data-stage></div></div>
+  </section>
+  <section class="stage-wrap" aria-label="Mobile">
+    <p class="stage-label">Nav C' v2 · Mobile 390 × 844</p>
+    <div class="stage-frame"><div class="stage stage-mobile" data-stage></div></div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const template = document.getElementById('stage-template');
+
+  for (const stage of document.querySelectorAll('[data-stage]')) {
+    stage.append(template.content.cloneNode(true));
+    const state = { open: true, scheme: 'light', lang: 'de' };
+    const menu = stage.querySelector('[data-menu]');
+    const openBtn = stage.querySelector('[data-open-menu]');
+
+    function render() {
+      stage.dataset.open = String(state.open);
+      menu.inert = !state.open;
+      openBtn.setAttribute('aria-expanded', String(state.open));
+      // 'auto' follows the OS setting, shown light in this snapshot
+      stage.dataset.scheme = state.scheme === 'dark' ? 'dark' : 'light';
+      for (const el of stage.querySelectorAll('[data-de]')) el.textContent = el.dataset[state.lang];
+      for (const el of stage.querySelectorAll('[data-aria-de]')) {
+        el.setAttribute('aria-label', state.lang === 'en' ? el.dataset.ariaEn : el.dataset.ariaDe);
+      }
+      for (const b of stage.querySelectorAll('[data-set-scheme]')) b.setAttribute('aria-pressed', String(b.dataset.setScheme === state.scheme));
+      for (const b of stage.querySelectorAll('[data-set-lang]')) b.setAttribute('aria-pressed', String(b.dataset.setLang === state.lang));
+    }
+
+    stage.addEventListener('click', (event) => {
+      const target = event.target.closest('button, a');
+      if (!target) return;
+      if (target.tagName === 'A') event.preventDefault();
+      if (target.matches('[data-open-menu]')) state.open = true;
+      else if (target.matches('[data-close-menu]')) state.open = false;
+      else if (target.dataset.setScheme) state.scheme = target.dataset.setScheme;
+      else if (target.dataset.setLang) state.lang = target.dataset.setLang;
+      else return;
+      render();
+      if (target.matches('[data-open-menu]')) stage.querySelector('[data-close-menu]').focus();
+      if (target.matches('[data-close-menu]')) openBtn.focus();
+    });
+
+    stage.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && state.open) {
+        state.open = false;
+        render();
+        openBtn.focus();
+      }
+    });
+
+    render();
+  }
+})();
+</script>
+</body>
+</html>
