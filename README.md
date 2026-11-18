@@ -11,6 +11,54 @@ Persönliche Website, gebaut mit [Astro](https://astro.build). Das Ergebnis ist 
 | `npm run build`   | Fertige Seite nach `dist/` bauen                  |
 | `npm run preview` | Gebaute Seite aus `dist/` lokal ansehen           |
 
+## Inhalte
+
+Alle Inhalte sind Markdown-Dateien in `src/content/`. Welche Felder erlaubt sind, steht in [src/content.config.ts](src/content.config.ts). Der Dateiname wird zur URL.
+
+### Wort hinzufügen
+
+Datei in `src/content/woerter/` anlegen, z. B. `sonder.md` → `/woerter/sonder/`.
+
+```markdown
+---
+wort: Sonder
+lautschrift: /zɔndɐ/          # optional
+wortart: Substantiv           # optional
+definition: Die plötzliche …  # optional – mit Definition erscheint das Wort im Wörterbuch
+herkunft: …                   # optional
+gewicht: 4                    # optional, 1–5: Grösse in der Wortwolke
+---
+```
+
+Ohne `gewicht` wird eine Grösse aus dem Wort abgeleitet. So entsteht eine gemischte Wolke.
+
+### Zitat hinzufügen
+
+Datei in `src/content/zitate/` anlegen, z. B. `hesse-stufen.md`. Der Text des Zitats steht unter dem Front Matter.
+
+```markdown
+---
+autor: Hermann Hesse
+quelle: Stufen (1941)   # optional
+woerter: [zauber]       # optional: Dateinamen aus src/content/woerter
+---
+
+Und jedem Anfang wohnt ein Zauber inne,
+Der uns beschützt und der uns hilft, zu leben.
+```
+
+Wörter aus `woerter` werden im Zitat verlinkt, auch in gebeugter Form (Augenblick → Augenblicke). Auf der Seite des Worts erscheint das Zitat ebenfalls.
+
+### Beispielinhalte
+
+Alle Beispiele liegen in `src/content/woerter/beispiele/` und `src/content/zitate/beispiele/`. Auf der Seite sind sie mit „Beispiel“ markiert. Zum Entfernen beide Ordner löschen. Willst du ein Beispiel behalten, verschiebe die Datei eine Ebene nach oben. Die URL bleibt dabei gleich.
+
+Achtung: Verweist eines deiner Zitate auf ein Beispielwort, muss das Wort vorher verschoben werden, sonst bricht der Build ab.
+
+## Styling
+
+Alle Farben, Schriften, Grössen und Abstände stehen als Variablen in [src/styles/tokens.css](src/styles/tokens.css). Die übrigen CSS-Dateien verwenden nur diese Variablen. Farben sind als `light-dark(hell, dunkel)` definiert.
+
 ## Neuen Beitrag anlegen
 
 Datei in `src/content/posts/` erstellen, z. B. `mein-projekt.md`. Sie ist dann unter `/posts/mein-projekt/` erreichbar.
@@ -33,15 +81,18 @@ Welche Felder erlaubt sind, steht in [src/content.config.ts](src/content.config.
 
 ```
 src/
-  content/posts/     Inhalte als Markdown
+  content/
+    woerter/         Wörter (beispiele/ = Beispielinhalte)
+    zitate/          Zitate (beispiele/ = Beispielinhalte)
+    posts/           Beiträge
   content.config.ts  Erlaubte Front-Matter-Felder
   data/site.ts       Seitentitel, Beschreibung, Navigation, Links
   layouts/           HTML-Gerüst (BaseLayout, PostLayout)
-  components/        Wiederverwendbare Teile (Header, Footer, Listen)
+  components/        Wiederverwendbare Teile (WordEntry, QuoteCard, …)
   pages/             Routen: jede Datei = eine URL
-  lib/               Hilfsfunktionen (Sortierung, Tags, Datumsformat)
-  styles/            CSS: tokens, base, layout, components, prose
-  scripts/           Client-JS (wird von Astro gebündelt)
+  lib/               Datenzugriff und Hilfsfunktionen (content.ts, posts.ts)
+  styles/            CSS: tokens (Variablen), base, layout, components, prose
+  scripts/           Client-JS: Wortwolke, Wörterbuch-Suche, Zufallswort, Farbschema
 public/              Dateien, die 1:1 ausgeliefert werden (Favicon, Bilder)
 ```
 
