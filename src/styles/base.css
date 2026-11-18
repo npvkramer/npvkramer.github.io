@@ -9,6 +9,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Reserve the scrollbar's space even while the open menu locks scrolling,
+     so the page does not shift and the menu bar lines up with the header. */
+  scrollbar-gutter: stable;
 }
 
 body {
