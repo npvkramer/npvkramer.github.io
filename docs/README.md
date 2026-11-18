@@ -1,0 +1,51 @@
+# Docs
+
+Concepts, mocks and decisions for this site, kept as history.
+
+- Files here are **not** part of the published site.
+- Run `npm run dev` and open [localhost:4321/admin/](http://localhost:4321/admin/) to browse them inside the app.
+  The `/admin` pages only exist in dev mode.
+- Each `.html` file also opens directly in a browser.
+
+## Rules
+
+- **Snapshots:** concepts and mocks stay as they were written, in their original language.
+  Don't update old files. Add a new dated file instead.
+- **File names:** `YYYY-MM-DD-topic.html` (or `.md`), in English.
+- **Decisions:** add a line to the decision log below, newest first.
+
+## Concepts
+
+| Date | File | Topic |
+| --- | --- | --- |
+| 2026-11-18 | [concepts/2026-11-18-i18n-concept.html](concepts/2026-11-18-i18n-concept.html) | Multilingual site: page language vs. word language, rules R1–R11 (German) |
+| 2026-11-18 | [concepts/2026-11-18-word-collection-mock.html](concepts/2026-11-18-word-collection-mock.html) | First clickable mock: words, quotes, dictionary (German) |
+
+## Decision log
+
+**2026-11-18: Multilingual site** (see i18n concept)
+
+- **Default page language:** English, no URL prefix. German lives under `/de/`.
+- **Paths:** translated per language, e.g. `/words/` and `/de/woerter/`.
+- **Hangul:** Noto Serif KR is the fallback font for Korean.
+- **Still open:**
+  - English dictionary: strict or with fallback?
+  - Language label: only when different, or always?
+  - Visitor language detection?
+  - Word language filter?
+  - Translation file layout?
+  - `lang` for Sonder?
+
+**2026-11-18: Docs location**
+
+- Docs live in `docs/` and are browsable via a dev-only `/admin` page.
+- Concepts keep their original language.
+
+**2026-11-18: Structure and layout**
+
+- **Content model:** one word collection with three views: word cloud, dictionary (words with a definition) and word pages.
+  Quotes reference words.
+- **Word cloud:** words scattered over the full width with mixed sizes.
+- **Quotes:** at most two columns, equal-height cards, author at the bottom.
+- **Layout:** one container for all pages, stepped widths up to 1800px.
+- **Blog:** removed for now.

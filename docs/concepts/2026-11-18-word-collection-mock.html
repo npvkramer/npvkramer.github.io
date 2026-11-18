@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wortsammlung Mock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: Rahmen der Astro-Seite (Header, schmale Textspalte), breite Bühne für Wolke und Zitate.
+   Farben übernommen aus src/styles/tokens.css, ergänzt um eine Display-Serif für die Wörter. */
+:root {
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
+
+  --size-sm: 0.875rem;
+  --size-base: 1.0625rem;
+  --size-lg: 1.25rem;
+
+  --text-width: 44rem;
+  --wide-width: 68rem;
+  --radius: 0.5rem;
+
+  --color-bg: #fbfbfa;
+  --color-surface: #f1f1ef;
+  --color-text: #1c1c1e;
+  --color-muted: #6b6b70;
+  --color-border: #e2e2df;
+  --color-accent: #2f5bd3;
+  --color-accent-soft: #e6ecfb;
+  --color-stage: #f4f4f1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #121214;
+    --color-surface: #1c1c1f;
+    --color-text: #ececee;
+    --color-muted: #9a9aa2;
+    --color-border: #2c2c31;
+    --color-accent: #8aa8ff;
+    --color-accent-soft: #1f2840;
+    --color-stage: #17171a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-bg: #121214;
+  --color-surface: #1c1c1f;
+  --color-text: #ececee;
+  --color-muted: #9a9aa2;
+  --color-border: #2c2c31;
+  --color-accent: #8aa8ff;
+  --color-accent-soft: #1f2840;
+  --color-stage: #17171a;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--size-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+h1, h2, h3 { line-height: 1.2; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: var(--color-accent); text-underline-offset: 0.2em; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 3px; }
+
+.container {
+  width: 100%;
+  max-width: calc(var(--text-width) + 32px);
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.container.wide { max-width: calc(var(--wide-width) + 32px); }
+
+/* Header wie auf der Astro-Seite */
+.site-header { border-bottom: 1px solid var(--color-border); }
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding-block: 0.75rem;
+}
+.site-title { font-weight: 700; color: var(--color-text); text-decoration: none; }
+.mock-pill {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border: 1px dashed var(--color-border);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; margin-right: auto; }
+.nav-list { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; list-style: none; margin: 0; padding: 0; }
+.nav-list a { color: var(--color-muted); text-decoration: none; }
+.nav-list a:hover, .nav-list a[aria-current="page"] { color: var(--color-text); }
+.nav-list a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.45em; }
+.theme-toggle {
+  display: grid; place-items: center;
+  width: 2.25rem; height: 2.25rem; padding: 0;
+  border: 1px solid var(--color-border); border-radius: var(--radius);
+  background: transparent; cursor: pointer; font-size: 1.1rem;
+}
+.theme-toggle:hover { background: var(--color-surface); }
+@media (max-width: 34rem) {
+  .nav-list { order: 3; width: 100%; }
+}
+
+main { padding-block: 2.5rem 4rem; }
+.view { display: grid; gap: 3rem; }
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.section-head { display: grid; gap: 0.5rem; }
+.section-head h1 { font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); }
+.section-head p { color: var(--color-muted); max-width: 38rem; }
+h2 { font-size: 1.35rem; }
+
+/* Wörter in der Display-Serif */
+.word-display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.005em; }
+.ipa { font-family: var(--font-sans); color: var(--color-muted); }
+.pos { font-style: italic; color: var(--color-muted); }
+
+/* Start: Wort des Moments */
+.hero { display: grid; gap: 0.75rem; }
+.hero .headword { font-size: clamp(3.5rem, 2rem + 7vw, 6.5rem); line-height: 1; }
+.hero .line { display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; align-items: baseline; }
+.hero .definition { font-size: var(--size-lg); max-width: 38rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  cursor: pointer; text-decoration: none; color: var(--color-text);
+  font-size: 0.95rem;
+}
+.btn:hover { background: var(--color-surface); }
+.btn.primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-bg); }
+.btn.primary:hover { filter: brightness(1.08); }
+
+/* Start: Bereiche als Liste */
+.areas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-border); }
+.areas li { border-bottom: 1px solid var(--color-border); }
+.areas a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 1rem;
+  padding-block: 1rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.areas a:hover .area-title { color: var(--color-accent); }
+.area-title { font-family: var(--font-display); font-size: 1.75rem; line-height: 1.1; }
+.area-desc { color: var(--color-muted); grid-column: 1; }
+.area-count { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--color-muted); font-variant-numeric: tabular-nums; font-size: var(--size-sm); }
+
+/* Start: Konzept */
+.concept { display: grid; gap: 1.25rem; }
+.variants { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; }
+.variant {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.1rem 1.25rem;
+  display: grid; gap: 0.75rem; align-content: start;
+  min-width: 0;
+}
+.variant.chosen { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.variant h3 { font-size: 1.05rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.tag-chosen { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-accent); font-weight: 600; }
+.variant p { font-size: 0.95rem; color: var(--color-muted); }
+.diagram { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-size: var(--size-sm); }
+.node {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  white-space: nowrap;
+}
+.node.core { border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+.arrow { color: var(--color-muted); }
+.diagram-stack { display: grid; gap: 0.45rem; }
+
+.code-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; }
+.code-block { min-width: 0; display: grid; gap: 0.4rem; }
+.code-block .label { font-size: var(--size-sm); color: var(--color-muted); font-family: var(--font-mono); }
+pre {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+/* Wörter: Steuerung */
+.toolbar { display: flex; flex-wrap: wrap; gap: 0.75rem 1rem; align-items: center; justify-content: space-between; }
+.segmented {
+  display: inline-flex; flex-wrap: wrap;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 3px; gap: 3px;
+  background: var(--color-surface);
+}
+.segmented button {
+  border: 0; background: transparent; cursor: pointer;
+  padding: 0.35rem 0.8rem; border-radius: calc(var(--radius) - 3px);
+  font-size: 0.9rem; color: var(--color-muted);
+}
+.segmented button[aria-pressed="true"] { background: var(--color-bg); color: var(--color-text); box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
+.hint { font-size: var(--size-sm); color: var(--color-muted); }
+
+/* Wörter: Wolke */
+.stage {
+  position: relative;
+  height: clamp(26rem, 62vh, 36rem);
+  background: var(--color-stage);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  overflow: hidden;
+}
+.cloud-word {
+  position: absolute; left: 0; top: 0;
+  border: 0; background: transparent; padding: 0.05em 0.15em;
+  font-family: var(--font-display);
+  line-height: 1.05;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--color-text);
+  will-change: transform;
+}
+.cloud-word[data-g="1"] { color: var(--color-muted); }
+.cloud-word[data-g="3"] { z-index: 2; }
+.cloud-word:hover, .cloud-word:focus-visible { color: var(--color-accent); z-index: 3; }
+.cloud-word.has-def::after {
+  content: "";
+  display: inline-block;
+  width: 0.18em; height: 0.18em;
+  margin-left: 0.12em;
+  border-radius: 50%;
+  background: var(--color-accent);
+  vertical-align: super;
+}
+.stage.settle .cloud-word { transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; font-size: var(--size-sm); color: var(--color-muted); }
+.legend .dot { display: inline-block; width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--color-accent); margin-right: 0.35rem; vertical-align: middle; }
+
+/* Wörter: eins nach dem anderen */
+.deck {
+  min-height: clamp(26rem, 62vh, 36rem);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  background: var(--color-stage);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  gap: 1rem;
+}
+.deck-progress { display: flex; align-items: center; gap: 0.75rem; font-size: var(--size-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.bar { flex: 1; height: 3px; background: var(--color-border); border-radius: 2px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--color-accent); transition: width 0.3s; }
+.deck-card { align-self: center; justify-self: center; text-align: center; display: grid; gap: 0.75rem; max-width: 36rem; min-width: 0; }
+.deck-card .headword { font-size: clamp(3rem, 1.5rem + 7vw, 6rem); line-height: 1; overflow-wrap: anywhere; }
+.deck-card .definition { color: var(--color-text); }
+.deck-card .muted { color: var(--color-muted); font-size: var(--size-sm); }
+.deck-card.enter { animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+@keyframes rise { from { opacity: 0.2; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.deck-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+
+/* Zitate */
+.quotes { columns: 21rem; column-gap: 1rem; }
+.quote-card {
+  break-inside: avoid;
+  margin: 0 0 1rem;
+  padding: 1.25rem 1.25rem 1.1rem;
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 1.5);
+  background: var(--color-bg);
+  display: grid; gap: 0.9rem;
+}
+.quote-card blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.3;
+  white-space: pre-line;
+}
+.quote-card figcaption { font-size: var(--size-sm); color: var(--color-muted); }
+.quote-card figcaption strong { color: var(--color-text); font-weight: 600; }
+.inline-word {
+  border: 0; padding: 0; background: none; cursor: pointer;
+  font: inherit; color: inherit;
+  text-decoration: underline dotted var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.18em;
+}
+.inline-word:hover { color: var(--color-accent); }
+
+/* Wörterbuch */
+.dict-tools { display: grid; gap: 0.9rem; }
+.search {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  font: inherit;
+}
+.letters { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.letters button {
+  min-width: 2rem; padding: 0.15rem 0.45rem;
+  border: 1px solid var(--color-border); border-radius: 0.35rem;
+  background: var(--color-bg); cursor: pointer; font-size: 0.9rem;
+}
+.letters button:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.dict { display: grid; }
+.letter-head {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 1.5rem 0.25rem;
+}
+.entry { padding-block: 1.1rem; border-bottom: 1px solid var(--color-border); display: grid; gap: 0.35rem; }
+.entry-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.8rem; }
+.entry .headword { font-size: 2rem; line-height: 1.1; }
+.entry .origin { font-size: var(--size-sm); color: var(--color-muted); }
+.entry .refs { font-size: var(--size-sm); }
+.link-btn { border: 0; background: none; padding: 0; color: var(--color-accent); cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; font-size: inherit; }
+.empty { color: var(--color-muted); padding-block: 1rem; }
+
+/* Dialog */
+dialog {
+  width: min(34rem, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0;
+}
+dialog::backdrop { background: rgb(0 0 0 / 0.35); }
+.dialog-body { padding: 1.5rem; display: grid; gap: 0.8rem; }
+.dialog-top { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.dialog-body .headword { font-size: 3rem; line-height: 1; overflow-wrap: anywhere; }
+.close {
+  border: 1px solid var(--color-border); background: var(--color-bg);
+  width: 2rem; height: 2rem; border-radius: var(--radius); cursor: pointer; flex: none;
+}
+.dialog-quote { border-left: 2px solid var(--color-accent); padding-left: 0.9rem; font-family: var(--font-display); font-size: 1.2rem; line-height: 1.3; white-space: pre-line; }
+.dialog-quote small { display: block; font-family: var(--font-sans); font-size: var(--size-sm); color: var(--color-muted); margin-top: 0.3rem; }
+.dialog-note { font-size: var(--size-sm); color: var(--color-muted); }
+
+.site-footer { border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: var(--size-sm); }
+.site-footer .container { padding-block: 1.25rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage.settle .cloud-word, .bar span { transition: none; }
+  .deck-card.enter { animation: none; }
+}
+</style>
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container wide site-header-inner">
+    <div class="brand">
+      <a class="site-title" href="#start">npvkramer</a>
+      <span class="mock-pill">Mock · Beispielinhalte</span>
+    </div>
+    <nav aria-label="Hauptnavigation">
+      <ul class="nav-list">
+        <li><a href="#start" data-route="start">Start</a></li>
+        <li><a href="#woerter" data-route="woerter">Wörter</a></li>
+        <li><a href="#zitate" data-route="zitate">Zitate</a></li>
+        <li><a href="#woerterbuch" data-route="woerterbuch">Wörterbuch</a></li>
+      </ul>
+    </nav>
+    <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Farbschema wechseln"><span aria-hidden="true">◐</span></button>
+  </div>
+</header>
+
+<main>
+  <!-- START -->
+  <section class="view" id="view-start" data-view="start">
+    <div class="container hero" id="hero"></div>
+
+    <div class="container">
+      <ul class="areas">
+        <li><a href="#woerter"><span class="area-title">Wörter</span><span class="area-desc">Wörter, die ich mag, als Wolke oder eins nach dem anderen.</span><span class="area-count" id="count-words"></span></a></li>
+        <li><a href="#zitate"><span class="area-title">Zitate</span><span class="area-desc">Sätze und Sprüche, die mich bewegt haben.</span><span class="area-count" id="count-quotes"></span></a></li>
+        <li><a href="#woerterbuch"><span class="area-title">Wörterbuch</span><span class="area-desc">Wörter mit Lautschrift und Bedeutung, alphabetisch.</span><span class="area-count" id="count-dict"></span></a></li>
+      </ul>
+    </div>
+
+    <div class="container concept">
+      <div class="section-head">
+        <span class="eyebrow">Konzept</span>
+        <h2>Drei Bereiche oder eine Sammlung?</h2>
+        <p>Zwei Möglichkeiten, wie die Inhalte zusammenhängen können. Dieser Mock setzt Variante B um.</p>
+      </div>
+      <div class="variants">
+        <div class="variant">
+          <h3>A · Drei getrennte Bereiche</h3>
+          <div class="diagram-stack">
+            <div class="diagram"><span class="node">Wörter</span></div>
+            <div class="diagram"><span class="node">Zitate</span></div>
+            <div class="diagram"><span class="node">Wörterbuch</span></div>
+          </div>
+          <p>Jeder Bereich hat eigene Dateien. Einfach, aber ein Wort im Wörterbuch muss in der Wortliste noch einmal erfasst werden.</p>
+        </div>
+        <div class="variant chosen">
+          <h3>B · Eine Sammlung, drei Ansichten <span class="tag-chosen">im Mock</span></h3>
+          <div class="diagram-stack">
+            <div class="diagram"><span class="node core">Wort</span><span class="arrow">→</span><span class="node">Wolke &amp; Zufall</span></div>
+            <div class="diagram"><span class="node core">Wort</span><span class="arrow">+ Bedeutung →</span><span class="node">Wörterbuch</span></div>
+            <div class="diagram"><span class="node">Zitat</span><span class="arrow">verlinkt →</span><span class="node core">Wort</span></div>
+          </div>
+          <p>Jedes Wort ist eine Datei. Hat es eine Bedeutung, erscheint es zusätzlich im Wörterbuch. Zitate verweisen auf Wörter aus der Sammlung.</p>
+        </div>
+      </div>
+      <div class="code-pair">
+        <div class="code-block">
+          <span class="label">src/content/woerter/sonder.md</span>
+<pre>---
+wort: Sonder
+lautschrift: /zɔndɐ/
+wortart: Substantiv
+gewicht: 3          # Grösse in der Wolke
+definition: >
+  Die plötzliche, tiefe Erkenntnis,
+  dass jeder zufällige Passant …
+herkunft: The Dictionary of Obscure Sorrows
+---</pre>
+        </div>
+        <div class="code-block">
+          <span class="label">src/content/zitate/hesse-stufen.md</span>
+<pre>---
+autor: Hermann Hesse
+quelle: Stufen (1941)
+woerter: [zauber]   # Verweis auf Wörter
+---
+Und jedem Anfang wohnt ein Zauber inne,
+Der uns beschützt und der uns hilft,
+zu leben.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WÖRTER -->
+  <section class="view" id="view-woerter" data-view="woerter" hidden>
+    <div class="container wide" style="display:grid; gap:1.25rem;">
+      <div class="section-head">
+        <span class="eyebrow">Sammlung</span>
+        <h1>Wörter</h1>
+        <p>Wörter, die ich mag. Grösse zeigt, wie sehr. Ein Klick öffnet das Wort.</p>
+      </div>
+      <div class="toolbar">
+        <div class="segmented" role="group" aria-label="Darstellung">
+          <button type="button" data-mode="schwebend" aria-pressed="true">Schwebend</button>
+          <button type="button" data-mode="verteilt" aria-pressed="false">Verteilt</button>
+          <button type="button" data-mode="einzeln" aria-pressed="false">Eins nach dem anderen</button>
+        </div>
+        <div class="legend" id="cloud-legend">
+          <span><span class="dot"></span>steht im Wörterbuch</span>
+          <span id="pause-hint">Maus über die Wolke hält sie an</span>
+        </div>
+      </div>
+
+      <div class="stage" id="stage" aria-label="Wortwolke"></div>
+
+      <div class="deck" id="deck" hidden>
+        <div class="deck-progress">
+          <span id="deck-count"></span>
+          <div class="bar"><span id="deck-bar"></span></div>
+          <button class="link-btn" type="button" id="deck-reset">Neu mischen</button>
+        </div>
+        <div class="deck-card" id="deck-card" aria-live="polite"></div>
+        <div class="deck-actions">
+          <button class="btn primary" type="button" id="deck-next">Nächstes Wort →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ZITATE -->
+  <section class="view" id="view-zitate" data-view="zitate" hidden>
+    <div class="container wide" style="display:grid; gap:1.5rem;">
+      <div class="section-head">
+        <span class="eyebrow">Sammlung</span>
+        <h1>Zitate</h1>
+        <p>Sätze, die geblieben sind. Unterstrichene Wörter stammen aus der Wortsammlung.</p>
+      </div>
+      <div class="quotes" id="quotes"></div>
+    </div>
+  </section>
+
+  <!-- WÖRTERBUCH -->
+  <section class="view" id="view-woerterbuch" data-view="woerterbuch" hidden>
+    <div class="container" style="display:grid; gap:1.25rem;">
+      <div class="section-head">
+        <span class="eyebrow">Nachschlagen</span>
+        <h1>Wörterbuch</h1>
+        <p>Alle Wörter der Sammlung, die eine Bedeutung haben.</p>
+      </div>
+      <div class="dict-tools">
+        <label class="hint" for="dict-search">Suchen</label>
+        <input class="search" id="dict-search" type="search" placeholder="Wort oder Bedeutung …" autocomplete="off">
+        <div class="letters" id="letters"></div>
+      </div>
+      <div class="dict" id="dict"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container wide">Mock für npvkramer.github.io · Wörter, Bedeutungen und Zitate sind Beispiele</div>
+</footer>
+
+<dialog id="word-dialog" aria-labelledby="dlg-word">
+  <div class="dialog-body" id="dialog-body"></div>
+</dialog>
+
+<script>
+(() => {
+  // ---------- Beispieldaten ----------
+  const WORDS = [
+    { w: 'Sonder', ipa: '/zɔndɐ/', pos: 'Substantiv', g: 3,
+      def: 'Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst – mit eigenen Sorgen, Träumen und Beziehungen, in denen man selbst höchstens eine unbedeutende Nebenrolle spielt.',
+      origin: 'Aus „The Dictionary of Obscure Sorrows“ von John Koenig.' },
+    { w: 'Fernweh', ipa: '/ˈfɛʁnˌveː/', pos: 'Substantiv, n.', g: 3,
+      def: 'Die Sehnsucht nach fernen Orten, auch nach solchen, an denen man nie war. Das Gegenstück zum Heimweh.' },
+    { w: 'Sehnsucht', g: 3 },
+    { w: 'Waldeinsamkeit', ipa: '/ˈvaltʔaɪ̯nzaːmkaɪ̯t/', pos: 'Substantiv, f.', g: 2,
+      def: 'Das Gefühl, allein im Wald zu sein: still, geborgen und ein wenig der Welt entrückt.',
+      origin: 'Geprägt von Ludwig Tieck in „Der blonde Eckbert“ (1797).' },
+    { w: 'Geborgenheit', ipa: '/ɡəˈbɔʁɡn̩haɪ̯t/', pos: 'Substantiv, f.', g: 2,
+      def: 'Das Gefühl, sicher, beschützt und angenommen zu sein.' },
+    { w: 'Habseligkeiten', ipa: '/ˈhaːpzeːlɪçkaɪ̯tn̩/', pos: 'Substantiv, Pl.', g: 2,
+      def: 'Die wenigen, oft bescheidenen Dinge, die jemand besitzt.',
+      origin: '2004 zum „schönsten deutschen Wort“ gewählt.' },
+    { w: 'Petrichor', ipa: '/ˈpeːtʁikoːɐ̯/', pos: 'Substantiv', g: 2,
+      def: 'Der erdige Geruch, der aufsteigt, wenn Regen auf trockenen Boden fällt.',
+      origin: 'Aus griech. pétra (Stein) und ichṓr (Blut der Götter), geprägt 1964.' },
+    { w: 'Serendipität', ipa: '/zeʁɛndipiˈtɛːt/', pos: 'Substantiv, f.', g: 2,
+      def: 'Die glückliche Entdeckung von etwas, nach dem man gar nicht gesucht hat.',
+      origin: 'Nach dem Märchen „Die drei Prinzen von Serendip“, Wortschöpfung von Horace Walpole (1754).' },
+    { w: 'Augenblick', ipa: '/ˈaʊ̯ɡn̩ˌblɪk/', pos: 'Substantiv, m.', g: 2,
+      def: 'Ein sehr kurzer Moment, wörtlich: so lange, wie ein Blick dauert.' },
+    { w: 'Weltschmerz', ipa: '/ˈvɛltˌʃmɛʁt͡s/', pos: 'Substantiv, m.', g: 2,
+      def: 'Traurigkeit darüber, dass die Welt hinter dem zurückbleibt, was sie sein könnte.',
+      origin: 'Geprägt von Jean Paul.' },
+    { w: 'Kummerspeck', ipa: '/ˈkʊmɐˌʃpɛk/', pos: 'Substantiv, m.', g: 1,
+      def: 'Gewicht, das man sich aus Kummer oder Frust angegessen hat.' },
+    { w: 'Verschlimmbessern', ipa: '/fɛɐ̯ˈʃlɪmˌbɛsɐn/', pos: 'Verb', g: 1,
+      def: 'Etwas verbessern wollen und es dabei schlechter machen.',
+      origin: 'Zusammengesetzt aus verschlimmern und verbessern.' },
+    { w: 'Zauber', g: 2 },
+    { w: 'Lichtblick', g: 2 },
+    { w: 'Morgenröte', g: 2 },
+    { w: 'Sternschnuppe', g: 2 },
+    { w: 'Geduld', g: 1 },
+    { w: 'Sprache', g: 1 },
+    { w: 'Kopfkino', g: 1 },
+    { w: 'Luftschloss', g: 1 },
+    { w: 'Ohrwurm', g: 1 },
+    { w: 'Zweisamkeit', g: 1 },
+    { w: 'Sommerfrische', g: 1 },
+    { w: 'Wolkenkuckucksheim', g: 1 },
+    { w: 'Fingerspitzengefühl', g: 1 },
+    { w: 'Nachhall', g: 1 },
+    { w: 'Gemütlichkeit', g: 1 },
+    { w: 'Feierabend', g: 1 },
+  ];
+
+  // [[Text]] oder [[Text im Satz|Wort]] verlinkt auf ein Wort der Sammlung
+  const QUOTES = [
+    { text: 'Und jedem Anfang wohnt ein [[Zauber]] inne,\nDer uns beschützt und der uns hilft, zu leben.', author: 'Hermann Hesse', source: 'Stufen (1941)' },
+    { text: 'Die Grenzen meiner [[Sprache]] bedeuten die Grenzen meiner Welt.', author: 'Ludwig Wittgenstein', source: 'Tractatus logico-philosophicus (1921)' },
+    { text: 'Man sieht nur mit dem Herzen gut. Das Wesentliche ist für die Augen unsichtbar.', author: 'Antoine de Saint-Exupéry', source: 'Der kleine Prinz (1943)' },
+    { text: 'Werd ich zum [[Augenblicke|Augenblick]] sagen:\nVerweile doch! du bist so schön!', author: 'Johann Wolfgang von Goethe', source: 'Faust I (1808)' },
+    { text: '… [[Geduld]] zu haben gegen alles Ungelöste in Ihrem Herzen und zu versuchen, die Fragen selbst liebzuhaben.', author: 'Rainer Maria Rilke', source: 'Briefe an einen jungen Dichter' },
+    { text: 'Es gibt nichts Gutes\naußer: Man tut es.', author: 'Erich Kästner', source: 'Moral' },
+    { text: 'Ohne Musik wäre das Leben ein Irrtum.', author: 'Friedrich Nietzsche', source: 'Götzen-Dämmerung (1889)' },
+  ];
+
+  const byName = new Map(WORDS.map((w) => [w.w, w]));
+  const DICT = WORDS.filter((w) => w.def).sort((a, b) => a.w.localeCompare(b.w, 'de'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const store = {
+    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ohne Speicher */ } },
+  };
+
+  function quoteHtml(text) {
+    return text.split(/(\[\[[^\]]+\]\])/).map((part) => {
+      const m = part.match(/^\[\[([^|\]]+)(?:\|([^\]]+))?\]\]$/);
+      if (!m) return esc(part);
+      const shown = m[1], target = m[2] || m[1];
+      return byName.has(target)
+        ? `<button type="button" class="inline-word" data-word="${esc(target)}">${esc(shown)}</button>`
+        : esc(shown);
+    }).join('');
+  }
+  const quotesFor = (name) => QUOTES.filter((q) => q.text.includes(`|${name}]]`) || q.text.includes(`[[${name}]]`));
+
+  // ---------- Theme ----------
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    const root = document.documentElement;
+    const cur = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    root.dataset.theme = cur === 'dark' ? 'light' : 'dark';
+  });
+
+  // ---------- Dialog ----------
+  const dialog = document.getElementById('word-dialog');
+  const dialogBody = document.getElementById('dialog-body');
+  function openWord(name) {
+    const w = byName.get(name);
+    if (!w) return;
+    const qs = quotesFor(name);
+    dialogBody.innerHTML = `
+      <div class="dialog-top">
+        <h2 class="word-display headword" id="dlg-word">${esc(w.w)}</h2>
+        <button class="close" type="button" data-close aria-label="Schliessen">✕</button>
+      </div>
+      ${w.ipa || w.pos ? `<p>${w.ipa ? `<span class="ipa">${esc(w.ipa)}</span> ` : ''}${w.pos ? `<span class="pos">${esc(w.pos)}</span>` : ''}</p>` : ''}
+      ${w.def ? `<p>${esc(w.def)}</p>` : `<p class="dialog-note">Noch keine Bedeutung erfasst. Sobald eine dazukommt, erscheint das Wort auch im Wörterbuch.</p>`}
+      ${w.origin ? `<p class="dialog-note">${esc(w.origin)}</p>` : ''}
+      ${qs.map((q) => `<div class="dialog-quote">${esc(q.text.replace(/\[\[([^|\]]+)(?:\|[^\]]+)?\]\]/g, '$1'))}<small>${esc(q.author)}, ${esc(q.source)}</small></div>`).join('')}
+      ${w.def ? `<p><a href="#woerterbuch" data-close data-jump="${esc(w.w)}">Im Wörterbuch ansehen →</a></p>` : ''}
+    `;
+    if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
+  }
+  dialog.addEventListener('click', (e) => {
+    const t = e.target;
+    if (t === dialog || t.closest('[data-close]')) {
+      const jump = t.closest('[data-jump]')?.dataset.jump;
+      dialog.close();
+      if (jump) setTimeout(() => focusEntry(jump), 60);
+    }
+  });
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-word]');
+    if (b) openWord(b.dataset.word);
+  });
+
+  // ---------- Start ----------
+  function renderHero() {
+    const w = DICT[Math.floor(Math.random() * DICT.length)];
+    document.getElementById('hero').innerHTML = `
+      <span class="eyebrow">Wort des Moments</span>
+      <h1 class="word-display headword">${esc(w.w)}</h1>
+      <p class="line"><span class="ipa">${esc(w.ipa || '')}</span><span class="pos">${esc(w.pos || '')}</span></p>
+      <p class="definition">${esc(w.def)}</p>
+      <div class="hero-actions">
+        <button class="btn" type="button" id="hero-next">Anderes Wort</button>
+        <a class="btn" href="#woerterbuch">Zum Wörterbuch</a>
+      </div>`;
+    document.getElementById('hero-next').addEventListener('click', renderHero);
+  }
+  document.getElementById('count-words').textContent = `${WORDS.length} Wörter`;
+  document.getElementById('count-quotes').textContent = `${QUOTES.length} Zitate`;
+  document.getElementById('count-dict').textContent = `${DICT.length} Einträge`;
+
+  // ---------- Wolke ----------
+  const stage = document.getElementById('stage');
+  const deck = document.getElementById('deck');
+  const legend = document.getElementById('cloud-legend');
+  const pauseHint = document.getElementById('pause-hint');
+  const SIZES = { 1: 19, 2: 30, 3: 48 };
+  let mode = reduceMotion ? 'verteilt' : 'schwebend';
+  let laidOut = false, raf = 0, lastT = 0, paused = false, stageW = 0, stageH = 0;
+
+  // stabile Zufallszahlen, damit die Anordnung bei jedem Laden gleich aussieht
+  let seed = 7;
+  const rand = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+
+  for (const w of WORDS) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cloud-word' + (w.def ? ' has-def' : '');
+    b.dataset.g = w.g;
+    b.dataset.word = w.w;
+    b.textContent = w.w;
+    stage.append(b);
+    w.el = b;
+  }
+
+  function measure() {
+    stageW = stage.clientWidth; stageH = stage.clientHeight;
+    const scale = Math.max(0.55, Math.min(1, stageW / 860));
+    for (const w of WORDS) {
+      w.el.style.fontSize = `${SIZES[w.g] * scale}px`;
+    }
+    for (const w of WORDS) { w.bw = w.el.offsetWidth; w.bh = w.el.offsetHeight; }
+  }
+
+  function layoutDistributed() {
+    seed = 7;
+    const placed = [];
+    const cx = stageW / 2, cy = stageH / 2, kx = Math.max(1, stageW / stageH);
+    const pad = 6, edge = 10;
+    const order = [...WORDS].sort((a, b) => b.g - a.g || b.w.length - a.w.length);
+    for (const w of order) {
+      const start = rand() * Math.PI * 2;
+      let done = false;
+      for (let i = 0; i < 4000 && !done; i++) {
+        const a = start + i * 0.18, r = i * 0.55;
+        const x = cx + Math.cos(a) * r * kx - w.bw / 2;
+        const y = cy + Math.sin(a) * r - w.bh / 2;
+        if (x < edge || y < edge || x + w.bw > stageW - edge || y + w.bh > stageH - edge) continue;
+        if (placed.some((p) => x < p.x + p.w + pad && x + w.bw + pad > p.x && y < p.y + p.h + pad && y + w.bh + pad > p.y)) continue;
+        placed.push({ x, y, w: w.bw, h: w.bh });
+        w.x = x; w.y = y; done = true;
+      }
+      if (!done) { w.x = rand() * Math.max(0, stageW - w.bw); w.y = rand() * Math.max(0, stageH - w.bh); }
+    }
+  }
+
+  const place = (w, x, y) => { w.el.style.transform = `translate(${x}px, ${y}px)`; };
+
+  function startFloat() {
+    for (const w of WORDS) {
+      w.fx = w.fx ?? w.x; w.fy = w.fy ?? w.y;
+      w.v = (w.g === 3 ? 7 : w.g === 2 ? 13 : 20) * (0.75 + rand() * 0.5);
+    }
+    cancelAnimationFrame(raf);
+    lastT = 0;
+    raf = requestAnimationFrame(tick);
+  }
+  function tick(t) {
+    if (mode !== 'schwebend' || current !== 'woerter') return;
+    const dt = lastT ? Math.min(0.05, (t - lastT) / 1000) : 0;
+    lastT = t;
+    if (!paused && !document.hidden) {
+      for (const w of WORDS) {
+        w.fx += w.v * dt;
+        if (w.fx > stageW + 4) { w.fx = -w.bw - 4; w.fy = 10 + Math.random() * Math.max(0, stageH - w.bh - 20); }
+        place(w, w.fx, w.fy);
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  stage.addEventListener('pointerenter', () => { paused = true; });
+  stage.addEventListener('pointerleave', () => { paused = false; });
+  stage.addEventListener('focusin', () => { paused = true; });
+  stage.addEventListener('focusout', () => { paused = false; });
+
+  function renderCloud() {
+    measure();
+    if (!laidOut) { layoutDistributed(); laidOut = true; }
+    if (mode === 'verteilt') {
+      cancelAnimationFrame(raf);
+      stage.classList.add('settle');
+      for (const w of WORDS) { w.fx = undefined; w.fy = undefined; place(w, w.x, w.y); }
+    } else {
+      stage.classList.remove('settle');
+      for (const w of WORDS) place(w, w.fx ?? w.x, w.fy ?? w.y);
+      startFloat();
+    }
+  }
+
+  function setMode(next) {
+    mode = next;
+    for (const b of document.querySelectorAll('[data-mode]')) b.setAttribute('aria-pressed', String(b.dataset.mode === mode));
+    const single = mode === 'einzeln';
+    stage.hidden = single;
+    legend.hidden = single;
+    deck.hidden = !single;
+    pauseHint.hidden = mode !== 'schwebend';
+    if (single) { cancelAnimationFrame(raf); renderDeck(false); }
+    else renderCloud();
+  }
+  document.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
+
+  let resizeTimer;
+  new ResizeObserver(() => {
+    if (current !== 'woerter' || mode === 'einzeln') return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const w0 = stageW;
+      measure();
+      if (Math.abs(stage.clientWidth - w0) > 4) { laidOut = false; for (const w of WORDS) { w.fx = undefined; w.fy = undefined; } renderCloud(); }
+    }, 120);
+  }).observe(stage);
+
+  // ---------- Eins nach dem anderen: jedes Wort einmal, bis alle durch sind ----------
+  const DECK_KEY = 'wortsammlung-deck';
+  function shuffled() {
+    const a = WORDS.map((w) => w.w);
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  let deckState = store.get(DECK_KEY);
+  if (!deckState || !Array.isArray(deckState.order) || deckState.order.length !== WORDS.length || deckState.order.some((n) => !byName.has(n))) {
+    deckState = { order: shuffled(), pos: 0 };
+  }
+  function renderDeck(animate) {
+    const total = deckState.order.length;
+    const card = document.getElementById('deck-card');
+    const nextBtn = document.getElementById('deck-next');
+    const done = deckState.pos >= total;
+    document.getElementById('deck-count').textContent = `${Math.min(deckState.pos + 1, total)} von ${total}`;
+    document.getElementById('deck-bar').style.width = `${(Math.min(deckState.pos + 1, total) / total) * 100}%`;
+    if (done) {
+      card.innerHTML = `<p class="word-display headword">Fertig.</p><p class="muted">Du hast alle ${total} Wörter gesehen.</p>`;
+      nextBtn.textContent = 'Neu mischen und von vorne';
+    } else {
+      const w = byName.get(deckState.order[deckState.pos]);
+      card.innerHTML = `
+        <p class="word-display headword">${esc(w.w)}</p>
+        ${w.ipa ? `<p><span class="ipa">${esc(w.ipa)}</span> <span class="pos">${esc(w.pos || '')}</span></p>` : ''}
+        ${w.def ? `<p class="definition">${esc(w.def)}</p>` : ''}
+        ${quotesFor(w.w).length ? `<p><button class="link-btn" type="button" data-word="${esc(w.w)}">In einem Zitat</button></p>` : ''}`;
+      nextBtn.textContent = deckState.pos === total - 1 ? 'Abschliessen' : 'Nächstes Wort →';
+    }
+    if (animate && !reduceMotion) { card.classList.remove('enter'); void card.offsetWidth; card.classList.add('enter'); }
+    store.set(DECK_KEY, deckState);
+  }
+  function deckNext() {
+    if (deckState.pos >= deckState.order.length) deckState = { order: shuffled(), pos: 0 };
+    else deckState.pos += 1;
+    renderDeck(true);
+  }
+  document.getElementById('deck-next').addEventListener('click', deckNext);
+  document.getElementById('deck-reset').addEventListener('click', () => { deckState = { order: shuffled(), pos: 0 }; renderDeck(true); });
+  document.addEventListener('keydown', (e) => {
+    if (current === 'woerter' && mode === 'einzeln' && !dialog.open && (e.key === 'ArrowRight') ) { e.preventDefault(); deckNext(); }
+  });
+
+  // ---------- Zitate ----------
+  document.getElementById('quotes').innerHTML = QUOTES.map((q) => `
+    <figure class="quote-card">
+      <blockquote>${quoteHtml(q.text)}</blockquote>
+      <figcaption><strong>${esc(q.author)}</strong> · ${esc(q.source)}</figcaption>
+    </figure>`).join('');
+
+  // ---------- Wörterbuch ----------
+  const dictEl = document.getElementById('dict');
+  const lettersEl = document.getElementById('letters');
+  const search = document.getElementById('dict-search');
+  const initial = (s) => s[0].toUpperCase().normalize('NFD')[0];
+  function renderDict() {
+    const q = search.value.trim().toLowerCase();
+    const list = DICT.filter((w) => !q || w.w.toLowerCase().includes(q) || w.def.toLowerCase().includes(q));
+    const letters = [...new Set(list.map((w) => initial(w.w)))];
+    lettersEl.innerHTML = letters.map((l) => `<button type="button" data-letter="${l}">${l}</button>`).join('');
+    if (!list.length) { dictEl.innerHTML = `<p class="empty">Kein Eintrag für „${esc(search.value)}“.</p>`; return; }
+    let html = '', last = '';
+    for (const w of list) {
+      const l = initial(w.w);
+      if (l !== last) { html += `<h2 class="letter-head" id="letter-${l}">${l}</h2>`; last = l; }
+      const qs = quotesFor(w.w);
+      html += `
+        <article class="entry" id="entry-${esc(w.w)}">
+          <div class="entry-head">
+            <h3 class="word-display headword">${esc(w.w)}</h3>
+            <span class="ipa">${esc(w.ipa || '')}</span>
+            <span class="pos">${esc(w.pos || '')}</span>
+          </div>
+          <p>${esc(w.def)}</p>
+          ${w.origin ? `<p class="origin">${esc(w.origin)}</p>` : ''}
+          ${qs.length ? `<p class="refs"><button class="link-btn" type="button" data-word="${esc(w.w)}">Kommt in ${qs.length === 1 ? 'einem Zitat' : qs.length + ' Zitaten'} vor</button></p>` : ''}
+        </article>`;
+    }
+    dictEl.innerHTML = html;
+  }
+  search.addEventListener('input', renderDict);
+  lettersEl.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-letter]');
+    if (b) document.getElementById(`letter-${b.dataset.letter}`)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  });
+  function focusEntry(name) {
+    search.value = '';
+    renderDict();
+    document.getElementById(`entry-${name}`)?.scrollIntoView({ behavior: 'auto', block: 'center' });
+  }
+
+  // ---------- Routing über den Hash ----------
+  const ROUTES = ['start', 'woerter', 'zitate', 'woerterbuch'];
+  let current = '';
+  function route() {
+    const r = location.hash.slice(1);
+    const next = ROUTES.includes(r) ? r : 'start';
+    if (next === current) return;
+    current = next;
+    for (const v of document.querySelectorAll('[data-view]')) v.hidden = v.dataset.view !== current;
+    for (const a of document.querySelectorAll('[data-route]')) {
+      if (a.dataset.route === current) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    }
+    if (current === 'woerter') setMode(mode); else cancelAnimationFrame(raf);
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+
+  renderHero();
+  renderDict();
+  route();
+})();
+</script>
+</body>
+</html>

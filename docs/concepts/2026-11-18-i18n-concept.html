@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprachkonzept Wortsammlung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@400&display=swap">
+<style>
+/* Layout: eine Textspalte im Look des Index-Themes; Vorschau als zwei Seitensprachen, Regeln als Register. */
+:root {
+  --font-body: 'Newsreader', 'Noto Serif KR', 'Times New Roman', serif;
+  --font-ui: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --subtle: #e8e5dd;
+  --text: #1a1a1a;
+  --muted: #5e5c57;
+  --border: #c9c6be;
+  --rule: #1a1a1a;
+  --accent: #2840e0;
+  --accent-soft: #e1e4f7;
+  --warn-soft: #f3ead2;
+  --warn: #7a5a12;
+
+  --radius: 2px;
+  --measure: 40rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161513; --surface: #1f1e1b; --subtle: #26241f; --text: #edeae3; --muted: #9c988f;
+    --border: #34322e; --rule: #cfcbc2; --accent: #8f9bff; --accent-soft: #23264a;
+    --warn-soft: #2e2817; --warn: #e2c27a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161513; --surface: #1f1e1b; --subtle: #26241f; --text: #edeae3; --muted: #9c988f;
+  --border: #34322e; --rule: #cfcbc2; --accent: #8f9bff; --accent-soft: #23264a;
+  --warn-soft: #2e2817; --warn: #e2c27a;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+.page {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 5rem;
+  display: grid;
+  gap: 4rem;
+}
+h1, h2, h3 { font-weight: 400; letter-spacing: -0.02em; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.25rem, 1.5rem + 3vw, 3.75rem); }
+h2 { font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem); }
+h3 { font-size: 1.3rem; }
+p { margin: 0; }
+code, pre, .ui {
+  font-family: var(--font-ui);
+}
+.ui, .label {
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.muted { color: var(--muted); }
+.measure { max-width: var(--measure); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+section { display: grid; gap: 1.25rem; }
+.section-head { display: grid; gap: 0.5rem; border-top: 1px solid var(--rule); padding-top: 1rem; }
+
+/* Kopf */
+.intro { display: grid; gap: 1rem; }
+.lead { font-size: 1.3rem; color: var(--muted); max-width: var(--measure); }
+
+/* Zwei Achsen */
+.axes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
+.axis { border: 1px solid var(--border); background: var(--surface); padding: 1.25rem; display: grid; gap: 0.6rem; align-content: start; min-width: 0; }
+.axis .values { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chip {
+  font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase;
+  border: 1px solid var(--border); padding: 0.1rem 0.45rem; border-radius: var(--radius); white-space: nowrap;
+}
+.chip.accent { border-color: var(--accent); color: var(--accent); }
+.chip.soft { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+
+/* Vorschau */
+.switch { display: inline-flex; border: 1px solid var(--rule); border-radius: var(--radius); }
+.switch button {
+  font-family: var(--font-ui); font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase;
+  background: transparent; color: var(--text); border: 0; padding: 0.45rem 0.9rem; cursor: pointer;
+}
+.switch button[aria-pressed="true"] { background: var(--rule); color: var(--bg); }
+.preview-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; }
+.url { font-family: var(--font-ui); font-size: 0.8125rem; color: var(--muted); overflow-wrap: anywhere; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 1rem; align-items: stretch; }
+.card {
+  border: 1px solid var(--rule); background: var(--surface);
+  padding: 1.25rem; display: grid; grid-template-rows: auto 1fr auto; gap: 1rem; min-width: 0;
+}
+.entry { display: grid; gap: 0.5rem; align-content: start; }
+.entry-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.7rem; }
+.headword { font-size: 2.6rem; line-height: 1.05; }
+.headword:lang(ko) { font-family: 'Noto Serif KR', var(--font-body); font-size: 2.3rem; }
+.romanization { font-style: italic; font-size: 1.35rem; }
+.ipa { color: var(--muted); }
+.pos { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.fallback {
+  font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--warn-soft); color: var(--warn); padding: 0.1rem 0.4rem; border-radius: var(--radius); justify-self: start;
+}
+.origin { font-size: 0.95rem; color: var(--muted); }
+.quote-text { font-size: 1.35rem; line-height: 1.4; white-space: pre-line; }
+.quote-text a { color: inherit; text-decoration: underline dotted var(--accent); text-decoration-thickness: 2px; }
+.translation { border-left: 2px solid var(--accent); padding-left: 0.8rem; color: var(--muted); white-space: pre-line; }
+.byline { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.byline strong { color: var(--text); font-weight: 500; }
+.applied { border-top: 1px solid var(--border); padding-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.applied .chip { cursor: pointer; background: transparent; color: inherit; }
+.applied .chip:hover { border-color: var(--accent); color: var(--accent); }
+.dict-note { font-size: 0.95rem; }
+
+/* Regeln */
+.rules { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.rule {
+  display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0.25rem 1.25rem;
+  padding-block: 1rem; border-bottom: 1px solid var(--border);
+  scroll-margin-top: 1rem;
+}
+.rule.flash { background: var(--accent-soft); }
+.rule-id { font-family: var(--font-ui); font-size: 0.8125rem; color: var(--accent); padding-top: 0.25rem; }
+.rule-body { display: grid; gap: 0.35rem; min-width: 0; }
+.rule-body h3 { font-size: 1.2rem; }
+.rule-when { font-family: var(--font-ui); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.02em; }
+.rule-body p { max-width: var(--measure); }
+@media (max-width: 30rem) {
+  .rule { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Dateien */
+.files { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: 1rem; }
+.file { display: grid; gap: 0.4rem; min-width: 0; }
+pre {
+  margin: 0; padding: 1rem; background: var(--subtle); border-radius: var(--radius);
+  font-size: 0.8rem; line-height: 1.6; overflow-x: auto;
+}
+pre .k { color: var(--accent); }
+pre .c { color: var(--muted); }
+
+/* Tabellen */
+.table-wrap { overflow-x: auto; border-top: 1px solid var(--rule); }
+table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+th, td { text-align: left; padding: 0.65rem 0.75rem 0.65rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+td code { font-size: 0.85rem; }
+
+/* Ablauf */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: step; border-top: 1px solid var(--rule); }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 1rem; padding-block: 0.9rem; border-bottom: 1px solid var(--border); }
+.steps li::before { content: counter(step); font-family: var(--font-ui); font-size: 0.8125rem; color: var(--accent); padding-top: 0.2rem; }
+.steps p + p { margin-top: 0.25rem; }
+
+/* Entscheidungen */
+.decisions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1rem; }
+.decision { border: 1px solid var(--border); padding: 1.1rem; display: grid; gap: 0.6rem; align-content: start; background: var(--surface); min-width: 0; }
+.option { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.5rem; font-size: 1rem; }
+.option .mark { font-family: var(--font-ui); font-size: 0.75rem; padding-top: 0.2rem; color: var(--muted); }
+.option.rec .mark { color: var(--accent); }
+
+.changes { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.4rem; max-width: var(--measure); }
+</style>
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
+</head>
+<body>
+<div class="page">
+  <header class="intro">
+    <span class="ui muted">Konzept · Wortsammlung</span>
+    <h1>Mehrsprachige Wortsammlung</h1>
+    <p class="lead">Wie Seiten, Wörter, Zitate und Wörterbuch mit Deutsch, Englisch und Wörtern aus jeder anderen Sprache umgehen, und welche Regel wann greift.</p>
+  </header>
+
+  <!-- Zwei Achsen -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Grundidee</span>
+      <h2>Zwei Sprachen, die nichts miteinander zu tun haben</h2>
+    </div>
+    <div class="axes">
+      <div class="axis">
+        <span class="label">Seitensprache</span>
+        <div class="values"><span class="chip accent">de</span><span class="chip accent">en</span></div>
+        <p>In welcher Sprache die Seite gelesen wird. Bestimmt Navigation, Beschriftungen und in welcher Sprache Definition, Wortart und Herkunft erscheinen. Kommt aus der URL.</p>
+      </div>
+      <div class="axis">
+        <span class="label">Sprache des Wortes</span>
+        <div class="values"><span class="chip">de</span><span class="chip">en</span><span class="chip">ko</span><span class="chip">ja</span><span class="chip">…</span></div>
+        <p>Aus welcher Sprache das Wort selbst stammt. Beliebig viele, als ISO-Code im Eintrag. 인연 bleibt 인연, egal ob die Seite auf Deutsch oder Englisch gelesen wird.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vorschau -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Vorschau</span>
+      <h2>Dieselben Einträge in beiden Seitensprachen</h2>
+      <p class="measure muted">Schalte die Seitensprache um. Unter jeder Karte stehen die Regeln, die gerade greifen. Ein Klick springt zur Regel.</p>
+    </div>
+    <div class="preview-bar">
+      <div class="switch" role="group" aria-label="Seitensprache">
+        <button type="button" data-ui="de" aria-pressed="true">Deutsch</button>
+        <button type="button" data-ui="en" aria-pressed="false">English</button>
+      </div>
+      <span class="url" id="url"></span>
+    </div>
+    <div class="cards" id="cards"></div>
+    <p class="dict-note muted" id="dict-note"></p>
+  </section>
+
+  <!-- Regeln -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Regeln</span>
+      <h2>Was wann greift</h2>
+    </div>
+    <ol class="rules" id="rules"></ol>
+  </section>
+
+  <!-- Dateien -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Dateiformat</span>
+      <h2>Eine Datei pro Eintrag, Übersetzungen pro Feld</h2>
+      <p class="measure muted">Das Wort, die Grösse und die Verweise gibt es nur einmal. Nur Texte, die übersetzt werden, bekommen pro Sprache einen Wert. Ein einfacher Text gilt als Deutsch, deine bestehenden Einträge funktionieren also unverändert.</p>
+    </div>
+    <div class="files">
+      <div class="file">
+        <span class="ui muted">src/content/words/inyeon.md</span>
+<pre><span class="c">---</span>
+<span class="k">word:</span> 인연
+<span class="k">lang:</span> ko                 <span class="c"># Sprache des Wortes (R2)</span>
+<span class="k">romanization:</span> Inyeon     <span class="c"># Pflicht bei fremder Schrift (R4)</span>
+<span class="k">pronunciation:</span> /in.jʌn/
+<span class="k">partOfSpeech:</span>
+  <span class="k">de:</span> Substantiv
+  <span class="k">en:</span> noun
+<span class="k">definition:</span>                <span class="c"># pro Sprache (R5)</span>
+  <span class="k">de:</span> Die schicksalhafte Verbindung …
+  <span class="k">en:</span> A fated connection …
+<span class="k">origin:</span>
+  <span class="k">de:</span> Sino-koreanisch, von 因緣 …
+  <span class="k">en:</span> Sino-Korean, from 因緣 …
+<span class="k">weight:</span> 4
+<span class="c">---</span></pre>
+      </div>
+      <div class="file">
+        <span class="ui muted">src/content/quotes/hesse-stufen.md</span>
+<pre><span class="c">---</span>
+<span class="k">author:</span> Hermann Hesse
+<span class="k">source:</span> Stufen (1941)
+<span class="k">lang:</span> de                 <span class="c"># Sprache des Originals</span>
+<span class="k">words:</span> [zauber]
+<span class="k">translation:</span>               <span class="c"># optional (R9)</span>
+  <span class="k">en:</span> |
+    And in every beginning dwells a magic
+    that protects us and helps us to live.
+<span class="c">---</span>
+
+Und jedem Anfang wohnt ein Zauber inne,
+Der uns beschützt und der uns hilft, zu leben.</pre>
+        <span class="ui muted">src/content/words/sonder.md (heute, bleibt gültig)</span>
+<pre><span class="c">---</span>
+<span class="k">word:</span> Sonder
+<span class="k">lang:</span> en                 <span class="c"># neu: englische Neuschöpfung</span>
+<span class="k">definition:</span> Die plötzliche … <span class="c"># Text = Deutsch</span>
+<span class="c">---</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- URLs -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Adressen</span>
+      <h2>URLs pro Seitensprache</h2>
+      <p class="measure muted">Die deutschen URLs bleiben wie heute. Englisch bekommt den Präfix /en/ und englische Pfade. Die ID (Dateiname) ist in beiden Sprachen gleich, deshalb findet der Sprachumschalter immer die passende Seite.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Seite</th><th>Deutsch</th><th>English</th></tr></thead>
+        <tbody>
+          <tr><td>Start</td><td><code>/</code></td><td><code>/en/</code></td></tr>
+          <tr><td>Wörter</td><td><code>/woerter/</code></td><td><code>/en/words/</code></td></tr>
+          <tr><td>Wort</td><td><code>/woerter/inyeon/</code></td><td><code>/en/words/inyeon/</code></td></tr>
+          <tr><td>Zitate</td><td><code>/zitate/</code></td><td><code>/en/quotes/</code></td></tr>
+          <tr><td>Wörterbuch</td><td><code>/woerterbuch/</code></td><td><code>/en/dictionary/</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Ablauf -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Ablauf</span>
+      <h2>Neuen Eintrag anlegen</h2>
+    </div>
+    <ol class="steps">
+      <li><div><p>Datei in <code>src/content/words/</code> anlegen. Dateiname in lateinischen Buchstaben, bei fremder Schrift die Umschrift: <code>inyeon.md</code>.</p><p class="muted">Der Dateiname wird zur URL in beiden Sprachen.</p></div></li>
+      <li><div><p><code>word</code> und <code>lang</code> setzen. Ist das Wort nicht in lateinischer Schrift, auch <code>romanization</code>.</p><p class="muted">Ohne <code>lang</code> gilt Deutsch.</p></div></li>
+      <li><div><p>Definition in den Sprachen schreiben, die du gerade hast. Nur Deutsch? Ein einfacher Text reicht.</p></div></li>
+      <li><div><p>Englisch später ergänzen: aus dem Text ein Objekt mit <code>de</code> und <code>en</code> machen. Sonst ändert sich nichts, der Eintrag ist ab dann zweisprachig.</p></div></li>
+      <li><div><p><code>npm run build</code> prüft: gültiger Sprachcode, Umschrift bei fremder Schrift, nur erlaubte Seitensprachen (<code>de</code>, <code>en</code>) in übersetzten Feldern, Verweise auf existierende Wörter.</p></div></li>
+    </ol>
+  </section>
+
+  <!-- Entscheidungen -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Offen</span>
+      <h2>Das musst du entscheiden</h2>
+      <p class="measure muted">Die Vorschau oben zeigt jeweils die empfohlene Variante.</p>
+    </div>
+    <div class="decisions">
+      <div class="decision">
+        <h3>Englisches Wörterbuch</h3>
+        <div class="option rec"><span class="mark">●</span><span>Nur Wörter mit englischer Definition (empfohlen). Sauber, wächst mit deinen Übersetzungen.</span></div>
+        <div class="option"><span class="mark">○</span><span>Alle Wörter, fehlende Definitionen auf Deutsch mit Hinweis.</span></div>
+      </div>
+      <div class="decision">
+        <h3>Sprachlabel</h3>
+        <div class="option rec"><span class="mark">●</span><span>Nur wenn das Wort nicht in der Seitensprache ist (empfohlen).</span></div>
+        <div class="option"><span class="mark">○</span><span>Immer, auch „Deutsch“ auf der deutschen Seite.</span></div>
+      </div>
+      <div class="decision">
+        <h3>Sprache des Besuchers</h3>
+        <div class="option rec"><span class="mark">●</span><span>Keine automatische Weiterleitung, nur der Umschalter im Header (empfohlen). Funktioniert auf jedem statischen Server.</span></div>
+        <div class="option"><span class="mark">○</span><span>Einmaliger Hinweis „This page is also available in English“ bei englischem Browser.</span></div>
+      </div>
+      <div class="decision">
+        <h3>Filter nach Wortsprache</h3>
+        <div class="option rec"><span class="mark">●</span><span>Später, sobald es genug fremdsprachige Wörter gibt (empfohlen).</span></div>
+        <div class="option"><span class="mark">○</span><span>Jetzt: „Alle · Deutsch · Englisch · Koreanisch“ über Wolke und Wörterbuch.</span></div>
+      </div>
+      <div class="decision">
+        <h3>Wo Übersetzungen liegen</h3>
+        <div class="option rec"><span class="mark">●</span><span>In derselben Datei, pro Feld (empfohlen). Alles zu einem Wort an einem Ort.</span></div>
+        <div class="option"><span class="mark">○</span><span>Eine Datei pro Sprache (<code>words/de/…</code>, <code>words/en/…</code>). Mehr Dateien, Wort und Gewicht doppelt.</span></div>
+      </div>
+      <div class="decision">
+        <h3>Sonder</h3>
+        <div class="option rec"><span class="mark">●</span><span><code>lang: en</code> setzen. Sonder ist eine englische Neuschöpfung von John Koenig.</span></div>
+        <div class="option"><span class="mark">○</span><span>Als deutsches Wort führen, weil du es im Deutschen verwendest.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Umsetzung -->
+  <section>
+    <div class="section-head">
+      <span class="ui muted">Umsetzung</span>
+      <h2>Was sich im Code ändert</h2>
+    </div>
+    <ul class="changes">
+      <li><strong>Schema:</strong> <code>lang</code>, <code>romanization</code>, übersetzbare Felder (Text oder <code>{ de, en }</code>), bei Zitaten <code>lang</code> und <code>translation</code>.</li>
+      <li><strong>Neu <code>src/i18n/</code>:</strong> Seitensprachen, alle Beschriftungen pro Sprache, Helfer für Übersetzung, Fallback und Sprachnamen (über die eingebaute <code>Intl.DisplayNames</code>, keine Liste nötig).</li>
+      <li><strong>Seiten:</strong> jede Seite einmal als gemeinsame Vorlage, die für <code>de</code> und <code>en</code> erzeugt wird. Kein doppelter Code.</li>
+      <li><strong>Header:</strong> Sprachumschalter zur Gegenstückseite, im <code>&lt;head&gt;</code> <code>hreflang</code>-Verweise für Suchmaschinen.</li>
+      <li><strong>Styling:</strong> eine Ersatzschrift für Hangul im Theme (Newsreader hat keine koreanischen Zeichen). Betrifft deinen Bereich, deshalb mit dir abstimmen.</li>
+      <li><strong>CLAUDE.md:</strong> die Regel „sichtbarer Text bleibt deutsch“ wird zu „sichtbarer Text in de und en über <code>src/i18n/</code>“. Kommt als Change Request.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(() => {
+  const NAMES = {
+    de: new Intl.DisplayNames(['de'], { type: 'language' }),
+    en: new Intl.DisplayNames(['en'], { type: 'language' }),
+  };
+  const UI = {
+    de: { onlyIn: (l) => `Nur auf ${NAMES.de.of(l)} verfügbar`, translation: 'Übersetzung', dict: (n) => `Im Wörterbuch dieser Seitensprache: ${n}.`, home: '/woerter/' },
+    en: { onlyIn: (l) => `Only available in ${NAMES.en.of(l)}`, translation: 'Translation', dict: (n) => `In the dictionary for this page language: ${n}.`, home: '/en/words/' },
+  };
+
+  const WORDS = [
+    {
+      id: 'inyeon', word: '인연', lang: 'ko', romanization: 'Inyeon', pronunciation: '/in.jʌn/',
+      partOfSpeech: { de: 'Substantiv', en: 'noun' },
+      definition: {
+        de: 'Die schicksalhafte Verbindung zwischen zwei Menschen. Im Buddhismus die Vorstellung, dass Begegnungen auf Verbindungen aus früheren Leben zurückgehen.',
+        en: 'A fated connection between two people. Rooted in the Buddhist idea that encounters go back to ties formed in earlier lives.',
+      },
+      origin: { de: 'Sino-koreanisch, von 因緣 (Ursache und Bedingung).', en: 'Sino-Korean, from 因緣 (cause and condition).' },
+    },
+    {
+      id: 'sonder', word: 'Sonder', lang: 'en', pronunciation: '/zɔndɐ/',
+      definition: 'Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst.',
+    },
+    {
+      id: 'fernweh', word: 'Fernweh', lang: 'de', pronunciation: '/ˈfɛʁnˌveː/',
+      partOfSpeech: { de: 'Substantiv, n.', en: 'noun' },
+      definition: {
+        de: 'Die Sehnsucht nach fernen Orten, auch nach solchen, an denen man nie war.',
+        en: 'A longing for distant places, even ones you have never been to.',
+      },
+    },
+  ];
+  const QUOTE = {
+    lang: 'de', author: 'Hermann Hesse', source: 'Stufen (1941)',
+    text: 'Und jedem Anfang wohnt ein Zauber inne,\nDer uns beschützt und der uns hilft, zu leben.',
+    link: 'Zauber',
+    translation: { en: 'And in every beginning dwells a magic\nthat protects us and helps us to live.' },
+  };
+
+  const RULES = [
+    { id: 'R1', title: 'Seitensprache', when: 'immer', text: 'Kommt aus der URL: /en/… ist Englisch, alles andere Deutsch. Es gibt keine automatische Weiterleitung, nur den Umschalter im Header.' },
+    { id: 'R2', title: 'Sprache des Wortes', when: 'jeder Eintrag', text: 'Feld lang mit ISO-Code (de, en, ko, ja …). Fehlt es, gilt Deutsch. Auf der Seite bekommt das Wort das passende lang-Attribut, damit Schrift und Vorlesefunktion stimmen.' },
+    { id: 'R3', title: 'Sprachlabel', when: 'Wortsprache ≠ Seitensprache', text: 'Neben dem Wort steht seine Sprache, benannt in der Seitensprache: ko wird zu „Koreanisch“ bzw. „Korean“. Die Namen erzeugt der Browser-Standard Intl.DisplayNames, es gibt keine Liste zu pflegen.' },
+    { id: 'R4', title: 'Umschrift', when: 'Wort nicht in lateinischer Schrift', text: 'romanization ist dann Pflicht, der Build bricht sonst ab. Sie steht neben dem Wort, bestimmt Sortierung und Register (인연 unter I) und wird bei der Suche mitdurchsucht.' },
+    { id: 'R5', title: 'Übersetzbare Felder', when: 'definition, partOfSpeech, origin, source', text: 'Entweder ein Text (gilt als Deutsch) oder pro Sprache ein Wert. Angezeigt wird der Wert der Seitensprache, sonst Deutsch, sonst der erste vorhandene.' },
+    { id: 'R6', title: 'Fallback-Hinweis', when: 'Text fehlt in der Seitensprache', text: 'Erscheint ein Text in einer anderen Sprache, steht darüber „Nur auf Deutsch verfügbar“ bzw. „Only available in German“, und der Text bekommt das lang-Attribut seiner Sprache.' },
+    { id: 'R7', title: 'Wörterbuch', when: 'Seite /woerterbuch/ bzw. /en/dictionary/', text: 'Listet die Wörter, die eine Definition in der Seitensprache haben. Das englische Wörterbuch wächst also mit deinen Übersetzungen (Entscheidung offen).' },
+    { id: 'R8', title: 'Wolke und Wortseiten', when: 'beide Seitensprachen', text: 'Alle Wörter erscheinen in beiden Sprachen, denn das Wort selbst ist nicht übersetzt. Fehlende Texte greifen auf R5 und R6 zurück.' },
+    { id: 'R9', title: 'Zitate', when: 'jedes Zitat', text: 'Das Original wird immer gezeigt. Ist seine Sprache nicht die Seitensprache und gibt es eine Übersetzung, steht sie darunter. Wortlinks gibt es nur im Original.' },
+    { id: 'R10', title: 'Beschriftungen', when: 'Navigation, Überschriften, Buttons', text: 'Alle Texte der Oberfläche liegen pro Sprache in src/i18n/. Komponenten enthalten keine festen Texte mehr.' },
+    { id: 'R11', title: 'Adressen', when: 'jede Seite', text: 'Deutsch ohne Präfix wie heute, Englisch unter /en/ mit englischen Pfaden. Die ID ist der Dateiname, in beiden Sprachen gleich.' },
+  ];
+
+  let ui = 'de';
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // R5: Seitensprache, sonst Deutsch, sonst erster Wert. Liefert Text und dessen Sprache.
+  function localized(field) {
+    if (field == null) return null;
+    if (typeof field === 'string') return { text: field, lang: 'de' };
+    const lang = field[ui] ? ui : field.de ? 'de' : Object.keys(field)[0];
+    return { text: field[lang], lang };
+  }
+
+  function chips(ids) {
+    return `<div class="applied"><span class="ui muted">Regeln</span>${ids.map((id) => `<button type="button" class="chip" data-rule="${id}">${id}</button>`).join('')}</div>`;
+  }
+
+  function wordCard(w) {
+    const applied = ['R2'];
+    const def = localized(w.definition);
+    const pos = localized(w.partOfSpeech);
+    const origin = localized(w.origin);
+    const showLabel = w.lang !== ui;
+    if (showLabel) applied.push('R3');
+    if (w.romanization) applied.push('R4');
+    applied.push('R5');
+    const fallback = def && def.lang !== ui;
+    if (fallback) applied.push('R6');
+    applied.push('R8');
+    return `
+      <article class="card">
+        <div class="entry">
+          <div class="entry-head">
+            <span class="headword" lang="${w.lang}">${esc(w.word)}</span>
+            ${w.romanization ? `<span class="romanization">${esc(w.romanization)}</span>` : ''}
+            ${w.pronunciation ? `<span class="ipa">${esc(w.pronunciation)}</span>` : ''}
+          </div>
+          <div class="entry-head">
+            ${showLabel ? `<span class="chip soft">${esc(NAMES[ui].of(w.lang))}</span>` : ''}
+            ${pos ? `<span class="pos" lang="${pos.lang}">${esc(pos.text)}</span>` : ''}
+          </div>
+          ${fallback ? `<span class="fallback">${esc(UI[ui].onlyIn(def.lang))}</span>` : ''}
+          ${def ? `<p lang="${def.lang}">${esc(def.text)}</p>` : ''}
+          ${origin ? `<p class="origin" lang="${origin.lang}">${esc(origin.text)}</p>` : ''}
+        </div>
+        <span></span>
+        ${chips(applied)}
+      </article>`;
+  }
+
+  function quoteCard(q) {
+    const applied = ['R9'];
+    const translation = q.lang !== ui && q.translation && q.translation[ui];
+    const text = esc(q.text).replace(q.link, `<a href="#">${q.link}</a>`);
+    return `
+      <article class="card">
+        <div class="entry">
+          <p class="quote-text" lang="${q.lang}">${text}</p>
+          ${translation ? `<p class="translation" lang="${ui}"><span class="ui">${UI[ui].translation}</span>\n${esc(translation)}</p>` : ''}
+        </div>
+        <p class="byline"><strong>${esc(q.author)}</strong>, ${esc(q.source)}</p>
+        ${chips(applied)}
+      </article>`;
+  }
+
+  function render() {
+    document.querySelectorAll('[data-ui]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.ui === ui)));
+    document.getElementById('url').textContent = `URL: ${UI[ui].home}…  (R1, R11)`;
+    document.getElementById('cards').innerHTML = WORDS.map(wordCard).join('') + quoteCard(QUOTE);
+    const inDict = WORDS.filter((w) => w.definition && (typeof w.definition === 'string' ? ui === 'de' : w.definition[ui])).map((w) => w.romanization || w.word);
+    document.getElementById('dict-note').textContent = `${UI[ui].dict(inDict.join(', '))} (R7)`;
+  }
+
+  document.getElementById('rules').innerHTML = RULES.map((r) => `
+    <li class="rule" id="rule-${r.id}">
+      <span class="rule-id">${r.id}</span>
+      <div class="rule-body">
+        <h3>${esc(r.title)}</h3>
+        <span class="rule-when">Wann: ${esc(r.when)}</span>
+        <p>${esc(r.text)}</p>
+      </div>
+    </li>`).join('');
+
+  document.addEventListener('click', (e) => {
+    const sw = e.target.closest('[data-ui]');
+    if (sw) { ui = sw.dataset.ui; render(); return; }
+    const chip = e.target.closest('[data-rule]');
+    if (chip) {
+      const el = document.getElementById(`rule-${chip.dataset.rule}`);
+      el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 1200);
+    }
+    if (e.target.closest('.quote-text a')) e.preventDefault();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
