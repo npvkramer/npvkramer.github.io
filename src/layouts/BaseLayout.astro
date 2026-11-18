@@ -7,9 +7,11 @@ import { SITE } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  /** Breite des Inhalts: Textspalte (Standard), breit oder ganze Fläche. */
+  width?: 'text' | 'wide' | 'full';
 }
 
-const { title, description = SITE.description } = Astro.props;
+const { title, description = SITE.description, width = 'text' } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -33,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <Header />
-    <main class="container">
+    <main class:list={['container', width !== 'text' && `container-${width}`]}>
       <slot />
     </main>
     <Footer />

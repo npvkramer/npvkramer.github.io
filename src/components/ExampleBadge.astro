@@ -1,0 +1,8 @@
+---
+// Markiert Beispielinhalte (Dateien im Ordner `beispiele/`). Verschwindet mit den Beispielen.
+interface Props {
+  show: boolean;
+}
+---
+
+{Astro.props.show && <span class="badge" title="Beispielinhalt aus dem Ordner beispiele/">Beispiel</span>}

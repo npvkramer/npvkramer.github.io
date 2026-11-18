@@ -1,14 +1,24 @@
-/* Design-Tokens: Farben, Schriften, Abstände. Farben hier zentral ändern. */
+/*
+  Design-Tokens: die einzige Stelle, an der Farben, Schriften, Grössen und Abstände festgelegt werden.
+  Alle anderen CSS-Dateien verwenden nur diese Variablen.
+*/
 
 :root {
+  /* Schriften */
   --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif; /* Wörter, Zitate, Überschriften im Wörterbuch */
   --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
 
+  /* Schriftgrössen */
   --size-sm: 0.875rem;
   --size-base: 1.0625rem;
   --size-lg: 1.25rem;
   --size-xl: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  --size-headword: 2rem;
+  --size-headword-lg: clamp(3rem, 2rem + 5vw, 5.5rem);
+  --size-letter: 2.25rem;
 
+  /* Abstände */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 1rem;
@@ -16,45 +26,42 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
+  /* Breiten */
   --content-width: 42rem;
+  --content-width-wide: 72rem;
+  --text-measure: 38rem; /* maximale Zeilenlänge für Fliesstext */
+
   --radius: 0.5rem;
 
-  /* Helles Farbschema */
-  --color-bg: #fbfbfa;
-  --color-surface: #f1f1ef;
-  --color-text: #1c1c1e;
-  --color-muted: #6b6b70;
-  --color-border: #e2e2df;
-  --color-accent: #2f5bd3;
-  --color-accent-soft: #e6ecfb;
+  /* Wortwolke */
+  --cloud-size-min: 1rem;
+  --cloud-size-max: clamp(2.25rem, 1rem + 4vw, 4.5rem);
+  --cloud-gap: 0.75rem; /* Mindestabstand zwischen Wörtern */
+  --cloud-min-height: 75vh;
+  --cloud-density: 2.4; /* Platz pro Wort: grösser = luftiger */
 
+  /* Zitate */
+  --quote-size: 1.5rem;
+  --quote-column-min: 22rem;
+  --quote-gap: var(--space-5);
+  --quote-padding: var(--space-5);
+
+  /* Farben: light-dark(hell, dunkel) */
+  color-scheme: light dark;
+  --color-bg: light-dark(#fbfbfa, #121214);
+  --color-surface: light-dark(#f1f1ef, #1c1c1f);
+  --color-text: light-dark(#1c1c1e, #ececee);
+  --color-muted: light-dark(#6b6b70, #9a9aa2);
+  --color-border: light-dark(#e2e2df, #2c2c31);
+  --color-accent: light-dark(#2f5bd3, #8aa8ff);
+  --color-accent-soft: light-dark(#e6ecfb, #1f2840);
+}
+
+/* Umschalter im Header überschreibt die Systemeinstellung */
+:root[data-theme='light'] {
   color-scheme: light;
 }
 
-/* Dunkles Farbschema: per Systemeinstellung … */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --color-bg: #121214;
-    --color-surface: #1c1c1f;
-    --color-text: #ececee;
-    --color-muted: #9a9aa2;
-    --color-border: #2c2c31;
-    --color-accent: #8aa8ff;
-    --color-accent-soft: #1f2840;
-
-    color-scheme: dark;
-  }
-}
-
-/* … oder per Umschalter */
 :root[data-theme='dark'] {
-  --color-bg: #121214;
-  --color-surface: #1c1c1f;
-  --color-text: #ececee;
-  --color-muted: #9a9aa2;
-  --color-border: #2c2c31;
-  --color-accent: #8aa8ff;
-  --color-accent-soft: #1f2840;
-
   color-scheme: dark;
 }

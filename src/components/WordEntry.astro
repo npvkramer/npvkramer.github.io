@@ -1,0 +1,29 @@
+---
+// Ein Wort im Stil eines Wörterbuch-Eintrags. Wird im Wörterbuch, auf der Wortseite und auf der Startseite verwendet.
+import type { HTMLAttributes } from 'astro/types';
+import ExampleBadge from './ExampleBadge.astro';
+import { isExample, wordUrl, type Word } from '../lib/content';
+
+interface Props extends HTMLAttributes<'article'> {
+  word: Word;
+  size?: 'md' | 'lg';
+  heading?: 'h1' | 'h2' | 'h3';
+  /** Überschrift verlinkt auf die Seite des Worts. */
+  link?: boolean;
+}
+
+const { word, size = 'md', heading: Heading = 'h3', link = false, class: className, ...attrs } = Astro.props;
+const { wort, lautschrift, wortart, definition, herkunft } = word.data;
+---
+
+<article class:list={['entry', `entry-${size}`, className]} {...attrs}>
+  <div class="entry-head">
+    <Heading class="headword">{link ? <a href={wordUrl(word)}>{wort}</a> : wort}</Heading>
+    {lautschrift && <span class="ipa">{lautschrift}</span>}
+    {wortart && <span class="pos">{wortart}</span>}
+    <ExampleBadge show={isExample(word)} />
+  </div>
+  {definition && <p class="definition">{definition}</p>}
+  {herkunft && <p class="origin">{herkunft}</p>}
+  <slot />
+</article>

@@ -109,3 +109,132 @@
 .post-header h1 {
   margin-bottom: var(--space-2);
 }
+
+/* Seitenkopf */
+.page-header {
+  margin-bottom: var(--space-5);
+}
+
+.page-header h1 {
+  margin-bottom: var(--space-2);
+}
+
+.page-header .lead,
+.entry .definition {
+  max-width: var(--text-measure);
+}
+
+/* Wörterbuch-Eintrag */
+.entry {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.entry p {
+  margin: 0;
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-3);
+}
+
+.entry-head .badge {
+  margin-left: 0;
+}
+
+.headword {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-headword);
+  line-height: 1.1;
+}
+
+.headword a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.headword a:hover {
+  color: var(--color-accent);
+}
+
+.entry-lg {
+  border-bottom: 0;
+  padding-block: 0;
+}
+
+.entry-lg .headword {
+  font-size: var(--size-headword-lg);
+  line-height: 1;
+}
+
+.entry-lg .definition {
+  font-size: var(--size-lg);
+}
+
+.ipa {
+  color: var(--color-muted);
+}
+
+.pos {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+.origin,
+.entry-refs {
+  color: var(--color-muted);
+  font-size: var(--size-sm);
+}
+
+/* Wörterbuch */
+.dictionary-tools {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.search {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.letter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.letter-nav a {
+  min-width: 2rem;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  text-align: center;
+  text-decoration: none;
+}
+
+.letter-head {
+  margin: var(--space-5) 0 0;
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-letter);
+  color: var(--color-accent);
+  scroll-margin-top: var(--space-4);
+}
+
+.letter-group .entry:last-child {
+  border-bottom: 0;
+}

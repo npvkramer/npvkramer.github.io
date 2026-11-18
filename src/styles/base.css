@@ -77,6 +77,10 @@ pre {
   font-size: 0.9em;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 ul[class],
 ol[class] {
   list-style: none;
