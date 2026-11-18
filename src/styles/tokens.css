@@ -26,9 +26,17 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
-  /* Breiten */
-  --content-width: 42rem;
-  --content-width-wide: 72rem;
+  /* Container: maximale Breite je Bildschirmbreite (Breakpoints in layout.css) */
+  --container-sm: 540px; /*  ab 576px */
+  --container-md: 720px; /*  ab 768px */
+  --container-lg: 960px; /*  ab 992px */
+  --container-xl: 1140px; /* ab 1200px */
+  --container-xxl: 1320px; /* ab 1400px */
+  --container-3xl: 1400px; /* ab 1500px */
+  --container-4xl: 1600px; /* ab 1700px */
+  --container-5xl: 1800px; /* ab 1920px */
+  --container-padding: var(--space-3);
+
   --text-measure: 38rem; /* maximale Zeilenlänge für Fliesstext */
 
   --radius: 0.5rem;

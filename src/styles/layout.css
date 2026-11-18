@@ -1,19 +1,21 @@
 /* Seitenrahmen: Container, Header, Footer. */
 
+/* Ein Container für alle Seiten: unter 576px volle Breite, darüber stufenweise (Werte in tokens.css) */
 .container {
   width: 100%;
-  max-width: calc(var(--content-width) + 2 * var(--space-3));
-  margin: 0 auto;
-  padding: 0 var(--space-3);
+  max-width: var(--container-max, none);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
 }
 
-.container-wide {
-  max-width: calc(var(--content-width-wide) + 2 * var(--space-3));
-}
-
-.container-full {
-  max-width: none;
-}
+@media (min-width: 576px) { .container { --container-max: var(--container-sm); } }
+@media (min-width: 768px) { .container { --container-max: var(--container-md); } }
+@media (min-width: 992px) { .container { --container-max: var(--container-lg); } }
+@media (min-width: 1200px) { .container { --container-max: var(--container-xl); } }
+@media (min-width: 1400px) { .container { --container-max: var(--container-xxl); } }
+@media (min-width: 1500px) { .container { --container-max: var(--container-3xl); } }
+@media (min-width: 1700px) { .container { --container-max: var(--container-4xl); } }
+@media (min-width: 1920px) { .container { --container-max: var(--container-5xl); } }
 
 main.container {
   flex: 1;

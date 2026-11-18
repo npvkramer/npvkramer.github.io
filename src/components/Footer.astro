@@ -1,17 +1,11 @@
 ---
 import { SITE } from '../data/site';
 
-interface Props {
-  /** Container-Klassen aus dem Layout, damit die Breite zum Inhalt passt. */
-  class?: string;
-}
-
-const { class: containerClass } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class:list={[containerClass, 'site-footer-inner']}>
+  <div class="container site-footer-inner">
     <p>© {year} {SITE.author}</p>
     <ul class="footer-links">
       {SITE.social.map((link) => (

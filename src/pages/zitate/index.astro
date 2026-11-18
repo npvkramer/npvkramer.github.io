@@ -8,7 +8,7 @@ const quotes = await getQuotes();
 const lead = 'Sätze und Sprüche, die mich bewegt haben. Unterstrichene Wörter stammen aus der Wortsammlung.';
 ---
 
-<BaseLayout title="Zitate" description={lead} width="wide">
+<BaseLayout title="Zitate" description={lead}>
   <PageHeader title="Zitate" lead={lead} />
   <QuoteGrid quotes={quotes} />
 </BaseLayout>
