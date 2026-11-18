@@ -1,0 +1,14 @@
+---
+import QuoteCard from './QuoteCard.astro';
+import type { Quote } from '../lib/content';
+
+interface Props {
+  quotes: Quote[];
+}
+
+const { quotes } = Astro.props;
+---
+
+<div class="quote-grid">
+  {quotes.map((quote) => <QuoteCard quote={quote} />)}
+</div>

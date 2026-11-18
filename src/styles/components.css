@@ -238,3 +238,56 @@
 .letter-group .entry:last-child {
   border-bottom: 0;
 }
+
+/* Zitate */
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--quote-column-min)), 1fr));
+  gap: var(--quote-gap);
+  align-items: start;
+}
+
+.quote-card {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--quote-padding);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.quote-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--quote-size);
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.quote-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--size-sm);
+}
+
+.quote-author {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.quote-source .badge {
+  margin-left: 0;
+}
+
+.word-link {
+  color: inherit;
+  text-decoration: underline dotted var(--color-accent);
+  text-decoration-thickness: 2px;
+}
+
+.word-link:hover {
+  color: var(--color-accent);
+}
