@@ -53,7 +53,7 @@ Wörter aus `woerter` werden im Zitat verlinkt, auch in gebeugter Form (Augenbli
 
 Alle Beispiele liegen in `src/content/woerter/beispiele/` und `src/content/zitate/beispiele/`. Auf der Seite sind sie mit „Beispiel“ markiert. Zum Entfernen beide Ordner löschen. Willst du ein Beispiel behalten, verschiebe die Datei eine Ebene nach oben. Die URL bleibt dabei gleich.
 
-Achtung: Verweist eines deiner Zitate auf ein Beispielwort, muss das Wort vorher verschoben werden, sonst bricht der Build ab.
+Achtung: Verweist eines deiner Zitate auf ein Beispielwort, verschiebe das Wort vorher. Sonst meldet der Build „Invalid content reference“ und der Link im Zitat fehlt.
 
 ## Styling
 
