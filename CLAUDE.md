@@ -24,7 +24,7 @@ This file improves itself, but only with approval.
 - **Unclear?** Ask instead of guessing.
 - **Verify:** run `npm run build` before committing and check its output for errors.
 - **The owner's own work:** don't commit or overwrite the owner's uncommitted changes.
-  Stage only your own files. `Content.md` holds the owner's idea notes: don't commit it.
+  Stage only your own files.
 
 ## Commands
 
