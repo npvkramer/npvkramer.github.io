@@ -12,6 +12,8 @@ interface Props {
 }
 
 const { title, description = SITE.description, width = 'text' } = Astro.props;
+// Header, Inhalt und Footer teilen sich dieselbe Breite, damit die Kanten fluchten.
+const containerClass = ['container', width !== 'text' && `container-${width}`];
 const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -34,10 +36,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <script is:inline src="/scripts/theme-init.js"></script>
   </head>
   <body>
-    <Header />
-    <main class:list={['container', width !== 'text' && `container-${width}`]}>
+    <Header class:list={containerClass} />
+    <main class:list={containerClass}>
       <slot />
     </main>
-    <Footer />
+    <Footer class:list={containerClass} />
   </body>
 </html>

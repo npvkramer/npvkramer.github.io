@@ -1,12 +1,18 @@
 ---
 import { SITE } from '../data/site';
 
+interface Props {
+  /** Container-Klassen aus dem Layout, damit die Breite zum Inhalt passt. */
+  class?: string;
+}
+
+const { class: containerClass } = Astro.props;
 const path = Astro.url.pathname;
 const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
 <header class="site-header">
-  <div class="container container-wide site-header-inner">
+  <div class:list={[containerClass, 'site-header-inner']}>
     <a class="site-title" href="/">{SITE.title}</a>
     <nav aria-label="Hauptnavigation">
       <ul class="nav-list">

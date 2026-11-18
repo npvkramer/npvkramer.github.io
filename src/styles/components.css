@@ -265,10 +265,6 @@
 }
 
 .quote-source {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-1) var(--space-2);
   color: var(--color-muted);
   font-size: var(--size-sm);
 }
@@ -276,10 +272,6 @@
 .quote-author {
   color: var(--color-text);
   font-weight: 600;
-}
-
-.quote-source .badge {
-  margin-left: 0;
 }
 
 .word-link {

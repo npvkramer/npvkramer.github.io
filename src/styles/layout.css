@@ -28,9 +28,11 @@ main.container {
 
 .site-header-inner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-2) var(--space-4);
   min-height: 3.75rem;
+  padding-block: var(--space-2);
 }
 
 .site-title {
@@ -102,13 +104,15 @@ main.container {
   color: inherit;
 }
 
-@media (max-width: 30rem) {
-  .site-header-inner {
-    gap: var(--space-3);
+/* Schmale Bildschirme: Navigation in eine eigene Zeile unter Titel und Umschalter */
+@media (max-width: 36rem) {
+  .site-header nav {
+    order: 1;
+    width: 100%;
   }
 
   .nav-list {
-    gap: var(--space-2);
-    font-size: var(--size-sm);
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
   }
 }

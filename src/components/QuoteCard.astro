@@ -17,8 +17,7 @@ const segments = linkWords((quote.body ?? '').trim(), words);
 <figure class="quote-card">
   <blockquote class="quote-text">{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
   <figcaption class="quote-source">
-    <span class="quote-author">{autor}</span>
-    {quelle && <span>· {quelle}</span>}
+    <span class="quote-author">{autor}</span>{quelle && `, ${quelle}`}
     <ExampleBadge show={isExample(quote)} />
   </figcaption>
 </figure>
