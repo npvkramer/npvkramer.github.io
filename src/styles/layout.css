@@ -1,6 +1,6 @@
-/* Seitenrahmen: Container, Header, Footer. */
+/* Page frame: container, header, footer. */
 
-/* Ein Container für alle Seiten: unter 576px volle Breite, darüber stufenweise (Werte in tokens.css) */
+/* One container for every page: full width below 576px, stepped above (values in tokens.css) */
 .container {
   width: 100%;
   max-width: var(--container-max, none);
@@ -25,7 +25,7 @@ main.container {
 
 /* Header */
 .site-header {
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-rule);
 }
 
 .site-header-inner {
@@ -33,12 +33,12 @@ main.container {
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2) var(--space-4);
-  min-height: 3.75rem;
+  min-height: 4.5rem;
   padding-block: var(--space-2);
 }
 
 .site-title {
-  font-weight: 700;
+  font-weight: var(--ui-weight-strong);
   color: var(--color-text);
   text-decoration: none;
   margin-right: auto;
@@ -46,24 +46,36 @@ main.container {
 
 .nav-list {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .nav-list a {
-  color: var(--color-muted);
+  color: var(--color-text);
   text-decoration: none;
 }
 
-.nav-list a:hover,
+.nav-list a:hover {
+  color: var(--color-accent);
+}
+
+/* Current page: accent color, wrapped in the theme's markers (e.g. [Wörter]) */
 .nav-list a[aria-current='page'] {
-  color: var(--color-text);
+  color: var(--color-accent);
+}
+
+.nav-list a[aria-current='page']::before {
+  content: var(--nav-marker-start, none);
+}
+
+.nav-list a[aria-current='page']::after {
+  content: var(--nav-marker-end, none);
 }
 
 .theme-toggle {
   display: grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -79,9 +91,8 @@ main.container {
 
 /* Footer */
 .site-footer {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-rule);
   color: var(--color-muted);
-  font-size: var(--size-sm);
 }
 
 .site-footer-inner {
@@ -106,7 +117,7 @@ main.container {
   color: inherit;
 }
 
-/* Schmale Bildschirme: Navigation in eine eigene Zeile unter Titel und Umschalter */
+/* Narrow screens: navigation gets its own row below title and toggle */
 @media (max-width: 36rem) {
   .site-header nav {
     order: 1;
