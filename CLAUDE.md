@@ -85,7 +85,8 @@ Styling is being reworked by the owner. Read the current files before assuming a
   The only inline style allowed is a CSS variable hook such as `--weight`.
 - **Theme and color scheme:**
   - `SITE.theme` sets `data-theme` on `<html>`.
-  - The header toggle sets `data-scheme` (light/dark), applied early by `public/scripts/theme-init.js`.
+  - The appearance setting in the site menu sets `data-scheme`: light (default), dark, or auto (follows the OS),
+    applied early by `public/scripts/theme-init.js`.
 - **Layout:** every page uses the same `.container`, from full width on mobile up to 1800px.
   Running text is capped at `--text-measure`.
 
