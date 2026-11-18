@@ -1,4 +1,0 @@
-/** „1 Zitat“, „3 Zitate“ */
-export function countLabel(count: number, singular: string, plural: string): string {
-  return `${count} ${count === 1 ? singular : plural}`;
-}
