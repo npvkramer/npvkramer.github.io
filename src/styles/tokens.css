@@ -50,6 +50,9 @@
   --quote-gap: var(--space-5);
   --quote-padding: var(--space-5);
 
+  /* Admin (dev only) */
+  --doc-frame-height: 80vh;
+
   /* Themes define colors with light-dark(light, dark); this enables both. */
   color-scheme: light dark;
 }

@@ -1,0 +1,54 @@
+---
+// Dev-only viewer for the files in docs/. In production no paths are generated,
+// so /admin never appears in the published site.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getDocs, type Doc } from '../../lib/docs';
+
+export async function getStaticPaths() {
+  if (!import.meta.env.DEV) return [];
+  const docs = await getDocs();
+  return [
+    { params: { path: undefined }, props: { docs, doc: undefined } },
+    ...docs.map((doc) => ({ params: { path: doc.slug }, props: { docs, doc } })),
+  ];
+}
+
+interface Props {
+  docs: Doc[];
+  doc?: Doc;
+}
+
+const { docs, doc } = Astro.props;
+---
+
+<BaseLayout title={doc ? doc.title : 'Admin'}>
+  {doc ? (
+    <>
+      <PageHeader title={doc.title} lead={doc.path} />
+      {doc.type === 'html' ? (
+        <iframe class="doc-frame" srcdoc={doc.html} title={doc.title}></iframe>
+      ) : (
+        <article class="doc-markdown">
+          <doc.Content />
+        </article>
+      )}
+      <p class="back"><a href="/admin/">← All docs</a></p>
+    </>
+  ) : (
+    <>
+      <PageHeader title="Admin" lead="Concepts, mocks and decisions from docs/. Only available in dev mode." />
+      <ul class="area-list">
+        {docs.map((d) => (
+          <li>
+            <a href={`/admin/${d.slug}/`}>
+              <span class="area-title">{d.title}</span>
+              <span class="area-description">{d.path}</span>
+              <span class="area-count">{d.type}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+</BaseLayout>

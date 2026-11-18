@@ -342,3 +342,28 @@
   gap: var(--space-4);
   margin-top: var(--space-5);
 }
+
+/* Admin (dev only): docs viewer */
+.doc-frame {
+  display: block;
+  width: 100%;
+  height: var(--doc-frame-height);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.doc-markdown {
+  max-width: var(--text-measure);
+}
+
+.doc-markdown table {
+  border-collapse: collapse;
+}
+
+.doc-markdown th,
+.doc-markdown td {
+  padding: var(--space-1) var(--space-3) var(--space-1) 0;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
