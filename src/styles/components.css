@@ -281,7 +281,7 @@
 }
 
 .button:hover {
-  background: var(--color-surface);
+  background: var(--color-subtle);
 }
 
 .area-list {

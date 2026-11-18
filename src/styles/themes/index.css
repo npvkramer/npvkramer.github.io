@@ -1,0 +1,58 @@
+/*
+  Theme "index": warm-minimal archive look.
+  Serif (Newsreader) for words, quotes and running text; monospace (IBM Plex Mono)
+  for navigation, labels and numbers. Thin rules, almost square corners, one blue accent.
+
+  This theme is also the base layer: it applies to :root, so every other theme
+  inherits all tokens it does not override. Token reference: ./README.md
+  Colors are light-dark(light, dark); the header toggle switches between them.
+*/
+
+/* Self-hosted fonts (SIL Open Font License). Browsers only download a face that is actually used. */
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+:root,
+:root[data-theme='index'] {
+  /* Font families */
+  --font-body: 'Newsreader Variable', 'Times New Roman', Times, serif;
+  --font-display: var(--font-body);
+  --font-ui: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  --font-mono: var(--font-ui);
+
+  /* Running text and headings */
+  --size-base: 1.125rem;
+  --size-headword-lg: clamp(3.5rem, 2rem + 6vw, 8.5rem);
+  --leading-body: 1.6;
+  --weight-display: 400;
+  --tracking-display: -0.02em;
+
+  /* UI text: navigation, labels, meta lines, buttons */
+  --ui-size: 0.8125rem;
+  --ui-weight: 400;
+  --ui-weight-strong: 500;
+  --ui-transform: uppercase;
+  --ui-tracking: 0.04em;
+
+  /* Colors */
+  --color-bg: light-dark(#f5f4f0, #161513); /* page background */
+  --color-surface: light-dark(#ffffff, #1f1e1b); /* cards, inputs */
+  --color-subtle: light-dark(#e8e5dd, #26241f); /* hover, code, highlighted areas */
+  --color-text: light-dark(#1a1a1a, #edeae3);
+  --color-muted: light-dark(#5e5c57, #9c988f); /* secondary text, at least 4.5:1 on bg */
+  --color-border: light-dark(#c9c6be, #34322e); /* thin dividers */
+  --color-rule: light-dark(#1a1a1a, #cfcbc2); /* strong lines: header, footer, cards */
+  --color-accent: light-dark(#2840e0, #8f9bff);
+  --color-accent-soft: light-dark(#e1e4f7, #23264a); /* tag background */
+  --color-on-accent: light-dark(#ffffff, #161513); /* text on accent */
+
+  /* Shape */
+  --radius: 2px;
+  --radius-tag: 2px;
+
+  /* Decoration: characters around the current navigation item */
+  --nav-marker-start: '[';
+  --nav-marker-end: ']';
+}

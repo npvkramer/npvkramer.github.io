@@ -1,5 +1,9 @@
-/* Einstiegspunkt für alle Styles. Wird einmal im BaseLayout importiert. */
+/* Entry point for all styles, imported once in BaseLayout. */
 @import './tokens.css';
+
+/* Themes: index is the base layer, further themes only override tokens. */
+@import './themes/index.css';
+
 @import './base.css';
 @import './layout.css';
 @import './components.css';

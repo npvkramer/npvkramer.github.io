@@ -1,15 +1,12 @@
 /*
-  Design-Tokens: die einzige Stelle, an der Farben, Schriften, Grössen und Abstände festgelegt werden.
-  Alle anderen CSS-Dateien verwenden nur diese Variablen.
+  Layout tokens: sizes, spacing and widths that every theme shares.
+  Fonts, colors and shapes live in the theme files under ./themes/.
+  A theme may still override any token defined here (see themes/README.md).
+  All other CSS files only use variables, never raw values.
 */
 
 :root {
-  /* Schriften */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: Georgia, 'Times New Roman', serif; /* Wörter, Zitate, Überschriften im Wörterbuch */
-  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
-
-  /* Schriftgrössen */
+  /* Font sizes */
   --size-sm: 0.875rem;
   --size-base: 1.0625rem;
   --size-lg: 1.25rem;
@@ -18,7 +15,7 @@
   --size-headword-lg: clamp(3rem, 2rem + 5vw, 5.5rem);
   --size-letter: 2.25rem;
 
-  /* Abstände */
+  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 1rem;
@@ -26,44 +23,35 @@
   --space-5: 2.5rem;
   --space-6: 4rem;
 
-  /* Container: maximale Breite je Bildschirmbreite (Breakpoints in layout.css) */
-  --container-sm: 540px; /*  ab 576px */
-  --container-md: 720px; /*  ab 768px */
-  --container-lg: 960px; /*  ab 992px */
-  --container-xl: 1140px; /* ab 1200px */
-  --container-xxl: 1320px; /* ab 1400px */
-  --container-3xl: 1400px; /* ab 1500px */
-  --container-4xl: 1600px; /* ab 1700px */
-  --container-5xl: 1800px; /* ab 1920px */
+  /* Container: max width per viewport width (breakpoints in layout.css) */
+  --container-sm: 540px; /*  from 576px */
+  --container-md: 720px; /*  from 768px */
+  --container-lg: 960px; /*  from 992px */
+  --container-xl: 1140px; /* from 1200px */
+  --container-xxl: 1320px; /* from 1400px */
+  --container-3xl: 1400px; /* from 1500px */
+  --container-4xl: 1600px; /* from 1700px */
+  --container-5xl: 1800px; /* from 1920px */
   --container-padding: var(--space-3);
 
-  --text-measure: 38rem; /* maximale Zeilenlänge für Fliesstext */
+  --text-measure: 38rem; /* max line length for running text */
 
-  --radius: 0.5rem;
-
-  /* Wortwolke */
+  /* Word cloud */
   --cloud-size-min: 1rem;
   --cloud-size-max: clamp(2.25rem, 1rem + 4vw, 4.5rem);
-  --cloud-gap: 0.75rem; /* Mindestabstand zwischen Wörtern */
+  --cloud-gap: 0.75rem; /* minimum gap between words */
   --cloud-min-height: 75vh;
-  --cloud-density: 2.4; /* Platz pro Wort: grösser = luftiger */
+  --cloud-density: 2.4; /* space per word: larger = airier */
 
-  /* Zitate */
+  /* Quotes */
   --quote-size: 1.5rem;
-  --quote-columns: 2; /* ab 768px, darunter 1 */
+  --quote-columns: 2; /* from 768px, one column below */
   --quote-min-height: 14rem;
   --quote-gap: var(--space-5);
   --quote-padding: var(--space-5);
 
-  /* Farben: light-dark(hell, dunkel) */
+  /* Themes define colors with light-dark(light, dark); this enables both. */
   color-scheme: light dark;
-  --color-bg: light-dark(#fbfbfa, #121214);
-  --color-surface: light-dark(#f1f1ef, #1c1c1f);
-  --color-text: light-dark(#1c1c1e, #ececee);
-  --color-muted: light-dark(#6b6b70, #9a9aa2);
-  --color-border: light-dark(#e2e2df, #2c2c31);
-  --color-accent: light-dark(#2f5bd3, #8aa8ff);
-  --color-accent-soft: light-dark(#e6ecfb, #1f2840);
 }
 
 /* The header toggle overrides the OS setting */

@@ -18,9 +18,9 @@ body {
   flex-direction: column;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--size-base);
-  line-height: 1.65;
+  line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
 }
 
