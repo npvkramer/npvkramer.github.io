@@ -9,8 +9,11 @@ Concepts, mocks and decisions for this site, kept as history.
 
 ## Rules
 
-- **Snapshots:** concepts and mocks stay as they were written, in their original language.
-  Don't update old files. Add a new dated file instead.
+- **Creation phase (now):** while the site is being built, concepts and mocks may be overwritten,
+  so every topic has one clean, current version. Keep the file name and date of the first version.
+- **Snapshots (later):** once the creation phase ends, concepts and mocks stay as they were written.
+  Don't update old files then; add a new dated file instead.
+- **Language:** concepts and mocks keep the language they were written in.
 - **File names:** `YYYY-MM-DD-topic.html` (or `.md`), in English.
 - **Decisions:** add a line to the decision log below, newest first.
 
@@ -18,27 +21,23 @@ Concepts, mocks and decisions for this site, kept as history.
 
 | Date | File | Topic |
 | --- | --- | --- |
-| 2026-11-18 | [concepts/2026-11-18-navigation-mock-v2.html](concepts/2026-11-18-navigation-mock-v2.html) | Navigation C' v2, as implemented: dark menu in dark mode, no italics, fade-in with rising items (German) |
-| 2026-11-18 | [concepts/2026-11-18-navigation-mock.html](concepts/2026-11-18-navigation-mock.html) | Navigation C': full-screen menu overlay, desktop and mobile, clickable (German). Superseded by v2 |
+| 2026-11-18 | [concepts/2026-11-18-navigation-mock.html](concepts/2026-11-18-navigation-mock.html) | Navigation C': full-screen menu overlay with fade-in, desktop and mobile, clickable (German) |
 | 2026-11-18 | [concepts/2026-11-18-index-theme-mock.html](concepts/2026-11-18-index-theme-mock.html) | Index theme style tiles, light (2) and dark (2b) (German) |
 | 2026-11-18 | [concepts/2026-11-18-i18n-concept.html](concepts/2026-11-18-i18n-concept.html) | Multilingual site: page language vs. word language, rules R1–R11 (German) |
 | 2026-11-18 | [concepts/2026-11-18-word-collection-mock.html](concepts/2026-11-18-word-collection-mock.html) | First clickable mock: words, quotes, dictionary (German) |
 
 ## Decision log
 
-**2026-11-18: Navigation refinements** (see navigation mock v2)
-
-- **Dark mode:** the menu stays dark, one step darker than the page, instead of inverting to light.
-- **Hover and current page:** accent color only, no italics.
-- **Motion:** the overlay fades in from transparent and nav items rise into place one after another;
-  closing fades out. Reduced motion keeps only the fade.
-
 **2026-11-18: Theme and navigation** (see index theme and navigation mocks)
 
 - **Theme:** Index, warm-minimal archive look in light and dark. Newsreader for text, IBM Plex Mono for UI.
   Values and token reference in `src/styles/themes/`.
 - **Navigation (C'):** "npvk" on the left, a single menu button on the right.
-  The menu is a full-screen, inverted, translucent overlay with large centered nav items.
+  The menu is a full-screen, translucent overlay with large centered nav items.
+- **Menu colors:** always a dark layer: inverted in light mode, one step darker than the page in dark mode.
+- **Hover and current page:** accent color only, no italics.
+- **Motion:** the overlay fades in from transparent and nav items rise into place one after another;
+  closing fades out. Reduced motion keeps only the fade.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 

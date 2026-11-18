@@ -9,9 +9,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
 <style>
 /*
-  Snapshot of the design canvas boards "Nav C' · Desktop" (1440×900) and "Nav C' · Mobile" (390×844).
-  Each stage is a fixed-size frame with the home page behind a full-screen, inverted, translucent menu.
-  The menu button opens it; close button and Escape close it. Appearance and language switch inside the stage.
+  Navigation C': full-screen menu overlay, desktop (1440×900) and mobile (390×844), as implemented.
+  - The menu is a dark, translucent layer: inverted in light mode, one step darker than the page in dark mode.
+  - Hover and current page: accent color only.
+  - Motion: the overlay fades in from transparent, nav items rise into place one after another;
+    closing fades out. Reduced motion keeps only the fade.
+  Each stage is a fixed-size frame; the site itself uses a native popover over the whole window.
 */
 body { margin: 0; padding: 32px 16px 64px; background: #d9d6ce; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
 .stages { display: flex; flex-wrap: wrap; gap: 48px; justify-content: center; align-items: flex-start; }
@@ -21,17 +24,18 @@ body { margin: 0; padding: 32px 16px 64px; background: #d9d6ce; font-family: 'IB
 
 .stage {
   --bg: #f5f4f0; --text: #1a1a1a; --muted: #5e5c57; --rule: #1a1a1a; --accent: #2840e0;
-  --inv: rgba(26, 26, 26, 0.92); --inv-solid: #1a1a1a; --inv-text: #f5f4f0; --inv-muted: #a8a49b; --inv-accent: #8f9bff;
+  --menu-bg: rgb(26 26 26 / 0.92); --menu-solid: #1a1a1a; --menu-text: #f5f4f0; --menu-muted: #a8a49b; --menu-accent: #8f9bff;
+  --duration: 320ms; --stagger: 60ms; --rise: 24px; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   position: relative; overflow: hidden; flex-shrink: 0;
   background: var(--bg); color: var(--text);
   font-family: 'Newsreader', 'Times New Roman', serif;
 }
 .stage[data-scheme='dark'] {
   --bg: #161513; --text: #edeae3; --muted: #9c988f; --rule: #cfcbc2; --accent: #8f9bff;
-  --inv: rgba(237, 234, 227, 0.94); --inv-solid: #edeae3; --inv-text: #161513; --inv-muted: #5e5c57; --inv-accent: #2840e0;
+  --menu-bg: rgb(8 8 7 / 0.9); --menu-solid: #080807; --menu-text: #edeae3; --menu-muted: #9c988f; --menu-accent: #8f9bff;
 }
-.stage-desktop { width: 1440px; height: 900px; --pad: 64px; --bar: 72px; --item: 120px; --num-top: 22px; }
-.stage-mobile { width: 390px; height: 844px; --pad: 20px; --bar: 64px; --item: 54px; --num-top: 10px; }
+.stage-desktop { width: 1440px; height: 900px; --pad: 64px; --bar: 72px; --item: 120px; }
+.stage-mobile { width: 390px; height: 844px; --pad: 20px; --bar: 64px; --item: 54px; }
 
 .ui { font-family: 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.04em; text-transform: uppercase; }
 a { text-decoration: none; color: inherit; }
@@ -42,6 +46,7 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
 .page .bar { border-bottom: 1px solid var(--rule); }
 .logo { font-size: 15px; font-weight: 500; }
 .icon-btn { width: 48px; height: 48px; margin-right: -10px; display: grid; place-items: center; border: 0; background: transparent; color: currentColor; }
+.icon-btn:hover { color: var(--accent); }
 
 .page main { padding: 72px var(--pad) 0; display: grid; gap: 20px; }
 .stage-mobile .page main { padding-top: 40px; gap: 14px; }
@@ -53,35 +58,55 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
 .stage-mobile .ipa { font-size: 20px; }
 .stage-mobile .definition { font-size: 18px; line-height: 1.55; }
 
+/* Overlay: fades in from transparent, fades out on close */
 .menu {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  background: var(--inv); color: var(--inv-text);
+  background: var(--menu-bg); color: var(--menu-text);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--duration) var(--ease), visibility 0s linear var(--duration);
 }
-.menu[hidden] { display: none; }
-.menu :focus-visible { outline-color: var(--inv-accent); }
+.stage[data-open='true'] .menu { opacity: 1; visibility: visible; transition: opacity var(--duration) var(--ease), visibility 0s; }
+.menu :focus-visible { outline-color: var(--menu-accent); }
+.menu .icon-btn:hover { color: var(--menu-accent); }
+
 .menu-nav { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-.menu-nav a { display: flex; align-items: flex-start; gap: 14px; font-size: var(--item); line-height: 1.05; letter-spacing: -0.02em; }
-.menu-nav a:hover, .menu-nav a:focus-visible { color: var(--inv-accent); font-style: italic; }
-.menu-nav .num { padding-top: var(--num-top); font-size: 14px; font-style: normal; color: var(--inv-muted); }
+.menu-nav a { display: flex; align-items: flex-start; gap: 0.12em; font-size: var(--item); line-height: 1.05; letter-spacing: -0.02em; }
+.menu-nav a:hover, .menu-nav a:focus-visible, .menu-nav a[aria-current='page'] { color: var(--menu-accent); }
+.menu-nav .num { margin-top: calc(var(--item) * 0.18); font-size: 14px; color: var(--menu-muted); }
 .stage-mobile .menu-nav { gap: 4px; }
-.stage-mobile .menu-nav a { gap: 8px; padding: 4px 0; }
 .stage-mobile .menu-nav .num { font-size: 11px; }
+
+/* Items rise into place one after another while the menu opens */
+.menu-nav a {
+  opacity: 0; translate: 0 var(--rise);
+  transition: opacity var(--duration) var(--ease), translate var(--duration) var(--ease), color 120ms;
+}
+.stage[data-open='true'] .menu-nav a {
+  opacity: 1; translate: 0 0;
+  transition-delay: calc(var(--stagger) * (var(--i) + 1)), calc(var(--stagger) * (var(--i) + 1)), 0s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-nav a, .stage[data-open='true'] .menu-nav a { translate: none; }
+}
 
 .menu-foot {
   flex-shrink: 0; margin: 0 var(--pad); padding: 24px 0 32px;
-  border-top: 1px solid var(--inv-text);
+  border-top: 1px solid var(--menu-text);
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; align-items: start;
   font-size: 13px;
 }
 .group { display: flex; flex-direction: column; gap: 10px; }
-.label { color: var(--inv-muted); }
+.label { color: var(--menu-muted); }
 .segments { display: flex; gap: 6px; }
-.segments button { height: 44px; padding: 0 14px; border: 1px solid var(--inv-text); border-radius: 2px; background: transparent; color: var(--inv-text); }
-.segments button[aria-pressed='true'] { background: var(--inv-text); color: var(--inv-solid); }
+.segments button { height: 44px; padding: 0 14px; border: 1px solid var(--menu-text); border-radius: 2px; background: transparent; color: var(--menu-text); }
+.segments button:hover { border-color: var(--menu-accent); color: var(--menu-accent); }
+.segments button[aria-pressed='true'] { border-color: var(--menu-text); background: var(--menu-text); color: var(--menu-solid); }
 .link-row { height: 44px; display: flex; align-items: center; }
-.meta { text-align: right; color: var(--inv-muted); }
+.link-row:hover { color: var(--menu-accent); }
+.meta { text-align: right; color: var(--menu-muted); }
 .meta .link-row { justify-content: flex-end; }
+.meta .link-row:hover { color: inherit; }
 
 .stage-mobile .menu-foot { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 16px; padding: 20px 0 28px; font-size: 12px; }
 .stage-mobile .group { gap: 8px; }
@@ -109,7 +134,7 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
         <p class="definition">Die plötzliche, tiefe Erkenntnis, dass jeder zufällige Passant ein ebenso lebendiges, komplexes und eigenständiges Leben führt wie man selbst.</p>
       </main>
     </div>
-    <div class="menu" role="dialog" aria-modal="true" data-menu data-aria-de="Menü" data-aria-en="Menu">
+    <div class="menu" role="dialog" data-menu data-aria-de="Menü" data-aria-en="Menu">
       <div class="bar">
         <a class="logo ui" href="#">npvk</a>
         <button class="icon-btn" type="button" data-close-menu data-aria-de="Menü schliessen" data-aria-en="Close menu">
@@ -117,9 +142,9 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
         </button>
       </div>
       <nav class="menu-nav" data-aria-de="Hauptnavigation" data-aria-en="Main navigation">
-        <a href="#"><span class="num ui">01</span><span data-de="Wörter" data-en="Words"></span></a>
-        <a href="#"><span class="num ui">02</span><span data-de="Zitate" data-en="Quotes"></span></a>
-        <a href="#"><span class="num ui">03</span><span data-de="Wörterbuch" data-en="Dictionary"></span></a>
+        <a href="#" style="--i: 0"><span class="num ui">01</span><span data-de="Wörter" data-en="Words"></span></a>
+        <a href="#" style="--i: 1" aria-current="page"><span class="num ui">02</span><span data-de="Zitate" data-en="Quotes"></span></a>
+        <a href="#" style="--i: 2"><span class="num ui">03</span><span data-de="Wörterbuch" data-en="Dictionary"></span></a>
       </nav>
       <div class="menu-foot ui">
         <div class="group group-appearance" role="group" data-aria-de="Darstellung" data-aria-en="Appearance">
@@ -133,8 +158,8 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
         <div class="group" role="group" data-aria-de="Sprache" data-aria-en="Language">
           <span class="label" data-de="Sprache" data-en="Language"></span>
           <div class="segments" style="--count: 2">
-            <button type="button" data-set-lang="de">DE</button>
             <button type="button" data-set-lang="en">EN</button>
+            <button type="button" data-set-lang="de">DE</button>
           </div>
         </div>
         <div class="group">
@@ -170,7 +195,8 @@ button { font: inherit; letter-spacing: inherit; text-transform: inherit; cursor
     const openBtn = stage.querySelector('[data-open-menu]');
 
     function render() {
-      menu.hidden = !state.open;
+      stage.dataset.open = String(state.open);
+      menu.inert = !state.open;
       openBtn.setAttribute('aria-expanded', String(state.open));
       // 'auto' follows the OS setting, shown light in this snapshot
       stage.dataset.scheme = state.scheme === 'dark' ? 'dark' : 'light';
