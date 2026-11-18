@@ -1,4 +1,4 @@
-/* Wiederverwendbare Bausteine. Werte kommen ausschliesslich aus tokens.css. */
+/* Reusable building blocks. Values come only from tokens.css and the active theme. */
 
 .lead {
   font-size: var(--size-lg);
@@ -9,7 +9,7 @@
   color: var(--color-muted);
 }
 
-/* Badge, z. B. „Beispiel“ */
+/* Badge, e.g. "Beispiel" */
 .badge {
   display: inline-block;
   margin-left: var(--space-2);
@@ -17,12 +17,10 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   color: var(--color-muted);
-  font-size: var(--size-sm);
-  font-weight: 400;
   vertical-align: middle;
 }
 
-/* Seitenkopf */
+/* Page header */
 .page-header {
   margin-bottom: var(--space-5);
 }
@@ -36,7 +34,7 @@
   max-width: var(--text-measure);
 }
 
-/* Wörterbuch-Eintrag */
+/* Dictionary entry */
 .entry {
   display: grid;
   gap: var(--space-2);
@@ -62,9 +60,10 @@
 .headword {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--weight-display);
   font-size: var(--size-headword);
   line-height: 1.1;
+  letter-spacing: var(--tracking-display);
 }
 
 .headword a {
@@ -83,7 +82,7 @@
 
 .entry-lg .headword {
   font-size: var(--size-headword-lg);
-  line-height: 1;
+  line-height: 0.95;
 }
 
 .entry-lg .definition {
@@ -92,20 +91,23 @@
 
 .ipa {
   color: var(--color-muted);
+  font-style: italic;
 }
 
 .pos {
   color: var(--color-muted);
-  font-style: italic;
 }
 
-.origin,
-.entry-refs {
+.origin {
   color: var(--color-muted);
   font-size: var(--size-sm);
 }
 
-/* Wörterbuch */
+.entry-refs {
+  color: var(--color-muted);
+}
+
+/* Dictionary */
 .dictionary-tools {
   display: grid;
   gap: var(--space-3);
@@ -114,10 +116,11 @@
 .search {
   width: 100%;
   max-width: var(--text-measure);
+  min-height: 3rem;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-rule);
   border-radius: var(--radius);
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-text);
   font: inherit;
 }
@@ -129,20 +132,27 @@
 }
 
 .letter-nav a {
-  min-width: 2rem;
-  padding: var(--space-1) var(--space-2);
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  text-align: center;
+  color: var(--color-text);
   text-decoration: none;
+}
+
+.letter-nav a:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .letter-head {
   margin: var(--space-5) 0 0;
   padding-bottom: var(--space-1);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-rule);
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--weight-display);
   font-size: var(--size-letter);
   color: var(--color-accent);
   scroll-margin-top: var(--space-4);
@@ -152,8 +162,8 @@
   border-bottom: 0;
 }
 
-/* Zitate */
-/* Karten einer Reihe sind gleich hoch; Zitat vertikal zentriert, Verfasser immer unten */
+/* Quotes */
+/* Cards in a row share one height; the quote is centered vertically, the author stays at the bottom */
 .quote-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -173,8 +183,9 @@
   min-height: var(--quote-min-height);
   margin: 0;
   padding: var(--quote-padding);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-rule);
   border-radius: var(--radius);
+  background: var(--color-surface);
 }
 
 .quote-text {
@@ -182,18 +193,17 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--quote-size);
-  line-height: 1.4;
+  line-height: 1.35;
   white-space: pre-line;
 }
 
 .quote-source {
   color: var(--color-muted);
-  font-size: var(--size-sm);
 }
 
 .quote-author {
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: var(--ui-weight-strong);
 }
 
 .word-link {
@@ -206,7 +216,7 @@
   color: var(--color-accent);
 }
 
-/* Wortwolke: ohne JavaScript eine umbrechende Liste, mit JavaScript frei verteilt */
+/* Word cloud: a wrapping list without JavaScript, freely scattered with it */
 .cloud {
   display: flex;
   flex-wrap: wrap;
@@ -228,7 +238,7 @@
 }
 
 .cloud-word {
-  /* --weight (1–5) kommt pro Wort aus dem Front Matter */
+  /* --weight (1–5) comes per word from the front matter */
   font-family: var(--font-display);
   font-size: calc(var(--cloud-size-min) + (var(--cloud-size-max) - var(--cloud-size-min)) * (var(--weight, 1) - 1) / 4);
   line-height: 1.1;
@@ -241,7 +251,7 @@
   color: var(--color-accent);
 }
 
-/* Punkt: Wort steht auch im Wörterbuch */
+/* Dot: the word also has a dictionary entry */
 .cloud-word[data-has-definition]::after {
   content: '';
   display: inline-block;
@@ -253,13 +263,10 @@
   vertical-align: super;
 }
 
-/* Startseite */
+/* Home page */
 .eyebrow {
   margin-bottom: var(--space-2);
-  color: var(--color-muted);
-  font-size: var(--size-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 .featured {
@@ -270,22 +277,22 @@
 }
 
 .button {
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-rule);
   border-radius: var(--radius);
   background: transparent;
   color: var(--color-text);
-  font: inherit;
-  font-size: var(--size-sm);
   cursor: pointer;
 }
 
 .button:hover {
-  background: var(--color-subtle);
+  background: var(--color-text);
+  color: var(--color-bg);
 }
 
 .area-list {
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-rule);
 }
 
 .area-list li {
@@ -303,6 +310,7 @@
 
 .area-title {
   font-family: var(--font-display);
+  font-weight: var(--weight-display);
   font-size: var(--size-xl);
   line-height: 1.2;
 }
@@ -320,11 +328,10 @@
   grid-row: 1 / span 2;
   align-self: center;
   color: var(--color-muted);
-  font-size: var(--size-sm);
   font-variant-numeric: tabular-nums;
 }
 
-/* Wortseite */
+/* Word page */
 .word-quotes {
   margin-top: var(--space-6);
 }
