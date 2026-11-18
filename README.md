@@ -57,7 +57,9 @@ Achtung: Verweist eines deiner Zitate auf ein Beispielwort, verschiebe das Wort 
 
 ## Styling
 
-Alle Farben, Schriften, Grössen und Abstände stehen als Variablen in [src/styles/tokens.css](src/styles/tokens.css). Die übrigen CSS-Dateien verwenden nur diese Variablen. Farben sind als `light-dark(hell, dunkel)` definiert.
+The look comes from themes. `SITE.theme` in [src/data/site.ts](src/data/site.ts) sets `data-theme` on `<html>`; the header toggle sets `data-scheme` (light/dark). Fonts, colors and shapes live in [src/styles/themes/](src/styles/themes/), shared sizes and spacing in [src/styles/tokens.css](src/styles/tokens.css). All other CSS files only use these variables.
+
+Token reference, Index values, font licenses and how to add a theme: [src/styles/themes/README.md](src/styles/themes/README.md).
 
 ## Struktur
 

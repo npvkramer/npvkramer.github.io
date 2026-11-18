@@ -1,0 +1,50 @@
+/*
+  Template for a new theme. Not imported: copy it to <name>.css first.
+  Steps and the full token reference: ./README.md
+
+  Everything not set here is inherited from the Index theme (index.css),
+  so delete every line you do not need to change.
+*/
+
+/* Fonts (optional): install with npm, then import the weights you use. */
+/* @import '@fontsource/<font>/400.css'; */
+
+:root[data-theme='<name>'] {
+  /* Font families */
+  --font-body: serif;
+  --font-display: var(--font-body);
+  --font-ui: sans-serif;
+  --font-mono: monospace;
+
+  /* Running text and headings */
+  --leading-body: 1.6;
+  --weight-display: 400;
+  --tracking-display: 0;
+
+  /* UI text: navigation, labels, meta lines, buttons */
+  --ui-size: 0.875rem;
+  --ui-weight: 400;
+  --ui-weight-strong: 600;
+  --ui-transform: none;
+  --ui-tracking: 0;
+
+  /* Colors: light-dark(light, dark) */
+  --color-bg: light-dark(#ffffff, #111111);
+  --color-surface: light-dark(#ffffff, #1a1a1a);
+  --color-subtle: light-dark(#f0f0f0, #222222);
+  --color-text: light-dark(#111111, #eeeeee);
+  --color-muted: light-dark(#666666, #999999);
+  --color-border: light-dark(#dddddd, #333333);
+  --color-rule: light-dark(#111111, #cccccc);
+  --color-accent: light-dark(#0055cc, #77aaff);
+  --color-accent-soft: light-dark(#e5eefa, #1a2840);
+  --color-on-accent: light-dark(#ffffff, #111111);
+
+  /* Shape */
+  --radius: 4px;
+  --radius-tag: 999px;
+
+  /* Decoration: characters around the current navigation item, or none */
+  --nav-marker-start: none;
+  --nav-marker-end: none;
+}
