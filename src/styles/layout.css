@@ -138,15 +138,9 @@ main.container {
   color: var(--color-menu-accent);
 }
 
-.menu-nav a:hover,
-.menu-nav a:focus-visible {
-  font-style: italic;
-}
-
 /* Small number next to each item, aligned with the cap height */
 .menu-num {
   margin-top: calc(var(--menu-item-size) * 0.18);
-  font-style: normal;
   color: var(--color-menu-muted);
 }
 
