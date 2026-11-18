@@ -58,7 +58,7 @@ main.container {
   color: var(--color-accent);
 }
 
-/* Current page: accent color, wrapped in the theme's markers (e.g. [Wörter]) */
+/* Current page: accent color, wrapped in the theme's markers (e.g. square brackets) */
 .nav-list a[aria-current='page'] {
   color: var(--color-accent);
 }
