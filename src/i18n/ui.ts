@@ -22,6 +22,12 @@ const en = {
     follow: 'Follow',
     escHint: '[ESC] = Close menu',
   },
+  // Written in the language it offers, e.g. shown on a German page to an English browser.
+  languageHint: {
+    message: 'This page is also available in English.',
+    action: 'Read in English',
+    dismiss: 'Close',
+  },
   count: {
     words: ['word', 'words'],
     quotes: ['quote', 'quotes'],
@@ -87,6 +93,11 @@ const de: Strings = {
     language: 'Sprache',
     follow: 'Folgen',
     escHint: '[ESC] = Menü schliessen',
+  },
+  languageHint: {
+    message: 'Diese Seite gibt es auch auf Deutsch.',
+    action: 'Auf Deutsch lesen',
+    dismiss: 'Schliessen',
   },
   count: {
     words: ['Wort', 'Wörter'],

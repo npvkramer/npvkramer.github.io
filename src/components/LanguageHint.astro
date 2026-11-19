@@ -1,0 +1,25 @@
+---
+// Offers the current page in the visitor's browser language, once (see docs decision log).
+// One hidden bar per other language, written in that language. src/scripts/language-hint.ts
+// shows the matching one; without JavaScript nothing appears.
+import { languageLinks, parsePath, t } from '../i18n';
+
+const others = parsePath(Astro.url) ? languageLinks(Astro.url).filter((link) => !link.current) : [];
+---
+
+{others.map((link) => {
+  const strings = t(link.locale).languageHint;
+  return (
+    <aside class="language-hint" lang={link.locale} data-language-hint={link.locale} hidden>
+      <div class="container language-hint-inner">
+        <p>{strings.message}</p>
+        <a href={link.href} hreflang={link.locale}>{strings.action} →</a>
+        <button class="language-hint-close" type="button" aria-label={strings.dismiss} data-language-hint-close>
+          ×
+        </button>
+      </div>
+    </aside>
+  );
+})}
+
+<script src="../scripts/language-hint.ts"></script>

@@ -399,3 +399,35 @@
   border-bottom: 1px solid var(--color-border);
   text-align: left;
 }
+
+/* Language hint: thin bar above the header, offers the browser's language once */
+.language-hint {
+  background: var(--color-subtle);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.language-hint-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-4);
+  padding-block: var(--space-2);
+}
+
+.language-hint p {
+  margin: 0;
+}
+
+.language-hint-close {
+  margin-left: auto;
+  padding: var(--space-1) var(--space-2);
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-hint-close:hover {
+  color: var(--color-accent);
+}

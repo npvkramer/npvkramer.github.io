@@ -110,6 +110,7 @@ ol[class] {
 .entry-refs,
 .letter-nav,
 .quote-source,
+.language-hint,
 .area-count {
   font-family: var(--font-ui);
   font-size: var(--ui-size);
