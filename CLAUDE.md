@@ -22,6 +22,7 @@ This file improves itself, but only with approval.
   - **Visitor-facing text:** English and German. Interface text lives in `src/i18n/ui.ts`,
     never hard-coded in components; URL paths are translated in `src/i18n/routes.ts`.
   - **Docs snapshots:** files in `docs/concepts/` keep the language they were written in.
+- **Quotation marks:** always German „…“, English “…”, apostrophe ’; never straight quotes in visible text.
 - **Commits:** small, focused commits. **Never push** unless the owner explicitly asks.
 - **Unclear?** Ask instead of guessing.
 - **Verify:** run `npm run build` before committing and check its output for errors.
@@ -47,7 +48,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - A word is in a language's glossary only with a definition in that language.
     There is no separate glossary collection.
 - **Quotes:** `src/content/quotes/*.md`
-  - Fields: `author`, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names).
+  - Fields: `author`*, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names).
+  - `author`: plain text applies to every language; `{ de, en }` if the name differs.
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
