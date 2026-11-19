@@ -49,6 +49,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 - A word goes online only when all its translatable fields exist in German and English.
   Incomplete words show in dev with a "Not online" marker; the build does not fail.
+- No separate `sources` field: where a word comes from goes into `origin`.
 
 **2026-11-18: Multilingual site** (see i18n concept)
 
