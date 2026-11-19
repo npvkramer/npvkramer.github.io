@@ -21,7 +21,8 @@ const words = defineCollection({
       word: z.string(),
       lang: languageCode(), // language of the word itself, e.g. ko; default de
       romanization: z.string().optional(), // Latin spelling, required for other scripts
-      pronunciation: z.string().optional(), // IPA, e.g. /zɔndɐ/
+      // IPA. Plain text applies to every page language; use { de, en } if it is said differently.
+      pronunciation: localizedText().optional(),
       partOfSpeech: localizedText().optional(),
       // With a definition in the page language the word also appears in that dictionary.
       definition: localizedText().optional(),

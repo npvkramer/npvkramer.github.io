@@ -31,3 +31,10 @@ export function resolve(value: LocalizedText | undefined, locale: Locale): Resol
 
 /** True if the field has text in exactly this language. */
 export const hasLocale = (value: LocalizedText | undefined, locale: Locale) => resolve(value, locale)?.fallback === false;
+
+/**
+ * For fields that are the same in every language unless split per language, e.g. pronunciation:
+ * plain text applies everywhere; `{ de, en }` picks the page language, else the other one.
+ */
+export const resolveShared = (value: LocalizedText | undefined, locale: Locale): string | undefined =>
+  typeof value === 'string' ? value : resolve(value, locale)?.text;

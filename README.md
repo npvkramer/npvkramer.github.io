@@ -28,7 +28,7 @@ Create a file in `src/content/words/`, e.g. `inyeon.md` → `/words/inyeon/` and
 word: 인연
 lang: ko                      # language of the word, ISO 639 code; default de
 romanization: Inyeon          # required if the word is not in Latin script
-pronunciation: /in.jʌn/       # optional, IPA
+pronunciation: /in.jʌn/       # optional, IPA; same for all languages, or { de, en } if said differently
 partOfSpeech:                 # optional, translatable
   de: Substantiv
   en: noun

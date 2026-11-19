@@ -4,7 +4,7 @@
 import type { HTMLAttributes } from 'astro/types';
 import ExampleBadge from './ExampleBadge.astro';
 import { isExample, wordUrl, type Word } from '../lib/content';
-import { getLocale, languageName, resolve, t } from '../i18n';
+import { getLocale, languageName, resolve, resolveShared, t } from '../i18n';
 
 interface Props extends HTMLAttributes<'article'> {
   word: Word;
@@ -16,7 +16,8 @@ interface Props extends HTMLAttributes<'article'> {
 
 const { word: entry, size = 'md', heading: Heading = 'h3', link = false, class: className, ...attrs } = Astro.props;
 const locale = getLocale(Astro.url);
-const { word, lang, romanization, pronunciation } = entry.data;
+const { word, lang, romanization } = entry.data;
+const pronunciation = resolveShared(entry.data.pronunciation, locale);
 const partOfSpeech = resolve(entry.data.partOfSpeech, locale);
 const definition = resolve(entry.data.definition, locale);
 const origin = resolve(entry.data.origin, locale);
