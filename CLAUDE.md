@@ -42,7 +42,7 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 
 - **Words:** `src/content/words/*.md`
   - Fields: `word`, `lang`, `romanization` (required for non-Latin script), `pronunciation`,
-    `partOfSpeech`*, `definition`*, `origin`*, `weight` (1–5, cloud size).
+    `partOfSpeech`*, `definition`*, `origin`*, `weight` (1–5, cloud size), `added` (required date).
   - `pronunciation`: plain text applies to every language; `{ de, en }` if speakers say it differently.
   - A word is in a language's dictionary only with a definition in that language.
     There is no separate dictionary collection.
@@ -57,6 +57,7 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 - **Going online:** a word is published only when every translatable field it has exists in
   both page languages; incomplete words show in dev only, marked "Not online".
 - **Data access:** only through [src/lib/content.ts](src/lib/content.ts). Pages and components never call `getCollection` directly.
+- **Guidelines:** what to capture and how, per field: [docs/content-guidelines.md](docs/content-guidelines.md).
 
 ## Code structure
 
