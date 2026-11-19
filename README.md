@@ -36,12 +36,12 @@ definition:                   # optional, translatable – with a definition in 
   de: Die schicksalhafte …    #   the word also appears in that language's glossary
   en: A fated connection …
 origin: …                     # optional, translatable
-weight: 4                     # optional, 1–5: size in the word cloud
+weight: 4                     # required, 1 (smallest) to 5 (largest): size in the word cloud
 added: 2026-11-19             # required: date the word was added
 ---
 ```
 
-Without `weight`, a size is derived from the word, which keeps the cloud mixed. Words are sorted by `romanization` if present (인연 under I).
+Words are sorted by `romanization` if present (인연 under I).
 
 ### Add a quote
 

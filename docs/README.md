@@ -41,6 +41,10 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-19: Word size**
+
+- `weight` (1 smallest, 5 largest) is required for every word; sizes are no longer derived from the file name.
+
 **2026-11-19: Section names**
 
 - Words → **Fragments / Fragmente** (`/fragments/`, `/de/fragmente/`)

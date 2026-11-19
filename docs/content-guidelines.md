@@ -22,7 +22,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `partOfSpeech` | Both languages, fixed terms. de: `Substantiv, m./f./n.` (gender for German nouns), `Verb`, `Adjektiv`, `Adverb`, `Redewendung`. en: `noun`, `verb`, `adjective`, `adverb`, `phrase`. |
 | `definition` | Both `de` and `en` (required). 1–2 sentences, max ~300 characters, in my own words (never copied from a dictionary). Starts with the thing itself ("The sudden realization …"), not "X is …". |
 | `origin` | Optional, one sentence: etymology, who coined it and when. Same content in both languages. This is also where the source goes (e.g. the book that coined the word); there is no separate sources field. |
-| `weight` | Optional. Leave empty by default (mixed cloud). `5` only for a handful of favorites. |
+| `weight` | Required. Size in the word cloud from `1` (smallest) to `5` (largest). Choose by how much the word means to me; mix the sizes so the cloud stays varied. |
 | `added` | Required. The day the word joined the collection, `YYYY-MM-DD`. Never change it later. |
 
 ## Quotes
@@ -39,7 +39,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 
 ## Before publishing (checklist)
 
-- [ ] `lang` and `added` set; `romanization` for non-Latin scripts
+- [ ] `lang`, `weight` and `added` set; `romanization` for non-Latin scripts
 - [ ] IPA checked against a source
 - [ ] Definition in German and English, own words
 - [ ] Page renders in both languages (`npm run dev`: `/fragments/<id>/` and `/de/fragmente/<id>/`)
