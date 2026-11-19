@@ -65,6 +65,7 @@ const en = {
     example: 'Example',
     exampleTitle: 'Example content',
     onlyIn: (language: string) => `Only available in ${language}`,
+    incomplete: 'Not online: translation missing',
   },
   notFound: {
     title: 'Page not found',
@@ -137,6 +138,7 @@ const de: Strings = {
     example: 'Beispiel',
     exampleTitle: 'Beispielinhalt',
     onlyIn: (language: string) => `Nur auf ${language} verfügbar`,
+    incomplete: 'Nicht online: Übersetzung fehlt',
   },
   notFound: {
     title: 'Seite nicht gefunden',

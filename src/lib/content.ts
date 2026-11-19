@@ -1,7 +1,7 @@
 // Data access for words and quotes. Pages and components get their data only through these functions.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { hasLocale, pathTo, type Locale } from '../i18n';
+import { LOCALES, hasLocale, pathTo, type Locale } from '../i18n';
 
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
@@ -15,8 +15,20 @@ export const wordUrl = (word: Word, locale: Locale) => pathTo('words', locale, w
 export const isExample = (entry: Word | Quote) =>
   (entry.filePath ?? '').replace(/\\/g, '/').includes(EXAMPLE_FOLDER);
 
-/** Examples only show in dev (`npm run dev`); the published build leaves them out. */
-export const isPublished = (entry: Word | Quote) => import.meta.env.DEV || !isExample(entry);
+/** A word is complete when every translatable field it has exists in all page languages. */
+export const isComplete = (word: Word) => {
+  const { partOfSpeech, definition, origin } = word.data;
+  return [partOfSpeech, definition, origin].every(
+    (field) => field === undefined || LOCALES.every((locale) => hasLocale(field, locale)),
+  );
+};
+
+/**
+ * Shown on the published site? Everything shows in dev (`npm run dev`); the published build
+ * leaves out examples and words that are not complete yet (see docs/content-guidelines.md).
+ */
+export const isPublished = (entry: Word | Quote) =>
+  import.meta.env.DEV || (!isExample(entry) && (entry.collection !== 'words' || isComplete(entry)));
 
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
 export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;
