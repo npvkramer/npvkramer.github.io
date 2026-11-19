@@ -92,7 +92,7 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Language label:** shown only when a word's language differs from the page language.
 - **Translations:** in the same file, one value per language per field. Plain text counts as German.
 - **Defaults:** light color scheme and English. No automatic redirect.
-- **Browser language:** a thin hint bar above the header offers the page in the browser's language,
+- **Browser language:** a thin hint bar floating at the bottom of the screen offers the page in the browser's language,
   written in that language. Shown once; closing it or choosing a language in the menu also counts.
   No prompt for the color scheme; the menu's "Auto" covers it.
 - **Pronunciation:** one value for all languages, or one per page language if speakers say it differently.
