@@ -50,10 +50,13 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Language label:** shown only when a word's language differs from the page language.
 - **Translations:** in the same file, one value per language per field. Plain text counts as German.
 - **Defaults:** light color scheme and English. No automatic redirect.
+- **Browser language:** a thin hint bar above the header offers the page in the browser's language,
+  written in that language. Shown once; closing it or choosing a language in the menu also counts.
+  No prompt for the color scheme; the menu's "Auto" covers it.
+- **Pronunciation:** one value for all languages, or one per page language if speakers say it differently.
+- **Sonder:** an English word (`lang: en`), coined by John Koenig; pronounced `/zɔndɐ/` (de) and `/ˈsɑːn.dɚ/` (en).
 - **Still open:**
-  - How to offer the visitor's browser language (and scheme), see the options in the chat.
   - Word language filter: later.
-  - `lang: en` for Sonder: proposed, not decided yet.
   - Content guidelines: drafted in `docs/content-guidelines.md`, not decided yet.
 
 **2026-11-18: Docs location**
