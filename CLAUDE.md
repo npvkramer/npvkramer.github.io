@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-Personal website: a collection of German words, quotes and a small dictionary.
+Personal website: a collection of words from any language, quotes and a small dictionary,
+in English (default) and German.
 Static site built with Astro 7, deployed to GitHub Pages. The build output must stay plain
 static HTML/CSS/JS so the site can move to its own domain or server at any time.
 
@@ -18,8 +19,8 @@ This file improves itself, but only with approval.
 
 - **English everywhere in the codebase:** code, identifiers, comments, file and folder names,
   commit messages, README and this file.
-  - **Stays German:** everything visitors see (UI text, content in `src/content/`), URLs.
-    That means route folders in `src/pages/` (`woerter/`, `zitate/`, `woerterbuch/`) and URL anchors.
+  - **Visitor-facing text:** English and German. Interface text lives in `src/i18n/ui.ts`,
+    never hard-coded in components; URL paths are translated in `src/i18n/routes.ts`.
   - **Docs snapshots:** files in `docs/concepts/` keep the language they were written in.
 - **Commits:** small, focused commits. **Never push** unless the owner explicitly asks.
 - **Unclear?** Ask instead of guessing.
@@ -35,14 +36,18 @@ Deploy: GitHub Actions builds every push to `live` ([.github/workflows/deploy.ym
 
 ## Content model
 
-Content is written in German, as Markdown. Front matter keys are English.
+Markdown with English front matter keys. Words can come from any language (`lang`).
 Schema: [src/content.config.ts](src/content.config.ts).
+Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 
 - **Words:** `src/content/words/*.md`
-  - Fields: `word`, `pronunciation`, `partOfSpeech`, `definition`, `origin`, `weight` (1–5, cloud size).
-  - A word with a `definition` also appears in the dictionary. There is no separate dictionary collection.
+  - Fields: `word`, `lang`, `romanization` (required for non-Latin script), `pronunciation`,
+    `partOfSpeech`*, `definition`*, `origin`*, `weight` (1–5, cloud size).
+  - `pronunciation`: plain text applies to every language; `{ de, en }` if speakers say it differently.
+  - A word is in a language's dictionary only with a definition in that language.
+    There is no separate dictionary collection.
 - **Quotes:** `src/content/quotes/*.md`
-  - Fields: `author`, `source`, `words` (references to word file names).
+  - Fields: `author`, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names).
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
@@ -52,15 +57,13 @@ Schema: [src/content.config.ts](src/content.config.ts).
 
 ## Code structure
 
-- **Routes:**
-  - `/`: random featured word and area list
-  - `/woerter/`: word cloud
-  - `/woerter/[id]/`: word page
-  - `/zitate/`: quotes
-  - `/woerterbuch/`: dictionary
-  - `404`
-- **Site settings:** title, theme and navigation live in [src/data/site.ts](src/data/site.ts).
-  Nav entries with a `description` also show as areas on the home page.
+- **Routes:** one catch-all page, `src/pages/[...route].astro`, renders the views in
+  `src/views/` for every language: `/`, `/words/`, `/words/<id>/`, `/quotes/`,
+  `/dictionary/`, and the same under `/de/` with German paths. Plus `404` and dev-only `/admin/`.
+- **Language:** components read the page language with `getLocale(Astro.url)`;
+  import language helpers only from `src/i18n`.
+- **Site settings:** title, author, theme and social links in [src/data/site.ts](src/data/site.ts);
+  navigation comes from `navItems(locale)`.
 - **Shared UI:** reusable components in `src/components/`, e.g. `WordEntry`, `QuoteCard`/`QuoteGrid`,
   `PageHeader`, `ExampleBadge`. Reuse them instead of duplicating markup (DRY).
 - **Client JS:** only in `src/scripts/`, loaded with `<script src>`.
@@ -70,7 +73,9 @@ Schema: [src/content.config.ts](src/content.config.ts).
 ## Docs
 
 - Concepts, mocks and decisions live in `docs/` (not published). Browse them in dev at `/admin/`.
-- Concepts are dated snapshots (`YYYY-MM-DD-topic.html`): don't edit old ones, add a new file.
+- Concepts and mocks are dated files (`YYYY-MM-DD-topic.html`). During the creation phase (now)
+  they may be overwritten, so every topic has one current version; keep the first file name and date.
+  Once the creation phase ends they become snapshots: add a new file instead of editing.
 - Record every product decision in the decision log in [docs/README.md](docs/README.md).
 
 ## Styling
