@@ -75,8 +75,8 @@ Token reference, Index values, font licenses and how to add a theme: [src/styles
 ```
 src/
   content/
-    words/           Words (examples/ = example content)
-    quotes/          Quotes (examples/ = example content)
+    words/           Words
+    quotes/          Quotes
   content.config.ts  Allowed front matter fields
   data/site.ts       Site title, description, theme, navigation, links
   layouts/           HTML frame (BaseLayout)
