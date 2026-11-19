@@ -13,7 +13,7 @@ Personal website built with [Astro](https://astro.build): a collection of words,
 
 ## Content
 
-All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL in every language.
+All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL in every language. What to capture and how: [docs/content-guidelines.md](docs/content-guidelines.md).
 
 The site is in English (default, `/words/…`) and German (`/de/woerter/…`). Words can come from any language. Interface text and paths live in [src/i18n/](src/i18n/).
 
@@ -37,6 +37,7 @@ definition:                   # optional, translatable – with a definition in 
   en: A fated connection …
 origin: …                     # optional, translatable
 weight: 4                     # optional, 1–5: size in the word cloud
+added: 2026-11-19             # required: date the word was added
 ---
 ```
 

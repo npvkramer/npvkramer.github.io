@@ -50,6 +50,8 @@ Concepts, mocks and decisions for this site, kept as history.
 - A word goes online only when all its translatable fields exist in German and English.
   Incomplete words show in dev with a "Not online" marker; the build does not fail.
 - No separate `sources` field: where a word comes from goes into `origin`.
+- Every word has a required `added` date (`YYYY-MM-DD`).
+- The content guidelines in [content-guidelines.md](content-guidelines.md) are decided and apply from now on.
 
 **2026-11-18: Multilingual site** (see i18n concept)
 
@@ -67,7 +69,6 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Sonder:** an English word (`lang: en`), coined by John Koenig; pronounced `/ˈzɔndɐ/` (de) and `/ˈsɑːn.dɚ/` (en).
 - **Still open:**
   - Word language filter: later.
-  - Content guidelines: drafted in `docs/content-guidelines.md`, not decided yet.
 
 **2026-11-18: Docs location**
 
