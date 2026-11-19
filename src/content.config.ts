@@ -26,8 +26,8 @@ const words = defineCollection({
       // With a definition in the page language the word also appears in that glossary.
       definition: localizedText().optional(),
       origin: localizedText().optional(),
-      // Size in the word cloud (1–5). Without it, a size is derived from the word.
-      weight: z.number().int().min(1).max(5).optional(),
+      // Size in the word cloud: 1 (smallest) to 5 (largest).
+      weight: z.number().int().min(1).max(5),
       // Date the word was added to the collection (YYYY-MM-DD), e.g. for "recently added".
       added: z.coerce.date(),
     })

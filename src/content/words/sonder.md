@@ -13,5 +13,6 @@ definition:
 origin:
   de: Neuschöpfung von John Koenig, aus „The Dictionary of Obscure Sorrows“ (Buch 2021). Angelehnt an dt. „sonder-“ (besonders) und frz. „sonder“ (ergründen).
   en: Coined by John Koenig in “The Dictionary of Obscure Sorrows” (book, 2021), after German “sonder-” (special) and French “sonder” (to probe).
+weight: 5
 added: 2026-11-18
 ---

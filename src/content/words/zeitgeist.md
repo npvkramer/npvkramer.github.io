@@ -13,5 +13,6 @@ definition:
 origin:
   de: Aus „Zeit“ und „Geist“. Johann Gottfried Herder verwendete das Wort 1769, ins Englische kam es im 19. Jahrhundert.
   en: From German “Zeit” (time) and “Geist” (spirit). Used by Johann Gottfried Herder in 1769 and borrowed into English in the 19th century.
+weight: 2
 added: 2026-11-19
 ---

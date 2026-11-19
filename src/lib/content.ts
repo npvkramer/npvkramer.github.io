@@ -6,8 +6,6 @@ import { hasLocale, pathTo, type Locale } from '../i18n';
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
 
-const MAX_WEIGHT = 5;
-
 export const wordUrl = (word: Word, locale: Locale) => pathTo('fragments', locale, word.id);
 
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
@@ -38,14 +36,6 @@ export async function getQuotes(): Promise<Quote[]> {
 /** Quotes that reference the given word. */
 export function quotesForWord(quotes: Quote[], word: Word): Quote[] {
   return quotes.filter((q) => q.data.words.some((ref) => ref.id === word.id));
-}
-
-/** Size in the word cloud (1–5): `weight` from the front matter, or derived stably from the word. */
-export function wordWeight(word: Word): number {
-  if (word.data.weight) return word.data.weight;
-  let hash = 0;
-  for (const char of word.id) hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
-  return (hash % MAX_WEIGHT) + 1;
 }
 
 /** First letter for the index, umlauts without dots (Ä → A). */

@@ -11,5 +11,6 @@ definition:
 origin:
   de: Von lat. „radiare“ (strahlen).
   en: From Latin “radiare” (to shine).
+weight: 3
 added: 2026-11-19
 ---

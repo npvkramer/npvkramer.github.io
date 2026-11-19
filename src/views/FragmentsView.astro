@@ -2,7 +2,7 @@
 // Fragments: all words as a cloud, scattered by src/scripts/word-cloud.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import { getWords, wordUrl, wordWeight } from '../lib/content';
+import { getWords, wordUrl } from '../lib/content';
 import { hasLocale, t, type Locale } from '../i18n';
 
 interface Props {
@@ -24,7 +24,7 @@ const words = await getWords(locale);
           class="cloud-word"
           href={wordUrl(word, locale)}
           lang={word.data.lang}
-          style={`--weight: ${wordWeight(word)}`}
+          style={`--weight: ${word.data.weight}`}
           data-has-definition={hasLocale(word.data.definition, locale) ? '' : undefined}
         >
           {word.data.word}
