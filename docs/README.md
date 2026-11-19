@@ -45,6 +45,11 @@ Concepts, mocks and decisions for this site, kept as history.
 
 - Examples only show in dev (`npm run dev`); the published site leaves them out.
 
+**2026-11-19: Both languages required**
+
+- A word goes online only when all its translatable fields exist in German and English.
+  Incomplete words show in dev with a "Not online" marker; the build does not fail.
+
 **2026-11-18: Multilingual site** (see i18n concept)
 
 - **Default page language:** English, no URL prefix. German lives under `/de/`.
