@@ -52,6 +52,10 @@ Concepts, mocks and decisions for this site, kept as history.
 - No separate `sources` field: where a word comes from goes into `origin`.
 - Every word has a required `added` date (`YYYY-MM-DD`).
 - The content guidelines in [content-guidelines.md](content-guidelines.md) are decided and apply from now on.
+- **Capitalization:** words are written like a dictionary headword in their language:
+  German nouns capitalized, English words lowercase (`sonder`, `kitchen counter`, `radiant`).
+- **Loanwords:** a word counts as German if it is established in German, even when coined elsewhere
+  (`Permafrost`); `sonder` stays English.
 
 **2026-11-18: Multilingual site** (see i18n concept)
 

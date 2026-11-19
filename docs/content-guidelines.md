@@ -15,10 +15,10 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | Field | Rule |
 | --- | --- |
 | File name | Lowercase ASCII of the word or its romanization: `inyeon.md`, `fernweh.md`, `serendipitaet.md` (ä → ae, ö → oe, ü → ue, ß → ss). Never rename after publishing; the file name is the URL. |
-| `word` | As written in its language and script, with the capitalization its language uses (German nouns capitalized): `인연`, `Fernweh`, `Sonder`. |
+| `word` | As written in its language and script, with the capitalization its language uses, like a dictionary headword: German nouns capitalized, English words lowercase. `인연`, `Fernweh`, `sonder`, `kitchen counter`. |
 | `lang` | Always set, even for German: `de`, `en`, `ko`, … The language the word *comes from*, not where I met it. |
 | `romanization` | Required for non-Latin scripts. Standard system per language: Korean: Revised Romanization; Japanese: Hepburn; Chinese: Hanyu Pinyin with tone marks. First letter capitalized. |
-| `pronunciation` | IPA between slashes. One value if the word sounds the same everywhere (`/in.jʌn/`). If speakers of the page languages say it differently, one per language: Sonder `de: /ˈzɔndɐ/`, `en: /ˈsɑːn.dɚ/`. Check Wiktionary or a dictionary. |
+| `pronunciation` | IPA between slashes. One value if the word sounds the same everywhere (`/in.jʌn/`). If speakers of the page languages say it differently, one per language: sonder `de: /ˈzɔndɐ/`, `en: /ˈsɑːn.dɚ/`. Check Wiktionary or a dictionary. |
 | `partOfSpeech` | Both languages, fixed terms. de: `Substantiv, m./f./n.` (gender for German nouns), `Verb`, `Adjektiv`, `Adverb`, `Redewendung`. en: `noun`, `verb`, `adjective`, `adverb`, `phrase`. |
 | `definition` | Both `de` and `en` (required to go online). 1–2 sentences, max ~300 characters, in my own words (never copied from a dictionary). Starts with the thing itself ("The sudden realization …"), not "X is …". |
 | `origin` | Optional, one sentence: etymology, who coined it and when. Same content in both languages. This is also where the source goes (e.g. the book that coined the word); there is no separate sources field. |
