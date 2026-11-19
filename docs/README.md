@@ -41,6 +41,12 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-19: Quotation marks**
+
+- Always the same typographic marks: German „…“, English “…”, apostrophe ’. No straight quotes in visible text.
+- Quotes are attributed to their earliest verifiable source, with its exact wording
+  (e.g. Rita Mae Brown, not the common misattribution to Einstein).
+
 **2026-11-19: Word size**
 
 - `weight` (1 smallest, 5 largest) is required for every word; sizes are no longer derived from the file name.

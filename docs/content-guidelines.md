@@ -37,6 +37,11 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `translation` | Optional. Prefer a published translation (add the translator to `source`) or my own, marked as such. |
 | `words` | Link words from the collection that appear in the quote. |
 
+## Typography
+
+- **Quotation marks, always the same:** German „…“, English “…”. Apostrophe ’ (`Life’s`).
+  Never straight `"` or `'` in visible text, in content or interface text.
+
 ## Before publishing (checklist)
 
 - [ ] `lang`, `weight` and `added` set; `romanization` for non-Latin scripts
