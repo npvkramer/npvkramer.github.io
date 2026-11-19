@@ -51,7 +51,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
-- **Examples:** example content lives in `examples/` subfolders and is marked "Example" (en) / "Beispiel" (de) on the site.
+- **Examples:** example content lives in `examples/` subfolders. It only shows in dev
+  (`npm run dev`), marked "Example" (en) / "Beispiel" (de); the published build leaves it out.
   The owner's real content goes in the main folders.
 - **Data access:** only through [src/lib/content.ts](src/lib/content.ts). Pages and components never call `getCollection` directly.
 
