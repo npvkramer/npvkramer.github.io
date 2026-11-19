@@ -31,7 +31,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | --- | --- |
 | File name | `author-work.md` in lowercase ASCII: `hesse-stufen.md`. |
 | Text (body) | Exactly as published, original spelling and line breaks. Mark omissions with `…`. |
-| `author` | Full name as commonly written: `Johann Wolfgang von Goethe`. |
+| `author` | Full name as commonly written: `Johann Wolfgang von Goethe`. One value if the name is the same in both languages, `{ de, en }` if not (`Demokrit` / `Democritus`). |
 | `source` | Work and year of first publication: `Stufen (1941)`. Translate only the work's title if an established translation exists. |
 | `lang` | Language of the original. |
 | `translation` | Optional. Prefer a published translation (add the translator to `source`) or my own, marked as such. |

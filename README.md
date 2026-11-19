@@ -49,7 +49,7 @@ Create a file in `src/content/quotes/`, e.g. `hesse-stufen.md`. The quote text g
 
 ```markdown
 ---
-author: Hermann Hesse
+author: Hermann Hesse   # same in every language, or { de, en } if the name differs
 source: Stufen (1941)   # optional, translatable
 lang: de                # language of the original; default de
 words: [zauber]         # optional: file names from src/content/words
