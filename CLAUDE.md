@@ -54,6 +54,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 - **Examples:** example content lives in `examples/` subfolders. It only shows in dev
   (`npm run dev`), marked "Example" (en) / "Beispiel" (de); the published build leaves it out.
   The owner's real content goes in the main folders.
+- **Going online:** a word is published only when every translatable field it has exists in
+  both page languages; incomplete words show in dev only, marked "Not online".
 - **Data access:** only through [src/lib/content.ts](src/lib/content.ts). Pages and components never call `getCollection` directly.
 
 ## Code structure
