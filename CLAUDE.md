@@ -42,7 +42,7 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 
 - **Words:** `src/content/words/*.md`
   - Fields: `word`, `lang`, `romanization` (required for non-Latin script), `pronunciation`,
-    `partOfSpeech`*, `definition`*, `origin`*, `weight` (1–5, cloud size), `added` (required date).
+    `partOfSpeech`*, `definition`*, `origin`*, `weight` (required, 1–5 cloud size), `added` (required date).
   - `pronunciation`: plain text applies to every language; `{ de, en }` if speakers say it differently.
   - A word is in a language's glossary only with a definition in that language.
     There is no separate glossary collection.
