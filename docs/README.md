@@ -41,6 +41,10 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-19: Unknown authors**
+
+- Quotes without a known author or source are allowed. They leave out `author` and show “Unknown” / „Unbekannt“.
+
 **2026-11-19: Quotation marks**
 
 - Always the same typographic marks: German „…“, English “…”, apostrophe ’. No straight quotes in visible text.

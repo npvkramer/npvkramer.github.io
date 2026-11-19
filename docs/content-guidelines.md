@@ -7,8 +7,8 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 
 - **Words:** words that mean something to me: beautiful, precise, untranslatable or tied to a memory.
   Any language.
-- **Quotes:** sentences that moved me, quoted exactly and with a verifiable source.
-- **Not:** everyday words without a reason, quotes without a known author or source.
+- **Quotes:** sentences that moved me, quoted exactly; with a verifiable source where one exists, otherwise without author (“Unknown”).
+- **Not:** everyday words without a reason.
 
 ## Words
 
@@ -29,9 +29,9 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 
 | Field | Rule |
 | --- | --- |
-| File name | `author-work.md` in lowercase ASCII: `hesse-stufen.md`. |
+| File name | `author-work.md` in lowercase ASCII: `hesse-stufen.md`. Unknown author: `unknown-topic.md` (`unknown-positive.md`). |
 | Text (body) | Exactly as published, original spelling and line breaks. Mark omissions with `…`. |
-| `author` | Full name as commonly written: `Johann Wolfgang von Goethe`. One value if the name is the same in both languages, `{ de, en }` if not (`Demokrit` / `Democritus`). |
+| `author` | Full name as commonly written: `Johann Wolfgang von Goethe`. One value if the name is the same in both languages, `{ de, en }` if not (`Demokrit` / `Democritus`). Leave it out if the author is unknown; the page shows “Unknown” / „Unbekannt“. |
 | `source` | Work and year of first publication: `Stufen (1941)`. Translate only the work's title if an established translation exists. |
 | `lang` | Language of the original. |
 | `translation` | Optional. Prefer a published translation (add the translator to `source`) or my own, marked as such. |
