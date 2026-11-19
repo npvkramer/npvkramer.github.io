@@ -49,8 +49,8 @@ Concepts, mocks and decisions for this site, kept as history.
 - Routes, views and code follow the new names. Content folders (`words`, `quotes`) stay for now.
 - **Resonance:** "Life’s lessons in words that echo." / „Die Lehren des Lebens in Worten, die nachklingen.“
 - **Glossary:** "The sound and meaning behind a word." / „Klang und Bedeutung hinter einem Wort.“
+- **Fragments:** "A scattering of words worth keeping." / „Eine lose Sammlung von Wörtern, die bleiben dürfen.“
 - Each definition is the section's page lead and its description in the menu and on the home page.
-- Still open: the definition of Fragments.
 
 **2026-11-19: Same content everywhere**
 
