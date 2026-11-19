@@ -41,6 +41,14 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-19: Section names**
+
+- Words → **Fragments / Fragmente** (`/fragments/`, `/de/fragmente/`)
+- Quotes → **Resonance / Nachklang** (`/resonance/`, `/de/nachklang/`)
+- Dictionary → **Glossary / Wortschatz** (`/glossary/`, `/de/wortschatz/`)
+- Routes, views and code follow the new names. Content folders (`words`, `quotes`) stay for now.
+- Still open: the definition of each section.
+
 **2026-11-19: Same content everywhere**
 
 - All example content is deleted.
