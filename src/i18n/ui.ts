@@ -44,6 +44,7 @@ const en = {
     lead: 'Life’s lessons in words that echo.',
     translation: 'Translation',
     none: 'No quotes yet.',
+    unknownAuthor: 'Unknown',
   },
   glossary: {
     title: 'Glossary',
@@ -109,6 +110,7 @@ const de: Strings = {
     lead: 'Die Lehren des Lebens in Worten, die nachklingen.',
     translation: 'Übersetzung',
     none: 'Noch keine Zitate.',
+    unknownAuthor: 'Unbekannt',
   },
   glossary: {
     title: 'Wortschatz',
