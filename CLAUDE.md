@@ -51,11 +51,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
-- **Examples:** example content lives in `examples/` subfolders. It only shows in dev
-  (`npm run dev`), marked "Example" (en) / "Beispiel" (de); the published build leaves it out.
-  The owner's real content goes in the main folders.
-- **Going online:** a word is published only when every translatable field it has exists in
-  both page languages; incomplete words show in dev only, marked "Not online".
+- **Same everywhere:** dev and the published site show exactly the same content;
+  no examples, no drafts. Every translatable field is written in both languages before committing.
 - **Data access:** only through [src/lib/content.ts](src/lib/content.ts). Pages and components never call `getCollection` directly.
 - **Guidelines:** what to capture and how, per field: [docs/content-guidelines.md](docs/content-guidelines.md).
 
