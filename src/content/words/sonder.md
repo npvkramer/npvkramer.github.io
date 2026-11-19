@@ -1,5 +1,5 @@
 ---
-word: Sonder
+word: sonder
 lang: en
 pronunciation:
   de: /ˈzɔndɐ/
