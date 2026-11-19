@@ -41,14 +41,15 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
-**2026-11-19: Example content**
+**2026-11-19: Same content everywhere**
 
-- Examples only show in dev (`npm run dev`); the published site leaves them out.
+- All example content is deleted.
+- Dev and the published site show exactly the same content: no dev-only examples, no hidden drafts.
+  This replaces the earlier rules that hid examples and incomplete words from the published site.
 
 **2026-11-19: Both languages required**
 
-- A word goes online only when all its translatable fields exist in German and English.
-  Incomplete words show in dev with a "Not online" marker; the build does not fail.
+- Every translatable field of a word is written in German and English before it is committed.
 - No separate `sources` field: where a word comes from goes into `origin`.
 - Every word has a required `added` date (`YYYY-MM-DD`).
 - The content guidelines in [content-guidelines.md](content-guidelines.md) are decided and apply from now on.

@@ -45,9 +45,9 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 - [ ] Page renders in both languages (`npm run dev`: `/words/<id>/` and `/de/woerter/<id>/`)
 - [ ] `npm run build` without errors
 
-## Going online
+## Both languages
 
-- **Both languages required:** a word goes online only when every translatable field it has
-  (`partOfSpeech`, `definition`, `origin`) is set in German and English.
-- **Until then:** incomplete words show in dev only, marked "Not online: translation missing",
-  and the published build leaves them out. It does not fail the build.
+- **Required:** every translatable field a word has (`partOfSpeech`, `definition`, `origin`)
+  is written in German and English before the word is committed.
+- **Same everywhere:** dev and the published site show exactly the same content. There is no
+  draft state; a missing translation shows the other language with an "Only available in …" note.

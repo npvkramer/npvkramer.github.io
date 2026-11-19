@@ -64,12 +64,6 @@ Der uns beschützt und der uns hilft, zu leben.
 
 Words listed in `words` are linked in the quote, inflected forms included (Augenblick → Augenblicke). The quote also appears on the word's page.
 
-### Example content
-
-All examples live in `src/content/words/examples/` and `src/content/quotes/examples/`. They only show with `npm run dev`, marked "Example" / "Beispiel"; the published site (`npm run build`) leaves them out. To keep an example, move the file one level up; its URL stays the same. Delete both folders once they are no longer needed.
-
-Note: a quote of yours may reference an example word. It is linked in dev, but not on the published site until you move the word out of `examples/`.
-
 ## Styling
 
 The look comes from themes. `SITE.theme` in [src/data/site.ts](src/data/site.ts) sets `data-theme` on `<html>`; the appearance setting in the site menu sets `data-scheme` (light by default, dark, or auto to follow the OS). Fonts, colors and shapes live in [src/styles/themes/](src/styles/themes/), shared sizes and spacing in [src/styles/tokens.css](src/styles/tokens.css). All other CSS files only use these variables.
