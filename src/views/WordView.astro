@@ -17,18 +17,18 @@ const quotes = quotesForWord(await getQuotes(), word);
 const definition = resolve(word.data.definition, locale);
 ---
 
-<BaseLayout title={word.data.word} description={definition?.text ?? strings.words.description(word.data.word)}>
+<BaseLayout title={word.data.word} description={definition?.text ?? strings.fragments.description(word.data.word)}>
   <WordEntry word={word} size="lg" heading="h1" />
 
   {quotes.length > 0 && (
     <section class="word-quotes">
-      <h2>{strings.words.inQuotes}</h2>
+      <h2>{strings.fragments.inQuotes}</h2>
       <QuoteGrid quotes={quotes} />
     </section>
   )}
 
   <p class="back">
-    <a href={pathTo('words', locale)}>{strings.words.allWords}</a>
-    {hasLocale(word.data.definition, locale) && <a href={pathTo('dictionary', locale)}>{strings.dictionary.title}</a>}
+    <a href={pathTo('fragments', locale)}>{strings.fragments.all}</a>
+    {hasLocale(word.data.definition, locale) && <a href={pathTo('glossary', locale)}>{strings.glossary.title}</a>}
   </p>
 </BaseLayout>

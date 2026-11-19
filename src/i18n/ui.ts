@@ -5,9 +5,9 @@ import type { Locale } from './config';
 const en = {
   siteDescription: 'Words, quotes and meanings I collect.',
   nav: {
-    words: { label: 'Words', description: 'Words I like, scattered freely.' },
-    quotes: { label: 'Quotes', description: 'Sentences and sayings that moved me.' },
-    dictionary: { label: 'Dictionary', description: 'Words with pronunciation and meaning.' },
+    fragments: { label: 'Fragments', description: 'Words I like, scattered freely.' },
+    resonance: { label: 'Resonance', description: 'Sentences and sayings that moved me.' },
+    glossary: { label: 'Glossary', description: 'Words with pronunciation and meaning.' },
   },
   menu: {
     label: 'Menu',
@@ -37,24 +37,24 @@ const en = {
     featured: 'Word of the moment',
     another: 'Another word',
   },
-  words: {
-    title: 'Words',
+  fragments: {
+    title: 'Fragments',
     lead: 'Words I like. Click one to open it.',
     description: (word: string) => `${word}, from my word collection.`,
     inQuotes: 'In quotes',
-    allWords: '← All words',
+    all: '← All fragments',
   },
-  quotes: {
-    title: 'Quotes',
+  resonance: {
+    title: 'Resonance',
     lead: 'Sentences and sayings that moved me. Underlined words come from the word collection.',
     translation: 'Translation',
     none: 'No quotes yet.',
   },
-  dictionary: {
-    title: 'Dictionary',
+  glossary: {
+    title: 'Glossary',
     lead: 'Words with pronunciation and meaning, A to Z.',
     search: 'Search word or meaning …',
-    searchLabel: 'Search the dictionary',
+    searchLabel: 'Search the glossary',
     index: 'Index',
     empty: 'No entry found.',
     none: 'No entries in English yet.',
@@ -76,9 +76,9 @@ type Strings = typeof en;
 const de: Strings = {
   siteDescription: 'Wörter, Zitate und Bedeutungen, die ich sammle.',
   nav: {
-    words: { label: 'Wörter', description: 'Wörter, die ich mag, frei verteilt.' },
-    quotes: { label: 'Zitate', description: 'Sätze und Sprüche, die mich bewegt haben.' },
-    dictionary: { label: 'Wörterbuch', description: 'Wörter mit Lautschrift und Bedeutung.' },
+    fragments: { label: 'Fragmente', description: 'Wörter, die ich mag, frei verteilt.' },
+    resonance: { label: 'Nachklang', description: 'Sätze und Sprüche, die mich bewegt haben.' },
+    glossary: { label: 'Wortschatz', description: 'Wörter mit Lautschrift und Bedeutung.' },
   },
   menu: {
     label: 'Menü',
@@ -107,24 +107,24 @@ const de: Strings = {
     featured: 'Wort des Moments',
     another: 'Anderes Wort',
   },
-  words: {
-    title: 'Wörter',
+  fragments: {
+    title: 'Fragmente',
     lead: 'Wörter, die ich mag. Ein Klick öffnet das Wort.',
     description: (word: string) => `${word}, aus meiner Wortsammlung.`,
     inQuotes: 'In Zitaten',
-    allWords: '← Alle Wörter',
+    all: '← Alle Fragmente',
   },
-  quotes: {
-    title: 'Zitate',
+  resonance: {
+    title: 'Nachklang',
     lead: 'Sätze und Sprüche, die mich bewegt haben. Unterstrichene Wörter stammen aus der Wortsammlung.',
     translation: 'Übersetzung',
     none: 'Noch keine Zitate.',
   },
-  dictionary: {
-    title: 'Wörterbuch',
+  glossary: {
+    title: 'Wortschatz',
     lead: 'Wörter mit Lautschrift und Bedeutung, alphabetisch.',
     search: 'Wort oder Bedeutung suchen …',
-    searchLabel: 'Wörterbuch durchsuchen',
+    searchLabel: 'Wortschatz durchsuchen',
     index: 'Register',
     empty: 'Kein Eintrag gefunden.',
     none: 'Noch keine Einträge auf Deutsch.',

@@ -10,7 +10,7 @@ export * from './ui';
 export * from './languages';
 export * from './localized';
 
-const NAV_ROUTES = ['words', 'quotes', 'dictionary'] as const;
+const NAV_ROUTES = ['fragments', 'resonance', 'glossary'] as const;
 
 /** Main navigation for a page language. Each entry also shows as an area on the home page. */
 export function navItems(locale: Locale) {

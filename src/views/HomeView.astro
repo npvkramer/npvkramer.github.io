@@ -2,7 +2,7 @@
 // Home page: a random featured word and the list of areas.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WordEntry from '../components/WordEntry.astro';
-import { getDefinedWords, getDictionary, getQuotes, getWords } from '../lib/content';
+import { getDefinedWords, getGlossary, getQuotes, getWords } from '../lib/content';
 import { countLabel, navItems, t, type Locale } from '../i18n';
 
 interface Props {
@@ -11,16 +11,16 @@ interface Props {
 
 const { locale } = Astro.props;
 const strings = t(locale);
-const [words, featured, dictionary, quotes] = await Promise.all([
+const [words, featured, glossary, quotes] = await Promise.all([
   getWords(locale),
   getDefinedWords(locale),
-  getDictionary(locale),
+  getGlossary(locale),
   getQuotes(),
 ]);
 const counts = {
-  words: countLabel(words.length, strings.count.words),
-  quotes: countLabel(quotes.length, strings.count.quotes),
-  dictionary: countLabel(dictionary.length, strings.count.entries),
+  fragments: countLabel(words.length, strings.count.words),
+  resonance: countLabel(quotes.length, strings.count.quotes),
+  glossary: countLabel(glossary.length, strings.count.entries),
 };
 ---
 

@@ -4,15 +4,15 @@ import { DEFAULT_LOCALE, LOCALES, getLocale, type Locale } from './config';
 
 export const ROUTES = {
   home: { en: '', de: '' },
-  words: { en: 'words', de: 'woerter' },
-  quotes: { en: 'quotes', de: 'zitate' },
-  dictionary: { en: 'dictionary', de: 'woerterbuch' },
+  fragments: { en: 'fragments', de: 'fragmente' },
+  resonance: { en: 'resonance', de: 'nachklang' },
+  glossary: { en: 'glossary', de: 'wortschatz' },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type RouteKey = keyof typeof ROUTES;
 const ROUTE_KEYS = Object.keys(ROUTES) as RouteKey[];
 
-/** URL of a page, e.g. pathTo('words', 'de', 'sonder') → /de/woerter/sonder/ */
+/** URL of a page, e.g. pathTo('fragments', 'de', 'sonder') → /de/fragmente/sonder/ */
 export function pathTo(route: RouteKey, locale: Locale, id?: string): string {
   const parts = [locale === DEFAULT_LOCALE ? '' : locale, ROUTES[route][locale], id].filter(Boolean);
   return parts.length ? `/${parts.join('/')}/` : '/';

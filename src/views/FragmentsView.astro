@@ -1,5 +1,5 @@
 ---
-// Word cloud: all words, scattered by src/scripts/word-cloud.ts.
+// Fragments: all words as a cloud, scattered by src/scripts/word-cloud.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getWords, wordUrl, wordWeight } from '../lib/content';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const strings = t(locale).words;
+const strings = t(locale).fragments;
 const words = await getWords(locale);
 ---
 

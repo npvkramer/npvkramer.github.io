@@ -8,7 +8,7 @@ export type Quote = CollectionEntry<'quotes'>;
 
 const MAX_WEIGHT = 5;
 
-export const wordUrl = (word: Word, locale: Locale) => pathTo('words', locale, word.id);
+export const wordUrl = (word: Word, locale: Locale) => pathTo('fragments', locale, word.id);
 
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
 export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;
@@ -24,8 +24,8 @@ export async function getDefinedWords(locale: Locale): Promise<Word[]> {
   return (await getWords(locale)).filter((word) => word.data.definition);
 }
 
-/** Dictionary of a page language: only words with a definition in exactly that language. */
-export async function getDictionary(locale: Locale): Promise<Word[]> {
+/** Glossary of a page language: only words with a definition in exactly that language. */
+export async function getGlossary(locale: Locale): Promise<Word[]> {
   return (await getWords(locale)).filter((word) => hasLocale(word.data.definition, locale));
 }
 

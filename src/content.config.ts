@@ -23,7 +23,7 @@ const words = defineCollection({
       // IPA. Plain text applies to every page language; use { de, en } if it is said differently.
       pronunciation: localizedText().optional(),
       partOfSpeech: localizedText().optional(),
-      // With a definition in the page language the word also appears in that dictionary.
+      // With a definition in the page language the word also appears in that glossary.
       definition: localizedText().optional(),
       origin: localizedText().optional(),
       // Size in the word cloud (1–5). Without it, a size is derived from the word.

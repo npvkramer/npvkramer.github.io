@@ -23,7 +23,7 @@ const segments = linkWords((quote.body ?? '').trim(), words, locale);
     <blockquote class="quote-text" lang={lang}>{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
     {translation && (
       <p class="quote-translation" lang={locale}>
-        <span class="word-language">{t(locale).quotes.translation}</span>
+        <span class="word-language">{t(locale).resonance.translation}</span>
         {translation.trim()}
       </p>
     )}

@@ -34,7 +34,7 @@
   max-width: var(--text-measure);
 }
 
-/* Dictionary entry */
+/* Word entry (dictionary style) */
 .entry {
   display: grid;
   gap: var(--space-2);
@@ -123,8 +123,8 @@
   color: var(--color-muted);
 }
 
-/* Dictionary */
-.dictionary-tools {
+/* Glossary */
+.glossary-tools {
   display: grid;
   gap: var(--space-3);
 }
@@ -283,7 +283,7 @@
   color: var(--color-accent);
 }
 
-/* Dot: the word also has a dictionary entry */
+/* Dot: the word also has a glossary entry */
 .cloud-word[data-has-definition]::after {
   content: '';
   display: inline-block;

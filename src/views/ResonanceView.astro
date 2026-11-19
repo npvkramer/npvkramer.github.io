@@ -1,5 +1,5 @@
 ---
-// All quotes as cards.
+// Resonance: all quotes as cards.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import QuoteGrid from '../components/QuoteGrid.astro';
@@ -10,7 +10,7 @@ interface Props {
   locale: Locale;
 }
 
-const strings = t(Astro.props.locale).quotes;
+const strings = t(Astro.props.locale).resonance;
 const quotes = await getQuotes();
 ---
 
