@@ -29,6 +29,8 @@ const words = defineCollection({
       origin: localizedText().optional(),
       // Size in the word cloud (1–5). Without it, a size is derived from the word.
       weight: z.number().int().min(1).max(5).optional(),
+      // Date the word was added to the collection (YYYY-MM-DD), e.g. for "recently added".
+      added: z.coerce.date(),
     })
     .refine((data) => data.romanization || isLatinScript(data.word), {
       message: 'Add `romanization` for words that are not written in Latin script',
