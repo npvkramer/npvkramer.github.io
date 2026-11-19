@@ -400,10 +400,15 @@
   text-align: left;
 }
 
-/* Language hint: thin bar above the header, offers the browser's language once */
+/* Language hint: thin bar floating at the bottom of the screen, offers the browser's language once.
+   Fixed, so header, menu and content never move when it appears or closes. */
 .language-hint {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: var(--z-floating);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--color-subtle);
-  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 }
 
 .language-hint-inner {

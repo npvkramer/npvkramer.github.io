@@ -40,11 +40,11 @@ const defaultAlternate = alternates.find((link) => link.locale === DEFAULT_LOCAL
     <script is:inline src="/scripts/theme-init.js"></script>
   </head>
   <body>
-    <LanguageHint />
     <Header />
     <main class="container">
       <slot />
     </main>
     <Footer />
+    <LanguageHint />
   </body>
 </html>

@@ -57,6 +57,9 @@
   --menu-rise: var(--space-4); /* how far items rise */
   --menu-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 
+  /* Layers: elements floating over the page (the site menu uses the browser's top layer) */
+  --z-floating: 10;
+
   /* Admin (dev only) */
   --doc-frame-height: 80vh;
 
