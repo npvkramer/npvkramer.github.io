@@ -47,7 +47,10 @@ Concepts, mocks and decisions for this site, kept as history.
 - Quotes → **Resonance / Nachklang** (`/resonance/`, `/de/nachklang/`)
 - Dictionary → **Glossary / Wortschatz** (`/glossary/`, `/de/wortschatz/`)
 - Routes, views and code follow the new names. Content folders (`words`, `quotes`) stay for now.
-- Still open: the definition of each section.
+- **Resonance:** "Life’s lessons in words that echo." / „Die Lehren des Lebens in Worten, die nachklingen.“
+- **Glossary:** "The sound and meaning behind a word." / „Klang und Bedeutung hinter einem Wort.“
+- Each definition is the section's page lead and its description in the menu and on the home page.
+- Still open: the definition of Fragments.
 
 **2026-11-19: Same content everywhere**
 
