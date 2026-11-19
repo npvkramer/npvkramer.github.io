@@ -54,7 +54,7 @@ Concepts, mocks and decisions for this site, kept as history.
   written in that language. Shown once; closing it or choosing a language in the menu also counts.
   No prompt for the color scheme; the menu's "Auto" covers it.
 - **Pronunciation:** one value for all languages, or one per page language if speakers say it differently.
-- **Sonder:** an English word (`lang: en`), coined by John Koenig; pronounced `/zɔndɐ/` (de) and `/ˈsɑːn.dɚ/` (en).
+- **Sonder:** an English word (`lang: en`), coined by John Koenig; pronounced `/ˈzɔndɐ/` (de) and `/ˈsɑːn.dɚ/` (en).
 - **Still open:**
   - Word language filter: later.
   - Content guidelines: drafted in `docs/content-guidelines.md`, not decided yet.

@@ -2,7 +2,7 @@
 word: Sonder
 lang: en
 pronunciation:
-  de: /zɔndɐ/
+  de: /ˈzɔndɐ/
   en: /ˈsɑːn.dɚ/
 partOfSpeech:
   de: Substantiv
