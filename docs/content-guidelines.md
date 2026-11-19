@@ -16,7 +16,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | --- | --- |
 | File name | Lowercase ASCII of the word or its romanization: `inyeon.md`, `fernweh.md`, `serendipitaet.md` (ä → ae, ö → oe, ü → ue, ß → ss). Never rename after publishing; the file name is the URL. |
 | `word` | As written in its language and script, with the capitalization its language uses, like a dictionary headword: German nouns capitalized, English words lowercase. `인연`, `Fernweh`, `sonder`, `kitchen counter`. |
-| `lang` | Always set, even for German: `de`, `en`, `ko`, … The language the word *comes from*, not where I met it. |
+| `lang` | Always set, even for German: `de`, `en`, `ko`, … The language the word *comes from*, not where I met it. Loanwords keep their origin: `permafrost` and `sonder` are English, even though German uses them too. |
 | `romanization` | Required for non-Latin scripts. Standard system per language: Korean: Revised Romanization; Japanese: Hepburn; Chinese: Hanyu Pinyin with tone marks. First letter capitalized. |
 | `pronunciation` | IPA between slashes. One value if the word sounds the same everywhere (`/in.jʌn/`). If speakers of the page languages say it differently, one per language: sonder `de: /ˈzɔndɐ/`, `en: /ˈsɑːn.dɚ/`. Check Wiktionary or a dictionary. |
 | `partOfSpeech` | Both languages, fixed terms. de: `Substantiv, m./f./n.` (gender for German nouns), `Verb`, `Adjektiv`, `Adverb`, `Redewendung`. en: `noun`, `verb`, `adjective`, `adverb`, `phrase`. |

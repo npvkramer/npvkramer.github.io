@@ -54,8 +54,8 @@ Concepts, mocks and decisions for this site, kept as history.
 - The content guidelines in [content-guidelines.md](content-guidelines.md) are decided and apply from now on.
 - **Capitalization:** words are written like a dictionary headword in their language:
   German nouns capitalized, English words lowercase (`sonder`, `kitchen counter`, `radiant`).
-- **Loanwords:** a word counts as German if it is established in German, even when coined elsewhere
-  (`Permafrost`); `sonder` stays English.
+- **Loanwords:** a word keeps the language it comes from, even if it is established in German
+  (`permafrost`, `sonder`: English). If German speakers say it differently, add a `de` pronunciation.
 
 **2026-11-18: Multilingual site** (see i18n concept)
 
