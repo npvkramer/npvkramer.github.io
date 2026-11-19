@@ -65,9 +65,9 @@ Words listed in `words` are linked in the quote, inflected forms included (Augen
 
 ### Example content
 
-All examples live in `src/content/words/examples/` and `src/content/quotes/examples/` and are marked "Beispiel" on the site. Delete both folders to remove them. To keep an example, move the file one level up; its URL stays the same.
+All examples live in `src/content/words/examples/` and `src/content/quotes/examples/`. They only show with `npm run dev`, marked "Example" / "Beispiel"; the published site (`npm run build`) leaves them out. To keep an example, move the file one level up; its URL stays the same. Delete both folders once they are no longer needed.
 
-Note: if one of your quotes references an example word, move that word first. Otherwise the build logs "Invalid content reference" and the link in the quote is missing.
+Note: a quote of yours may reference an example word. It is linked in dev, but not on the published site until you move the word out of `examples/`.
 
 ## Styling
 

@@ -41,6 +41,10 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-19: Example content**
+
+- Examples only show in dev (`npm run dev`); the published site leaves them out.
+
 **2026-11-18: Multilingual site** (see i18n concept)
 
 - **Default page language:** English, no URL prefix. German lives under `/de/`.
