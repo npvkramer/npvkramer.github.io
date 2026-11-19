@@ -31,7 +31,7 @@ const segments = linkWords((quote.body ?? '').trim(), words, locale);
   </div>
   <figcaption class="quote-source">
     <span class="quote-author">{author}</span>{source && <span lang={source.lang}>, {source.text}</span>}
-    {lang !== locale && <span class="word-language">· {languageName(lang, locale)}</span>}
+    {lang !== locale && <span class="word-language">{` · ${languageName(lang, locale)}`}</span>}
     <ExampleBadge show={isExample(quote)} />
   </figcaption>
 </figure>
