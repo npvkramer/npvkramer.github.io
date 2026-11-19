@@ -34,7 +34,7 @@ const en = {
   },
   fragments: {
     title: 'Fragments',
-    lead: 'Words I like. Click one to open it.',
+    lead: 'A scattering of words worth keeping.',
     description: (word: string) => `${word}, from my word collection.`,
     inQuotes: 'In quotes',
     all: '← All fragments',
@@ -99,7 +99,7 @@ const de: Strings = {
   },
   fragments: {
     title: 'Fragmente',
-    lead: 'Wörter, die ich mag. Ein Klick öffnet das Wort.',
+    lead: 'Eine lose Sammlung von Wörtern, die bleiben dürfen.',
     description: (word: string) => `${word}, aus meiner Wortsammlung.`,
     inQuotes: 'In Zitaten',
     all: '← Alle Fragmente',
