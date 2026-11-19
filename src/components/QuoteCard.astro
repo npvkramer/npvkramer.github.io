@@ -2,8 +2,7 @@
 // A quote as a card. The original is always shown; a translation into the page language follows
 // when there is one. Words listed in `words` in the front matter are linked in the original.
 import { getEntries } from 'astro:content';
-import ExampleBadge from './ExampleBadge.astro';
-import { isExample, isPublished, linkWords, type Quote, type Word } from '../lib/content';
+import { linkWords, type Quote, type Word } from '../lib/content';
 import { getLocale, languageName, resolve, t } from '../i18n';
 
 interface Props {
@@ -15,8 +14,7 @@ const locale = getLocale(Astro.url);
 const { author, lang, words: wordRefs } = quote.data;
 const source = resolve(quote.data.source, locale);
 const translation = lang !== locale ? quote.data.translation?.[locale] : undefined;
-// Only link words that have a page in this build (examples are left out when published).
-const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolean(word) && isPublished(word));
+const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolean(word));
 const segments = linkWords((quote.body ?? '').trim(), words, locale);
 ---
 
@@ -33,6 +31,5 @@ const segments = linkWords((quote.body ?? '').trim(), words, locale);
   <figcaption class="quote-source">
     <span class="quote-author">{author}</span>{source && <span lang={source.lang}>, {source.text}</span>}
     {lang !== locale && <span class="word-language">{` · ${languageName(lang, locale)}`}</span>}
-    <ExampleBadge show={isExample(quote)} />
   </figcaption>
 </figure>

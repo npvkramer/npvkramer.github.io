@@ -2,8 +2,7 @@
 // A word styled as a dictionary entry. Used in the dictionary, on the word page and on the home page.
 // The word keeps its own language; definition and labels follow the page language.
 import type { HTMLAttributes } from 'astro/types';
-import ExampleBadge from './ExampleBadge.astro';
-import { isComplete, isExample, wordUrl, type Word } from '../lib/content';
+import { wordUrl, type Word } from '../lib/content';
 import { getLocale, languageName, resolve, resolveShared, t } from '../i18n';
 
 interface Props extends HTMLAttributes<'article'> {
@@ -30,9 +29,6 @@ const origin = resolve(entry.data.origin, locale);
     {pronunciation && <span class="ipa">{pronunciation}</span>}
     {lang !== locale && <span class="word-language">{languageName(lang, locale)}</span>}
     {partOfSpeech && <span class="pos" lang={partOfSpeech.lang}>{partOfSpeech.text}</span>}
-    <ExampleBadge show={isExample(entry)} />
-    {/* Only visible in dev: the published build leaves incomplete words out */}
-    {!isExample(entry) && !isComplete(entry) && <span class="badge">{t(locale).entry.incomplete}</span>}
   </div>
   {definition?.fallback && <p class="fallback-note">{t(locale).entry.onlyIn(languageName(definition.lang, locale))}</p>}
   {definition && <p class="definition" lang={definition.lang}>{definition.text}</p>}

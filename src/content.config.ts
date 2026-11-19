@@ -8,8 +8,7 @@ import { isLatinScript, languageCode } from './i18n/languages';
 import { localizedText } from './i18n/localized';
 import { LOCALES } from './i18n/config';
 
-// The ID is the file name without folders, so an entry can move between
-// `examples/` and the main folder without changing its URL.
+// The ID is the file name without folders, so an entry keeps its URL if it moves into a subfolder.
 const idFromFileName = ({ entry }: { entry: string }) =>
   entry.replace(/\.md$/, '').split('/').pop()!;
 

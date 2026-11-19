@@ -1,41 +1,21 @@
 // Data access for words and quotes. Pages and components get their data only through these functions.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { LOCALES, hasLocale, pathTo, type Locale } from '../i18n';
+import { hasLocale, pathTo, type Locale } from '../i18n';
 
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
 
-const EXAMPLE_FOLDER = '/examples/';
 const MAX_WEIGHT = 5;
 
 export const wordUrl = (word: Word, locale: Locale) => pathTo('words', locale, word.id);
-
-/** Is the entry in an `examples/` folder? */
-export const isExample = (entry: Word | Quote) =>
-  (entry.filePath ?? '').replace(/\\/g, '/').includes(EXAMPLE_FOLDER);
-
-/** A word is complete when every translatable field it has exists in all page languages. */
-export const isComplete = (word: Word) => {
-  const { partOfSpeech, definition, origin } = word.data;
-  return [partOfSpeech, definition, origin].every(
-    (field) => field === undefined || LOCALES.every((locale) => hasLocale(field, locale)),
-  );
-};
-
-/**
- * Shown on the published site? Everything shows in dev (`npm run dev`); the published build
- * leaves out examples and words that are not complete yet (see docs/content-guidelines.md).
- */
-export const isPublished = (entry: Word | Quote) =>
-  import.meta.env.DEV || (!isExample(entry) && (entry.collection !== 'words' || isComplete(entry)));
 
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
 export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;
 
 /** All words, sorted alphabetically for the page language. */
 export async function getWords(locale: Locale): Promise<Word[]> {
-  const words = await getCollection('words', isPublished);
+  const words = await getCollection('words');
   return words.sort((a, b) => sortKey(a).localeCompare(sortKey(b), locale));
 }
 
@@ -51,7 +31,7 @@ export async function getDictionary(locale: Locale): Promise<Word[]> {
 
 /** All quotes in a stable order (by file name). */
 export async function getQuotes(): Promise<Quote[]> {
-  const quotes = await getCollection('quotes', isPublished);
+  const quotes = await getCollection('quotes');
   return quotes.sort((a, b) => a.id.localeCompare(b.id));
 }
 
