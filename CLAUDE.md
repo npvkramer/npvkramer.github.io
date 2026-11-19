@@ -49,7 +49,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
     There is no separate glossary collection.
 - **Quotes:** `src/content/quotes/*.md`
   - Fields: `author`*, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names).
-  - `author`: plain text applies to every language; `{ de, en }` if the name differs.
+  - `author`: plain text applies to every language; `{ de, en }` if the name differs;
+    leave it out if unknown (shown as “Unknown” / „Unbekannt“).
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
