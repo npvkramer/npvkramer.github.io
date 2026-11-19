@@ -12,7 +12,13 @@ export * from './localized';
 
 const NAV_ROUTES = ['fragments', 'resonance', 'glossary'] as const;
 
-/** Main navigation for a page language. Each entry also shows as an area on the home page. */
+/**
+ * Main navigation for a page language. Label and description are the section's own title and lead,
+ * so each name and definition lives in one place. Each entry also shows as an area on the home page.
+ */
 export function navItems(locale: Locale) {
-  return NAV_ROUTES.map((route) => ({ route, href: pathTo(route, locale), ...t(locale).nav[route] }));
+  return NAV_ROUTES.map((route) => {
+    const { title, lead } = t(locale)[route];
+    return { route, href: pathTo(route, locale), label: title, description: lead };
+  });
 }

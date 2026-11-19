@@ -4,11 +4,6 @@ import type { Locale } from './config';
 
 const en = {
   siteDescription: 'Words, quotes and meanings I collect.',
-  nav: {
-    fragments: { label: 'Fragments', description: 'Words I like, scattered freely.' },
-    resonance: { label: 'Resonance', description: 'Sentences and sayings that moved me.' },
-    glossary: { label: 'Glossary', description: 'Words with pronunciation and meaning.' },
-  },
   menu: {
     label: 'Menu',
     open: 'Open menu',
@@ -46,13 +41,13 @@ const en = {
   },
   resonance: {
     title: 'Resonance',
-    lead: 'Sentences and sayings that moved me. Underlined words come from the word collection.',
+    lead: 'Life’s lessons in words that echo.',
     translation: 'Translation',
     none: 'No quotes yet.',
   },
   glossary: {
     title: 'Glossary',
-    lead: 'Words with pronunciation and meaning, A to Z.',
+    lead: 'The sound and meaning behind a word.',
     search: 'Search word or meaning …',
     searchLabel: 'Search the glossary',
     index: 'Index',
@@ -75,11 +70,6 @@ type Strings = typeof en;
 
 const de: Strings = {
   siteDescription: 'Wörter, Zitate und Bedeutungen, die ich sammle.',
-  nav: {
-    fragments: { label: 'Fragmente', description: 'Wörter, die ich mag, frei verteilt.' },
-    resonance: { label: 'Nachklang', description: 'Sätze und Sprüche, die mich bewegt haben.' },
-    glossary: { label: 'Wortschatz', description: 'Wörter mit Lautschrift und Bedeutung.' },
-  },
   menu: {
     label: 'Menü',
     open: 'Menü öffnen',
@@ -116,13 +106,13 @@ const de: Strings = {
   },
   resonance: {
     title: 'Nachklang',
-    lead: 'Sätze und Sprüche, die mich bewegt haben. Unterstrichene Wörter stammen aus der Wortsammlung.',
+    lead: 'Die Lehren des Lebens in Worten, die nachklingen.',
     translation: 'Übersetzung',
     none: 'Noch keine Zitate.',
   },
   glossary: {
     title: 'Wortschatz',
-    lead: 'Wörter mit Lautschrift und Bedeutung, alphabetisch.',
+    lead: 'Klang und Bedeutung hinter einem Wort.',
     search: 'Wort oder Bedeutung suchen …',
     searchLabel: 'Wortschatz durchsuchen',
     index: 'Register',
