@@ -15,12 +15,15 @@ export const wordUrl = (word: Word, locale: Locale) => pathTo('words', locale, w
 export const isExample = (entry: Word | Quote) =>
   (entry.filePath ?? '').replace(/\\/g, '/').includes(EXAMPLE_FOLDER);
 
+/** Examples only show in dev (`npm run dev`); the published build leaves them out. */
+export const isPublished = (entry: Word | Quote) => import.meta.env.DEV || !isExample(entry);
+
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
 export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;
 
 /** All words, sorted alphabetically for the page language. */
 export async function getWords(locale: Locale): Promise<Word[]> {
-  const words = await getCollection('words');
+  const words = await getCollection('words', isPublished);
   return words.sort((a, b) => sortKey(a).localeCompare(sortKey(b), locale));
 }
 
@@ -36,7 +39,7 @@ export async function getDictionary(locale: Locale): Promise<Word[]> {
 
 /** All quotes in a stable order (by file name). */
 export async function getQuotes(): Promise<Quote[]> {
-  const quotes = await getCollection('quotes');
+  const quotes = await getCollection('quotes', isPublished);
   return quotes.sort((a, b) => a.id.localeCompare(b.id));
 }
 

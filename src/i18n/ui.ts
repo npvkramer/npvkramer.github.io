@@ -48,6 +48,7 @@ const en = {
     title: 'Quotes',
     lead: 'Sentences and sayings that moved me. Underlined words come from the word collection.',
     translation: 'Translation',
+    none: 'No quotes yet.',
   },
   dictionary: {
     title: 'Dictionary',
@@ -119,6 +120,7 @@ const de: Strings = {
     title: 'Zitate',
     lead: 'Sätze und Sprüche, die mich bewegt haben. Unterstrichene Wörter stammen aus der Wortsammlung.',
     translation: 'Übersetzung',
+    none: 'Noch keine Zitate.',
   },
   dictionary: {
     title: 'Wörterbuch',

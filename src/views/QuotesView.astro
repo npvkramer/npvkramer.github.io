@@ -16,5 +16,5 @@ const quotes = await getQuotes();
 
 <BaseLayout title={strings.title} description={strings.lead}>
   <PageHeader title={strings.title} lead={strings.lead} />
-  <QuoteGrid quotes={quotes} />
+  {quotes.length > 0 ? <QuoteGrid quotes={quotes} /> : <p class="empty">{strings.none}</p>}
 </BaseLayout>
