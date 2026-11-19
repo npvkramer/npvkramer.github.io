@@ -3,7 +3,7 @@
 // when there is one. Words listed in `words` in the front matter are linked in the original.
 import { getEntries } from 'astro:content';
 import { linkWords, type Quote, type Word } from '../lib/content';
-import { getLocale, languageName, resolve, t } from '../i18n';
+import { getLocale, languageName, resolve, resolveShared, t } from '../i18n';
 
 interface Props {
   quote: Quote;
@@ -11,7 +11,8 @@ interface Props {
 
 const { quote } = Astro.props;
 const locale = getLocale(Astro.url);
-const { author, lang, words: wordRefs } = quote.data;
+const { lang, words: wordRefs } = quote.data;
+const author = resolveShared(quote.data.author, locale);
 const source = resolve(quote.data.source, locale);
 const translation = lang !== locale ? quote.data.translation?.[locale] : undefined;
 const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolean(word));

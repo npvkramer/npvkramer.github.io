@@ -40,7 +40,8 @@ const words = defineCollection({
 const quotes = defineCollection({
   loader: glob({ base: './src/content/quotes', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
-    author: z.string(),
+    // Plain text applies to every language; { de, en } where the name differs (Demokrit / Democritus).
+    author: localizedText(),
     source: localizedText().optional(),
     lang: languageCode(), // language of the original text; default de
     // Translations of the quote text per page language. Shown below the original.
