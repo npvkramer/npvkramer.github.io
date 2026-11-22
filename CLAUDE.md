@@ -56,7 +56,10 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 - **Films:** `src/content/films/*.md`
   - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`), `director`,
     `cast` (list), `runtimeMinutes`, `rating` (0–10, whole numbers), `description`*.
-  - `title`: plain text applies to every language; `{ de, en }` if it differs.
+  - `title`: plain text if the same everywhere; otherwise `{ original, de?, en? }` with the
+    release titles that differ. The original shows below a translated title.
+  - Image: `src/assets/films/<file name>.{jpg,png,webp,avif}`, optional; otherwise `placeholder.*`
+    or the title’s first letter.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
 - **Same everywhere:** dev and the published site show exactly the same content;
   no examples, no drafts. Every translatable field is written in both languages before committing.
