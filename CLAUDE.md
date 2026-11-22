@@ -48,7 +48,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - A word is in a language's glossary only with a definition in that language.
     There is no separate glossary collection.
 - **Quotes:** `src/content/quotes/*.md`
-  - Fields: `author`*, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names).
+  - Fields: `author`*, `source`*, `lang`, `translation` (`{ de, en }`), `words` (references to word file names),
+    `added` (required date).
   - `author`: plain text applies to every language; `{ de, en }` if the name differs;
     leave it out if unknown (shown as “Unknown” / „Unbekannt“).
   - The body is the quote as plain text; line breaks are kept.
@@ -56,7 +57,8 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 - **Films:** `src/content/films/*.md`
   - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`),
     `director` (films) or `creator` (series), one name or a list, `studio` (list), `cast` (list),
-    `runtimeMinutes` (`null` = unknown), `rating` (0–10, whole numbers; `null` = not rated yet), `description`*.
+    `runtimeMinutes` (`null` = unknown), `rating` (0–10, whole numbers; `null` = not rated yet), `description`*,
+    `added` (required date).
   - Series also: `seasons` (required), `endDate` (left out while running).
   - `title`: plain text if the same everywhere; otherwise `{ original, de?, en? }` with the
     release titles that differ. The original shows below a translated title.
