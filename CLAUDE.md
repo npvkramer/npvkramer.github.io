@@ -1,7 +1,7 @@
 # CLAUDE.md
 
-Personal website with two sections, Resonance (quotes) and Glossary (words with meanings,
-each with its own page), with words from any language, in English (default) and German.
+Personal website with three sections, Resonance (quotes), Glossary (words with meanings,
+each with its own page) and Film (films and series), in English (default) and German.
 Static site built with Astro 7, deployed to GitHub Pages. The build output must stay plain
 static HTML/CSS/JS so the site can move to its own domain or server at any time.
 
@@ -53,6 +53,9 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
     leave it out if unknown (shown as “Unknown” / „Unbekannt“).
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
+- **Films:** `src/content/films/*.md`
+  - Fields: `title`, `year`, `type` (`film` | `series`), `genre`, `rating` (0–10, steps of 0.5), `description`*.
+  - `title` and `genre`: plain text applies to every language; `{ de, en }` if it differs.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
 - **Same everywhere:** dev and the published site show exactly the same content;
   no examples, no drafts. Every translatable field is written in both languages before committing.
@@ -62,7 +65,7 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 ## Code structure
 
 - **Routes:** one catch-all page, `src/pages/[...route].astro`, renders the views in
-  `src/views/` for every language: `/`, `/resonance/`, `/glossary/`, `/glossary/<id>/`,
+  `src/views/` for every language: `/`, `/resonance/`, `/glossary/`, `/glossary/<id>/`, `/film/`,
   and the same under `/de/` with German paths. Plus `404` and dev-only `/admin/`.
 - **Language:** components read the page language with `getLocale(Astro.url)`;
   import language helpers only from `src/i18n`.
