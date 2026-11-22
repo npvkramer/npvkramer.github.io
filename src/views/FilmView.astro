@@ -30,7 +30,7 @@ const groupId = (type: FilmType) => strings.groups[type].toLowerCase();
   {films.length === 0 && <p class="empty">{strings.none}</p>}
 
   {films.length > 0 && (
-    <div class="film-controls">
+    <div class="list-controls">
       {groups.length > 1 && (
         <div class="filter-bar" role="group" aria-label={strings.filterLabel} data-film-filter hidden>
           <button class="button" type="button" data-filter="all" aria-pressed="true">{strings.all}</button>

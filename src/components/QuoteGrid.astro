@@ -9,6 +9,6 @@ interface Props {
 const { quotes } = Astro.props;
 ---
 
-<div class="quote-grid">
+<div class="quote-grid" data-quote-grid>
   {quotes.map((quote) => <QuoteCard quote={quote} />)}
 </div>

@@ -37,6 +37,8 @@ const en = {
     lead: 'Life’s lessons in words that echo.',
     none: 'No quotes yet.',
     unknownAuthor: 'Unknown',
+    sortLabel: 'Sort',
+    sorts: { newest: 'Newest', quote: 'Quote', author: 'Author' },
   },
   glossary: {
     title: 'Glossary',
@@ -119,6 +121,8 @@ const de: Strings = {
     lead: 'Die Lehren des Lebens in Worten, die nachklingen.',
     none: 'Noch keine Zitate.',
     unknownAuthor: 'Unbekannt',
+    sortLabel: 'Sortieren',
+    sorts: { newest: 'Neueste', quote: 'Zitat', author: 'Autor' },
   },
   glossary: {
     title: 'Wortschatz',

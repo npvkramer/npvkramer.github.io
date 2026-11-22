@@ -1,5 +1,5 @@
 ---
-// Resonance: all quotes as cards.
+// Resonance: all quotes as cards, newest first. A switch sorts them by quote or by author instead.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import QuoteGrid from '../components/QuoteGrid.astro';
@@ -10,11 +10,28 @@ interface Props {
   locale: Locale;
 }
 
+const SORTS = ['newest', 'quote', 'author'] as const;
+
 const strings = t(Astro.props.locale).resonance;
 const quotes = await getQuotes();
 ---
 
 <BaseLayout title={strings.title} description={strings.lead}>
   <PageHeader title={strings.title} lead={strings.lead} />
+
+  {quotes.length > 1 && (
+    <div class="list-controls">
+      <div class="filter-bar" role="group" aria-label={strings.sortLabel} data-quote-sort hidden>
+        {SORTS.map((sort) => (
+          <button class="button" type="button" data-sort={sort} aria-pressed={String(sort === 'newest')}>
+            {strings.sorts[sort]}
+          </button>
+        ))}
+      </div>
+    </div>
+  )}
+
   {quotes.length > 0 ? <QuoteGrid quotes={quotes} /> : <p class="empty">{strings.none}</p>}
 </BaseLayout>
+
+<script src="../scripts/quote-sort.ts"></script>

@@ -329,8 +329,8 @@
 }
 
 /* Film: filter, groups and entries */
-/* Filter (all, films, series) on the left, view switch (list, cards) on the right */
-.film-controls {
+/* Controls above a list: e.g. filter on the left, view switch or sort order on the right */
+.list-controls {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

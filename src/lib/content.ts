@@ -62,10 +62,10 @@ export async function getGlossary(locale: Locale): Promise<Word[]> {
   return (await getWords(locale)).filter((word) => hasLocale(word.data.definition, locale));
 }
 
-/** All quotes in a stable order (by file name). */
+/** All quotes, newest first (by `added`), then by file name. */
 export async function getQuotes(): Promise<Quote[]> {
   const quotes = await getCollection('quotes');
-  return quotes.sort((a, b) => a.id.localeCompare(b.id));
+  return quotes.sort((a, b) => b.data.added.valueOf() - a.data.added.valueOf() || a.id.localeCompare(b.id));
 }
 
 /** Quotes that reference the given word. */
