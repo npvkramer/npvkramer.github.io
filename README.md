@@ -82,7 +82,7 @@ studio:                       # studio or distributor; several as a list
 cast:                         # main cast
   - Greta Lee
   - Teo Yoo
-runtimeMinutes: 105           # for series: one episode
+runtimeMinutes: 105           # for series: one episode; null if unknown or too varied
 # series only:
 # creator: [Carter Bays, Craig Thomas]   # required for series instead of director
 # seasons: 5                  # required for series
