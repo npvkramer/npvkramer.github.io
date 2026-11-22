@@ -1,5 +1,5 @@
 ---
-// One film or series: square image, title, rating, release date, type, genre, runtime, director, studio, cast
+// One film or series: square image, title, rating, dates, type, seasons, genre, runtime, director or creator, studio, cast
 // and description. Without an image (and without a placeholder image) the title's first letter is shown.
 import { Image } from 'astro:assets';
 import { filmImage, filmTitle, type Film } from '../lib/content';
@@ -15,7 +15,8 @@ const IMAGE_PIXELS = 320;
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
 const strings = t(locale).film;
-const { releaseDate, endDate, seasons, type, director, studio, cast, runtimeMinutes, rating } = film.data;
+const { releaseDate, endDate, seasons, type, director, creator, studio, cast, runtimeMinutes, rating } = film.data;
+const makers = [(type === 'film' ? director : creator) ?? []].flat();
 const { title, original } = filmTitle(film, locale);
 const image = filmImage(film);
 const genre = film.data.genre[locale];
@@ -58,8 +59,8 @@ const meta = [strings.types[type], seasons && strings.seasons(seasons), genre, s
     {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
     <dl class="film-credits">
       <div>
-        <dt>{strings.director[type]}</dt>
-        <dd>{[director].flat().join(', ')}</dd>
+        <dt>{strings.makers[type]}</dt>
+        <dd>{makers.join(', ')}</dd>
       </div>
       <div>
         <dt>{strings.studio}</dt>

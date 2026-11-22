@@ -59,8 +59,8 @@ const en = {
     types: { film: 'Film', series: 'Series' },
     rating: (value: string) => `${value} / 10`,
     ratingLabel: 'Rating',
-    // Film: director; series: creators
-    director: { film: 'Director', series: 'Created by' },
+    // Film: director; series: creator
+    makers: { film: 'Director', series: 'Created by' },
     studio: 'Studio',
     cast: 'Cast',
     runtime: (minutes: number) => `${minutes} min`,
@@ -140,7 +140,7 @@ const de: Strings = {
     types: { film: 'Film', series: 'Serie' },
     rating: (value: string) => `${value} / 10`,
     ratingLabel: 'Bewertung',
-    director: { film: 'Regie', series: 'Idee' },
+    makers: { film: 'Regie', series: 'Idee' },
     studio: 'Studio',
     cast: 'Besetzung',
     runtime: (minutes: number) => `${minutes} Min.`,

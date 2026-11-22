@@ -5,7 +5,7 @@ type: series
 genre:
   de: Drama, Western
   en: Drama, Western
-director:
+creator:
   - Taylor Sheridan
   - John Linson
 studio:

@@ -51,6 +51,14 @@ const quotes = defineCollection({
   }),
 });
 
+const names = z.union([z.string(), z.array(z.string()).min(1)]);
+
+// Fields each type needs and fields it must not have.
+const FIELDS_BY_TYPE = {
+  film: { required: ['director'], forbidden: ['creator', 'seasons', 'endDate'] },
+  series: { required: ['creator', 'seasons'], forbidden: ['director'] },
+} as const;
+
 const films = defineCollection({
   loader: glob({ base: './src/content/films', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
@@ -62,8 +70,9 @@ const films = defineCollection({
     // First release (YYYY-MM-DD); for series the first episode.
     releaseDate: z.coerce.date(),
     type: z.enum(FILM_TYPES),
-    // Names stay the same in every language. One name or a list; for series the creators.
-    director: z.union([z.string(), z.array(z.string()).min(1)]),
+    // Names stay the same in every language; one name or a list. Films: director, series: creator.
+    director: names.optional(),
+    creator: names.optional(),
     // Studio or distributor; several (e.g. per region) as a list.
     studio: z.array(z.string()).min(1),
     cast: z.array(z.string()).min(1), // main cast
@@ -78,14 +87,15 @@ const films = defineCollection({
     seasons: z.number().int().positive().optional(),
     endDate: z.coerce.date().optional(),
   }).superRefine((film, ctx) => {
-    if (film.type === 'series' && film.seasons === undefined) {
-      ctx.addIssue({ code: 'custom', path: ['seasons'], message: 'Series need `seasons`' });
+    const rules = FIELDS_BY_TYPE[film.type];
+    for (const key of rules.required) {
+      if (film[key] === undefined) {
+        ctx.addIssue({ code: 'custom', path: [key], message: `A ${film.type} needs \`${key}\`` });
+      }
     }
-    if (film.type === 'film') {
-      for (const key of ['seasons', 'endDate'] as const) {
-        if (film[key] !== undefined) {
-          ctx.addIssue({ code: 'custom', path: [key], message: `\`${key}\` is only for series` });
-        }
+    for (const key of rules.forbidden) {
+      if (film[key] !== undefined) {
+        ctx.addIssue({ code: 'custom', path: [key], message: `\`${key}\` is not used for a ${film.type}` });
       }
     }
   }),
