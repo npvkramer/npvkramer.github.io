@@ -54,8 +54,9 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **Films:** `src/content/films/*.md`
-  - Fields: `title`, `year`, `type` (`film` | `series`), `genre`, `rating` (0–10, steps of 0.5), `description`*.
-  - `title` and `genre`: plain text applies to every language; `{ de, en }` if it differs.
+  - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`), `director`,
+    `cast` (list), `runtimeMinutes`, `rating` (0–10, whole numbers), `description`*.
+  - `title`: plain text applies to every language; `{ de, en }` if it differs.
 - **IDs:** the file name without folders, so an entry keeps its URL when moved.
 - **Same everywhere:** dev and the published site show exactly the same content;
   no examples, no drafts. Every translatable field is written in both languages before committing.
