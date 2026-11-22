@@ -41,6 +41,12 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Quote order**
+
+- Default view “Selection” / „Auswahl“: quotes with `order` first (smaller = higher), then the rest newest first.
+- Further sorts: “Newest”, “Quote” (alphabetical by the shown text), “Author” (unknown last). The choice is remembered.
+- My order is set with `order`, not by changing `added`.
+
 **2026-11-22: Quotes in the page language**
 
 - Like film titles: the translation into the page language is the main quote, the original follows as a smaller line.

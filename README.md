@@ -53,6 +53,7 @@ source: Stufen (1941)   # optional, translatable
 lang: de                # language of the original; default de
 words: [zauber]         # optional: file names from src/content/words
 added: 2026-11-19       # required: date the quote was added
+order: 1                # optional: my order on the page (smaller = higher); others follow newest first
 translation:            # per page language; shown as the main quote, with the original below
   en: |
     And in every beginning dwells a magic …
