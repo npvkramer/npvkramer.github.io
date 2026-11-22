@@ -64,6 +64,8 @@ const en = {
     studio: 'Studio',
     cast: 'Cast',
     runtime: (minutes: number) => `${minutes} min`,
+    since: (year: number) => `since ${year}`,
+    seasons: (count: number) => (count === 1 ? '1 season' : `${count} seasons`),
     none: 'No films or series yet.',
   },
   // Page of a single word
@@ -142,6 +144,8 @@ const de: Strings = {
     studio: 'Studio',
     cast: 'Besetzung',
     runtime: (minutes: number) => `${minutes} Min.`,
+    since: (year: number) => `seit ${year}`,
+    seasons: (count: number) => (count === 1 ? '1 Staffel' : `${count} Staffeln`),
     none: 'Noch keine Filme oder Serien.',
   },
   entry: {

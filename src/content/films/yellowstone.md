@@ -18,6 +18,8 @@ cast:
   - Wes Bentley
   - Cole Hauser
 runtimeMinutes: 60
+seasons: 5
+endDate: 2024-12-15
 rating:
 description:
   de: Die Familie Dutton verteidigt ihre Ranch in Montana gegen mächtige Interessen und Konflikte an ihren Grenzen.

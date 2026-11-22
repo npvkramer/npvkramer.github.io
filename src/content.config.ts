@@ -74,6 +74,20 @@ const films = defineCollection({
     // My rating from 0 to 10, whole numbers only. `null` or left out: not rated yet.
     rating: z.number().int().min(0).max(10).nullish(),
     description: localizedText(),
+    // Series only: number of seasons (required) and the date of the last episode (left out while running).
+    seasons: z.number().int().positive().optional(),
+    endDate: z.coerce.date().optional(),
+  }).superRefine((film, ctx) => {
+    if (film.type === 'series' && film.seasons === undefined) {
+      ctx.addIssue({ code: 'custom', path: ['seasons'], message: 'Series need `seasons`' });
+    }
+    if (film.type === 'film') {
+      for (const key of ['seasons', 'endDate'] as const) {
+        if (film[key] !== undefined) {
+          ctx.addIssue({ code: 'custom', path: [key], message: `\`${key}\` is only for series` });
+        }
+      }
+    }
   }),
 });
 

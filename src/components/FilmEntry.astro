@@ -15,15 +15,29 @@ const IMAGE_PIXELS = 320;
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
 const strings = t(locale).film;
-const { releaseDate, type, director, studio, cast, runtimeMinutes, rating } = film.data;
+const { releaseDate, endDate, seasons, type, director, studio, cast, runtimeMinutes, rating } = film.data;
 const { title, original } = filmTitle(film, locale);
 const image = filmImage(film);
 const genre = film.data.genre[locale];
 const description = resolve(film.data.description, locale);
 const ratingText = rating == null ? undefined : strings.rating(String(rating));
-const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' }).format(
-  releaseDate,
-);
+// Films: the full release date. Series: the years they ran (2018–2024), or “since 2018” while running.
+// Dates are read in UTC so the day does not shift with the build machine's time zone.
+const startYear = releaseDate.getUTCFullYear();
+const endYear = endDate?.getUTCFullYear();
+const dateText =
+  type === 'film'
+    ? new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(
+        releaseDate,
+      )
+    : endYear === undefined
+      ? strings.since(startYear)
+      : endYear === startYear
+        ? String(startYear)
+        : `${startYear}–${endYear}`;
+const meta = [strings.types[type], seasons && strings.seasons(seasons), genre, strings.runtime(runtimeMinutes)]
+  .filter(Boolean)
+  .join(' · ');
 ---
 
 <article class="film" id={film.id}>
@@ -39,7 +53,7 @@ const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'sh
     </div>
     {original && <p class="film-original">{original}</p>}
     <p class="film-meta">
-      <time datetime={releaseDate.toISOString().slice(0, 10)}>{releaseText}</time>{` · ${strings.types[type]} · ${genre} · ${strings.runtime(runtimeMinutes)}`}
+      <time datetime={releaseDate.toISOString().slice(0, 10)}>{dateText}</time>{` · ${meta}`}
     </p>
     {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
     <dl class="film-credits">
