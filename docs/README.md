@@ -41,6 +41,11 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Film sort**
+
+- Sorts “Title” / „Titel“ (default, alphabetical) and “Year” / „Jahr“ (newest first), within each group. The choice is remembered.
+- Year of a film: its release date. Year of a series: its end date; a running series counts as today and comes first.
+
 **2026-11-22: Ta eis heauton**
 
 - Resonance / Nachklang is renamed to **Ta eis heauton** (Greek “to himself”, after Marcus Aurelius), the same name in both languages.

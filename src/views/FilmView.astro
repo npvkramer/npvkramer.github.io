@@ -1,6 +1,7 @@
 ---
-// Film: films and series on one page, grouped by type. A filter shows one group, and a switch shows
-// the entries as a list or as cards (square images that flip to show the details).
+// Film: films and series on one page, grouped by type and sorted by title. A filter shows one group,
+// a sort switch orders each group by title or by year, and a view switch shows the entries as a list
+// or as cards (square images that flip to show the details).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import FilmEntry from '../components/FilmEntry.astro';
@@ -12,6 +13,7 @@ interface Props {
   locale: Locale;
 }
 
+const SORTS = ['title', 'year'] as const;
 const VIEWS = ['list', 'cards'] as const;
 
 const { locale } = Astro.props;
@@ -36,6 +38,15 @@ const groupId = (type: FilmType) => strings.groups[type].toLowerCase();
           <button class="button" type="button" data-filter="all" aria-pressed="true">{strings.all}</button>
           {groups.map(({ type }) => (
             <button class="button" type="button" data-filter={type} aria-pressed="false">{strings.groups[type]}</button>
+          ))}
+        </div>
+      )}
+      {films.length > 1 && (
+        <div class="filter-bar" role="group" aria-label={strings.sortLabel} data-film-sort hidden>
+          {SORTS.map((sort) => (
+            <button class="button" type="button" data-sort={sort} aria-pressed={String(sort === 'title')}>
+              {strings.sorts[sort]}
+            </button>
           ))}
         </div>
       )}

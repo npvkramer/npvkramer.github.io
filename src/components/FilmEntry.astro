@@ -2,7 +2,7 @@
 // One film or series: square image, title, rating, dates, type, seasons, genre, runtime, director or creator, studio, cast
 // and description. Without an image (and without a placeholder image) the title's first letter is shown.
 import { Image } from 'astro:assets';
-import { filmImage, filmTitle, type Film } from '../lib/content';
+import { filmImage, filmTitle, filmYearDate, type Film } from '../lib/content';
 import { getLocale, resolve, t } from '../i18n';
 
 interface Props {
@@ -46,9 +46,11 @@ const meta = [
 ]
   .filter(Boolean)
   .join(' · ');
+// What the year sort on the Film page orders by (src/scripts/film-page.ts); empty while a series is running.
+const yearSort = filmYearDate(film)?.toISOString().slice(0, 10) ?? '';
 ---
 
-<article class="film" id={film.id} data-film-card>
+<article class="film" id={film.id} data-film-card data-year-sort={yearSort}>
   {image ? (
     <Image
       class="film-image"

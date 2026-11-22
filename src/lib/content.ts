@@ -32,14 +32,19 @@ const filmImages = new Map(
 export const filmImage = (film: Film): ImageMetadata | undefined =>
   filmImages.get(film.id) ?? filmImages.get(FILM_IMAGE_PLACEHOLDER);
 
-/** All films and series, best rated first, then by title; films not rated yet come last. */
+/** All films and series, alphabetically by the title shown in the page language. */
 export async function getFilms(locale: Locale): Promise<Film[]> {
   const films = await getCollection('films');
   const title = (film: Film) => filmTitle(film, locale).title;
-  // Not rated yet sorts after every rating.
-  const rating = (film: Film) => film.data.rating ?? -1;
-  return films.sort((a, b) => rating(b) - rating(a) || title(a).localeCompare(title(b), locale));
+  return films.sort((a, b) => title(a).localeCompare(title(b), locale));
 }
+
+/**
+ * The date a film or series is placed by when sorting by year: a film's release date, a series' end date.
+ * Undefined for a series that is still running, so it counts as today.
+ */
+export const filmYearDate = (film: Film): Date | undefined =>
+  film.data.type === 'series' ? film.data.endDate : film.data.releaseDate;
 
 export const wordUrl = (word: Word, locale: Locale) => pathTo('glossary', locale, word.id);
 
