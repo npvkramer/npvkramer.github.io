@@ -65,15 +65,20 @@ Words listed in `words` are linked in the quote, inflected forms included (Augen
 
 ### Add a film or series
 
-Create a file in `src/content/films/`, e.g. `in-the-mood-for-love.md`. It is listed on `/film/` and `/de/film/`, grouped into films and series, best rated first.
+Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/film/` and `/de/film/`, grouped into films and series, best rated first.
 
 ```markdown
 ---
-title: In the Mood for Love   # same in every language, or { de, en } if the title differs
-year: 2000
+title: Past Lives             # same in every language, or { de, en } if the title differs
+releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
 genre: { de: Liebesfilm, en: Romance }   # same rule as title
-rating: 9.5                   # 0 to 10 in steps of 0.5
+director: Celine Song         # several: separate with commas
+cast:                         # main cast
+  - Greta Lee
+  - Teo Yoo
+runtimeMinutes: 105           # for series: one episode
+rating: 9                     # 0 to 10, whole numbers
 description:                  # translatable
   de: …
   en: …

@@ -40,12 +40,15 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 
 | Field | Rule |
 | --- | --- |
-| File name | Lowercase ASCII of the original title: `in-the-mood-for-love.md`. |
+| File name | Lowercase ASCII of the original title: `past-lives.md`. |
 | `title` | The original title. Use `{ de, en }` only if the German or English release title differs. |
-| `year` | Year of the first release; for series, the year of the first season. |
+| `releaseDate` | Date of the first release, `YYYY-MM-DD`; for series, the first episode. |
 | `type` | `film` or `series`. |
+| `director` | Full name; several directors separated by commas. |
+| `cast` | Main cast as a list, usually 2–5 names. |
+| `runtimeMinutes` | Length in minutes; for series, one typical episode. |
 | `genre` | One main genre, fixed terms. One value if it is the same in both languages (`Drama`), otherwise `{ de, en }` (`Komödie` / `Comedy`). |
-| `rating` | My rating from `0` to `10` in steps of `0.5`. |
+| `rating` | My rating from `0` to `10`, whole numbers only. |
 | `description` | Both `de` and `en`. 1–2 sentences in my own words, no spoilers. |
 
 ## Typography
