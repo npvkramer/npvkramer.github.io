@@ -72,7 +72,7 @@ Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/f
 title: Past Lives             # same in every language, or { de, en } if the title differs
 releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
-genre: { de: Liebesfilm, en: Romance }   # same rule as title
+genre: { de: Liebesfilm, en: Romance }   # required in both languages
 director: Celine Song         # several: separate with commas
 cast:                         # main cast
   - Greta Lee

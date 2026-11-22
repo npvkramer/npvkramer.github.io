@@ -45,7 +45,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 - New section **Film** (same name in both languages): `/film/`, `/de/film/`.
 - Films and series on one page, in two groups with a filter (All, Films, Series).
-- Per entry: title, release date, type (film or series), genre, director, cast, runtime in minutes,
+- Per entry: title, release date, type (film or series), genre (always { de, en }), director, cast, runtime in minutes,
   rating (0–10, whole numbers) and description.
 - No icons or posters for now (official posters are copyrighted).
 - Still open: the section description (placeholder: “Films and series worth watching.” / „Filme und Serien, die sich lohnen.“).
