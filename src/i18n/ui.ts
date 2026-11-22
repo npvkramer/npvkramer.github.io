@@ -38,7 +38,7 @@ const en = {
     none: 'No quotes yet.',
     unknownAuthor: 'Unknown',
     sortLabel: 'Sort',
-    sorts: { selection: 'Selection', newest: 'Newest', quote: 'Quote', author: 'Author' },
+    sorts: { newest: 'Newest', author: 'Author' },
   },
   glossary: {
     title: 'Glossary',
@@ -122,7 +122,7 @@ const de: Strings = {
     none: 'Noch keine Zitate.',
     unknownAuthor: 'Unbekannt',
     sortLabel: 'Sortieren',
-    sorts: { selection: 'Auswahl', newest: 'Neueste', quote: 'Zitat', author: 'Autor' },
+    sorts: { newest: 'Neueste', author: 'Autor' },
   },
   glossary: {
     title: 'Wortschatz',

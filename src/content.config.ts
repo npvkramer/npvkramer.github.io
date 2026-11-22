@@ -55,8 +55,6 @@ const quotes = defineCollection({
     words: z.array(reference('words')).default([]),
     // Date the quote was added (YYYY-MM-DD).
     added: z.coerce.date(),
-    // Optional position in my own order: the highest number shows on top. Quotes without it follow, newest first.
-    order: optional(z.number().int()),
   }),
 });
 

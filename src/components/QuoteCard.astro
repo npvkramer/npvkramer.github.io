@@ -21,17 +21,10 @@ const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolea
 const original = linkWords((quote.body ?? '').trim(), words, locale);
 // The original is the main quote when there is no translation, otherwise the smaller line below it.
 const Original = translation ? 'p' : 'blockquote';
-// Values the sort switch on the Resonance page orders by (src/scripts/quote-sort.ts).
-const sortText = (translation ?? quote.body ?? '').trim();
 ---
 
-<figure
-  class="quote-card"
-  data-quote-card
-  data-added={quote.data.added.toISOString().slice(0, 10)}
-  data-quote={sortText}
-  data-author={knownAuthor ?? ''}
->
+<!-- data-author: what the sort switch on the Resonance page orders by (src/scripts/quote-sort.ts). -->
+<figure class="quote-card" data-quote-card data-author={knownAuthor ?? ''}>
   <div class="quote-body">
     {translation && <blockquote class="quote-text" lang={locale}>{translation}</blockquote>}
     <Original class={translation ? 'quote-original' : 'quote-text'} lang={lang}>{original.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</Original>

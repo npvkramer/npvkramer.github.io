@@ -35,8 +35,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `lang` | Language of the original. |
 | `translation` | One per page language that differs from the original. Shown as the main quote on that language’s page, with the original below. Prefer a published translation (add the translator to `source`) or my own. |
 | `words` | Link words from the collection that appear in the quote. |
-| `added` | Required. The day the quote joined the collection, `YYYY-MM-DD`. Never change it later. |
-| `order` | Optional. My order on the page: the highest number shows on top, so a new quote gets the next number. Quotes without it follow, newest first. Change `order` to reorder, never `added`. |
+| `added` | Required. The day the quote joined the collection, `YYYY-MM-DD`. The page shows the newest on top, so change `added` to reorder. |
 
 ## Films and series
 
