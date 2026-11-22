@@ -76,7 +76,7 @@ title:                        # plain text if the same everywhere, otherwise:
 releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
 genre: { de: Liebesfilm, en: Romance }   # required in both languages
-director: Celine Song         # one name or a list; for series the creators
+director: Celine Song         # films; one name or a list
 studio:                       # studio or distributor; several as a list
   - A24
 cast:                         # main cast
@@ -84,6 +84,7 @@ cast:                         # main cast
   - Teo Yoo
 runtimeMinutes: 105           # for series: one episode
 # series only:
+# creator: [Carter Bays, Craig Thomas]   # required for series instead of director
 # seasons: 5                  # required for series
 # endDate: 2024-12-15         # last episode; leave out while running
 rating: 9                     # 0 to 10, whole numbers; null if not rated yet

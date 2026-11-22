@@ -45,7 +45,8 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | Image | Optional, `src/assets/films/<file name>.jpg` (or `.png`, `.webp`, `.avif`), ideally 1:1 and at least 320 × 320 px. Only images I made or may use. |
 | `releaseDate` | Date of the first release, `YYYY-MM-DD`; for series, the first episode. |
 | `type` | `film` or `series`. |
-| `director` | Full name, or a list for several. For series the creators (shown as “Created by” / „Idee“). |
+| `director` | Films only, required: full name, or a list for several. |
+| `creator` | Series only, required: the creators, one name or a list (shown as “Created by” / „Idee“). |
 | `studio` | Studio or distributor as a list. Several if they differ by region, e.g. `[Focus Features, Universal Pictures International]`. |
 | `cast` | Main cast as a list, usually 2–5 names. |
 | `runtimeMinutes` | Length in minutes; for series, one typical episode. |

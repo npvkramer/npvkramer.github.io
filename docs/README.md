@@ -47,7 +47,7 @@ Concepts, mocks and decisions for this site, kept as history.
 - Films and series on one page, in two groups with a filter (All, Films, Series).
 - Per entry: title, release date, type (film or series), genre (always { de, en }), director, studio, cast, runtime in minutes,
   rating (0–10, whole numbers) and description.
-- **Series** also have `seasons` (required) and `endDate` (left out while running); they show the years they ran
+- **Series** have `creator` instead of `director`, plus `seasons` (required) and `endDate` (left out while running); they show the years they ran
   (2018–2024, or “since 2018”) and the number of seasons instead of the full release date.
 - **Title:** original title, plus German and English release titles where they differ; the original shows below a translated title.
 - **Image:** square image per film in `src/assets/films/`, matched by file name; `placeholder.*` or the title’s first letter otherwise. No official posters (copyright).
