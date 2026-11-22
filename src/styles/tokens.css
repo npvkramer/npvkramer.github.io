@@ -43,6 +43,9 @@
   --quote-gap: var(--space-5);
   --quote-padding: var(--space-5);
 
+  /* Film */
+  --film-image-size: clamp(4.5rem, 3rem + 6vw, 8rem); /* square image next to each entry */
+
   /* Site menu */
   --menu-item-size: clamp(3rem, 1.5rem + 6vw, 7.5rem);
   --menu-duration: 320ms; /* fade of the overlay and of each item */

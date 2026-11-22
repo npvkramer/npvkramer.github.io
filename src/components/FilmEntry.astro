@@ -1,17 +1,23 @@
 ---
-// One film or series: title, rating, release date, type, genre, runtime, director, cast and description.
-import { filmTitle, type Film } from '../lib/content';
+// One film or series: square image, title, rating, release date, type, genre, runtime, director, cast
+// and description. Without an image (and without a placeholder image) the title's first letter is shown.
+import { Image } from 'astro:assets';
+import { filmImage, filmTitle, type Film } from '../lib/content';
 import { getLocale, resolve, t } from '../i18n';
 
 interface Props {
   film: Film;
 }
 
+// Rendered size in CSS comes from --film-image-size; this is the largest pixel size generated.
+const IMAGE_PIXELS = 320;
+
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
 const strings = t(locale).film;
 const { releaseDate, type, director, cast, runtimeMinutes, rating } = film.data;
 const { title, original } = filmTitle(film, locale);
+const image = filmImage(film);
 const genre = film.data.genre[locale];
 const description = resolve(film.data.description, locale);
 const ratingText = strings.rating(String(rating));
@@ -21,24 +27,30 @@ const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'sh
 ---
 
 <article class="film" id={film.id}>
-  <div class="film-head">
-    <h3 class="film-title">{title}</h3>
-    <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>
+  {image ? (
+    <Image class="film-image" src={image} alt="" width={IMAGE_PIXELS} height={IMAGE_PIXELS} fit="cover" />
+  ) : (
+    <span class="film-image film-monogram" aria-hidden="true">{title.charAt(0)}</span>
+  )}
+  <div class="film-body">
+    <div class="film-head">
+      <h3 class="film-title">{title}</h3>
+      <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>
+    </div>
+    {original && <p class="film-original">{original}</p>}
+    <p class="film-meta">
+      <time datetime={releaseDate.toISOString().slice(0, 10)}>{releaseText}</time>{` · ${strings.types[type]} · ${genre} · ${strings.runtime(runtimeMinutes)}`}
+    </p>
+    {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
+    <dl class="film-credits">
+      <div>
+        <dt>{strings.director}</dt>
+        <dd>{director}</dd>
+      </div>
+      <div>
+        <dt>{strings.cast}</dt>
+        <dd>{cast.join(', ')}</dd>
+      </div>
+    </dl>
   </div>
-  {original && <p class="film-original">{original}</p>}
-  <p class="film-meta">
-    <time datetime={releaseDate.toISOString().slice(0, 10)}>{releaseText}</time>
-    · {strings.types[type]} · {genre} · {strings.runtime(runtimeMinutes)}
-  </p>
-  {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
-  <dl class="film-credits">
-    <div>
-      <dt>{strings.director}</dt>
-      <dd>{director}</dd>
-    </div>
-    <div>
-      <dt>{strings.cast}</dt>
-      <dd>{cast.join(', ')}</dd>
-    </div>
-  </dl>
 </article>

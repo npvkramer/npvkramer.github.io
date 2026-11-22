@@ -1,5 +1,6 @@
 // Data access for words, quotes and films. Pages and components get their data only through these functions.
 
+import type { ImageMetadata } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { hasLocale, pathTo, type Locale } from '../i18n';
 
@@ -17,6 +18,19 @@ export function filmTitle(film: Film, locale: Locale): { title: string; original
   const shown = title[locale] ?? title.original;
   return shown === title.original ? { title: shown } : { title: shown, original: title.original };
 }
+
+// Film images live in src/assets/films/ and are matched by file name: past-lives.jpg for past-lives.md.
+// A file named placeholder.* is used for films without their own image.
+const FILM_IMAGE_PLACEHOLDER = 'placeholder';
+const filmImages = new Map(
+  Object.entries(
+    import.meta.glob<ImageMetadata>('/src/assets/films/*.{jpg,jpeg,png,webp,avif}', { eager: true, import: 'default' }),
+  ).map(([path, image]) => [path.split('/').pop()!.replace(/\.[^.]+$/, ''), image]),
+);
+
+/** The film's own image, else the placeholder image, else nothing (the page then shows a monogram). */
+export const filmImage = (film: Film): ImageMetadata | undefined =>
+  filmImages.get(film.id) ?? filmImages.get(FILM_IMAGE_PLACEHOLDER);
 
 /** All films and series, best rated first, then by title. */
 export async function getFilms(locale: Locale): Promise<Film[]> {
