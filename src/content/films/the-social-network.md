@@ -18,4 +18,5 @@ rating:
 description:
   de: Die Gründung von Facebook bringt Mark Zuckerberg Erfolg – und einen Konflikt mit seinem früheren Freund Eduardo Saverin.
   en: The founding of Facebook brings Mark Zuckerberg success—and a conflict with his former friend Eduardo Saverin.
+added: 2026-11-22
 ---

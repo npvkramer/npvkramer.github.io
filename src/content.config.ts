@@ -48,6 +48,8 @@ const quotes = defineCollection({
     translation: z.partialRecord(z.enum(LOCALES), z.string()).optional(),
     // References to words (file names in src/content/words). They are linked in the quote text.
     words: z.array(reference('words')).default([]),
+    // Date the quote was added (YYYY-MM-DD).
+    added: z.coerce.date(),
   }),
 });
 
@@ -88,6 +90,8 @@ const films = defineCollection({
     // My rating from 0 to 10, whole numbers only. `null` or left out: not rated yet.
     rating: z.number().int().min(0).max(10).nullish(),
     description: localizedText(),
+    // Date the entry was added (YYYY-MM-DD).
+    added: z.coerce.date(),
     // Series only: number of seasons (required) and the date of the last episode (left out while running).
     seasons: optional(z.number().int().positive()),
     endDate: optional(z.coerce.date()),

@@ -21,4 +21,5 @@ rating:
 description:
   de: Im April 1945 führt Sergeant Wardaddy seine fünfköpfige Panzerbesatzung auf eine gefährliche Mission hinter feindlichen Linien.
   en: In April 1945, Sergeant Wardaddy leads his five-man tank crew on a dangerous mission behind enemy lines.
+added: 2026-11-22
 ---

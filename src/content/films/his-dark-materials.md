@@ -22,4 +22,5 @@ rating:
 description:
   de: Auf der Suche nach einem entführten Freund entdeckt Lyra ein Geheimnis um verschwundene Kinder und den rätselhaften Staub. Ihre Reise führt sie in andere Welten.
   en: Searching for a kidnapped friend, Lyra uncovers a mystery involving missing children and the strange substance called Dust. Her journey leads her into other worlds.
+added: 2026-11-22
 ---

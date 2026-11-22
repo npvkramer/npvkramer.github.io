@@ -24,4 +24,5 @@ rating:
 description:
   de: Vier Geschwister gelangen durch einen Kleiderschrank nach Narnia. Mit Aslans Hilfe kämpfen sie gegen die Weisse Hexe und ihren ewigen Winter.
   en: Four siblings enter Narnia through a wardrobe. With Aslan’s help, they fight to free the land from the White Witch’s endless winter.
+added: 2026-11-22
 ---

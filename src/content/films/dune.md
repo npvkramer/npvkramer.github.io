@@ -23,4 +23,5 @@ rating:
 description:
   de: Paul Atreides reist mit seiner Familie zum Wüstenplaneten Arrakis, wo ein Konflikt um dessen kostbarste Ressource ausbricht.
   en: Paul Atreides travels with his family to the desert planet Arrakis, where a conflict erupts over its most precious resource.
+added: 2026-11-22
 ---

@@ -19,4 +19,5 @@ rating: null
 description:
   de: Die Geschichte von Liebe und Verlust in Shakespeares Familie, die ihn zu seinem Stück Hamlet inspirierte.
   en: A story of love and loss in Shakespeare’s family that inspired him to write Hamlet.
+added: 2026-11-22
 ---

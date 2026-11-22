@@ -24,4 +24,5 @@ rating: null
 description:
   de: Die Familie Dutton verteidigt ihre Ranch in Montana gegen mächtige Interessen und Konflikte an ihren Grenzen.
   en: The Dutton family defends its Montana ranch amid powerful interests and conflicts along its borders.
+added: 2026-11-22
 ---

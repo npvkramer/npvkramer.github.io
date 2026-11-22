@@ -21,4 +21,5 @@ rating:
 description:
   de: Nach einem Verrat wird der römische General Maximus versklavt. Als Gladiator kämpft er sich bis nach Rom, um den Tod seiner Familie zu rächen.
   en: Betrayed and enslaved, Roman general Maximus fights his way to Rome as a gladiator to avenge his family.
+added: 2026-11-22
 ---

@@ -18,4 +18,5 @@ rating:
 description:
   de: Während der Weihnachtsferien müssen ein mürrischer Lehrer, ein Schüler und die Köchin eines Internats zusammen auf dem Campus bleiben. Zwischen ihnen entsteht eine unerwartete Verbindung.
   en: During Christmas break, a grumpy teacher, a student and a boarding school’s head cook remain on campus together and form an unexpected bond.
+added: 2026-11-22
 ---

@@ -20,4 +20,5 @@ rating:
 description:
   de: 1962 fährt der Türsteher Tony Lip den Pianisten Don Shirley auf einer Konzerttour durch den Süden der USA. Angesichts der Rassentrennung müssen sich die beiden aufeinander verlassen.
   en: In 1962, bouncer Tony Lip drives pianist Don Shirley on a concert tour through the American South. Facing segregation, the two must learn to rely on each other.
+added: 2026-11-22
 ---

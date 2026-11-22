@@ -24,4 +24,5 @@ rating: null
 description:
   de: Ein Junge, der am Weihnachtsmann zweifelt, fährt mit einem geheimnisvollen Zug zum Nordpol und entdeckt die Magie des Glaubens wieder.
   en: A boy who doubts Santa Claus boards a mysterious train to the North Pole and rediscovers the wonder of believing.
+added: 2026-11-22
 ---

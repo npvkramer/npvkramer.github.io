@@ -23,4 +23,5 @@ rating:
 description:
   de: Spitzenkoch Carmy kehrt nach Chicago zurück und versucht, mit seinem Team ein Restaurant durch den fordernden Küchenalltag zu führen.
   en: Chef Carmy returns to Chicago and works with his team to keep a restaurant going through the demands of kitchen life.
+added: 2026-11-22
 ---

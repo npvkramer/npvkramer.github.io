@@ -19,4 +19,5 @@ rating:
 description:
   de: Ein Holzfäller und Eisenbahnarbeiter erlebt Liebe und Verlust im sich wandelnden Amerika des frühen 20. Jahrhunderts.
   en: A logger and railroad worker experiences love and loss in the changing America of the early 20th century.
+added: 2026-11-22
 ---

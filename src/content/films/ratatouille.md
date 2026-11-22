@@ -21,4 +21,5 @@ rating:
 description:
   de: Die junge Ratte Rémy träumt davon, Koch in einem Pariser Spitzenrestaurant zu werden. Gemeinsam mit Linguini versucht sie, diesen Traum zu verwirklichen.
   en: Remy, a young rat, dreams of becoming a chef in a fine Paris restaurant. With Linguini’s help, he sets out to make that dream come true.
+added: 2026-11-22
 ---

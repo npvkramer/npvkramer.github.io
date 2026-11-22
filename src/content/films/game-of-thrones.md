@@ -23,4 +23,5 @@ rating: null
 description:
   de: Mächtige Familien kämpfen um den Eisernen Thron, während im Norden eine bedrohliche Gefahr erwacht.
   en: Powerful families fight for the Iron Throne as a dangerous threat rises in the North.
+added: 2026-11-22
 ---
