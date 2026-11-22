@@ -35,7 +35,6 @@ const en = {
   resonance: {
     title: 'Resonance',
     lead: 'Life’s lessons in words that echo.',
-    translation: 'Translation',
     none: 'No quotes yet.',
     unknownAuthor: 'Unknown',
   },
@@ -118,7 +117,6 @@ const de: Strings = {
   resonance: {
     title: 'Nachklang',
     lead: 'Die Lehren des Lebens in Worten, die nachklingen.',
-    translation: 'Übersetzung',
     none: 'Noch keine Zitate.',
     unknownAuthor: 'Unbekannt',
   },

@@ -1,6 +1,7 @@
 ---
-// A quote as a card. The original is always shown; a translation into the page language follows
-// when there is one. Words listed in `words` in the front matter are linked in the original.
+// A quote as a card, like a film title: the quote in the page language first, the original below it.
+// Without a translation into the page language (or when the quote already is in it) only the original shows.
+// Words listed in `words` in the front matter are linked in the original, where they appear in that form.
 import { getEntries } from 'astro:content';
 import { linkWords, type Quote, type Word } from '../lib/content';
 import { getLocale, languageName, resolve, resolveShared, t } from '../i18n';
@@ -14,20 +15,17 @@ const locale = getLocale(Astro.url);
 const { lang, words: wordRefs } = quote.data;
 const author = resolveShared(quote.data.author, locale) ?? t(locale).resonance.unknownAuthor;
 const source = resolve(quote.data.source, locale);
-const translation = lang !== locale ? quote.data.translation?.[locale] : undefined;
+const translation = lang !== locale ? quote.data.translation?.[locale]?.trim() : undefined;
 const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolean(word));
-const segments = linkWords((quote.body ?? '').trim(), words, locale);
+const original = linkWords((quote.body ?? '').trim(), words, locale);
+// The original is the main quote when there is no translation, otherwise the smaller line below it.
+const Original = translation ? 'p' : 'blockquote';
 ---
 
 <figure class="quote-card">
   <div class="quote-body">
-    <blockquote class="quote-text" lang={lang}>{segments.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</blockquote>
-    {translation && (
-      <p class="quote-translation" lang={locale}>
-        <span class="word-language">{t(locale).resonance.translation}</span>
-        {translation.trim()}
-      </p>
-    )}
+    {translation && <blockquote class="quote-text" lang={locale}>{translation}</blockquote>}
+    <Original class={translation ? 'quote-original' : 'quote-text'} lang={lang}>{original.map((s) => (s.href ? <a class="word-link" href={s.href}>{s.text}</a> : s.text))}</Original>
   </div>
   <figcaption class="quote-source">
     <span class="quote-author">{author}</span>{source && <span lang={source.lang}>, {source.text}</span>}

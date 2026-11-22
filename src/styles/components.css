@@ -204,20 +204,20 @@
   background: var(--color-surface);
 }
 
-/* Original and optional translation, centered vertically together */
+/* Quote in the page language and its original, centered vertically together */
 .quote-body {
   display: grid;
   gap: var(--space-3);
   align-self: center;
 }
 
-.quote-translation {
-  display: grid;
-  gap: var(--space-1);
+/* Original under a translated quote: smaller and quieter, like the original title of a film */
+.quote-original {
   margin: 0;
   padding-left: var(--space-3);
   border-left: 1px solid var(--color-accent);
   color: var(--color-muted);
+  font-style: italic;
   white-space: pre-line;
 }
 
