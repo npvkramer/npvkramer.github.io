@@ -36,7 +36,7 @@ Rules for component CSS: use only these variables, never raw colors, fonts or ra
 | Token | Purpose | Index |
 | --- | --- | --- |
 | `--font-body` | Running text, definitions | Newsreader |
-| `--font-display` | Headings, headwords, quotes, word cloud | Newsreader (= body) |
+| `--font-display` | Headings, headwords, quotes | Newsreader (= body) |
 | `--font-ui` | Navigation, labels, meta lines, buttons | IBM Plex Mono |
 | `--font-mono` | Code | IBM Plex Mono (= UI) |
 | `--size-base` | Body size (overrides tokens.css) | 1.125rem (18px) |

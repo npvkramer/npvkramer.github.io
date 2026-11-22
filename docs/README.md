@@ -41,6 +41,14 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Fragments removed**
+
+- The glossary already lists every word, so the Fragments section (word cloud) is gone,
+  together with `weight` and the cloud script, styles and tokens.
+- Word pages move under the glossary: `/glossary/<id>/`, `/de/wortschatz/<id>/`.
+- The random featured word on the home page stays.
+- **Glossary** is now defined as “A collection of words.” / „Eine Sammlung von Wörtern.“
+
 **2026-11-19: Unknown authors**
 
 - Quotes without a known author or source are allowed. They leave out `author` and show “Unknown” / „Unbekannt“.
@@ -64,7 +72,7 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Resonance:** "Life’s lessons in words that echo." / „Die Lehren des Lebens in Worten, die nachklingen.“
 - **Glossary:** "The sound and meaning behind a word." / „Klang und Bedeutung hinter einem Wort.“
 - **Fragments:** "A scattering of words worth keeping." / „Eine lose Sammlung von Wörtern, die bleiben dürfen.“
-- Each definition is the section's page lead and its description in the menu and on the home page.
+- Each definition is the section’s page lead and its description in the menu and on the home page.
 
 **2026-11-19: Same content everywhere**
 

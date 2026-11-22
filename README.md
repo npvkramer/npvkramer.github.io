@@ -1,6 +1,6 @@
 # npvkramer.github.io
 
-Personal website built with [Astro](https://astro.build): three sections: Fragments (a word cloud), Resonance (quotes) and Glossary (words with meanings). The output is plain static HTML, CSS and JS and runs on any web server.
+Personal website built with [Astro](https://astro.build): two sections: Resonance (quotes) and Glossary (words with meanings, each with its own page). The output is plain static HTML, CSS and JS and runs on any web server.
 
 ## Commands
 
@@ -15,13 +15,13 @@ Personal website built with [Astro](https://astro.build): three sections: Fragme
 
 All content is Markdown in `src/content/`. The allowed front matter fields are defined in [src/content.config.ts](src/content.config.ts). The file name becomes the URL in every language. What to capture and how: [docs/content-guidelines.md](docs/content-guidelines.md).
 
-The site is in English (default, `/fragments/…`) and German (`/de/fragmente/…`). Words can come from any language. Interface text and paths live in [src/i18n/](src/i18n/).
+The site is in English (default, `/glossary/…`) and German (`/de/wortschatz/…`). Words can come from any language. Interface text and paths live in [src/i18n/](src/i18n/).
 
 **Translatable fields** (`partOfSpeech`, `definition`, `origin`, quote `source`) take plain text or one value per page language. Plain text counts as German. A missing language falls back to German (or the other language) with an "Only available in …" note.
 
 ### Add a word
 
-Create a file in `src/content/words/`, e.g. `inyeon.md` → `/fragments/inyeon/` and `/de/fragmente/inyeon/`.
+Create a file in `src/content/words/`, e.g. `inyeon.md` → `/glossary/inyeon/` and `/de/wortschatz/inyeon/`.
 
 ```markdown
 ---
@@ -36,7 +36,6 @@ definition:                   # optional, translatable – with a definition in 
   de: Die schicksalhafte …    #   the word also appears in that language's glossary
   en: A fated connection …
 origin: …                     # optional, translatable
-weight: 4                     # required, 1 (smallest) to 5 (largest): size in the word cloud
 added: 2026-11-19             # required: date the word was added
 ---
 ```
@@ -84,7 +83,7 @@ src/
   pages/             Routes: each file is a URL (folder names stay German)
   lib/               Data access and helpers (content.ts, format.ts)
   styles/            CSS: tokens, themes, base, layout, components
-  scripts/           Client JS: word cloud, glossary search, random word, color scheme
+  scripts/           Client JS: glossary search, random word, color scheme
 public/              Files served as-is (favicon, early scripts)
 ```
 
