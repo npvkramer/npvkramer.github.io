@@ -328,6 +328,67 @@
   margin-top: var(--space-5);
 }
 
+/* Film: filter, groups and entries */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.filter-bar [aria-pressed='true'] {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.film-group + .film-group {
+  margin-top: var(--space-6);
+}
+
+.film-group h2 {
+  margin-top: 0;
+}
+
+.film-list {
+  border-top: 1px solid var(--color-rule);
+}
+
+.film {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: var(--space-4);
+}
+
+.film-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+}
+
+.film-title {
+  margin: 0;
+  font-size: var(--size-headword);
+}
+
+.film-rating {
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.film-meta {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.film-description {
+  margin: 0;
+  max-width: var(--text-measure);
+}
+
 /* Admin (dev only): docs viewer */
 .doc-frame {
   display: block;

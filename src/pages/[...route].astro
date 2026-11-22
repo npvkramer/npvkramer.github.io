@@ -5,6 +5,7 @@ import HomeView from '../views/HomeView.astro';
 import WordView from '../views/WordView.astro';
 import ResonanceView from '../views/ResonanceView.astro';
 import GlossaryView from '../views/GlossaryView.astro';
+import FilmView from '../views/FilmView.astro';
 import { getWords, type Word } from '../lib/content';
 import { LOCALES, pathTo, type Locale, type RouteKey } from '../i18n';
 
@@ -19,6 +20,7 @@ export async function getStaticPaths() {
       page('home'),
       page('resonance'),
       page('glossary'),
+      page('film'),
       ...words.map((word) => page('glossary', word)),
     ];
   });
@@ -36,3 +38,4 @@ const { locale, route, word } = Astro.props;
 {route === 'home' && <HomeView locale={locale} />}
 {route === 'resonance' && <ResonanceView locale={locale} />}
 {route === 'glossary' && (word ? <WordView locale={locale} word={word} /> : <GlossaryView locale={locale} />)}
+{route === 'film' && <FilmView locale={locale} />}

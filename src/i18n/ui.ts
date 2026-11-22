@@ -26,6 +26,7 @@ const en = {
   count: {
     quotes: ['quote', 'quotes'],
     entries: ['entry', 'entries'],
+    titles: ['title', 'titles'],
   },
   home: {
     featured: 'Word of the moment',
@@ -48,6 +49,17 @@ const en = {
     none: 'No entries in English yet.',
     letterAnchor: 'letter',
     inQuotes: (count: number) => (count === 1 ? 'Appears in one quote' : `Appears in ${count} quotes`),
+  },
+  film: {
+    title: 'Film',
+    lead: 'Films and series worth watching.',
+    filterLabel: 'Show',
+    all: 'All',
+    groups: { film: 'Films', series: 'Series' },
+    types: { film: 'Film', series: 'Series' },
+    rating: (value: string) => `${value} / 10`,
+    ratingLabel: 'Rating',
+    none: 'No films or series yet.',
   },
   // Page of a single word
   entry: {
@@ -88,6 +100,7 @@ const de: Strings = {
   count: {
     quotes: ['Zitat', 'Zitate'],
     entries: ['Eintrag', 'Einträge'],
+    titles: ['Titel', 'Titel'],
   },
   home: {
     featured: 'Wort des Moments',
@@ -110,6 +123,17 @@ const de: Strings = {
     none: 'Noch keine Einträge auf Deutsch.',
     letterAnchor: 'buchstabe',
     inQuotes: (count: number) => (count === 1 ? 'Kommt in einem Zitat vor' : `Kommt in ${count} Zitaten vor`),
+  },
+  film: {
+    title: 'Film',
+    lead: 'Filme und Serien, die sich lohnen.',
+    filterLabel: 'Anzeigen',
+    all: 'Alle',
+    groups: { film: 'Filme', series: 'Serien' },
+    types: { film: 'Film', series: 'Serie' },
+    rating: (value: string) => `${value} / 10`,
+    ratingLabel: 'Bewertung',
+    none: 'Noch keine Filme oder Serien.',
   },
   entry: {
     onlyIn: (language: string) => `Nur auf ${language} verfügbar`,

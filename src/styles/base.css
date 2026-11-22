@@ -110,6 +110,8 @@ ol[class] {
 .entry-refs,
 .letter-nav,
 .quote-source,
+.film-meta,
+.film-rating,
 .language-hint,
 .area-count {
   font-family: var(--font-ui);

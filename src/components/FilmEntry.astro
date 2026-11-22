@@ -1,0 +1,27 @@
+---
+// One film or series: title, rating, year, type, genre and a short description.
+import type { Film } from '../lib/content';
+import { getLocale, resolve, resolveShared, t } from '../i18n';
+
+interface Props {
+  film: Film;
+}
+
+const { film } = Astro.props;
+const locale = getLocale(Astro.url);
+const strings = t(locale).film;
+const { year, type, rating } = film.data;
+const title = resolveShared(film.data.title, locale);
+const genre = resolveShared(film.data.genre, locale);
+const description = resolve(film.data.description, locale);
+const ratingText = strings.rating(new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(rating));
+---
+
+<article class="film" id={film.id}>
+  <div class="film-head">
+    <h3 class="film-title">{title}</h3>
+    <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>
+  </div>
+  <p class="film-meta">{year} · {strings.types[type]} · {genre}</p>
+  {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
+</article>
