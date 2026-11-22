@@ -45,7 +45,7 @@
 
   /* Film */
   --film-image-size: clamp(4.5rem, 3rem + 6vw, 8rem); /* square image next to each entry */
-  --film-card-min: 15rem; /* card view: smallest card width */
+  --film-card-min: 22rem; /* card view: smallest card width */
   --flip-duration: 0.6s;
   --flip-perspective: 1200px;
 

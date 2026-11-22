@@ -11,8 +11,8 @@ interface Props {
 
 // Pixel widths generated for the image: small for the list, large for the card view.
 // The browser picks one from `sizes`; the displayed size comes from CSS.
-const IMAGE_WIDTHS = [320, 640];
-const IMAGE_SIZES = '(min-width: 576px) 20rem, 100vw';
+const IMAGE_WIDTHS = [320, 640, 960];
+const IMAGE_SIZES = '(min-width: 576px) 30rem, 100vw';
 
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
@@ -54,8 +54,8 @@ const meta = [
       class="film-image"
       src={image}
       alt=""
-      width={IMAGE_WIDTHS[1]}
-      height={IMAGE_WIDTHS[1]}
+      width={IMAGE_WIDTHS.at(-1)}
+      height={IMAGE_WIDTHS.at(-1)}
       widths={IMAGE_WIDTHS}
       sizes={IMAGE_SIZES}
       fit="cover"
