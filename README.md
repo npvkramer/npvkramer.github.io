@@ -83,6 +83,9 @@ cast:                         # main cast
   - Greta Lee
   - Teo Yoo
 runtimeMinutes: 105           # for series: one episode
+# series only:
+# seasons: 5                  # required for series
+# endDate: 2024-12-15         # last episode; leave out while running
 rating: 9                     # 0 to 10, whole numbers; null if not rated yet
 description:                  # translatable
   de: …

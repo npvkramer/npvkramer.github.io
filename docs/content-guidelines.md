@@ -49,6 +49,8 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `studio` | Studio or distributor as a list. Several if they differ by region, e.g. `[Focus Features, Universal Pictures International]`. |
 | `cast` | Main cast as a list, usually 2–5 names. |
 | `runtimeMinutes` | Length in minutes; for series, one typical episode. |
+| `seasons` | Series only, required: number of seasons. |
+| `endDate` | Series only: date of the last episode, `YYYY-MM-DD`. Leave it out while the series is still running. |
 | `genre` | One main genre, always in both languages: `{ de: Komödie, en: Comedy }`, also when the word is the same (`{ de: Drama, en: Drama }`). |
 | `rating` | My rating from `0` to `10`, whole numbers only. `null` if I have not rated it yet; it then shows no rating and comes last in its group. |
 | `description` | Both `de` and `en`. 1–2 sentences in my own words, no spoilers. |
