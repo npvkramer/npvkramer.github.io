@@ -12,6 +12,5 @@ definition:
 origin:
   de: Sino-koreanisch, von 因緣 (Ursache und Bedingung).
   en: Sino-Korean, from 因緣 (cause and condition).
-weight: 5
 added: 2026-11-19
 ---

@@ -13,6 +13,5 @@ definition:
 origin:
   de: Geprägt 1943 vom US-Geologen Siemon W. Muller, aus engl. „permanent“ und „frost“.
   en: Coined in 1943 by the US geologist Siemon W. Muller, from “permanent” and “frost”.
-weight: 2
 added: 2026-11-19
 ---
