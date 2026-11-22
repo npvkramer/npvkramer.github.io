@@ -52,7 +52,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `runtimeMinutes` | Length in minutes; for series, one typical episode. `null` if unknown or if episodes vary too much; then no runtime is shown. |
 | `seasons` | Series only, required: number of seasons. |
 | `endDate` | Series only: date of the last episode, `YYYY-MM-DD`. Leave it out while the series is still running. |
-| `genre` | One main genre, always in both languages: `{ de: Komödie, en: Comedy }`, also when the word is the same (`{ de: Drama, en: Drama }`). |
+| `genre` | Always in both languages: `{ de: Komödie, en: Comedy }`, also when the word is the same (`{ de: Drama, en: Drama }`). English in Title Case (`Fantasy Drama`, `Historical Drama / Action`); German as usual (`Fantasy-Drama`). Several genres separated by `,` or `/`. |
 | `rating` | My rating from `0` to `10`, whole numbers only. `null` if I have not rated it yet; it then shows no rating and comes last in its group. |
 | `description` | Both `de` and `en`. 1–2 sentences in my own words, no spoilers. |
 
