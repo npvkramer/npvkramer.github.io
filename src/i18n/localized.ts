@@ -21,6 +21,9 @@ export const localizedText = () =>
       .refine((value) => Object.values(value).some(Boolean), 'Add the text in at least one language'),
   ]);
 
+/** Schema for a field that must be written in every page language, e.g. `genre: { de: …, en: … }`. */
+export const textPerLocale = () => z.record(z.enum(LOCALES), z.string().min(1));
+
 /** Picks the page language, else German, else any other. `fallback` marks text in another language. */
 export function resolve(value: LocalizedText | undefined, locale: Locale): ResolvedText | undefined {
   if (value === undefined) return undefined;

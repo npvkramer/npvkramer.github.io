@@ -5,7 +5,7 @@ import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { isLatinScript, languageCode } from './i18n/languages';
-import { localizedText } from './i18n/localized';
+import { localizedText, textPerLocale } from './i18n/localized';
 import { LOCALES } from './i18n/config';
 import { FILM_TYPES } from './lib/film-types';
 
@@ -64,8 +64,8 @@ const films = defineCollection({
     cast: z.array(z.string()).min(1), // main cast
     // Length in minutes; for series one episode.
     runtimeMinutes: z.number().int().positive(),
-    // Same rule as title: plain text for every language, { de, en } if it differs (Comedy / Komödie).
-    genre: localizedText(),
+    // Always in both languages: { de: Komödie, en: Comedy }.
+    genre: textPerLocale(),
     // My rating from 0 to 10, whole numbers only.
     rating: z.number().int().min(0).max(10),
     description: localizedText(),
