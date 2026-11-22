@@ -55,8 +55,9 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - Referenced words are linked inline, inflected forms included.
 - **Films:** `src/content/films/*.md`
   - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`),
-    `director` (name or list; for series the creators), `studio` (list), `cast` (list), `runtimeMinutes`,
-    `rating` (0–10, whole numbers; `null` = not rated yet), `description`*.
+    `director` (films) or `creator` (series), one name or a list, `studio` (list), `cast` (list),
+    `runtimeMinutes`, `rating` (0–10, whole numbers; `null` = not rated yet), `description`*.
+  - Series also: `seasons` (required), `endDate` (left out while running).
   - `title`: plain text if the same everywhere; otherwise `{ original, de?, en? }` with the
     release titles that differ. The original shows below a translated title.
   - Image: `src/assets/films/<file name>.{jpg,png,webp,avif}`, optional; otherwise `placeholder.*`
