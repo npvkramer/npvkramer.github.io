@@ -45,7 +45,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 - New section **Film** (same name in both languages): `/film/`, `/de/film/`.
 - Films and series on one page, in two groups with a filter (All, Films, Series).
-- Per entry: title, release date, type (film or series), genre (always { de, en }), director, cast, runtime in minutes,
+- Per entry: title, release date, type (film or series), genre (always { de, en }), director, studio, cast, runtime in minutes,
   rating (0–10, whole numbers) and description.
 - **Title:** original title, plus German and English release titles where they differ; the original shows below a translated title.
 - **Image:** square image per film in `src/assets/films/`, matched by file name; `placeholder.*` or the title’s first letter otherwise. No official posters (copyright).

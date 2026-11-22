@@ -46,6 +46,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `releaseDate` | Date of the first release, `YYYY-MM-DD`; for series, the first episode. |
 | `type` | `film` or `series`. |
 | `director` | Full name; several directors separated by commas. |
+| `studio` | Studio or distributor as a list. Several if they differ by region, e.g. `[Focus Features, Universal Pictures International]`. |
 | `cast` | Main cast as a list, usually 2–5 names. |
 | `runtimeMinutes` | Length in minutes; for series, one typical episode. |
 | `genre` | One main genre, always in both languages: `{ de: Komödie, en: Comedy }`, also when the word is the same (`{ de: Drama, en: Drama }`). |

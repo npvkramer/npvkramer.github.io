@@ -77,6 +77,8 @@ releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
 genre: { de: Liebesfilm, en: Romance }   # required in both languages
 director: Celine Song         # several: separate with commas
+studio:                       # studio or distributor; several as a list
+  - A24
 cast:                         # main cast
   - Greta Lee
   - Teo Yoo
