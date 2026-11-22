@@ -42,7 +42,7 @@ const en = {
   },
   glossary: {
     title: 'Glossary',
-    lead: 'A collection of words.',
+    lead: 'Words, ideas, meanings, connections',
     search: 'Search word or meaning …',
     searchLabel: 'Search the glossary',
     index: 'Index',
@@ -53,7 +53,7 @@ const en = {
   },
   film: {
     title: 'Film',
-    lead: 'Stories told on screen.',
+    lead: 'Stories, scenes, characters, emotions',
     filterLabel: 'Show',
     sortLabel: 'Sort',
     sorts: { title: 'Title', year: 'Year' },
@@ -128,7 +128,7 @@ const de: Strings = {
   },
   glossary: {
     title: 'Wortschatz',
-    lead: 'Eine Sammlung von Wörtern.',
+    lead: 'Wörter, Ideen, Bedeutungen, Verbindungen',
     search: 'Wort oder Bedeutung suchen …',
     searchLabel: 'Wortschatz durchsuchen',
     index: 'Register',
@@ -139,7 +139,7 @@ const de: Strings = {
   },
   film: {
     title: 'Film',
-    lead: 'Geschichten, auf der Leinwand erzählt.',
+    lead: 'Geschichten, Szenen, Figuren, Gefühle',
     filterLabel: 'Anzeigen',
     sortLabel: 'Sortieren',
     sorts: { title: 'Titel', year: 'Jahr' },

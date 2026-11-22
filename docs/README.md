@@ -41,6 +41,13 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Section descriptions**
+
+- All three follow the same pattern: four nouns, no closing period.
+- **Ta eis heauton:** “Thoughts, people, observations, perceptions” / „Gedanken, Menschen, Beobachtungen, Wahrnehmungen“
+- **Glossary:** “Words, ideas, meanings, connections” / „Wörter, Ideen, Bedeutungen, Verbindungen“
+- **Film:** “Stories, scenes, characters, emotions” / „Geschichten, Szenen, Figuren, Gefühle“
+
 **2026-11-22: Film sort**
 
 - Films and series stay in separate groups, also under “All”.
@@ -79,7 +86,7 @@ Concepts, mocks and decisions for this site, kept as history.
   (2018–2024, or “since 2018”) and the number of seasons instead of the full release date.
 - **Title:** original title, plus German and English release titles where they differ; the original shows below a translated title.
 - **Image:** square image per film in `src/assets/films/`, matched by file name; `placeholder.*` or the title’s first letter otherwise. No official posters (copyright).
-- Section description (2026-11-22): “Stories told on screen.” / „Geschichten, auf der Leinwand erzählt.“
+- Section description: see “Section descriptions” (2026-11-22).
 
 **2026-11-22: Fragments removed**
 
