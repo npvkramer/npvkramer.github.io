@@ -20,7 +20,7 @@ const { title, original } = filmTitle(film, locale);
 const image = filmImage(film);
 const genre = film.data.genre[locale];
 const description = resolve(film.data.description, locale);
-const ratingText = strings.rating(String(rating));
+const ratingText = rating == null ? undefined : strings.rating(String(rating));
 const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' }).format(
   releaseDate,
 );
@@ -35,7 +35,7 @@ const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'sh
   <div class="film-body">
     <div class="film-head">
       <h3 class="film-title">{title}</h3>
-      <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>
+      {ratingText && <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>}
     </div>
     {original && <p class="film-original">{original}</p>}
     <p class="film-meta">

@@ -32,11 +32,13 @@ const filmImages = new Map(
 export const filmImage = (film: Film): ImageMetadata | undefined =>
   filmImages.get(film.id) ?? filmImages.get(FILM_IMAGE_PLACEHOLDER);
 
-/** All films and series, best rated first, then by title. */
+/** All films and series, best rated first, then by title; films not rated yet come last. */
 export async function getFilms(locale: Locale): Promise<Film[]> {
   const films = await getCollection('films');
   const title = (film: Film) => filmTitle(film, locale).title;
-  return films.sort((a, b) => b.data.rating - a.data.rating || title(a).localeCompare(title(b), locale));
+  // Not rated yet sorts after every rating.
+  const rating = (film: Film) => film.data.rating ?? -1;
+  return films.sort((a, b) => rating(b) - rating(a) || title(a).localeCompare(title(b), locale));
 }
 
 export const wordUrl = (word: Word, locale: Locale) => pathTo('glossary', locale, word.id);

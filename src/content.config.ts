@@ -69,8 +69,8 @@ const films = defineCollection({
     runtimeMinutes: z.number().int().positive(),
     // Always in both languages: { de: Komödie, en: Comedy }.
     genre: textPerLocale(),
-    // My rating from 0 to 10, whole numbers only.
-    rating: z.number().int().min(0).max(10),
+    // My rating from 0 to 10, whole numbers only. `null` or left out: not rated yet.
+    rating: z.number().int().min(0).max(10).nullish(),
     description: localizedText(),
   }),
 });
