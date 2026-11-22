@@ -53,6 +53,11 @@ const quotes = defineCollection({
 
 const names = z.union([z.string(), z.array(z.string()).min(1)]);
 
+// Optional field that also accepts an empty value (`seasons:` with nothing after it) as “not set”.
+// Without this, an empty `endDate:` would turn into 1970-01-01 and an empty `seasons:` would fail.
+const optional = <T extends z.ZodType>(schema: T) =>
+  z.preprocess((value) => (value === null ? undefined : value), schema.optional());
+
 // Fields each type needs and fields it must not have.
 const FIELDS_BY_TYPE = {
   film: { required: ['director'], forbidden: ['creator', 'seasons', 'endDate'] },
@@ -71,8 +76,8 @@ const films = defineCollection({
     releaseDate: z.coerce.date(),
     type: z.enum(FILM_TYPES),
     // Names stay the same in every language; one name or a list. Films: director, series: creator.
-    director: names.optional(),
-    creator: names.optional(),
+    director: optional(names),
+    creator: optional(names),
     // Studio or distributor; several (e.g. per region) as a list.
     studio: z.array(z.string()).min(1),
     cast: z.array(z.string()).min(1), // main cast
@@ -84,8 +89,8 @@ const films = defineCollection({
     rating: z.number().int().min(0).max(10).nullish(),
     description: localizedText(),
     // Series only: number of seasons (required) and the date of the last episode (left out while running).
-    seasons: z.number().int().positive().optional(),
-    endDate: z.coerce.date().optional(),
+    seasons: optional(z.number().int().positive()),
+    endDate: optional(z.coerce.date()),
   }).superRefine((film, ctx) => {
     const rules = FIELDS_BY_TYPE[film.type];
     for (const key of rules.required) {
