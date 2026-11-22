@@ -44,8 +44,8 @@ const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'sh
     {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
     <dl class="film-credits">
       <div>
-        <dt>{strings.director}</dt>
-        <dd>{director}</dd>
+        <dt>{strings.director[type]}</dt>
+        <dd>{[director].flat().join(', ')}</dd>
       </div>
       <div>
         <dt>{strings.studio}</dt>

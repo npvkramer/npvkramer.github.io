@@ -62,8 +62,8 @@ const films = defineCollection({
     // First release (YYYY-MM-DD); for series the first episode.
     releaseDate: z.coerce.date(),
     type: z.enum(FILM_TYPES),
-    // Names stay the same in every language. Several directors: separate them with commas.
-    director: z.string(),
+    // Names stay the same in every language. One name or a list; for series the creators.
+    director: z.union([z.string(), z.array(z.string()).min(1)]),
     // Studio or distributor; several (e.g. per region) as a list.
     studio: z.array(z.string()).min(1),
     cast: z.array(z.string()).min(1), // main cast
