@@ -41,6 +41,14 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Film section**
+
+- New section **Film** (same name in both languages): `/film/`, `/de/film/`.
+- Films and series on one page, in two groups with a filter (All, Films, Series).
+- Per entry: title, year, type (film or series), genre, rating (0–10 in steps of 0.5), description.
+- No icons or posters for now (official posters are copyrighted).
+- Still open: the section description (placeholder: “Films and series worth watching.” / „Filme und Serien, die sich lohnen.“).
+
 **2026-11-22: Fragments removed**
 
 - The glossary already lists every word, so the Fragments section (word cloud) is gone,

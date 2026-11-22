@@ -36,6 +36,18 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `translation` | Optional. Prefer a published translation (add the translator to `source`) or my own, marked as such. |
 | `words` | Link words from the collection that appear in the quote. |
 
+## Films and series
+
+| Field | Rule |
+| --- | --- |
+| File name | Lowercase ASCII of the original title: `in-the-mood-for-love.md`. |
+| `title` | The original title. Use `{ de, en }` only if the German or English release title differs. |
+| `year` | Year of the first release; for series, the year of the first season. |
+| `type` | `film` or `series`. |
+| `genre` | One main genre, fixed terms. One value if it is the same in both languages (`Drama`), otherwise `{ de, en }` (`Komödie` / `Comedy`). |
+| `rating` | My rating from `0` to `10` in steps of `0.5`. |
+| `description` | Both `de` and `en`. 1–2 sentences in my own words, no spoilers. |
+
 ## Typography
 
 - **Quotation marks, always the same:** German „…“, English “…”. Apostrophe ’ (`Life’s`).

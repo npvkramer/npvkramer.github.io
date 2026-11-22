@@ -1,6 +1,6 @@
 # npvkramer.github.io
 
-Personal website built with [Astro](https://astro.build): two sections: Resonance (quotes) and Glossary (words with meanings, each with its own page). The output is plain static HTML, CSS and JS and runs on any web server.
+Personal website built with [Astro](https://astro.build): three sections: Resonance (quotes), Glossary (words with meanings, each with its own page) and Film (films and series with a rating). The output is plain static HTML, CSS and JS and runs on any web server.
 
 ## Commands
 
@@ -62,6 +62,23 @@ Der uns beschützt und der uns hilft, zu leben.
 ```
 
 Words listed in `words` are linked in the quote, inflected forms included (Augenblick → Augenblicke). The quote also appears on the word's page.
+
+### Add a film or series
+
+Create a file in `src/content/films/`, e.g. `in-the-mood-for-love.md`. It is listed on `/film/` and `/de/film/`, grouped into films and series, best rated first.
+
+```markdown
+---
+title: In the Mood for Love   # same in every language, or { de, en } if the title differs
+year: 2000
+type: film                    # film or series
+genre: { de: Liebesfilm, en: Romance }   # same rule as title
+rating: 9.5                   # 0 to 10 in steps of 0.5
+description:                  # translatable
+  de: …
+  en: …
+---
+```
 
 ## Styling
 
