@@ -36,7 +36,12 @@ const dateText =
       : endYear === startYear
         ? String(startYear)
         : `${startYear}–${endYear}`;
-const meta = [strings.types[type], seasons && strings.seasons(seasons), genre, strings.runtime(runtimeMinutes)]
+const meta = [
+  strings.types[type],
+  seasons && strings.seasons(seasons),
+  genre,
+  runtimeMinutes && strings.runtime(runtimeMinutes),
+]
   .filter(Boolean)
   .join(' · ');
 ---

@@ -76,8 +76,8 @@ const films = defineCollection({
     // Studio or distributor; several (e.g. per region) as a list.
     studio: z.array(z.string()).min(1),
     cast: z.array(z.string()).min(1), // main cast
-    // Length in minutes; for series one episode.
-    runtimeMinutes: z.number().int().positive(),
+    // Length in minutes; for series one episode. `null` or left out if unknown or too varied.
+    runtimeMinutes: z.number().int().positive().nullish(),
     // Always in both languages: { de: Komödie, en: Comedy }.
     genre: textPerLocale(),
     // My rating from 0 to 10, whole numbers only. `null` or left out: not rated yet.
