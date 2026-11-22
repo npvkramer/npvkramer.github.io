@@ -36,6 +36,11 @@ const words = defineCollection({
     }),
 });
 
+// Optional field that also accepts an empty value (`seasons:` with nothing after it) as “not set”.
+// Without this, an empty `endDate:` would turn into 1970-01-01 and an empty `seasons:` would fail.
+const optional = <T extends z.ZodType>(schema: T) =>
+  z.preprocess((value) => (value === null ? undefined : value), schema.optional());
+
 const quotes = defineCollection({
   loader: glob({ base: './src/content/quotes', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
@@ -44,21 +49,18 @@ const quotes = defineCollection({
     author: localizedText().optional(),
     source: localizedText().optional(),
     lang: languageCode(), // language of the original text; default de
-    // Translations of the quote text per page language. Shown below the original.
+    // Translations of the quote text per page language, shown as the main quote with the original below.
     translation: z.partialRecord(z.enum(LOCALES), z.string()).optional(),
     // References to words (file names in src/content/words). They are linked in the quote text.
     words: z.array(reference('words')).default([]),
     // Date the quote was added (YYYY-MM-DD).
     added: z.coerce.date(),
+    // Optional position in my own order (smaller = higher). Quotes without it follow, newest first.
+    order: optional(z.number().int()),
   }),
 });
 
 const names = z.union([z.string(), z.array(z.string()).min(1)]);
-
-// Optional field that also accepts an empty value (`seasons:` with nothing after it) as “not set”.
-// Without this, an empty `endDate:` would turn into 1970-01-01 and an empty `seasons:` would fail.
-const optional = <T extends z.ZodType>(schema: T) =>
-  z.preprocess((value) => (value === null ? undefined : value), schema.optional());
 
 // Fields each type needs and fields it must not have.
 const FIELDS_BY_TYPE = {

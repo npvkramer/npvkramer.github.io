@@ -1,8 +1,9 @@
-// Resonance: sorts the quotes by date added (default, newest first), by quote text or by author.
-// Without JavaScript the switch stays hidden and the quotes keep the default order.
+// Resonance: sorts the quotes in my selection (default, the order from the server), by date added
+// (newest first), by quote text or by author. Without JavaScript the switch stays hidden and the
+// quotes keep the default order.
 // Quotes without a known author come last when sorting by author.
 
-type Sort = 'newest' | 'quote' | 'author';
+type Sort = 'selection' | 'newest' | 'quote' | 'author';
 
 const STORAGE_KEY = 'quote-sort';
 const bar = document.querySelector<HTMLElement>('[data-quote-sort]');
@@ -18,6 +19,7 @@ if (bar && grid) {
     text(a, key).localeCompare(text(b, key), locale);
 
   const compare: Record<Sort, (a: HTMLElement, b: HTMLElement) => number> = {
+    selection: () => 0,
     newest: (a, b) => text(b, 'added').localeCompare(text(a, 'added')),
     quote: byText('quote'),
     author: (a, b) =>
@@ -45,5 +47,5 @@ if (bar && grid) {
   } catch {
     /* Storage unavailable: keep the default order */
   }
-  if (saved === 'quote' || saved === 'author') show(saved);
+  if (saved === 'newest' || saved === 'quote' || saved === 'author') show(saved);
 }
