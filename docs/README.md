@@ -41,6 +41,12 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Film card view**
+
+- A switch “List · Cards” next to the type filter; the list is the default and the choice is remembered.
+- Cards show only the large square image; clicking (or Enter/Space) flips a card to show its details.
+- Same markup for both views, laid out by CSS; without JavaScript only the list.
+
 **2026-11-22: Film section**
 
 - New section **Film** (same name in both languages): `/film/`, `/de/film/`.

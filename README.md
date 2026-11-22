@@ -116,7 +116,7 @@ src/
   pages/             Routes: each file is a URL (folder names stay German)
   lib/               Data access and helpers (content.ts, format.ts)
   styles/            CSS: tokens, themes, base, layout, components
-  scripts/           Client JS: glossary search, random word, color scheme
+  scripts/           Client JS: glossary search, film page (filter, cards), random word, color scheme
 public/              Files served as-is (favicon, early scripts)
 ```
 
