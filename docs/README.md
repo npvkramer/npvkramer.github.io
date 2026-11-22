@@ -43,7 +43,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 **2026-11-22: Quote order**
 
-- Default view “Selection” / „Auswahl“: quotes with `order` first (smaller = higher), then the rest newest first.
+- Default view “Selection” / „Auswahl“: quotes with `order` first, highest number on top (a new quote gets the next number), then the rest newest first.
 - Further sorts: “Newest”, “Quote” (alphabetical by the shown text), “Author” (unknown last). The choice is remembered.
 - My order is set with `order`, not by changing `added`.
 
