@@ -51,7 +51,7 @@ Concepts, mocks and decisions for this site, kept as history.
 **2026-11-22: Film sort**
 
 - Films and series stay in separate groups, also under “All”.
-- Sorts “Title” / „Titel“ (default, alphabetical) and “Year” / „Jahr“ (newest first), within each group. The choice is remembered.
+- Sorts “Random” / „Zufall“ (default; clicking it again shuffles anew), “Title” / „Titel“ (alphabetical) and “Year” / „Jahr“ (newest first), within each group. The choice is remembered. Without JavaScript: by title.
 - Year of a film: its release date. Year of a series: its end date; a running series counts as today and comes first.
 
 **2026-11-22: Ta eis heauton**
@@ -62,8 +62,9 @@ Concepts, mocks and decisions for this site, kept as history.
 
 **2026-11-22: Quote order**
 
-- Default “Newest” / „Neueste“: newest `added` on top. No separate order field: to reorder, change `added`.
-- The only other sort is “Author” / „Autor“ (unknown last, same author newest first). The choice is remembered.
+- Default “Random” / „Zufall“ (clicking it again shuffles anew). Without JavaScript: newest first.
+- “Newest” / „Neueste“: newest `added` on top. No separate order field: to reorder, change `added`.
+- “Author” / „Autor“: unknown last, same author newest first. The choice is remembered.
 
 **2026-11-22: Quotes in the page language**
 

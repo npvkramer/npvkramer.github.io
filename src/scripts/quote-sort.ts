@@ -1,8 +1,11 @@
-// Ta eis heauton: switches the quotes between newest first (default, the order from the server) and by author.
-// Without JavaScript the switch stays hidden and the quotes keep the default order.
-// Quotes without a known author come last when sorting by author; the same author keeps newest first.
+// Ta eis heauton: shows the quotes in random order (default; clicking it again shuffles anew), newest first
+// (the order from the server) or by author. Without JavaScript the switch stays hidden and the quotes show
+// newest first. Quotes without a known author come last when sorting by author; the same author keeps
+// newest first.
 
-type Sort = 'newest' | 'author';
+import { shuffled } from './shuffle';
+
+type Sort = 'random' | 'newest' | 'author';
 
 const STORAGE_KEY = 'quote-sort';
 const bar = document.querySelector<HTMLElement>('[data-quote-sort]');
@@ -15,13 +18,17 @@ if (bar && grid) {
   const locale = document.documentElement.lang;
   const author = (card: HTMLElement) => card.dataset.author ?? '';
 
-  const compare: Record<Sort, (a: HTMLElement, b: HTMLElement) => number> = {
-    newest: () => 0,
-    author: (a, b) => Number(!author(a)) - Number(!author(b)) || author(a).localeCompare(author(b), locale),
+  const order: Record<Sort, () => HTMLElement[]> = {
+    random: () => shuffled(cards),
+    newest: () => cards,
+    author: () =>
+      [...cards].sort(
+        (a, b) => Number(!author(a)) - Number(!author(b)) || author(a).localeCompare(author(b), locale),
+      ),
   };
 
   const show = (sort: Sort) => {
-    grid.append(...[...cards].sort(compare[sort]));
+    grid.append(...order[sort]());
     for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.sort === sort));
     try {
       localStorage.setItem(STORAGE_KEY, sort);
@@ -39,7 +46,7 @@ if (bar && grid) {
   try {
     saved = localStorage.getItem(STORAGE_KEY);
   } catch {
-    /* Storage unavailable: keep the default order */
+    /* Storage unavailable: use the default */
   }
-  if (saved === 'author') show(saved);
+  show(saved === 'newest' || saved === 'author' ? saved : 'random');
 }

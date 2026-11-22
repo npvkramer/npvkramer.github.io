@@ -1,8 +1,11 @@
-// Film page: filter by type, sort by title or year, switch between list and cards, flip cards to show
-// their details. Without JavaScript the controls stay hidden and every entry shows as a list, by title.
+// Film page: filter by type, sort at random (default; clicking it again shuffles anew), by title or by year,
+// switch between list and cards, flip cards to show their details. Without JavaScript the controls stay
+// hidden and every entry shows as a list, by title.
+
+import { shuffled } from './shuffle';
 
 type View = 'list' | 'cards';
-type Sort = 'title' | 'year';
+type Sort = 'random' | 'title' | 'year';
 
 const STORAGE_KEY = 'film-view';
 const SORT_STORAGE_KEY = 'film-sort';
@@ -41,15 +44,16 @@ function setupSort(container: HTMLElement): void {
     entries: [...list.querySelectorAll<HTMLElement>('[data-film-card]')],
   }));
 
-  // Newest first; a running series (empty date) counts as today and comes first.
+  // Year: newest first; a running series (empty date) counts as today and comes first.
   const year = (entry: HTMLElement) => entry.dataset.yearSort || '9999';
-  const compare: Record<Sort, (a: HTMLElement, b: HTMLElement) => number> = {
-    title: () => 0,
-    year: (a, b) => year(b).localeCompare(year(a)),
+  const order: Record<Sort, (entries: HTMLElement[]) => HTMLElement[]> = {
+    random: shuffled,
+    title: (entries) => entries,
+    year: (entries) => [...entries].sort((a, b) => year(b).localeCompare(year(a))),
   };
 
   const show = (sort: Sort) => {
-    for (const { list, entries } of lists) list.append(...[...entries].sort(compare[sort]));
+    for (const { list, entries } of lists) list.append(...order[sort](entries));
     press(buttons, buttons.find((button) => button.dataset.sort === sort) ?? buttons[0]);
     try {
       localStorage.setItem(SORT_STORAGE_KEY, sort);
@@ -67,9 +71,9 @@ function setupSort(container: HTMLElement): void {
   try {
     saved = localStorage.getItem(SORT_STORAGE_KEY);
   } catch {
-    /* Storage unavailable: keep the order by title */
+    /* Storage unavailable: use the default */
   }
-  if (saved === 'year') show(saved);
+  show(saved === 'title' || saved === 'year' ? saved : 'random');
 }
 
 function setupView(container: HTMLElement): void {

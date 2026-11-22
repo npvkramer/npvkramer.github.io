@@ -52,7 +52,7 @@ author: Hermann Hesse   # same in every language, or { de, en } if the name diff
 source: Stufen (1941)   # optional, translatable
 lang: de                # language of the original; default de
 words: [zauber]         # optional: file names from src/content/words
-added: 2026-11-19       # required: date the quote was added; the page shows newest first
+added: 2026-11-19       # required: date the quote was added; used by the sort “Newest”
 translation:            # per page language; shown as the main quote, with the original below
   en: |
     And in every beginning dwells a magic …
@@ -66,7 +66,7 @@ Words listed in `words` are linked in the quote, inflected forms included (Augen
 
 ### Add a film or series
 
-Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/film/` and `/de/filme/`, grouped into films and series, sorted by title (visitors can switch to newest year first).
+Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/film/` and `/de/filme/`, grouped into films and series, in random order (visitors can switch to title or year; without JavaScript by title).
 
 ```markdown
 ---
