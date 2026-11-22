@@ -6,7 +6,7 @@ export const ROUTES = {
   home: { en: '', de: '' },
   resonance: { en: 'resonance', de: 'nachklang' },
   glossary: { en: 'glossary', de: 'wortschatz' },
-  film: { en: 'film', de: 'film' },
+  film: { en: 'film', de: 'filme' },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type RouteKey = keyof typeof ROUTES;

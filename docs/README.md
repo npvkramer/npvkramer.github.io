@@ -49,7 +49,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 **2026-11-22: Film section**
 
-- New section **Film** (same name in both languages): `/film/`, `/de/film/`.
+- New section **Film** (same name in both languages): `/film/`, `/de/filme/` (German path renamed from `/de/film/` on 2026-11-22).
 - Films and series on one page, in two groups with a filter (All, Films, Series).
 - Per entry: title, release date, type (film or series), genre (always { de, en }), director, studio, cast, runtime in minutes,
   rating (0–10, whole numbers) and description.

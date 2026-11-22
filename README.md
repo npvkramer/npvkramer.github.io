@@ -65,7 +65,7 @@ Words listed in `words` are linked in the quote, inflected forms included (Augen
 
 ### Add a film or series
 
-Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/film/` and `/de/film/`, grouped into films and series, best rated first.
+Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/film/` and `/de/filme/`, grouped into films and series, best rated first.
 
 ```markdown
 ---
