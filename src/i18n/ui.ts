@@ -53,7 +53,7 @@ const en = {
   },
   film: {
     title: 'Film',
-    lead: 'Films and series worth watching.',
+    lead: 'Stories told on screen.',
     filterLabel: 'Show',
     sortLabel: 'Sort',
     sorts: { title: 'Title', year: 'Year' },
@@ -139,7 +139,7 @@ const de: Strings = {
   },
   film: {
     title: 'Film',
-    lead: 'Filme und Serien, die sich lohnen.',
+    lead: 'Geschichten, auf der Leinwand erzählt.',
     filterLabel: 'Anzeigen',
     sortLabel: 'Sortieren',
     sorts: { title: 'Titel', year: 'Jahr' },

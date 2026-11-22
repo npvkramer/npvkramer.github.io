@@ -43,6 +43,7 @@ Concepts, mocks and decisions for this site, kept as history.
 
 **2026-11-22: Film sort**
 
+- Films and series stay in separate groups, also under “All”.
 - Sorts “Title” / „Titel“ (default, alphabetical) and “Year” / „Jahr“ (newest first), within each group. The choice is remembered.
 - Year of a film: its release date. Year of a series: its end date; a running series counts as today and comes first.
 
@@ -78,7 +79,7 @@ Concepts, mocks and decisions for this site, kept as history.
   (2018–2024, or “since 2018”) and the number of seasons instead of the full release date.
 - **Title:** original title, plus German and English release titles where they differ; the original shows below a translated title.
 - **Image:** square image per film in `src/assets/films/`, matched by file name; `placeholder.*` or the title’s first letter otherwise. No official posters (copyright).
-- Still open: the section description (placeholder: “Films and series worth watching.” / „Filme und Serien, die sich lohnen.“).
+- Section description (2026-11-22): “Stories told on screen.” / „Geschichten, auf der Leinwand erzählt.“
 
 **2026-11-22: Fragments removed**
 
