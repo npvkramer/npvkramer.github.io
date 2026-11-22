@@ -54,9 +54,9 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
   - The body is the quote as plain text; line breaks are kept.
   - Referenced words are linked inline, inflected forms included.
 - **Films:** `src/content/films/*.md`
-  - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`), `director`,
-    `studio` (list), `cast` (list), `runtimeMinutes`, `rating` (0–10, whole numbers; `null` = not rated yet),
-    `description`*.
+  - Fields: `title`, `releaseDate`, `type` (`film` | `series`), `genre` (always `{ de, en }`),
+    `director` (name or list; for series the creators), `studio` (list), `cast` (list), `runtimeMinutes`,
+    `rating` (0–10, whole numbers; `null` = not rated yet), `description`*.
   - `title`: plain text if the same everywhere; otherwise `{ original, de?, en? }` with the
     release titles that differ. The original shows below a translated title.
   - Image: `src/assets/films/<file name>.{jpg,png,webp,avif}`, optional; otherwise `placeholder.*`
