@@ -54,8 +54,11 @@ const quotes = defineCollection({
 const films = defineCollection({
   loader: glob({ base: './src/content/films', pattern: '**/*.md', generateId: idFromFileName }),
   schema: z.object({
-    // Plain text applies to every language; { de, en } where the title differs.
-    title: localizedText(),
+    // Plain text if the title is the same everywhere; otherwise the original plus de/en where they differ.
+    title: z.union([
+      z.string(),
+      z.object({ original: z.string(), de: z.string().optional(), en: z.string().optional() }).strict(),
+    ]),
     // First release (YYYY-MM-DD); for series the first episode.
     releaseDate: z.coerce.date(),
     type: z.enum(FILM_TYPES),

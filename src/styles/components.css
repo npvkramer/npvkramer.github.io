@@ -379,6 +379,13 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Original title under a translated one */
+.film-original {
+  margin: 0;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
 .film-meta {
   margin: 0;
   color: var(--color-muted);

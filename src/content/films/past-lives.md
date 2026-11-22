@@ -1,7 +1,7 @@
 ---
 title:
+  original: Past Lives
   de: Past Lives – In einem anderen Leben
-  en: Past Lives
 releaseDate: 2023-06-02
 type: film
 genre:

@@ -1,16 +1,27 @@
 // Data access for words, quotes and films. Pages and components get their data only through these functions.
 
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { hasLocale, pathTo, resolveShared, type Locale } from '../i18n';
+import { hasLocale, pathTo, type Locale } from '../i18n';
 
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
 export type Film = CollectionEntry<'films'>;
 
+/**
+ * Title of a film for a page language, plus the original title when it differs
+ * (e.g. “Parasite” with “기생충”).
+ */
+export function filmTitle(film: Film, locale: Locale): { title: string; original?: string } {
+  const { title } = film.data;
+  if (typeof title === 'string') return { title };
+  const shown = title[locale] ?? title.original;
+  return shown === title.original ? { title: shown } : { title: shown, original: title.original };
+}
+
 /** All films and series, best rated first, then by title. */
 export async function getFilms(locale: Locale): Promise<Film[]> {
   const films = await getCollection('films');
-  const title = (film: Film) => resolveShared(film.data.title, locale) ?? film.id;
+  const title = (film: Film) => filmTitle(film, locale).title;
   return films.sort((a, b) => b.data.rating - a.data.rating || title(a).localeCompare(title(b), locale));
 }
 
