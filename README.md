@@ -81,7 +81,7 @@ cast:                         # main cast
   - Greta Lee
   - Teo Yoo
 runtimeMinutes: 105           # for series: one episode
-rating: 9                     # 0 to 10, whole numbers
+rating: 9                     # 0 to 10, whole numbers; null if not rated yet
 description:                  # translatable
   de: …
   en: …
