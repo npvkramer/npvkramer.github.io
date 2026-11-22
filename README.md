@@ -69,7 +69,10 @@ Create a file in `src/content/films/`, e.g. `past-lives.md`. It is listed on `/f
 
 ```markdown
 ---
-title: Past Lives             # same in every language, or { de, en } if the title differs
+title:                        # plain text if the same everywhere, otherwise:
+  original: Past Lives
+  de: Past Lives – In einem anderen Leben   # only if different from the original
+  en: …                                     # only if different from the original
 releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
 genre: { de: Liebesfilm, en: Romance }   # required in both languages
@@ -84,6 +87,8 @@ description:                  # translatable
   en: …
 ---
 ```
+
+**Image:** put a square-ish image in `src/assets/films/` named like the film file, e.g. `past-lives.jpg` (also `.png`, `.webp`, `.avif`). It is cropped to a square and optimized at build time. Films without an image use `placeholder.*` from the same folder if it exists, otherwise the first letter of the title.
 
 ## Styling
 

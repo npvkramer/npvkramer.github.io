@@ -41,7 +41,8 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | Field | Rule |
 | --- | --- |
 | File name | Lowercase ASCII of the original title: `past-lives.md`. |
-| `title` | The original title. Use `{ de, en }` only if the German or English release title differs. |
+| `title` | Plain text if the title is the same everywhere. Otherwise `original` plus `de` and/or `en` for the release titles that differ. |
+| Image | Optional, `src/assets/films/<file name>.jpg` (or `.png`, `.webp`, `.avif`), ideally 1:1 and at least 320 × 320 px. Only images I made or may use. |
 | `releaseDate` | Date of the first release, `YYYY-MM-DD`; for series, the first episode. |
 | `type` | `film` or `series`. |
 | `director` | Full name; several directors separated by commas. |
