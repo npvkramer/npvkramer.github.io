@@ -40,7 +40,7 @@ const en = {
   },
   glossary: {
     title: 'Glossary',
-    lead: 'The sound and meaning behind a word.',
+    lead: 'A collection of words.',
     search: 'Search word or meaning …',
     searchLabel: 'Search the glossary',
     index: 'Index',
@@ -102,7 +102,7 @@ const de: Strings = {
   },
   glossary: {
     title: 'Wortschatz',
-    lead: 'Klang und Bedeutung hinter einem Wort.',
+    lead: 'Eine Sammlung von Wörtern.',
     search: 'Wort oder Bedeutung suchen …',
     searchLabel: 'Wortschatz durchsuchen',
     index: 'Register',
