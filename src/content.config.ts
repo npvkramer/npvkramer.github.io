@@ -7,6 +7,7 @@ import { z } from 'astro/zod';
 import { isLatinScript, languageCode } from './i18n/languages';
 import { localizedText } from './i18n/localized';
 import { LOCALES } from './i18n/config';
+import { FILM_TYPES } from './lib/film-types';
 
 // The ID is the file name without folders, so an entry keeps its URL if it moves into a subfolder.
 const idFromFileName = ({ entry }: { entry: string }) =>
@@ -50,4 +51,19 @@ const quotes = defineCollection({
   }),
 });
 
-export const collections = { words, quotes };
+const films = defineCollection({
+  loader: glob({ base: './src/content/films', pattern: '**/*.md', generateId: idFromFileName }),
+  schema: z.object({
+    // Plain text applies to every language; { de, en } where the title differs.
+    title: localizedText(),
+    year: z.number().int().min(1870).max(2100),
+    type: z.enum(FILM_TYPES),
+    // Same rule as title: plain text for every language, { de, en } if it differs (Comedy / Komödie).
+    genre: localizedText(),
+    // My rating from 0 to 10 in steps of 0.5.
+    rating: z.number().min(0).max(10).multipleOf(0.5),
+    description: localizedText(),
+  }),
+});
+
+export const collections = { words, quotes, films };
