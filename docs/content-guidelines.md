@@ -35,6 +35,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `lang` | Language of the original. |
 | `translation` | One per page language that differs from the original. Shown as the main quote on that language’s page, with the original below. Prefer a published translation (add the translator to `source`) or my own. |
 | `words` | Link words from the collection that appear in the quote. |
+| `added` | Required. The day the quote joined the collection, `YYYY-MM-DD`. Never change it later. |
 
 ## Films and series
 
@@ -55,6 +56,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `genre` | Always in both languages: `{ de: Komödie, en: Comedy }`, also when the word is the same (`{ de: Drama, en: Drama }`). English in Title Case (`Fantasy Drama`, `Historical Drama / Action`); German as usual (`Fantasy-Drama`). Several genres separated by `,` or `/`. |
 | `rating` | My rating from `0` to `10`, whole numbers only. `null` if I have not rated it yet; it then shows no rating and comes last in its group. |
 | `description` | Both `de` and `en`. 1–2 sentences in my own words, no spoilers. |
+| `added` | Required. The day the entry joined the collection, `YYYY-MM-DD`. Never change it later. |
 
 ### Prompt for image and data
 
@@ -99,6 +101,7 @@ rating:
 description:
   de:
   en:
+added:
 ---
 
 Regeln:
@@ -112,6 +115,7 @@ Regeln:
 - cast: Hauptbesetzung, 3–6 Namen.
 - runtimeMinutes: ganze Zahl; bei Serien eine typische Folge. Wenn unbekannt oder stark schwankend: null.
 - rating: leer lassen.
+- added: heutiges Datum, Format JJJJ-MM-TT.
 - description: je 1–2 Sätze, eigene Worte, keine Spoiler, Deutsch und Englisch inhaltlich gleich.
 - Typografie: Apostroph ’ statt ' (father’s, O’Toole). Deutsche Anführungszeichen „…“, englische “…”. Schweizer Schreibweise ohne ß (Weisse).
 ```
