@@ -8,6 +8,8 @@ genre:
   de: Liebesfilm
   en: Romance
 director: Celine Song
+studio:
+  - A24
 cast:
   - Greta Lee
   - Teo Yoo

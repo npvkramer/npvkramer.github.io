@@ -6,6 +6,8 @@ genre:
   de: Drama
   en: Drama
 director: Charlotte Wells
+studio:
+  - A24
 cast:
   - Paul Mescal
   - Frankie Corio

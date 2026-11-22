@@ -64,6 +64,8 @@ const films = defineCollection({
     type: z.enum(FILM_TYPES),
     // Names stay the same in every language. Several directors: separate them with commas.
     director: z.string(),
+    // Studio or distributor; several (e.g. per region) as a list.
+    studio: z.array(z.string()).min(1),
     cast: z.array(z.string()).min(1), // main cast
     // Length in minutes; for series one episode.
     runtimeMinutes: z.number().int().positive(),

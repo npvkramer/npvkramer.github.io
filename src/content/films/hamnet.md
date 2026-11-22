@@ -6,6 +6,9 @@ genre:
   de: Drama
   en: Drama
 director: Chloé Zhao
+studio:
+  - Focus Features
+  - Universal Pictures International
 cast:
   - Jessie Buckley
   - Paul Mescal

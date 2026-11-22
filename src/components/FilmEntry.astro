@@ -1,5 +1,5 @@
 ---
-// One film or series: square image, title, rating, release date, type, genre, runtime, director, cast
+// One film or series: square image, title, rating, release date, type, genre, runtime, director, studio, cast
 // and description. Without an image (and without a placeholder image) the title's first letter is shown.
 import { Image } from 'astro:assets';
 import { filmImage, filmTitle, type Film } from '../lib/content';
@@ -15,7 +15,7 @@ const IMAGE_PIXELS = 320;
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
 const strings = t(locale).film;
-const { releaseDate, type, director, cast, runtimeMinutes, rating } = film.data;
+const { releaseDate, type, director, studio, cast, runtimeMinutes, rating } = film.data;
 const { title, original } = filmTitle(film, locale);
 const image = filmImage(film);
 const genre = film.data.genre[locale];
@@ -46,6 +46,10 @@ const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'sh
       <div>
         <dt>{strings.director}</dt>
         <dd>{director}</dd>
+      </div>
+      <div>
+        <dt>{strings.studio}</dt>
+        <dd>{studio.join(', ')}</dd>
       </div>
       <div>
         <dt>{strings.cast}</dt>
