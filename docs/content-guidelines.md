@@ -33,7 +33,7 @@ Unlike the dated concepts, this is a living document: update it when a rule chan
 | `author` | Full name as commonly written: `Johann Wolfgang von Goethe`. One value if the name is the same in both languages, `{ de, en }` if not (`Demokrit` / `Democritus`). Leave it out if the author is unknown; the page shows “Unknown” / „Unbekannt“. |
 | `source` | Work and year of first publication: `Stufen (1941)`. Translate only the work's title if an established translation exists. |
 | `lang` | Language of the original. |
-| `translation` | Optional. Prefer a published translation (add the translator to `source`) or my own, marked as such. |
+| `translation` | One per page language that differs from the original. Shown as the main quote on that language’s page, with the original below. Prefer a published translation (add the translator to `source`) or my own. |
 | `words` | Link words from the collection that appear in the quote. |
 
 ## Films and series

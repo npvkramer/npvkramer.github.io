@@ -41,6 +41,11 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Quotes in the page language**
+
+- Like film titles: the translation into the page language is the main quote, the original follows as a smaller line.
+- Quotes already in the page language, or without a translation, show only the original.
+
 **2026-11-22: Film card view**
 
 - A switch “List · Cards” next to the type filter; the list is the default and the choice is remembered.

@@ -52,7 +52,7 @@ author: Hermann Hesse   # same in every language, or { de, en } if the name diff
 source: Stufen (1941)   # optional, translatable
 lang: de                # language of the original; default de
 words: [zauber]         # optional: file names from src/content/words
-translation:            # optional: shown below the original on pages in that language
+translation:            # per page language; shown as the main quote, with the original below
   en: |
     And in every beginning dwells a magic …
 ---
