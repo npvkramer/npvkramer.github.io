@@ -1,4 +1,4 @@
-// Resonance: switches the quotes between newest first (default, the order from the server) and by author.
+// Ta eis heauton: switches the quotes between newest first (default, the order from the server) and by author.
 // Without JavaScript the switch stays hidden and the quotes keep the default order.
 // Quotes without a known author come last when sorting by author; the same author keeps newest first.
 

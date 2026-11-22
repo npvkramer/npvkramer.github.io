@@ -14,7 +14,7 @@ const { quote } = Astro.props;
 const locale = getLocale(Astro.url);
 const { lang, words: wordRefs } = quote.data;
 const knownAuthor = resolveShared(quote.data.author, locale);
-const author = knownAuthor ?? t(locale).resonance.unknownAuthor;
+const author = knownAuthor ?? t(locale).taEisHeauton.unknownAuthor;
 const source = resolve(quote.data.source, locale);
 const translation = lang !== locale ? quote.data.translation?.[locale]?.trim() : undefined;
 const words = (await getEntries(wordRefs)).filter((word): word is Word => Boolean(word));
@@ -23,7 +23,7 @@ const original = linkWords((quote.body ?? '').trim(), words, locale);
 const Original = translation ? 'p' : 'blockquote';
 ---
 
-<!-- data-author: what the sort switch on the Resonance page orders by (src/scripts/quote-sort.ts). -->
+<!-- data-author: what the sort switch on the Ta eis heauton page orders by (src/scripts/quote-sort.ts). -->
 <figure class="quote-card" data-quote-card data-author={knownAuthor ?? ''}>
   <div class="quote-body">
     {translation && <blockquote class="quote-text" lang={locale}>{translation}</blockquote>}

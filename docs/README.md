@@ -41,6 +41,12 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Ta eis heauton**
+
+- Resonance / Nachklang is renamed to **Ta eis heauton** (Greek “to himself”, after Marcus Aurelius), the same name in both languages.
+- Lead: “Thoughts, people, observations, perceptions” / „Gedanken, Menschen, Beobachtungen, Wahrnehmungen“.
+- URL `/ta-eis-heauton/` and `/de/ta-eis-heauton/`; route key, view and code follow. The content stays quotes for now.
+
 **2026-11-22: Quote order**
 
 - Default “Newest” / „Neueste“: newest `added` on top. No separate order field: to reorder, change `added`.

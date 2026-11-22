@@ -18,7 +18,7 @@ const [featured, glossary, quotes, films] = await Promise.all([
   getFilms(locale),
 ]);
 const counts = {
-  resonance: countLabel(quotes.length, strings.count.quotes),
+  taEisHeauton: countLabel(quotes.length, strings.count.quotes),
   glossary: countLabel(glossary.length, strings.count.entries),
   film: countLabel(films.length, strings.count.titles),
 };

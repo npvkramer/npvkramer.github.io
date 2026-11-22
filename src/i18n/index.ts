@@ -10,7 +10,7 @@ export * from './ui';
 export * from './languages';
 export * from './localized';
 
-const NAV_ROUTES = ['resonance', 'glossary', 'film'] as const;
+const NAV_ROUTES = ['taEisHeauton', 'glossary', 'film'] as const;
 
 /**
  * Main navigation for a page language. Label and description are the section's own title and lead,

@@ -32,9 +32,9 @@ const en = {
     featured: 'Word of the moment',
     another: 'Another word',
   },
-  resonance: {
-    title: 'Resonance',
-    lead: 'Life’s lessons in words that echo.',
+  taEisHeauton: {
+    title: 'Ta eis heauton',
+    lead: 'Thoughts, people, observations, perceptions',
     none: 'No quotes yet.',
     unknownAuthor: 'Unknown',
     sortLabel: 'Sort',
@@ -116,9 +116,9 @@ const de: Strings = {
     featured: 'Wort des Moments',
     another: 'Anderes Wort',
   },
-  resonance: {
-    title: 'Nachklang',
-    lead: 'Die Lehren des Lebens in Worten, die nachklingen.',
+  taEisHeauton: {
+    title: 'Ta eis heauton',
+    lead: 'Gedanken, Menschen, Beobachtungen, Wahrnehmungen',
     none: 'Noch keine Zitate.',
     unknownAuthor: 'Unbekannt',
     sortLabel: 'Sortieren',

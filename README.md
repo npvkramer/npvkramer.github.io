@@ -1,6 +1,6 @@
 # npvkramer.github.io
 
-Personal website built with [Astro](https://astro.build): three sections: Resonance (quotes), Glossary (words with meanings, each with its own page) and Film (films and series with a rating). The output is plain static HTML, CSS and JS and runs on any web server.
+Personal website built with [Astro](https://astro.build): three sections: Ta eis heauton (quotes), Glossary (words with meanings, each with its own page) and Film (films and series with a rating). The output is plain static HTML, CSS and JS and runs on any web server.
 
 ## Commands
 

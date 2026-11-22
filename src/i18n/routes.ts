@@ -4,7 +4,7 @@ import { DEFAULT_LOCALE, LOCALES, getLocale, type Locale } from './config';
 
 export const ROUTES = {
   home: { en: '', de: '' },
-  resonance: { en: 'resonance', de: 'nachklang' },
+  taEisHeauton: { en: 'ta-eis-heauton', de: 'ta-eis-heauton' },
   glossary: { en: 'glossary', de: 'wortschatz' },
   film: { en: 'film', de: 'filme' },
 } as const satisfies Record<string, Record<Locale, string>>;

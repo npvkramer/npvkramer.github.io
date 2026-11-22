@@ -3,7 +3,7 @@
 // so /glossary/inyeon/ (en) and /de/wortschatz/inyeon/ (de) render the same view.
 import HomeView from '../views/HomeView.astro';
 import WordView from '../views/WordView.astro';
-import ResonanceView from '../views/ResonanceView.astro';
+import TaEisHeautonView from '../views/TaEisHeautonView.astro';
 import GlossaryView from '../views/GlossaryView.astro';
 import FilmView from '../views/FilmView.astro';
 import { getWords, type Word } from '../lib/content';
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
     });
     return [
       page('home'),
-      page('resonance'),
+      page('taEisHeauton'),
       page('glossary'),
       page('film'),
       ...words.map((word) => page('glossary', word)),
@@ -36,6 +36,6 @@ const { locale, route, word } = Astro.props;
 ---
 
 {route === 'home' && <HomeView locale={locale} />}
-{route === 'resonance' && <ResonanceView locale={locale} />}
+{route === 'taEisHeauton' && <TaEisHeautonView locale={locale} />}
 {route === 'glossary' && (word ? <WordView locale={locale} word={word} /> : <GlossaryView locale={locale} />)}
 {route === 'film' && <FilmView locale={locale} />}
