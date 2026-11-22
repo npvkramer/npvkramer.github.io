@@ -1,5 +1,6 @@
 ---
-// Film: films and series on one page, grouped by type, with a filter to show one group.
+// Film: films and series on one page, grouped by type. A filter shows one group, and a switch shows
+// the entries as a list or as cards (square images that flip to show the details).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import FilmEntry from '../components/FilmEntry.astro';
@@ -10,6 +11,8 @@ import { t, type Locale } from '../i18n';
 interface Props {
   locale: Locale;
 }
+
+const VIEWS = ['list', 'cards'] as const;
 
 const { locale } = Astro.props;
 const strings = t(locale).film;
@@ -26,23 +29,36 @@ const groupId = (type: FilmType) => strings.groups[type].toLowerCase();
 
   {films.length === 0 && <p class="empty">{strings.none}</p>}
 
-  {groups.length > 1 && (
-    <div class="filter-bar" role="group" aria-label={strings.filterLabel} data-film-filter hidden>
-      <button class="button" type="button" data-filter="all" aria-pressed="true">{strings.all}</button>
-      {groups.map(({ type }) => (
-        <button class="button" type="button" data-filter={type} aria-pressed="false">{strings.groups[type]}</button>
-      ))}
+  {films.length > 0 && (
+    <div class="film-controls">
+      {groups.length > 1 && (
+        <div class="filter-bar" role="group" aria-label={strings.filterLabel} data-film-filter hidden>
+          <button class="button" type="button" data-filter="all" aria-pressed="true">{strings.all}</button>
+          {groups.map(({ type }) => (
+            <button class="button" type="button" data-filter={type} aria-pressed="false">{strings.groups[type]}</button>
+          ))}
+        </div>
+      )}
+      <div class="filter-bar" role="group" aria-label={strings.viewLabel} data-film-view-switch hidden>
+        {VIEWS.map((view) => (
+          <button class="button" type="button" data-view={view} aria-pressed={String(view === 'list')}>
+            {strings.views[view]}
+          </button>
+        ))}
+      </div>
     </div>
   )}
 
-  {groups.map(({ type, films }) => (
-    <section class="film-group" id={groupId(type)} data-film-group={type}>
-      <h2>{strings.groups[type]}</h2>
-      <div class="film-list">
-        {films.map((film) => <FilmEntry film={film} />)}
-      </div>
-    </section>
-  ))}
+  <div class="films" data-films data-view="list">
+    {groups.map(({ type, films }) => (
+      <section class="film-group" id={groupId(type)} data-film-group={type}>
+        <h2>{strings.groups[type]}</h2>
+        <div class="film-list">
+          {films.map((film) => <FilmEntry film={film} />)}
+        </div>
+      </section>
+    ))}
+  </div>
 </BaseLayout>
 
-<script src="../scripts/film-filter.ts"></script>
+<script src="../scripts/film-page.ts"></script>

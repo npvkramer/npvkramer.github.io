@@ -329,11 +329,19 @@
 }
 
 /* Film: filter, groups and entries */
+/* Filter (all, films, series) on the left, view switch (list, cards) on the right */
+.film-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-bottom: var(--space-5);
 }
 
 .filter-bar [aria-pressed='true'] {
@@ -441,6 +449,72 @@
 .film-credits dd {
   margin: 0;
   color: var(--color-text);
+}
+
+/*
+  Card view: the same entries as a grid of square cards. The image is the front,
+  the details are the back; a pressed card (aria-pressed, set by film-page.ts) is turned over.
+*/
+.films[data-view='cards'] .film-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--film-card-min)), 1fr));
+  gap: var(--space-4);
+  border-top: 0;
+}
+
+.films[data-view='cards'] .film {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  aspect-ratio: 1;
+  overflow: hidden; /* keeps the card square however long the details are */
+  padding: 0;
+  border-bottom: 0;
+  perspective: var(--flip-perspective);
+  cursor: pointer;
+}
+
+.films[data-view='cards'] .film > * {
+  grid-area: 1 / 1;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform var(--flip-duration) var(--menu-ease);
+}
+
+.films[data-view='cards'] .film-body {
+  align-content: start;
+  overflow-y: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  transform: rotateY(180deg);
+}
+
+.films[data-view='cards'] .film[aria-pressed='true'] > .film-image {
+  transform: rotateY(-180deg);
+}
+
+.films[data-view='cards'] .film[aria-pressed='true'] > .film-body {
+  transform: rotateY(0);
+}
+
+.films[data-view='cards'] .film-title {
+  font-size: var(--size-lg);
+}
+
+.films[data-view='cards'] .film-description {
+  font-size: var(--size-sm);
+}
+
+.films[data-view='cards'] .film-monogram {
+  font-size: var(--size-headword-lg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .films[data-view='cards'] .film > * {
+    transition: none;
+  }
 }
 
 /* Admin (dev only): docs viewer */
