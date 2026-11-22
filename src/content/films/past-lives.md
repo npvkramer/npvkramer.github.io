@@ -16,7 +16,7 @@ cast:
   - John Magaro
   - Jojo T. Gibbs
 runtimeMinutes: 105
-rating: 9
+rating: null
 description:
   de: Zwei Jugendlieben begegnen sich nach Jahrzehnten wieder und verbringen eine schicksalhafte Woche miteinander.
   en: Two childhood sweethearts reunite for one fateful week after decades apart.

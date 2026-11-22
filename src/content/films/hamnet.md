@@ -15,7 +15,7 @@ cast:
   - Emily Watson
   - Joe Alwyn
 runtimeMinutes: 125
-rating: 9
+rating: null
 description:
   de: Die Geschichte von Liebe und Verlust in Shakespeares Familie, die ihn zu seinem Stück Hamlet inspirierte.
   en: A story of love and loss in Shakespeare’s family that inspired him to write Hamlet.

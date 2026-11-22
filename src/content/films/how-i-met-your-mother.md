@@ -19,7 +19,7 @@ cast:
   - Neil Patrick Harris
   - Alyson Hannigan
 runtimeMinutes: 22
-rating: 9
+rating: null
 description:
   de: Ted erzählt seinen Kindern, wie er ihre Mutter kennenlernte – und von den Jahren voller Freundschaft, Beziehungen und Umwege, die ihn dorthin führten.
   en: Ted tells his children how he met their mother, revisiting the friendships, relationships and detours that led him to her.
