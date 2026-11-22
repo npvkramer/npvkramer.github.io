@@ -24,20 +24,12 @@ const en = {
     dismiss: 'Close',
   },
   count: {
-    words: ['word', 'words'],
     quotes: ['quote', 'quotes'],
     entries: ['entry', 'entries'],
   },
   home: {
     featured: 'Word of the moment',
     another: 'Another word',
-  },
-  fragments: {
-    title: 'Fragments',
-    lead: 'A scattering of words worth keeping.',
-    description: (word: string) => `${word}, from my word collection.`,
-    inQuotes: 'In quotes',
-    all: '← All fragments',
   },
   resonance: {
     title: 'Resonance',
@@ -57,8 +49,12 @@ const en = {
     letterAnchor: 'letter',
     inQuotes: (count: number) => (count === 1 ? 'Appears in one quote' : `Appears in ${count} quotes`),
   },
+  // Page of a single word
   entry: {
     onlyIn: (language: string) => `Only available in ${language}`,
+    description: (word: string) => `${word}, from my glossary.`,
+    inQuotes: 'In quotes',
+    back: '← Glossary',
   },
   notFound: {
     title: 'Page not found',
@@ -90,20 +86,12 @@ const de: Strings = {
     dismiss: 'Schliessen',
   },
   count: {
-    words: ['Wort', 'Wörter'],
     quotes: ['Zitat', 'Zitate'],
     entries: ['Eintrag', 'Einträge'],
   },
   home: {
     featured: 'Wort des Moments',
     another: 'Anderes Wort',
-  },
-  fragments: {
-    title: 'Fragmente',
-    lead: 'Eine lose Sammlung von Wörtern, die bleiben dürfen.',
-    description: (word: string) => `${word}, aus meiner Wortsammlung.`,
-    inQuotes: 'In Zitaten',
-    all: '← Alle Fragmente',
   },
   resonance: {
     title: 'Nachklang',
@@ -125,6 +113,9 @@ const de: Strings = {
   },
   entry: {
     onlyIn: (language: string) => `Nur auf ${language} verfügbar`,
+    description: (word: string) => `${word}, aus meinem Wortschatz.`,
+    inQuotes: 'In Zitaten',
+    back: '← Wortschatz',
   },
   notFound: {
     title: 'Seite nicht gefunden',

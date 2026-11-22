@@ -6,7 +6,7 @@ import { hasLocale, pathTo, type Locale } from '../i18n';
 export type Word = CollectionEntry<'words'>;
 export type Quote = CollectionEntry<'quotes'>;
 
-export const wordUrl = (word: Word, locale: Locale) => pathTo('fragments', locale, word.id);
+export const wordUrl = (word: Word, locale: Locale) => pathTo('glossary', locale, word.id);
 
 /** Text used for sorting and the index: the romanization if there is one (인연 → Inyeon). */
 export const sortKey = (word: Word) => word.data.romanization ?? word.data.word;

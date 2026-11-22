@@ -36,13 +36,6 @@
 
   --text-measure: 38rem; /* max line length for running text */
 
-  /* Word cloud */
-  --cloud-size-min: 1rem;
-  --cloud-size-max: clamp(2.25rem, 1rem + 4vw, 4.5rem);
-  --cloud-gap: 0.75rem; /* minimum gap between words */
-  --cloud-min-height: 75vh;
-  --cloud-density: 2.4; /* space per word: larger = airier */
-
   /* Quotes */
   --quote-size: 1.5rem;
   --quote-columns: 2; /* from 768px, one column below */

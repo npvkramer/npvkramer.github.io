@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WordEntry from '../components/WordEntry.astro';
 import QuoteGrid from '../components/QuoteGrid.astro';
 import { getQuotes, quotesForWord, type Word } from '../lib/content';
-import { hasLocale, pathTo, resolve, t, type Locale } from '../i18n';
+import { pathTo, resolve, t, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
@@ -17,18 +17,17 @@ const quotes = quotesForWord(await getQuotes(), word);
 const definition = resolve(word.data.definition, locale);
 ---
 
-<BaseLayout title={word.data.word} description={definition?.text ?? strings.fragments.description(word.data.word)}>
+<BaseLayout title={word.data.word} description={definition?.text ?? strings.entry.description(word.data.word)}>
   <WordEntry word={word} size="lg" heading="h1" />
 
   {quotes.length > 0 && (
     <section class="word-quotes">
-      <h2>{strings.fragments.inQuotes}</h2>
+      <h2>{strings.entry.inQuotes}</h2>
       <QuoteGrid quotes={quotes} />
     </section>
   )}
 
   <p class="back">
-    <a href={pathTo('fragments', locale)}>{strings.fragments.all}</a>
-    {hasLocale(word.data.definition, locale) && <a href={pathTo('glossary', locale)}>{strings.glossary.title}</a>}
+    <a href={pathTo('glossary', locale)}>{strings.entry.back}</a>
   </p>
 </BaseLayout>

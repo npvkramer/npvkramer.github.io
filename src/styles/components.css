@@ -248,53 +248,6 @@
   color: var(--color-accent);
 }
 
-/* Word cloud: a wrapping list without JavaScript, freely scattered with it */
-.cloud {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--cloud-gap);
-}
-
-.cloud.is-scattered {
-  display: block;
-  position: relative;
-  min-height: var(--cloud-min-height);
-  overflow: hidden;
-}
-
-.cloud.is-scattered > li {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.cloud-word {
-  /* --weight (1–5) comes per word from the front matter */
-  font-family: var(--font-display);
-  font-size: calc(var(--cloud-size-min) + (var(--cloud-size-max) - var(--cloud-size-min)) * (var(--weight, 1) - 1) / 4);
-  line-height: 1.1;
-  white-space: nowrap;
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-.cloud-word:hover {
-  color: var(--color-accent);
-}
-
-/* Dot: the word also has a glossary entry */
-.cloud-word[data-has-definition]::after {
-  content: '';
-  display: inline-block;
-  width: 0.18em;
-  height: 0.18em;
-  margin-left: 0.12em;
-  border-radius: 50%;
-  background: var(--color-accent);
-  vertical-align: super;
-}
-
 /* Home page */
 .eyebrow {
   margin-bottom: var(--space-2);
