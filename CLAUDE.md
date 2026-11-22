@@ -1,7 +1,7 @@
 # CLAUDE.md
 
-Personal website with three sections, Fragments (a word cloud), Resonance (quotes) and Glossary
-(words with meanings), with words from any language, in English (default) and German.
+Personal website with two sections, Resonance (quotes) and Glossary (words with meanings,
+each with its own page), with words from any language, in English (default) and German.
 Static site built with Astro 7, deployed to GitHub Pages. The build output must stay plain
 static HTML/CSS/JS so the site can move to its own domain or server at any time.
 
@@ -43,7 +43,7 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 
 - **Words:** `src/content/words/*.md`
   - Fields: `word`, `lang`, `romanization` (required for non-Latin script), `pronunciation`,
-    `partOfSpeech`*, `definition`*, `origin`*, `weight` (required, 1–5 cloud size), `added` (required date).
+    `partOfSpeech`*, `definition`*, `origin`*, `added` (required date).
   - `pronunciation`: plain text applies to every language; `{ de, en }` if speakers say it differently.
   - A word is in a language's glossary only with a definition in that language.
     There is no separate glossary collection.
@@ -62,14 +62,14 @@ Fields marked * are translatable: plain text (= German) or `{ de, en }`.
 ## Code structure
 
 - **Routes:** one catch-all page, `src/pages/[...route].astro`, renders the views in
-  `src/views/` for every language: `/`, `/fragments/`, `/fragments/<id>/`, `/resonance/`,
-  `/glossary/`, and the same under `/de/` with German paths. Plus `404` and dev-only `/admin/`.
+  `src/views/` for every language: `/`, `/resonance/`, `/glossary/`, `/glossary/<id>/`,
+  and the same under `/de/` with German paths. Plus `404` and dev-only `/admin/`.
 - **Language:** components read the page language with `getLocale(Astro.url)`;
   import language helpers only from `src/i18n`.
 - **Site settings:** title, author, theme and social links in [src/data/site.ts](src/data/site.ts);
   navigation comes from `navItems(locale)`.
 - **Shared UI:** reusable components in `src/components/`, e.g. `WordEntry`, `QuoteCard`/`QuoteGrid`,
-  `PageHeader`, `ExampleBadge`. Reuse them instead of duplicating markup (DRY).
+  `PageHeader`, `LanguageHint`. Reuse them instead of duplicating markup (DRY).
 - **Client JS:** only in `src/scripts/`, loaded with `<script src>`.
   - Scripts hook into `data-*` attributes.
   - Every page must still work without JavaScript (progressive enhancement).
