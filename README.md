@@ -76,7 +76,7 @@ title:                        # plain text if the same everywhere, otherwise:
 releaseDate: 2023-06-02       # first release; for series the first episode
 type: film                    # film or series
 genre: { de: Liebesfilm, en: Romance }   # required in both languages
-director: Celine Song         # several: separate with commas
+director: Celine Song         # one name or a list; for series the creators
 studio:                       # studio or distributor; several as a list
   - A24
 cast:                         # main cast
