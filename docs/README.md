@@ -41,6 +41,12 @@ Concepts, mocks and decisions for this site, kept as history.
 - **Menu footer:** appearance (light/dark/auto), language, social links, copyright; `[ESC]` closes the menu.
 - **Language group:** only shown once the site has more than one language.
 
+**2026-11-22: Favicon**
+
+- Serif “N” with a small blue square, on off-white. Source image: `brand/favicon-source.png`.
+- Served as `favicon.ico` (16/32/48), `icon-192.png` and `apple-touch-icon.png`, cropped tighter than the source so it stays legible at 16 px.
+- No SVG version yet (the source is a raster image); the old “n” SVG is removed.
+
 **2026-11-22: Section descriptions**
 
 - All three follow the same pattern: four nouns, no closing period.
