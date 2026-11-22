@@ -59,6 +59,9 @@ const en = {
     types: { film: 'Film', series: 'Series' },
     rating: (value: string) => `${value} / 10`,
     ratingLabel: 'Rating',
+    director: 'Director',
+    cast: 'Cast',
+    runtime: (minutes: number) => `${minutes} min`,
     none: 'No films or series yet.',
   },
   // Page of a single word
@@ -133,6 +136,9 @@ const de: Strings = {
     types: { film: 'Film', series: 'Serie' },
     rating: (value: string) => `${value} / 10`,
     ratingLabel: 'Bewertung',
+    director: 'Regie',
+    cast: 'Besetzung',
+    runtime: (minutes: number) => `${minutes} Min.`,
     none: 'Noch keine Filme oder Serien.',
   },
   entry: {

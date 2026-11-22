@@ -56,12 +56,18 @@ const films = defineCollection({
   schema: z.object({
     // Plain text applies to every language; { de, en } where the title differs.
     title: localizedText(),
-    year: z.number().int().min(1870).max(2100),
+    // First release (YYYY-MM-DD); for series the first episode.
+    releaseDate: z.coerce.date(),
     type: z.enum(FILM_TYPES),
+    // Names stay the same in every language. Several directors: separate them with commas.
+    director: z.string(),
+    cast: z.array(z.string()).min(1), // main cast
+    // Length in minutes; for series one episode.
+    runtimeMinutes: z.number().int().positive(),
     // Same rule as title: plain text for every language, { de, en } if it differs (Comedy / Komödie).
     genre: localizedText(),
-    // My rating from 0 to 10 in steps of 0.5.
-    rating: z.number().min(0).max(10).multipleOf(0.5),
+    // My rating from 0 to 10, whole numbers only.
+    rating: z.number().int().min(0).max(10),
     description: localizedText(),
   }),
 });

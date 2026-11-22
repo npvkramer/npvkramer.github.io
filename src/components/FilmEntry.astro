@@ -1,5 +1,5 @@
 ---
-// One film or series: title, rating, year, type, genre and a short description.
+// One film or series: title, rating, release date, type, genre, runtime, director, cast and description.
 import type { Film } from '../lib/content';
 import { getLocale, resolve, resolveShared, t } from '../i18n';
 
@@ -10,11 +10,14 @@ interface Props {
 const { film } = Astro.props;
 const locale = getLocale(Astro.url);
 const strings = t(locale).film;
-const { year, type, rating } = film.data;
+const { releaseDate, type, director, cast, runtimeMinutes, rating } = film.data;
 const title = resolveShared(film.data.title, locale);
 const genre = resolveShared(film.data.genre, locale);
 const description = resolve(film.data.description, locale);
-const ratingText = strings.rating(new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(rating));
+const ratingText = strings.rating(String(rating));
+const releaseText = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' }).format(
+  releaseDate,
+);
 ---
 
 <article class="film" id={film.id}>
@@ -22,6 +25,19 @@ const ratingText = strings.rating(new Intl.NumberFormat(locale, { maximumFractio
     <h3 class="film-title">{title}</h3>
     <span class="film-rating" aria-label={`${strings.ratingLabel}: ${ratingText}`}>{ratingText}</span>
   </div>
-  <p class="film-meta">{year} · {strings.types[type]} · {genre}</p>
+  <p class="film-meta">
+    <time datetime={releaseDate.toISOString().slice(0, 10)}>{releaseText}</time>
+    · {strings.types[type]} · {genre} · {strings.runtime(runtimeMinutes)}
+  </p>
   {description && <p class="film-description" lang={description.lang}>{description.text}</p>}
+  <dl class="film-credits">
+    <div>
+      <dt>{strings.director}</dt>
+      <dd>{director}</dd>
+    </div>
+    <div>
+      <dt>{strings.cast}</dt>
+      <dd>{cast.join(', ')}</dd>
+    </div>
+  </dl>
 </article>
